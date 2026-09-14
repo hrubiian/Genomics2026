@@ -647,7 +647,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="zgrep"><strong>zgrep</strong></h2>
 <p>(Grep Compressed Files) Пошук у стиснених файлах без розпакування.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb42"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">zgrep</span> <span class="st">'pattern'</span> file.gz                 <span class="co"># Пошук у стисненому файлі</span></span>
-<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="fu">zgrep</span> <span class="at">-c</span> <span class="st">'^@SRR'</span> reads.fastq.gz         <span class="co"># Підрахунок заголовків ридів у FASTQ</span></span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="fu">zgrep</span> <span class="at">-c</span> <span class="st">'^@SRR'</span> reads.fastq.gz         <span class="co"># Підрахунок заголовків рідів у FASTQ</span></span>
 <span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a><span class="fu">zgrep</span> <span class="at">-v</span> <span class="st">'^#'</span> variants.vcf.gz <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span>   <span class="co"># Підрахунок варіантів без рядків заголовка</span></span>
 <span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a><span class="fu">zgrep</span> <span class="at">-i</span> <span class="st">'chr1'</span> annotation.gtf.gz       <span class="co"># Пошук без урахування регістру</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
@@ -750,7 +750,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb53-5"><a href="#cb53-5" aria-hidden="true" tabindex="-1"></a><span class="va">SAMPLE</span><span class="op">=</span><span class="va">$(</span><span class="fu">basename</span> reads.fastq.gz .fastq.gz<span class="va">)</span>   <span class="co"># Підстановка результату команди</span></span>
 <span id="cb53-6"><a href="#cb53-6" aria-hidden="true" tabindex="-1"></a><span class="va">LINES</span><span class="op">=</span><span class="va">$(</span><span class="fu">zcat</span> reads.fastq.gz <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span><span class="va">)</span></span>
-<span id="cb53-7"><a href="#cb53-7" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="va">$((LINES</span> <span class="op">/</span> <span class="dv">4</span><span class="va">))</span>                <span class="co"># Арифметика: кількість ридів у FASTQ</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb53-7"><a href="#cb53-7" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="va">$((LINES</span> <span class="op">/</span> <span class="dv">4</span><span class="va">))</span>                <span class="co"># Арифметика: кількість рідів у FASTQ</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="ln" class="level2">
 <h2 class="anchored" data-anchor-id="ln"><strong>ln</strong></h2>
@@ -793,7 +793,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="довготривалі-задачі-та-ресурси" class="level1">
 <h1>Довготривалі задачі та ресурси</h1>
-<p>Вирівнювання ридів чи збірка геному можуть тривати години. Наведені команди дозволяють не втратити результат при розриві з’єднання з сервером.</p>
+<p>Вирівнювання рідів чи збірка геному можуть тривати години. Наведені команди дозволяють не втратити результат при розриві з’єднання з сервером.</p>
 <section id="фоновий-режим-і-nohup" class="level2">
 <h2 class="anchored" data-anchor-id="фоновий-режим-і-nohup"><strong>Фоновий режим і nohup</strong></h2>
 <p>(Background Jobs) Запуск задач, що продовжують працювати після закриття термінала.</p>

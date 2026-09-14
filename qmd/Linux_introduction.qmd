@@ -493,7 +493,7 @@ sort -k1,1 genes.tsv > genes.sorted.tsv
 
 ``` bash
 zgrep 'pattern' file.gz                 # Пошук у стисненому файлі
-zgrep -c '^@SRR' reads.fastq.gz         # Підрахунок заголовків ридів у FASTQ
+zgrep -c '^@SRR' reads.fastq.gz         # Підрахунок заголовків рідів у FASTQ
 zgrep -v '^#' variants.vcf.gz | wc -l   # Підрахунок варіантів без рядків заголовка
 zgrep -i 'chr1' annotation.gtf.gz       # Пошук без урахування регістру
 ```
@@ -629,7 +629,7 @@ bwa mem $REF reads.fastq > aln.sam
 
 SAMPLE=$(basename reads.fastq.gz .fastq.gz)   # Підстановка результату команди
 LINES=$(zcat reads.fastq.gz | wc -l)
-echo $((LINES / 4))                # Арифметика: кількість ридів у FASTQ
+echo $((LINES / 4))                # Арифметика: кількість рідів у FASTQ
 ```
 
 ## **ln**
@@ -683,7 +683,7 @@ bwa mem ref.fa reads.fq > aln.sam && samtools view -b aln.sam > aln.bam
 
 # Довготривалі задачі та ресурси
 
-Вирівнювання ридів чи збірка геному можуть тривати години. Наведені команди дозволяють не втратити результат при розриві з'єднання з сервером.
+Вирівнювання рідів чи збірка геному можуть тривати години. Наведені команди дозволяють не втратити результат при розриві з'єднання з сервером.
 
 ## **Фоновий режим і nohup**
 

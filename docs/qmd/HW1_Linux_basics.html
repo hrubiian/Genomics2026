@@ -196,10 +196,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#скільки-генів-на-кожній-хромосомі" id="toc-скільки-генів-на-кожній-хромосомі" class="nav-link" data-scroll-target="#скільки-генів-на-кожній-хромосомі">Скільки генів на кожній хромосомі</a></li>
   <li><a href="#скільки-пар-основ-займають-гени" id="toc-скільки-пар-основ-займають-гени" class="nav-link" data-scroll-target="#скільки-пар-основ-займають-гени">Скільки пар основ займають гени</a></li>
   </ul></li>
-  <li><a href="#b3.-fastq-риди-секвенування" id="toc-b3.-fastq-риди-секвенування" class="nav-link" data-scroll-target="#b3.-fastq-риди-секвенування">B3. FASTQ — риди секвенування</a>
+  <li><a href="#b3.-fastq-ріди-секвенування" id="toc-b3.-fastq-ріди-секвенування" class="nav-link" data-scroll-target="#b3.-fastq-ріди-секвенування">B3. FASTQ — ріди секвенування</a>
   <ul class="collapse">
-  <li><a href="#скільки-ридів-у-файлі" id="toc-скільки-ридів-у-файлі" class="nav-link" data-scroll-target="#скільки-ридів-у-файлі">Скільки ридів у файлі</a></li>
-  <li><a href="#довжина-ридів" id="toc-довжина-ридів" class="nav-link" data-scroll-target="#довжина-ридів">Довжина ридів</a></li>
+  <li><a href="#скільки-рідів-у-файлі" id="toc-скільки-рідів-у-файлі" class="nav-link" data-scroll-target="#скільки-рідів-у-файлі">Скільки рідів у файлі</a></li>
+  <li><a href="#довжина-рідів" id="toc-довжина-рідів" class="nav-link" data-scroll-target="#довжина-рідів">Довжина рідів</a></li>
   <li><a href="#перетворення-fastq-у-fasta" id="toc-перетворення-fastq-у-fasta" class="nav-link" data-scroll-target="#перетворення-fastq-у-fasta">Перетворення FASTQ у FASTA</a></li>
   </ul></li>
   </ul></li>
@@ -1362,16 +1362,16 @@ TTATTATATTATTATATTATTATATTATTATATTATTATATTATTATATTATTATATTAT</code></pre>
 <p>Різниця величезна: <strong>112 107 235</strong> проти <strong>98 399 658</strong> пар основ, тобто майже <strong>14 мільйонів</strong> зайвих. Кількість інтервалів впала з 24 278 до 14 794 — саме стільки генів мають спільні ділянки з сусідами. Для реальної роботи цю операцію виконують програмою <code>bedtools merge</code>, але корисно розуміти, що саме вона робить.</p>
 </section>
 </section>
-<section id="b3.-fastq-риди-секвенування" class="level2">
-<h2 class="anchored" data-anchor-id="b3.-fastq-риди-секвенування">B3. FASTQ — риди секвенування</h2>
+<section id="b3.-fastq-ріди-секвенування" class="level2">
+<h2 class="anchored" data-anchor-id="b3.-fastq-ріди-секвенування">B3. FASTQ — ріди секвенування</h2>
 <p>FASTQ — це те, що видає секвенатор, і головний формат HW3. Кожен рід описується <strong>рівно чотирма рядками</strong>:</p>
 <pre class="text"><code>@SRR1234567.1 1/1                      &lt;- 1. заголовок, починається з @
 GATTACAGATTACAGATTACAGATTACAGATTACA    &lt;- 2. послідовність
 +                                      &lt;- 3. роздільник
 IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII    &lt;- 4. якість кожного нуклеотида</code></pre>
 <p>Четвертий рядок кодує якість символами: кожному нуклеотиду відповідає один символ, і чим «пізніший» він в ASCII, тим вища якість. Саме тому рядок послідовності й рядок якості завжди однакової довжини.</p>
-<section id="скільки-ридів-у-файлі" class="level3">
-<h3 class="anchored" data-anchor-id="скільки-ридів-у-файлі">Скільки ридів у файлі</h3>
+<section id="скільки-рідів-у-файлі" class="level3">
+<h3 class="anchored" data-anchor-id="скільки-рідів-у-файлі">Скільки рідів у файлі</h3>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb47"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Для розпакованого файлу</span></span>
 <span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="va">$((</span> <span class="va">$(</span><span class="fu">wc</span> <span class="at">-l</span> <span class="op">&lt;</span> reads.fastq<span class="va">)</span> <span class="op">/</span> <span class="dv">4</span> <span class="va">))</span></span>
 <span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1414,7 +1414,7 @@ IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII    &lt;- 4. якість кожного ну
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Warning</span>Не рахуйте риди через <code>grep -c '^@'</code>
+<span class="screen-reader-only">Warning</span>Не рахуйте ріди через <code>grep -c '^@'</code>
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -1422,8 +1422,8 @@ IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII    &lt;- 4. якість кожного ну
 </div>
 </div>
 </section>
-<section id="довжина-ридів" class="level3">
-<h3 class="anchored" data-anchor-id="довжина-ридів">Довжина ридів</h3>
+<section id="довжина-рідів" class="level3">
+<h3 class="anchored" data-anchor-id="довжина-рідів">Довжина рідів</h3>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb48"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">awk</span> <span class="st">'NR % 4 == 2 {print length($0)}'</span> reads.fastq <span class="kw">|</span> <span class="fu">sort</span> <span class="at">-n</span> <span class="kw">|</span> <span class="fu">uniq</span> <span class="at">-c</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <pre class="text"><code>      1 24
       1 35
@@ -1455,11 +1455,11 @@ IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII    &lt;- 4. якість кожного ну
 </tr>
 <tr class="even">
 <td><code>sort -n</code> → <code>uniq -c</code></td>
-<td>будує розподіл: скільки ридів має кожну довжину</td>
+<td>будує розподіл: скільки рідів має кожну довжину</td>
 </tr>
 </tbody>
 </table>
-<p>Після обрізки адаптерів (<code>fastp</code> у HW3) довжини стають різними — цей розподіл показує, наскільки сильно обрізалися риди.</p>
+<p>Після обрізки адаптерів (<code>fastp</code> у HW3) довжини стають різними — цей розподіл показує, наскільки сильно обрізалися ріди.</p>
 </section>
 <section id="перетворення-fastq-у-fasta" class="level3">
 <h3 class="anchored" data-anchor-id="перетворення-fastq-у-fasta">Перетворення FASTQ у FASTA</h3>
@@ -1481,7 +1481,7 @@ IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII    &lt;- 4. якість кожного ну
 <tbody>
 <tr class="odd">
 <td><code>NR % 4 == 1</code></td>
-<td>рядки заголовків ридів</td>
+<td>рядки заголовків рідів</td>
 </tr>
 <tr class="even">
 <td><code>sub(/^@/, "&gt;")</code></td>
@@ -1508,7 +1508,7 @@ IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII    &lt;- 4. якість кожного ну
 </div>
 <div class="callout-body-container callout-body">
 <ul>
-<li>Порахуйте частку ридів, довших за 100 нуклеотидів</li>
+<li>Порахуйте частку рідів, довших за 100 нуклеотидів</li>
 <li>Знайдіть у FASTA найдовшу ділянку з <code>N</code> поспіль</li>
 <li>Обчисліть GC-склад <strong>кожного</strong> ріду у FASTQ і побудуйте розподіл</li>
 <li>Порівняйте GC-склад різних хромосом дрозофіли між собою</li>

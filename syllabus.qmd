@@ -10,7 +10,7 @@ title: "Syllabus"
 
 -   **HW:** install [WSL](qmd/Install_Software.qmd), learning basic [shell](qmd/Linux_introduction.qmd) commands, make [HW1_shell_commands](qmd/HW1_Linux_basics.qmd) task
 
--   Presentation - [Google Slides](https://docs.google.com/presentation/d/1PRIB2bWGBoKb1OlVK-6dyEmj8xGSuaCg4YV7x72MTeA/edit?slide=id.p#slide=id.p)
+-   Presentation - [Google Slides](https://docs.google.com/presentation/d/1gzqI__0QGl7CwzEGaILzwHvmswQjnvcGmmODxpY0Xtw/edit?usp=sharing)
 
 ## Week 2 (21.09.2025)
 
@@ -60,6 +60,10 @@ title: "Syllabus"
 -   Guest Lecture
 
 ## Week 10(16.11.2026)
+
+- TBA 
+
+## Week 11(23.11.2026)
 
 -   Presentation group's results. Summary of the course
 <!-- - Template of presentation - [Google Slides](https://docs.google.com/presentation/d/1y_OozXxONxVYAfu7k68_F-MTNjz7ekUS1Mb9qtOXUec/edit?slide=id.g311d8853ae9_0_32#slide=id.g311d8853ae9_0_32) -->

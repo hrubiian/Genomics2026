@@ -170,6 +170,39 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#крок-4.-пошук-корисної-інформації-про-розташування-гена-на-хромосомі-gene_id-gene_source" id="toc-крок-4.-пошук-корисної-інформації-про-розташування-гена-на-хромосомі-gene_id-gene_source" class="nav-link" data-scroll-target="#крок-4.-пошук-корисної-інформації-про-розташування-гена-на-хромосомі-gene_id-gene_source">Крок 4. Пошук корисної інформації про розташування гена на хромосомі, gene_id, gene_source</a></li>
   <li><a href="#крок-5.-знаходження-min-та-max-елементівfeatures-гена" id="toc-крок-5.-знаходження-min-та-max-елементівfeatures-гена" class="nav-link" data-scroll-target="#крок-5.-знаходження-min-та-max-елементівfeatures-гена">Крок 5. Знаходження Min та Max елементів(features) гена</a></li>
   <li><a href="#крок-6.-optional-shell-скрипт" id="toc-крок-6.-optional-shell-скрипт" class="nav-link" data-scroll-target="#крок-6.-optional-shell-скрипт">Крок 6. (Optional) Shell скрипт</a></li>
+  <li><a href="#поглиблений-аналіз-advanced" id="toc-поглиблений-аналіз-advanced" class="nav-link" data-scroll-target="#поглиблений-аналіз-advanced">Поглиблений аналіз (Advanced)</a>
+  <ul class="collapse">
+  <li><a href="#a0.-девять-колонок-gtf" id="toc-a0.-девять-колонок-gtf" class="nav-link" data-scroll-target="#a0.-девять-колонок-gtf">A0. Дев’ять колонок GTF</a></li>
+  <li><a href="#a1.-метадані-файлу-яку-саме-версію-анотації-ви-аналізуєте" id="toc-a1.-метадані-файлу-яку-саме-версію-анотації-ви-аналізуєте" class="nav-link" data-scroll-target="#a1.-метадані-файлу-яку-саме-версію-анотації-ви-аналізуєте">A1. Метадані файлу: яку саме версію анотації ви аналізуєте?</a></li>
+  <li><a href="#a2.-ієрархія-gtf-ген-транскрипт-екзон" id="toc-a2.-ієрархія-gtf-ген-транскрипт-екзон" class="nav-link" data-scroll-target="#a2.-ієрархія-gtf-ген-транскрипт-екзон">A2. Ієрархія GTF: ген → транскрипт → екзон</a></li>
+  <li><a href="#a3.-чому-точність-пошуку-критична" id="toc-a3.-чому-точність-пошуку-критична" class="nav-link" data-scroll-target="#a3.-чому-точність-пошуку-критична">A3. Чому точність пошуку критична</a></li>
+  <li><a href="#a4.-системи-координат-gtf-і-bed" id="toc-a4.-системи-координат-gtf-і-bed" class="nav-link" data-scroll-target="#a4.-системи-координат-gtf-і-bed">A4. Системи координат: GTF і BED</a></li>
+  <li><a href="#a5.-альтернативний-сплайсинг" id="toc-a5.-альтернативний-сплайсинг" class="nav-link" data-scroll-target="#a5.-альтернативний-сплайсинг">A5. Альтернативний сплайсинг</a></li>
+  <li><a href="#a6.-з-чого-складається-геном-біотипи-генів" id="toc-a6.-з-чого-складається-геном-біотипи-генів" class="nav-link" data-scroll-target="#a6.-з-чого-складається-геном-біотипи-генів">A6. З чого складається геном: біотипи генів</a></li>
+  <li><a href="#a7.-структура-збірки-геному" id="toc-a7.-структура-збірки-геному" class="nav-link" data-scroll-target="#a7.-структура-збірки-геному">A7. Структура збірки геному</a></li>
+  <li><a href="#a8.-ланцюг-strand-як-перевірка-даних" id="toc-a8.-ланцюг-strand-як-перевірка-даних" class="nav-link" data-scroll-target="#a8.-ланцюг-strand-як-перевірка-даних">A8. Ланцюг (strand) як перевірка даних</a></li>
+  <li><a href="#a9.-найдовші-гени-геному" id="toc-a9.-найдовші-гени-геному" class="nav-link" data-scroll-target="#a9.-найдовші-гени-геному">A9. Найдовші гени геному</a></li>
+  </ul></li>
+  <li><a href="#робота-з-іншими-форматами-advanced" id="toc-робота-з-іншими-форматами-advanced" class="nav-link" data-scroll-target="#робота-з-іншими-форматами-advanced">Робота з іншими форматами (Advanced)</a>
+  <ul class="collapse">
+  <li><a href="#b1.-fasta-послідовність-геному" id="toc-b1.-fasta-послідовність-геному" class="nav-link" data-scroll-target="#b1.-fasta-послідовність-геному">B1. FASTA — послідовність геному</a>
+  <ul class="collapse">
+  <li><a href="#скільки-послідовностей-у-файлі-та-якої-вони-довжини" id="toc-скільки-послідовностей-у-файлі-та-якої-вони-довжини" class="nav-link" data-scroll-target="#скільки-послідовностей-у-файлі-та-якої-вони-довжини">Скільки послідовностей у файлі та якої вони довжини</a></li>
+  <li><a href="#gc-склад-послідовності" id="toc-gc-склад-послідовності" class="nav-link" data-scroll-target="#gc-склад-послідовності">GC-склад послідовності</a></li>
+  <li><a href="#прогалини-у-збірці-символи-n" id="toc-прогалини-у-збірці-символи-n" class="nav-link" data-scroll-target="#прогалини-у-збірці-символи-n">Прогалини у збірці (символи N)</a></li>
+  </ul></li>
+  <li><a href="#b2.-bed-інтервали-на-геномі" id="toc-b2.-bed-інтервали-на-геномі" class="nav-link" data-scroll-target="#b2.-bed-інтервали-на-геномі">B2. BED — інтервали на геномі</a>
+  <ul class="collapse">
+  <li><a href="#скільки-генів-на-кожній-хромосомі" id="toc-скільки-генів-на-кожній-хромосомі" class="nav-link" data-scroll-target="#скільки-генів-на-кожній-хромосомі">Скільки генів на кожній хромосомі</a></li>
+  <li><a href="#скільки-пар-основ-займають-гени" id="toc-скільки-пар-основ-займають-гени" class="nav-link" data-scroll-target="#скільки-пар-основ-займають-гени">Скільки пар основ займають гени</a></li>
+  </ul></li>
+  <li><a href="#b3.-fastq-риди-секвенування" id="toc-b3.-fastq-риди-секвенування" class="nav-link" data-scroll-target="#b3.-fastq-риди-секвенування">B3. FASTQ — риди секвенування</a>
+  <ul class="collapse">
+  <li><a href="#скільки-ридів-у-файлі" id="toc-скільки-ридів-у-файлі" class="nav-link" data-scroll-target="#скільки-ридів-у-файлі">Скільки ридів у файлі</a></li>
+  <li><a href="#довжина-ридів" id="toc-довжина-ридів" class="nav-link" data-scroll-target="#довжина-ридів">Довжина ридів</a></li>
+  <li><a href="#перетворення-fastq-у-fasta" id="toc-перетворення-fastq-у-fasta" class="nav-link" data-scroll-target="#перетворення-fastq-у-fasta">Перетворення FASTQ у FASTA</a></li>
+  </ul></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -265,7 +298,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Потрібно вияснити:</p>
 <ol type="1">
 <li>На якій <strong>хромосомі</strong> знаходиться ген</li>
-<li><strong>dene_id</strong> знайденого гену</li>
+<li><strong>gene_id</strong> знайденого гену</li>
 <li><strong>gene_source</strong> гену</li>
 <li><strong>Скільки</strong> Елементів(Features) знайдено для цього гену у вигляді екзонів</li>
 <li>Знайти <strong>найдовший</strong> Елемент(feature)</li>
@@ -284,7 +317,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <tbody>
 <tr class="odd">
 <td>Розташований на хромосомі</td>
-<td>3L</td>
+<td>3R</td>
 </tr>
 <tr class="even">
 <td>gene_id</td>
@@ -299,12 +332,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>135</td>
 </tr>
 <tr class="odd">
-<td>Max довжина Елементу</td>
-<td>37</td>
+<td>Min довжина Елементу</td>
+<td>38</td>
 </tr>
 <tr class="even">
-<td>Min довжина Елементу</td>
-<td>5744</td>
+<td>Max довжина Елементу</td>
+<td>5745</td>
 </tr>
 </tbody>
 </table>
@@ -361,24 +394,1131 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="крок-5.-знаходження-min-та-max-елементівfeatures-гена" class="level1">
 <h1>Крок 5. Знаходження Min та Max елементів(features) гена</h1>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Оберіть відповідні колонки в яких міститься інформація про початок та кінець транскрипту</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Оберіть відповідні колонки в яких міститься інформація про початок та кінець елементу</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cut</span> <span class="at">-f</span> 4,5 cpo.gtf <span class="op">&gt;</span> length_gene.txt</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co"># відніміть значення колонки 2 від колонки 1 та запишіть у новий файл min_max_gene.txt</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="fu">awk</span> <span class="st">'{print $2 - $1}'</span> length_gene.txt <span class="op">&gt;</span> min_max_gene.txt</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Знайти мінімальне число Елементу(Feature) гена</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="fu">sort</span> <span class="at">-n</span> min_max_gene.txt <span class="kw">|</span> <span class="fu">head</span> <span class="at">-n</span> 1</span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Знайти максимальне число Елементу(Feature) гена</span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="fu">sort</span> <span class="at">-n</span> min_max_gene.txt <span class="kw">|</span> <span class="fu">tail</span> <span class="at">-n</span> 1</span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Продвинутіший спосіб знаходження min та max</span></span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="fu">awk</span> <span class="st">'NR == 1 {min = $1} $1 &lt; min {min = $1} END {print min}'</span> min_max_gene.txt</span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="fu">awk</span> <span class="st">'NR == 1 {max = $1} $1 &gt; max {max = $1} END {print max}'</span> min_max_gene.txt</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Обчисліть довжину кожного елементу та запишіть у новий файл min_max_gene.txt</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Увага: координати GTF включають обидва кінці, тому довжина = кінець - початок + 1</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="fu">awk</span> <span class="st">'{print $2 - $1 + 1}'</span> length_gene.txt <span class="op">&gt;</span> min_max_gene.txt</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Знайти мінімальне число Елементу(Feature) гена</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="fu">sort</span> <span class="at">-n</span> min_max_gene.txt <span class="kw">|</span> <span class="fu">head</span> <span class="at">-n</span> 1</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Знайти максимальне число Елементу(Feature) гена</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="fu">sort</span> <span class="at">-n</span> min_max_gene.txt <span class="kw">|</span> <span class="fu">tail</span> <span class="at">-n</span> 1</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Продвинутіший спосіб знаходження min та max</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="fu">awk</span> <span class="st">'NR == 1 {min = $1} $1 &lt; min {min = $1} END {print min}'</span> min_max_gene.txt</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="fu">awk</span> <span class="st">'NR == 1 {max = $1} $1 &gt; max {max = $1} END {print max}'</span> min_max_gene.txt</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Запишіть знайдені <strong>min</strong> та <strong>max</strong> довжину Елементів(Features) у табличку</p>
 </section>
 <section id="крок-6.-optional-shell-скрипт" class="level1">
 <h1>Крок 6. (Optional) Shell скрипт</h1>
 <p>Напишіть <strong>shell</strong> скрипт для оптимізації процесу та анотації генів у автоматичному режимі</p>
+</section>
+<section id="поглиблений-аналіз-advanced" class="level1">
+<h1>Поглиблений аналіз (Advanced)</h1>
+<p>Цей розділ <strong>не є обов’язковим</strong> для здачі завдання. Він для тих, хто хоче зрозуміти, що ще містить GTF файл і як читати анотацію геному.</p>
+<p>Усі команди виконуються на тому самому файлі <code>Drosophila_melanogaster.BDGP6.46.112.gtf</code>. Після кожної команди наведено очікуваний результат та <strong>розбір команди</strong> — що саме робить кожна її частина.</p>
+<section id="a0.-девять-колонок-gtf" class="level2">
+<h2 class="anchored" data-anchor-id="a0.-девять-колонок-gtf">A0. Дев’ять колонок GTF</h2>
+<p>Майже всі команди нижче звертаються до колонок за номером (<code>$1</code>, <code>$3</code>, <code>$4</code>…), тому спочатку розберемось, що в них лежить. Колонки розділені <strong>табуляцією</strong>.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 9%">
+<col style="width: 22%">
+<col style="width: 38%">
+<col style="width: 29%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>№</th>
+<th>Назва</th>
+<th>Що містить</th>
+<th>Приклад</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>$1</code></td>
+<td>seqname</td>
+<td>хромосома або скафолд</td>
+<td><code>3R</code></td>
+</tr>
+<tr class="even">
+<td><code>$2</code></td>
+<td>source</td>
+<td>джерело анотації</td>
+<td><code>FlyBase</code></td>
+</tr>
+<tr class="odd">
+<td><code>$3</code></td>
+<td>feature</td>
+<td>тип елементу</td>
+<td><code>exon</code></td>
+</tr>
+<tr class="even">
+<td><code>$4</code></td>
+<td>start</td>
+<td>початок, нумерація з 1</td>
+<td><code>17758709</code></td>
+</tr>
+<tr class="odd">
+<td><code>$5</code></td>
+<td>end</td>
+<td>кінець, включно</td>
+<td><code>17758978</code></td>
+</tr>
+<tr class="even">
+<td><code>$6</code></td>
+<td>score</td>
+<td>оцінка, у цьому файлі не використовується</td>
+<td><code>.</code></td>
+</tr>
+<tr class="odd">
+<td><code>$7</code></td>
+<td>strand</td>
+<td>ланцюг ДНК</td>
+<td><code>-</code></td>
+</tr>
+<tr class="even">
+<td><code>$8</code></td>
+<td>frame</td>
+<td>фаза зчитування для CDS (<code>0</code>, <code>1</code>, <code>2</code>)</td>
+<td><code>.</code></td>
+</tr>
+<tr class="odd">
+<td><code>$9</code></td>
+<td>attribute</td>
+<td>пари <code>ключ "значення";</code></td>
+<td><code>gene_id "FBgn0038542"; …</code></td>
+</tr>
+</tbody>
+</table>
+<p>Крапка <code>.</code> означає «значення відсутнє». Уся змістовна інформація про ген — назва, ідентифікатор, біотип — лежить у дев’ятій колонці як текст, тому її дістають не через <code>cut</code>, а за допомогою <code>grep -o</code> або <code>awk</code>.</p>
+</section>
+<section id="a1.-метадані-файлу-яку-саме-версію-анотації-ви-аналізуєте" class="level2">
+<h2 class="anchored" data-anchor-id="a1.-метадані-файлу-яку-саме-версію-анотації-ви-аналізуєте">A1. Метадані файлу: яку саме версію анотації ви аналізуєте?</h2>
+<p>Перші рядки GTF починаються з <code>#!</code> і містять інформацію про збірку геному. Без цих даних ваш результат неможливо відтворити.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span> <span class="at">-5</span> Drosophila_melanogaster.BDGP6.46.112.gtf</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code>#!genome-build BDGP6.46
+#!genome-version BDGP6.46
+#!genome-build-accession GCA_000001215.4
+#!genebuild-last-updated 2022-07</code></pre>
+<p><strong>Розбір команди:</strong></p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Частина</th>
+<th>Що робить</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>head</code></td>
+<td>виводить початок файлу</td>
+</tr>
+<tr class="even">
+<td><code>-5</code></td>
+<td>рівно 5 перших рядків (скорочення від <code>-n 5</code>)</td>
+</tr>
+<tr class="odd">
+<td><code>Drosophila_...gtf</code></td>
+<td>файл, який читаємо</td>
+</tr>
+</tbody>
+</table>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Завжди записуйте версію анотації
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Координати гена змінюються між версіями збірки. Результат «ген на позиції 3 427 221» без вказівки збірки (<strong>BDGP6.46</strong>) не має сенсу — в іншій версії там може бути інший ген. У методах завжди вказують назву та версію анотації.</p>
+</div>
+</div>
+</section>
+<section id="a2.-ієрархія-gtf-ген-транскрипт-екзон" class="level2">
+<h2 class="anchored" data-anchor-id="a2.-ієрархія-gtf-ген-транскрипт-екзон">A2. Ієрархія GTF: ген → транскрипт → екзон</h2>
+<p>GTF — не просто список генів. Кожен рядок описує <strong>елемент</strong> (feature), а елементи утворюють ієрархію.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">awk</span> <span class="st">'!/^#/ {print $3}'</span> Drosophila_melanogaster.BDGP6.46.112.gtf <span class="kw">|</span> <span class="fu">sort</span> <span class="kw">|</span> <span class="fu">uniq</span> <span class="at">-c</span> <span class="kw">|</span> <span class="fu">sort</span> <span class="at">-rn</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code> 196625 exon
+ 163189 CDS
+  46766 five_prime_utr
+  41610 transcript
+  33737 three_prime_utr
+  30802 start_codon
+  30791 stop_codon
+  24278 gene
+      4 Selenocysteine</code></pre>
+<p><strong>Розбір команди:</strong></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 45%">
+<col style="width: 55%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Частина</th>
+<th>Що робить</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>awk</code></td>
+<td>обробляє файл рядок за рядком, автоматично ділячи його на колонки</td>
+</tr>
+<tr class="even">
+<td><code>!/^#/</code></td>
+<td><strong>умова</strong>: обробляти рядок, тільки якщо він <strong>не</strong> починається з <code>#</code>. <code>^</code> — початок рядка, <code>!</code> — заперечення. Так ми пропускаємо заголовок</td>
+</tr>
+<tr class="odd">
+<td><code>{print $3}</code></td>
+<td><strong>дія</strong>: вивести третю колонку — тип елементу</td>
+</tr>
+<tr class="even">
+<td><code>|</code></td>
+<td>конвеєр (pipe): передає вивід попередньої команди на вхід наступної</td>
+</tr>
+<tr class="odd">
+<td><code>sort</code></td>
+<td>впорядковує рядки за алфавітом. Обов’язковий крок: <code>uniq</code> бачить лише <strong>сусідні</strong> однакові рядки</td>
+</tr>
+<tr class="even">
+<td><code>uniq -c</code></td>
+<td>склеює однакові рядки в один і додає спереду їх кількість (<code>-c</code> = count)</td>
+</tr>
+<tr class="odd">
+<td><code>sort -rn</code></td>
+<td>сортує результат: <code>-n</code> — як числа, а не як текст; <code>-r</code> — у спадному порядку</td>
+</tr>
+</tbody>
+</table>
+<p>Зверніть увагу: у файлі <strong>567 802</strong> рядки, але лише <strong>24 278</strong> генів. Саме тому в Кроці 3 ми фільтруємо рядки за типом <code>exon</code> — інакше порахуємо не те.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="dt">\"</span>bcd<span class="dt">\"</span> <span class="at">-w</span> Drosophila_melanogaster.BDGP6.46.112.gtf <span class="kw">|</span> <span class="fu">cut</span> <span class="at">-f</span> 3 <span class="kw">|</span> <span class="fu">sort</span> <span class="kw">|</span> <span class="fu">uniq</span> <span class="at">-c</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code>     16 CDS
+     18 exon
+      7 five_prime_utr
+      1 gene
+      5 start_codon
+      5 stop_codon
+      5 three_prime_utr
+      5 transcript</code></pre>
+<p><strong>Розбір команди:</strong></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 45%">
+<col style="width: 55%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Частина</th>
+<th>Що робить</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>grep</code></td>
+<td>залишає лише ті рядки файлу, де є заданий шаблон</td>
+</tr>
+<tr class="even">
+<td><code>\"bcd\"</code></td>
+<td>шаблон — це текст <code>"bcd"</code> <strong>разом із лапками</strong>. Зворотний слеш <code>\</code> каже bash не з’їдати лапку, а передати її у <code>grep</code></td>
+</tr>
+<tr class="odd">
+<td><code>-w</code></td>
+<td>збіг тільки як ціле слово, а не як частина довшого слова</td>
+</tr>
+<tr class="even">
+<td><code>cut -f 3</code></td>
+<td>вирізає третю колонку. <code>cut</code> за замовчуванням розділяє рядок табуляцією, тому для GTF додаткові опції не потрібні</td>
+</tr>
+<tr class="odd">
+<td><code>sort</code> → <code>uniq -c</code></td>
+<td>рахує, скільки рядків кожного типу (див. розбір вище)</td>
+</tr>
+</tbody>
+</table>
+<p>Один ген <code>bcd</code> — це 1 рядок <code>gene</code>, 5 рядків <code>transcript</code> і 18 рядків <code>exon</code>.</p>
+</section>
+<section id="a3.-чому-точність-пошуку-критична" class="level2">
+<h2 class="anchored" data-anchor-id="a3.-чому-точність-пошуку-критична">A3. Чому точність пошуку критична</h2>
+<p>У Кроці 3 ми шукали ген як <code>\"cpo\"</code> — тобто разом із лапками. Це не помилка, а важливий прийом. Порівняйте на прикладі гена <strong>m</strong> (так, є ген з назвою з однієї літери):</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="dt">\"</span>m<span class="dt">\"</span> <span class="at">-w</span> Drosophila_melanogaster.BDGP6.46.112.gtf <span class="kw">|</span> <span class="fu">grep</span> <span class="at">-w</span> exon <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-w</span> m Drosophila_melanogaster.BDGP6.46.112.gtf <span class="kw">|</span> <span class="fu">grep</span> <span class="at">-w</span> exon <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> m Drosophila_melanogaster.BDGP6.46.112.gtf <span class="kw">|</span> <span class="fu">grep</span> <span class="at">-w</span> exon <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code>8
+168
+196631</code></pre>
+<p><strong>Розбір команд:</strong></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 16%">
+<col style="width: 35%">
+<col style="width: 48%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Команда</th>
+<th>Який шаблон шукає</th>
+<th>Чому стільки результатів</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>grep \"m\" -w</code></td>
+<td>текст <code>"m"</code> із лапками</td>
+<td>у GTF назва гена записана як <code>gene_name "m"</code>, тому збіг точний — <strong>8</strong></td>
+</tr>
+<tr class="even">
+<td><code>grep -w m</code></td>
+<td>літеру <code>m</code> як окреме слово</td>
+<td>слово <code>m</code> трапляється і в інших місцях рядка — <strong>168</strong></td>
+</tr>
+<tr class="odd">
+<td><code>grep m</code></td>
+<td>будь-яке входження літери <code>m</code></td>
+<td>літера <code>m</code> є майже в кожному рядку (<code>melanogaster</code>, <code>exon_number</code>…) — <strong>196 631</strong></td>
+</tr>
+<tr class="even">
+<td><code>wc -l</code></td>
+<td>—</td>
+<td>рахує кількість рядків, що дійшли до кінця конвеєра (<code>-l</code> = lines)</td>
+</tr>
+</tbody>
+</table>
+<p>Різниця у <strong>24 тисячі разів</strong>. У GTF назва гена завжди записана в лапках (<code>gene_name "m"</code>), тому пошук разом із лапками дає точний результат.</p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>Завжди перевіряйте, скільки генів знайшов ваш пошук
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="dt">\"</span>cpo<span class="dt">\"</span> <span class="at">-w</span> Drosophila_melanogaster.BDGP6.46.112.gtf <span class="kw">|</span> <span class="fu">grep</span> <span class="at">-o</span> <span class="st">'gene_id "[^"]*"'</span> <span class="kw">|</span> <span class="fu">sort</span> <span class="at">-u</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 45%">
+<col style="width: 55%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Частина</th>
+<th>Що робить</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>grep -o</code></td>
+<td>виводить <strong>лише сам збіг</strong>, а не весь рядок (<code>-o</code> = only-matching)</td>
+</tr>
+<tr class="even">
+<td><code>'gene_id "[^"]*"'</code></td>
+<td>регулярний вираз: текст <code>gene_id</code>, лапка, далі <code>[^"]*</code> — будь-яка кількість символів, <strong>крім лапки</strong>, і закриваюча лапка</td>
+</tr>
+<tr class="odd">
+<td><code>sort -u</code></td>
+<td>сортує і залишає лише унікальні значення (<code>-u</code> = unique)</td>
+</tr>
+</tbody>
+</table>
+<p>Якщо у виводі більше одного <code>gene_id</code> — ваш шаблон зачепив кілька генів, і всі подальші підрахунки будуть неправильними.</p>
+</div>
+</div>
+</section>
+<section id="a4.-системи-координат-gtf-і-bed" class="level2">
+<h2 class="anchored" data-anchor-id="a4.-системи-координат-gtf-і-bed">A4. Системи координат: GTF і BED</h2>
+<p>Це найчастіше джерело помилок у біоінформатиці.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 18%">
+<col style="width: 20%">
+<col style="width: 18%">
+<col style="width: 41%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Формат</th>
+<th>Початок</th>
+<th>Кінець</th>
+<th>Довжина елементу</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>GTF</strong> / GFF / VCF / SAM</td>
+<td>з 1, включно</td>
+<td>включно</td>
+<td><code>кінець - початок + 1</code></td>
+</tr>
+<tr class="even">
+<td><strong>BED</strong></td>
+<td>з 0, включно</td>
+<td>не включно</td>
+<td><code>кінець - початок</code></td>
+</tr>
+</tbody>
+</table>
+<p>Саме тому в Кроці 5 ми додаємо <code>+ 1</code>. Без цього кожна довжина буде на 1 менша:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">awk</span> <span class="st">'{print $2 - $1}'</span>     length_gene.txt <span class="kw">|</span> <span class="fu">sort</span> <span class="at">-n</span> <span class="kw">|</span> <span class="fu">head</span> <span class="at">-n</span> 1   <span class="co"># 37 - неправильно</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">awk</span> <span class="st">'{print $2 - $1 + 1}'</span> length_gene.txt <span class="kw">|</span> <span class="fu">sort</span> <span class="at">-n</span> <span class="kw">|</span> <span class="fu">head</span> <span class="at">-n</span> 1   <span class="co"># 38 - правильно</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Розбір команди:</strong></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 45%">
+<col style="width: 55%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Частина</th>
+<th>Що робить</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>awk '{print …}'</code></td>
+<td>дія без умови — виконується для <strong>кожного</strong> рядка файлу</td>
+</tr>
+<tr class="even">
+<td><code>$2 - $1</code></td>
+<td>у файлі <code>length_gene.txt</code> лише дві колонки: початок і кінець. Тут ми віднімаємо початок від кінця</td>
+</tr>
+<tr class="odd">
+<td><code>+ 1</code></td>
+<td>поправка на те, що в GTF обидва кінці включені в елемент</td>
+</tr>
+<tr class="even">
+<td><code>sort -n</code></td>
+<td>числове сортування за зростанням</td>
+</tr>
+<tr class="odd">
+<td><code>head -n 1</code></td>
+<td>перший рядок = найменше значення. Для максимуму треба <code>tail -n 1</code></td>
+</tr>
+<tr class="even">
+<td><code># 37</code></td>
+<td>усе після <code>#</code> — коментар, bash його не виконує</td>
+</tr>
+</tbody>
+</table>
+<p>Перетворення GTF у BED — це саме зсув початку на одиницю:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">awk</span> <span class="st">'BEGIN {OFS="\t"} {print $1, $4-1, $5}'</span> cpo.gtf <span class="op">&gt;</span> cpo.bed</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span> <span class="at">-3</span> cpo.bed</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Розбір команди:</strong></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 45%">
+<col style="width: 55%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Частина</th>
+<th>Що робить</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>BEGIN {…}</code></td>
+<td>блок, який виконується <strong>один раз до</strong> читання файлу</td>
+</tr>
+<tr class="even">
+<td><code>OFS="\t"</code></td>
+<td>Output Field Separator — роздільник між значеннями у виводі. Без нього <code>print $1, $4</code> розділить їх пробілом, а BED вимагає табуляцію</td>
+</tr>
+<tr class="odd">
+<td><code>{print $1, $4-1, $5}</code></td>
+<td>три колонки BED: хромосома, початок <strong>мінус 1</strong>, кінець</td>
+</tr>
+<tr class="even">
+<td><code>&gt; cpo.bed</code></td>
+<td>записати результат у файл замість виведення на екран</td>
+</tr>
+<tr class="odd">
+<td><code>head -3 cpo.bed</code></td>
+<td>подивитись перші 3 рядки створеного файлу</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="a5.-альтернативний-сплайсинг" class="level2">
+<h2 class="anchored" data-anchor-id="a5.-альтернативний-сплайсинг">A5. Альтернативний сплайсинг</h2>
+<p>Один ген може кодувати кілька різних транскриптів. Подивіться, скільки екзонів у кожного транскрипту гена <code>bcd</code>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="dt">\"</span>bcd<span class="dt">\"</span> <span class="at">-w</span> Drosophila_melanogaster.BDGP6.46.112.gtf <span class="kw">|</span> <span class="fu">awk</span> <span class="st">'$3 == "exon"'</span> <span class="dt">\</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">|</span> <span class="fu">grep</span> <span class="at">-o</span> <span class="st">'transcript_id "[^"]*"'</span> <span class="kw">|</span> <span class="fu">sort</span> <span class="kw">|</span> <span class="fu">uniq</span> <span class="at">-c</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code>      2 transcript_id "FBtr0081664"
+      4 transcript_id "FBtr0081665"
+      4 transcript_id "FBtr0081666"
+      4 transcript_id "FBtr0081667"
+      4 transcript_id "FBtr0081668"</code></pre>
+<p><strong>Розбір команди:</strong></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 45%">
+<col style="width: 55%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Частина</th>
+<th>Що робить</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>grep \"bcd\" -w …</code></td>
+<td>залишає лише рядки гена <code>bcd</code></td>
+</tr>
+<tr class="even">
+<td><code>awk '$3 == "exon"'</code></td>
+<td><strong>умова без дії</strong>. Якщо в <code>awk</code> не написати <code>{…}</code>, він виводить увесь рядок цілком. Тобто це фільтр: залишити рядки, де третя колонка дорівнює <code>exon</code></td>
+</tr>
+<tr class="odd">
+<td><code>\</code> в кінці рядка</td>
+<td>перенесення однієї довгої команди на наступний рядок</td>
+</tr>
+<tr class="even">
+<td><code>grep -o 'transcript_id "[^"]*"'</code></td>
+<td>витягує з дев’ятої колонки лише ідентифікатор транскрипту</td>
+</tr>
+<tr class="odd">
+<td><code>sort</code> → <code>uniq -c</code></td>
+<td>рахує, скільки екзонів припадає на кожен транскрипт</td>
+</tr>
+</tbody>
+</table>
+<p>П’ять ізоформ: одна з 2 екзонів, чотири — з 4. А тепер знайдіть рекордсменів усього геному:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">awk</span> <span class="st">'$3 == "transcript"'</span> Drosophila_melanogaster.BDGP6.46.112.gtf <span class="dt">\</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">|</span> <span class="fu">grep</span> <span class="at">-o</span> <span class="st">'gene_name "[^"]*"'</span> <span class="kw">|</span> <span class="fu">sort</span> <span class="kw">|</span> <span class="fu">uniq</span> <span class="at">-c</span> <span class="kw">|</span> <span class="fu">sort</span> <span class="at">-rn</span> <span class="kw">|</span> <span class="fu">head</span> <span class="at">-5</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code>     75 gene_name "Dscam1"
+     60 gene_name "para"
+     31 gene_name "Svil"
+     28 gene_name "CAP"
+     25 gene_name "trol"</code></pre>
+<p><strong>Розбір команди:</strong></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 45%">
+<col style="width: 55%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Частина</th>
+<th>Що робить</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>awk '$3 == "transcript"'</code></td>
+<td>залишає лише рядки-транскрипти. Один такий рядок = одна ізоформа</td>
+</tr>
+<tr class="even">
+<td><code>grep -o 'gene_name "[^"]*"'</code></td>
+<td>витягує назву гена, якому належить транскрипт</td>
+</tr>
+<tr class="odd">
+<td><code>sort</code> → <code>uniq -c</code></td>
+<td>рахує кількість транскриптів на кожен ген</td>
+</tr>
+<tr class="even">
+<td><code>sort -rn</code></td>
+<td>найбільші значення — на початок</td>
+</tr>
+<tr class="odd">
+<td><code>head -5</code></td>
+<td>залишити лише перші 5 рядків</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Dscam1</strong> — класичний приклад альтернативного сплайсингу. У <em>Drosophila</em> цей ген бере участь у формуванні нейронних зв’язків, і завдяки взаємовиключним екзонам теоретично здатний утворювати десятки тисяч варіантів білка.</p>
+</section>
+<section id="a6.-з-чого-складається-геном-біотипи-генів" class="level2">
+<h2 class="anchored" data-anchor-id="a6.-з-чого-складається-геном-біотипи-генів">A6. З чого складається геном: біотипи генів</h2>
+<p>Не всі гени кодують білок.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">awk</span> <span class="st">'$3 == "gene"'</span> Drosophila_melanogaster.BDGP6.46.112.gtf <span class="dt">\</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">|</span> <span class="fu">grep</span> <span class="at">-o</span> <span class="st">'gene_biotype "[^"]*"'</span> <span class="kw">|</span> <span class="fu">sort</span> <span class="kw">|</span> <span class="fu">uniq</span> <span class="at">-c</span> <span class="kw">|</span> <span class="fu">sort</span> <span class="at">-rn</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code>  13986 gene_biotype "protein_coding"
+   5898 gene_biotype "transposable_element"
+   3296 gene_biotype "ncRNA"
+    340 gene_biotype "pseudogene"
+    312 gene_biotype "tRNA"
+    299 gene_biotype "snoRNA"
+    115 gene_biotype "rRNA"
+     32 gene_biotype "snRNA"</code></pre>
+<p><strong>Розбір команди:</strong></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 45%">
+<col style="width: 55%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Частина</th>
+<th>Що робить</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>awk '$3 == "gene"'</code></td>
+<td>лише рядки типу <code>gene</code> — по одному на ген. Якби ми не фільтрували, кожен ген порахувався б стільки разів, скільки має екзонів</td>
+</tr>
+<tr class="even">
+<td><code>grep -o 'gene_biotype "[^"]*"'</code></td>
+<td>витягує біотип із дев’ятої колонки</td>
+</tr>
+<tr class="odd">
+<td><code>sort</code> → <code>uniq -c</code> → <code>sort -rn</code></td>
+<td>рахує і впорядковує за спаданням</td>
+</tr>
+</tbody>
+</table>
+<p>Лише близько <strong>58 %</strong> анотованих генів кодують білок. Майже 6 тисяч записів — це <strong>мобільні генетичні елементи (транспозони)</strong>, які займають значну частину геному дрозофіли.</p>
+</section>
+<section id="a7.-структура-збірки-геному" class="level2">
+<h2 class="anchored" data-anchor-id="a7.-структура-збірки-геному">A7. Структура збірки геному</h2>
+<p>Перша колонка GTF — це не завжди «хромосома».</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">awk</span> <span class="st">'!/^#/ {print $1}'</span> Drosophila_melanogaster.BDGP6.46.112.gtf <span class="kw">|</span> <span class="fu">sort</span> <span class="kw">|</span> <span class="fu">uniq</span> <span class="at">-c</span> <span class="kw">|</span> <span class="fu">sort</span> <span class="at">-rn</span> <span class="kw">|</span> <span class="fu">head</span> <span class="at">-10</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code> 130216 3R
+ 117270 2R
+ 106082 3L
+ 102243 X
+ 101169 2L
+   9582 4
+    877 Y
+    148 mitochondrion_genome
+     77 rDNA
+     50 Unmapped_Scaffold_8_D1580_D1567</code></pre>
+<p><strong>Розбір команди:</strong> та сама конструкція, що і в A2, але виводиться <code>$1</code> (хромосома) замість <code>$3</code> (тип елементу), а <code>head -10</code> залишає 10 найбільших.</p>
+<p>У дрозофіли хромосоми 2 і 3 великі та метацентричні, тому їх анотують окремими <strong>плечима</strong>: <code>2L</code>, <code>2R</code>, <code>3L</code>, <code>3R</code>. Окремо йдуть статеві хромосоми <code>X</code> і <code>Y</code>, маленька хромосома <code>4</code>, мітохондріальний геном та <strong>нерозміщені скафолди</strong> — фрагменти, для яких не вдалося визначити позицію у геномі. Наявність таких скафолдів — нормальна ознака реальної збірки.</p>
+</section>
+<section id="a8.-ланцюг-strand-як-перевірка-даних" class="level2">
+<h2 class="anchored" data-anchor-id="a8.-ланцюг-strand-як-перевірка-даних">A8. Ланцюг (strand) як перевірка даних</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">awk</span> <span class="st">'$3 == "gene" {print $7}'</span> Drosophila_melanogaster.BDGP6.46.112.gtf <span class="kw">|</span> <span class="fu">sort</span> <span class="kw">|</span> <span class="fu">uniq</span> <span class="at">-c</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code>  12111 +
+  12167 -</code></pre>
+<p><strong>Розбір команди:</strong></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 45%">
+<col style="width: 55%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Частина</th>
+<th>Що робить</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>'$3 == "gene" {print $7}'</code></td>
+<td>тут є <strong>і умова, і дія</strong>: якщо третя колонка — <code>gene</code>, вивести сьому колонку (ланцюг)</td>
+</tr>
+<tr class="even">
+<td><code>sort</code> → <code>uniq -c</code></td>
+<td>рахує, скільки генів на кожному ланцюзі</td>
+</tr>
+</tbody>
+</table>
+<p>Гени розподілені між двома ланцюгами майже порівну. Сильний перекіс у такому підрахунку був би приводом запідозрити помилку в обробці файлу.</p>
+</section>
+<section id="a9.-найдовші-гени-геному" class="level2">
+<h2 class="anchored" data-anchor-id="a9.-найдовші-гени-геному">A9. Найдовші гени геному</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb27"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">awk</span> <span class="st">'$3 == "gene" {</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="st">       len = $5 - $4 + 1</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="st">       match($0, /gene_name "[^"]*"/)</span></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="st">       name = substr($0, RSTART + 11, RLENGTH - 12)</span></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a><span class="st">       print len "\t" name "\t" $1</span></span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a><span class="st">     }'</span> Drosophila_melanogaster.BDGP6.46.112.gtf <span class="kw">|</span> <span class="fu">sort</span> <span class="at">-rn</span> <span class="kw">|</span> <span class="fu">head</span> <span class="at">-5</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code>1965857 Myo81F  3R
+709421  Pzl 3R
+434041  lovit   3L
+396036  CG17684 2R
+394149  kirre   X</code></pre>
+<p>Це найскладніша команда розділу, тому розберемо її рядок за рядком.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 38%">
+<col style="width: 61%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Рядок</th>
+<th>Що робить</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>$3 == "gene" {</code></td>
+<td>умова: працюємо лише з рядками типу <code>gene</code></td>
+</tr>
+<tr class="even">
+<td><code>len = $5 - $4 + 1</code></td>
+<td>створюємо змінну <code>len</code> — довжина гена від початку до кінця, з поправкою <code>+1</code></td>
+</tr>
+<tr class="odd">
+<td><code>match($0, /gene_name "[^"]*"/)</code></td>
+<td>шукає у <strong>всьому рядку</strong> (<code>$0</code>) фрагмент <code>gene_name "…"</code>. Сама функція нічого не виводить, але встановлює дві службові змінні: <code>RSTART</code> — позиція, з якої почався збіг, і <code>RLENGTH</code> — довжина збігу</td>
+</tr>
+<tr class="even">
+<td><code>name = substr($0, RSTART + 11, RLENGTH - 12)</code></td>
+<td>вирізає з рядка назву гена. <code>substr(текст, звідки, скільки)</code>. Зсув <code>+11</code> пропускає 11 символів слова <code>gene_name "</code>, а <code>-12</code> відкидає ці ж 11 символів і закриваючу лапку</td>
+</tr>
+<tr class="odd">
+<td><code>print len "\t" name "\t" $1</code></td>
+<td>друкує три значення через табуляцію <code>\t</code></td>
+</tr>
+<tr class="even">
+<td><code>sort -rn</code></td>
+<td>сортує за першою колонкою (довжиною) у спадному порядку</td>
+</tr>
+<tr class="odd">
+<td><code>head -5</code></td>
+<td>п’ять найдовших генів</td>
+</tr>
+</tbody>
+</table>
+<p>Ген <code>Myo81F</code> займає майже <strong>2 мільйони пар основ</strong> — це приблизно 1 % геному дрозофіли. Переважна частина цієї довжини — інтрони, а не кодуюча послідовність. Порівняйте це з довжинами окремих екзонів, які ви рахували у Кроці 5.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Куди рухатись далі
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>Порахуйте загальну довжину всіх екзонів гена — це довжина зрілої мРНК</li>
+<li>Обчисліть довжини <strong>інтронів</strong> як проміжки між сусідніми екзонами</li>
+<li>Порівняйте кількість екзонів у генах з різним <code>gene_biotype</code></li>
+<li>Побудуйте розподіл довжин екзонів усього геному і подивіться на його форму</li>
+</ul>
+</div>
+</div>
+</section>
+</section>
+<section id="робота-з-іншими-форматами-advanced" class="level1">
+<h1>Робота з іншими форматами (Advanced)</h1>
+<p>GTF — не єдиний текстовий формат у геноміці. <strong>FASTA</strong>, <strong>BED</strong> і <strong>FASTQ</strong> влаштовані так само просто, тому ті самі <code>grep</code>, <code>awk</code>, <code>sort</code> і <code>uniq</code> працюють і з ними. Нижче — по кілька практичних прикладів для кожного формату.</p>
+<section id="b1.-fasta-послідовність-геному" class="level2">
+<h2 class="anchored" data-anchor-id="b1.-fasta-послідовність-геному">B1. FASTA — послідовність геному</h2>
+<p>GTF описує, <strong>де</strong> розташовані гени, а FASTA містить <strong>саму послідовність</strong>. Формат складається з рядка-заголовка, що починається з <code>&gt;</code>, і рядків послідовності під ним.</p>
+<p>Завантажте для прикладу 4-ту хромосому дрозофіли — найменшу з її хромосом:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb29"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-O</span> https://ftp.ensembl.org/pub/release-112/fasta/drosophila_melanogaster/dna/Drosophila_melanogaster.BDGP6.46.dna.primary_assembly.4.fa.gz</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="fu">gunzip</span> Drosophila_melanogaster.BDGP6.46.dna.primary_assembly.4.fa.gz</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span> <span class="at">-2</span> Drosophila_melanogaster.BDGP6.46.dna.primary_assembly.4.fa <span class="kw">|</span> <span class="fu">cut</span> <span class="at">-c</span> 1-70</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code>&gt;4 dna:primary_assembly primary_assembly:BDGP6.46:4:1:1348131:1 REF
+TTATTATATTATTATATTATTATATTATTATATTATTATATTATTATATTATTATATTAT</code></pre>
+<section id="скільки-послідовностей-у-файлі-та-якої-вони-довжини" class="level3">
+<h3 class="anchored" data-anchor-id="скільки-послідовностей-у-файлі-та-якої-вони-довжини">Скільки послідовностей у файлі та якої вони довжини</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb31"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Кількість послідовностей</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-c</span> <span class="st">'^&gt;'</span> Drosophila_melanogaster.BDGP6.46.dna.primary_assembly.4.fa</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Довжина кожної послідовності</span></span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a><span class="fu">awk</span> <span class="st">'/^&gt;/ {if (name) print len "\t" name; name = substr($1, 2); len = 0; next}</span></span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a><span class="st">     {len += length($0)}</span></span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a><span class="st">     END {print len "\t" name}'</span> Drosophila_melanogaster.BDGP6.46.dna.primary_assembly.4.fa</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code>1
+1348131 4</code></pre>
+<p><strong>Розбір команди:</strong></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 45%">
+<col style="width: 55%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Частина</th>
+<th>Що робить</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>grep -c '^&gt;'</code></td>
+<td>рахує рядки, що починаються з <code>&gt;</code>. У FASTA кожен такий рядок — окрема послідовність</td>
+</tr>
+<tr class="even">
+<td><code>/^&gt;/ {…}</code></td>
+<td>блок виконується лише для рядків-заголовків</td>
+</tr>
+<tr class="odd">
+<td><code>if (name) print len "\t" name</code></td>
+<td>перед переходом до нового заголовка друкує накопичену довжину <strong>попередньої</strong> послідовності</td>
+</tr>
+<tr class="even">
+<td><code>name = substr($1, 2)</code></td>
+<td>бере перше слово заголовка і відкидає символ <code>&gt;</code> (<code>substr</code> з позиції 2)</td>
+</tr>
+<tr class="odd">
+<td><code>len = 0</code></td>
+<td>обнуляє лічильник для нової послідовності</td>
+</tr>
+<tr class="even">
+<td><code>next</code></td>
+<td>перейти до наступного рядка, не виконуючи решту програми</td>
+</tr>
+<tr class="odd">
+<td><code>{len += length($0)}</code></td>
+<td>для рядків послідовності додає їхню довжину</td>
+</tr>
+<tr class="even">
+<td><code>END {print …}</code></td>
+<td>після кінця файлу друкує останню послідовність — інакше вона загубилася б</td>
+</tr>
+</tbody>
+</table>
+<p>Довжина <code>1348131</code> збігається з числом у заголовку — корисна перевірка того, що файл завантажився повністю.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Чому не можна просто порахувати символи через <code>wc -c</code>
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><code>wc -c</code> порахує ще й символи нового рядка та сам заголовок. Послідовність у FASTA розбита на рядки по 60 символів, тому помилка буде суттєвою. Правильно — відкинути заголовки і прибрати переноси рядків:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb33"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-v</span> <span class="st">'^&gt;'</span> file.fa <span class="kw">|</span> <span class="fu">tr</span> <span class="at">-d</span> <span class="st">'\n'</span> <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-c</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><code>grep -v '^&gt;'</code> відкидає заголовки, <code>tr -d '\n'</code> видаляє всі переноси рядків.</p>
+</div>
+</div>
+</section>
+<section id="gc-склад-послідовності" class="level3">
+<h3 class="anchored" data-anchor-id="gc-склад-послідовності">GC-склад послідовності</h3>
+<p>Частка G та C — базова характеристика геному. Вона різна у різних організмів і навіть у різних частинах одного геному.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb34"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-v</span> <span class="st">'^&gt;'</span> Drosophila_melanogaster.BDGP6.46.dna.primary_assembly.4.fa <span class="dt">\</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">|</span> <span class="fu">awk</span> <span class="st">'{gc += gsub(/[GCgc]/, ""); at += gsub(/[ATat]/, "")}</span></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="st">         END {printf "GC = %.2f%%\n", 100 * gc / (gc + at)}'</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code>GC = 35.25%</code></pre>
+<p><strong>Розбір команди:</strong></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 45%">
+<col style="width: 55%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Частина</th>
+<th>Що робить</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>grep -v '^&gt;'</code></td>
+<td><code>-v</code> — інвертувати: залишити все, <strong>крім</strong> заголовків</td>
+</tr>
+<tr class="even">
+<td><code>gsub(/[GCgc]/, "")</code></td>
+<td><code>gsub</code> замінює всі збіги і <strong>повертає їх кількість</strong>. Тут ми використовуємо саме це число, а зміна рядка нас не цікавить</td>
+</tr>
+<tr class="odd">
+<td><code>[GCgc]</code></td>
+<td>будь-який із символів G, C, g, c — великі й малі літери враховуються разом</td>
+</tr>
+<tr class="even">
+<td><code>gc += …</code></td>
+<td>накопичує кількість G та C по всіх рядках</td>
+</tr>
+<tr class="odd">
+<td><code>END {printf …}</code></td>
+<td>після обробки всього файлу друкує результат</td>
+</tr>
+<tr class="even">
+<td><code>%.2f%%</code></td>
+<td>формат: число з двома знаками після коми, далі знак <code>%</code> (подвоєний <code>%%</code>, бо один <code>%</code> має особливе значення)</td>
+</tr>
+</tbody>
+</table>
+<p>Для порівняння запустіть те саме на мітохондріальному геномі — отримаєте <strong>17.78 %</strong>. Мітохондріальна ДНК комах надзвичайно багата на A та T.</p>
+</section>
+<section id="прогалини-у-збірці-символи-n" class="level3">
+<h3 class="anchored" data-anchor-id="прогалини-у-збірці-символи-n">Прогалини у збірці (символи N)</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb36"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-v</span> <span class="st">'^&gt;'</span> Drosophila_melanogaster.BDGP6.46.dna.primary_assembly.4.fa <span class="dt">\</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">|</span> <span class="fu">awk</span> <span class="st">'{n += gsub(/[Nn]/, "")} END {print n + 0}'</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code>17000</code></pre>
+<p>Літера <code>N</code> означає «нуклеотид невідомий». Це <strong>прогалини збірки</strong> — ділянки, які не вдалося прочитати чи зібрати. На 4-й хромосомі їх 17 000, а от у мітохондріальному геномі — жодної, бо він маленький і зібраний повністю. <code>n + 0</code> потрібне, щоб вивести <code>0</code>, а не порожній рядок, якщо жодного <code>N</code> немає.</p>
+</section>
+</section>
+<section id="b2.-bed-інтервали-на-геномі" class="level2">
+<h2 class="anchored" data-anchor-id="b2.-bed-інтервали-на-геномі">B2. BED — інтервали на геномі</h2>
+<p>BED описує <strong>ділянки</strong> геному: хромосома, початок, кінець. Це найпростіший і найпоширеніший формат для регіонів — саме його приймає більшість інструментів та геномних браузерів.</p>
+<p>Зробимо BED усіх генів прямо з нашого GTF:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb38"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">awk</span> <span class="st">'BEGIN {OFS="\t"}</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="st">     $3 == "gene" {</span></span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a><span class="st">       match($0, /gene_name "[^"]*"/)</span></span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a><span class="st">       name = substr($0, RSTART + 11, RLENGTH - 12)</span></span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a><span class="st">       print $1, $4 - 1, $5, name, ".", $7</span></span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a><span class="st">     }'</span> Drosophila_melanogaster.BDGP6.46.112.gtf <span class="op">&gt;</span> genes.bed</span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span> <span class="at">-3</span> genes.bed</span>
+<span id="cb38-9"><a href="#cb38-9" aria-hidden="true" tabindex="-1"></a><span class="fu">wc</span> <span class="at">-l</span> genes.bed</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code>3R  17750128    17763188    TyrR    .   -
+3R  3827683 3832402 Doc{}RR42085    .   -
+3R  28641584    28642891    CG14062 .   -
+24278 genes.bed</code></pre>
+<p><strong>Розбір команди:</strong></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 45%">
+<col style="width: 55%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Частина</th>
+<th>Що робить</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>$4 - 1</code></td>
+<td>перетворення координати з GTF (нумерація з 1) у BED (нумерація з 0) — див. розділ A4</td>
+</tr>
+<tr class="even">
+<td><code>print $1, $4-1, $5, name, ".", $7</code></td>
+<td>шість стандартних колонок BED: хромосома, початок, кінець, назва, оцінка, ланцюг</td>
+</tr>
+<tr class="odd">
+<td><code>"."</code></td>
+<td>у колонці score немає значення, тому ставимо крапку</td>
+</tr>
+<tr class="even">
+<td><code>&gt; genes.bed</code></td>
+<td>зберігаємо результат у файл</td>
+</tr>
+</tbody>
+</table>
+<section id="скільки-генів-на-кожній-хромосомі" class="level3">
+<h3 class="anchored" data-anchor-id="скільки-генів-на-кожній-хромосомі">Скільки генів на кожній хромосомі</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb40"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cut</span> <span class="at">-f</span> 1 genes.bed <span class="kw">|</span> <span class="fu">sort</span> <span class="kw">|</span> <span class="fu">uniq</span> <span class="at">-c</span> <span class="kw">|</span> <span class="fu">sort</span> <span class="at">-rn</span> <span class="kw">|</span> <span class="fu">head</span> <span class="at">-7</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code>   5239 2R
+   5063 3R
+   4711 3L
+   4571 2L
+   3729 X
+    684 4
+    193 Y</code></pre>
+<p>Порівняйте з підрахунком у розділі A7: там ми рахували <strong>рядки</strong> GTF, а тут — <strong>гени</strong>. Оскільки BED містить рівно один рядок на ген, числа тут значно менші й відповідають на інше питання.</p>
+</section>
+<section id="скільки-пар-основ-займають-гени" class="level3">
+<h3 class="anchored" data-anchor-id="скільки-пар-основ-займають-гени">Скільки пар основ займають гени</h3>
+<p>Тут ховається типова пастка. Наївна сума довжин інтервалів рахує ділянки, де гени <strong>перекриваються</strong>, по кілька разів:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb42"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Наївна сума - неправильно, якщо інтервали перекриваються</span></span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="fu">awk</span> <span class="st">'{sum += $3 - $2} END {print sum}'</span> genes.bed</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code>112107235</code></pre>
+<p>Щоб отримати справжнє покриття, інтервали спочатку сортують, а потім <strong>зливають</strong> ті, що перекриваються:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb44"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sort</span> <span class="at">-k1,1</span> <span class="at">-k2,2n</span> genes.bed <span class="dt">\</span></span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">|</span> <span class="fu">awk</span> <span class="st">'BEGIN {OFS="\t"}</span></span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a><span class="st">         NR == 1 {chr = $1; start = $2; end = $3; next}</span></span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a><span class="st">         $1 == chr &amp;&amp; $2 &lt;= end {if ($3 &gt; end) end = $3; next}</span></span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a><span class="st">         {print chr, start, end; chr = $1; start = $2; end = $3}</span></span>
+<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a><span class="st">         END {print chr, start, end}'</span> <span class="op">&gt;</span> genes.merged.bed</span>
+<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-8"><a href="#cb44-8" aria-hidden="true" tabindex="-1"></a><span class="fu">wc</span> <span class="at">-l</span> genes.merged.bed</span>
+<span id="cb44-9"><a href="#cb44-9" aria-hidden="true" tabindex="-1"></a><span class="fu">awk</span> <span class="st">'{sum += $3 - $2} END {print sum}'</span> genes.merged.bed</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code>14794 genes.merged.bed
+98399658</code></pre>
+<p><strong>Розбір команди:</strong></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 45%">
+<col style="width: 55%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Частина</th>
+<th>Що робить</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>sort -k1,1 -k2,2n</code></td>
+<td><strong>обов’язковий крок</strong>: <code>-k1,1</code> — за хромосомою як текст, <code>-k2,2n</code> — за початком як число. Без сортування злиття не спрацює</td>
+</tr>
+<tr class="even">
+<td><code>NR == 1 {…; next}</code></td>
+<td>для першого рядка просто запам’ятовуємо інтервал</td>
+</tr>
+<tr class="odd">
+<td><code>$1 == chr &amp;&amp; $2 &lt;= end</code></td>
+<td>якщо та сама хромосома і новий інтервал починається не пізніше кінця поточного — вони перекриваються</td>
+</tr>
+<tr class="even">
+<td><code>if ($3 &gt; end) end = $3</code></td>
+<td>розширюємо поточний інтервал праворуч. Перевірка потрібна, бо новий інтервал може цілком міститися всередині поточного</td>
+</tr>
+<tr class="odd">
+<td><code>{print chr, start, end; …}</code></td>
+<td>інтервали не перекриваються — друкуємо накопичений і починаємо новий</td>
+</tr>
+<tr class="even">
+<td><code>END {print …}</code></td>
+<td>друкуємо останній інтервал, інакше він загубиться</td>
+</tr>
+</tbody>
+</table>
+<p>Різниця величезна: <strong>112 107 235</strong> проти <strong>98 399 658</strong> пар основ, тобто майже <strong>14 мільйонів</strong> зайвих. Кількість інтервалів впала з 24 278 до 14 794 — саме стільки генів мають спільні ділянки з сусідами. Для реальної роботи цю операцію виконують програмою <code>bedtools merge</code>, але корисно розуміти, що саме вона робить.</p>
+</section>
+</section>
+<section id="b3.-fastq-риди-секвенування" class="level2">
+<h2 class="anchored" data-anchor-id="b3.-fastq-риди-секвенування">B3. FASTQ — риди секвенування</h2>
+<p>FASTQ — це те, що видає секвенатор, і головний формат HW3. Кожен рід описується <strong>рівно чотирма рядками</strong>:</p>
+<pre class="text"><code>@SRR1234567.1 1/1                      &lt;- 1. заголовок, починається з @
+GATTACAGATTACAGATTACAGATTACAGATTACA    &lt;- 2. послідовність
++                                      &lt;- 3. роздільник
+IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII    &lt;- 4. якість кожного нуклеотида</code></pre>
+<p>Четвертий рядок кодує якість символами: кожному нуклеотиду відповідає один символ, і чим «пізніший» він в ASCII, тим вища якість. Саме тому рядок послідовності й рядок якості завжди однакової довжини.</p>
+<section id="скільки-ридів-у-файлі" class="level3">
+<h3 class="anchored" data-anchor-id="скільки-ридів-у-файлі">Скільки ридів у файлі</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb47"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Для розпакованого файлу</span></span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="va">$((</span> <span class="va">$(</span><span class="fu">wc</span> <span class="at">-l</span> <span class="op">&lt;</span> reads.fastq<span class="va">)</span> <span class="op">/</span> <span class="dv">4</span> <span class="va">))</span></span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Для стисненого - без розпакування</span></span>
+<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="va">$((</span> <span class="va">$(</span><span class="fu">zcat</span> reads.fastq.gz <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span><span class="va">)</span> <span class="op">/</span> <span class="dv">4</span> <span class="va">))</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Розбір команди:</strong></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 45%">
+<col style="width: 55%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Частина</th>
+<th>Що робить</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>wc -l &lt; reads.fastq</code></td>
+<td>кількість рядків. Запис через <code>&lt;</code> не друкує ім’я файлу, лише число</td>
+</tr>
+<tr class="even">
+<td><code>$( … )</code></td>
+<td>підстановка команди: результат підставляється у вираз</td>
+</tr>
+<tr class="odd">
+<td><code>$(( … / 4 ))</code></td>
+<td>арифметика в bash. Ділимо на 4, бо один рід — це чотири рядки</td>
+</tr>
+<tr class="even">
+<td><code>zcat</code></td>
+<td>читає стиснений <code>.gz</code> файл, не створюючи розпакованої копії на диску</td>
+</tr>
+</tbody>
+</table>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>Не рахуйте риди через <code>grep -c '^@'</code>
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Символ <code>@</code> є і серед символів якості, тому рядок якості може початися з <code>@</code> і бути порахованим як заголовок. Ділення кількості рядків на 4 — надійний спосіб.</p>
+</div>
+</div>
+</section>
+<section id="довжина-ридів" class="level3">
+<h3 class="anchored" data-anchor-id="довжина-ридів">Довжина ридів</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb48"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">awk</span> <span class="st">'NR % 4 == 2 {print length($0)}'</span> reads.fastq <span class="kw">|</span> <span class="fu">sort</span> <span class="at">-n</span> <span class="kw">|</span> <span class="fu">uniq</span> <span class="at">-c</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code>      1 24
+      1 35
+      1 40</code></pre>
+<p><strong>Розбір команди:</strong></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 45%">
+<col style="width: 55%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Частина</th>
+<th>Що робить</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>NR</code></td>
+<td>вбудована змінна <code>awk</code> — номер поточного рядка</td>
+</tr>
+<tr class="even">
+<td><code>NR % 4 == 2</code></td>
+<td><code>%</code> — остача від ділення. Рядки 2, 6, 10, 14… — це саме рядки послідовності</td>
+</tr>
+<tr class="odd">
+<td><code>length($0)</code></td>
+<td>довжина всього рядка, тобто довжина ріду</td>
+</tr>
+<tr class="even">
+<td><code>sort -n</code> → <code>uniq -c</code></td>
+<td>будує розподіл: скільки ридів має кожну довжину</td>
+</tr>
+</tbody>
+</table>
+<p>Після обрізки адаптерів (<code>fastp</code> у HW3) довжини стають різними — цей розподіл показує, наскільки сильно обрізалися риди.</p>
+</section>
+<section id="перетворення-fastq-у-fasta" class="level3">
+<h3 class="anchored" data-anchor-id="перетворення-fastq-у-fasta">Перетворення FASTQ у FASTA</h3>
+<p>Іноді потрібні лише послідовності, без інформації про якість:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb50"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="fu">awk</span> <span class="st">'NR % 4 == 1 {sub(/^@/, "&gt;"); print}</span></span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a><span class="st">     NR % 4 == 2 {print}'</span> reads.fastq <span class="op">&gt;</span> reads.fasta</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Розбір команди:</strong></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 45%">
+<col style="width: 55%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Частина</th>
+<th>Що робить</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>NR % 4 == 1</code></td>
+<td>рядки заголовків ридів</td>
+</tr>
+<tr class="even">
+<td><code>sub(/^@/, "&gt;")</code></td>
+<td>замінює <code>@</code> на початку рядка на <code>&gt;</code> — заголовок стає FASTA-заголовком. <code>sub</code> змінює лише <strong>перший</strong> збіг, на відміну від <code>gsub</code></td>
+</tr>
+<tr class="odd">
+<td><code>print</code></td>
+<td>друкує змінений рядок</td>
+</tr>
+<tr class="even">
+<td><code>NR % 4 == 2 {print}</code></td>
+<td>друкує рядок послідовності без змін. Рядки 3 і 4 просто ігноруються</td>
+</tr>
+</tbody>
+</table>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Спробуйте самостійно
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>Порахуйте частку ридів, довших за 100 нуклеотидів</li>
+<li>Знайдіть у FASTA найдовшу ділянку з <code>N</code> поспіль</li>
+<li>Обчисліть GC-склад <strong>кожного</strong> ріду у FASTQ і побудуйте розподіл</li>
+<li>Порівняйте GC-склад різних хромосом дрозофіли між собою</li>
+</ul>
+</div>
+</div>
 
 
+</section>
+</section>
 </section>
 
 </main> <!-- /main -->

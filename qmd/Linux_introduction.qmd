@@ -30,7 +30,7 @@ ls -la                  # Виведення прихованих файлів �
 
 ## **df**
 
-(Disk Free) Команда для зміни поточного робочого каталогу
+(Disk Free) Відображення вільного та зайнятого місця на дисках
 
 ``` bash
 df                      # Виведення використання диску для всіх файлових систем
@@ -61,7 +61,7 @@ mkdir -p /path/to/dir   # Створення структури каталогі
 
 ## **rm**
 
-(Remove) Створення нових каталогів
+(Remove) Видалення файлів і каталогів
 
 ``` bash
 rm file.txt             # Видалення файлу
@@ -110,7 +110,9 @@ grep -r 'pattern' /path/to/dir  # Рекурсивний пошук по всь�
 grep -v 'pattern' file.txt      # Виведення рядків, що не містять 'pattern'
 grep --color "example" file.txt   # Виділяє "example" у виведенні
 grep --color -w "example" file.txt   # Пошук цілого слова з підкресленням знайдених збігів
-grep --color \"PTPN22\" file.txt    #Виділення рядків, якщо в них є регулярні вирази у дужках
+grep --color 'PTPN22' file.txt       # Виділення збігів з назвою гена PTPN22
+grep -c '^>' genome.fasta            # Підрахунок послідовностей у FASTA файлі
+grep -v '^#' variants.vcf | wc -l    # Підрахунок варіантів у VCF без рядків заголовка
 ```
 
 ## **echo**
@@ -120,7 +122,7 @@ grep --color \"PTPN22\" file.txt    #Виділення рядків, якщо �
 ``` bash
 echo "Hello, World!"    # Виведення тексту
 echo $HOME              # Виведення значення змінної
-echo "Line 1\nLine 2"   # Виведення з новими рядками
+echo -e "Line 1\nLine 2"  # Виведення з новими рядками (-e вмикає обробку \n)
 ```
 
 ## **ps**
@@ -210,11 +212,14 @@ ssh -i keyfile.pem user@hostname  # Підключення з використа
 
 ## **comm**
 
-(Compare Two Sorted Files) Створення нових каталогів
+(Compare Two Sorted Files) Порядкове порівняння двох **відсортованих** файлів
 
 ``` bash
-comm file1.txt file2.txt # Порівняння файлів
-comm -1 file1.txt file2.txt # Виведення відмінностей у другому файлі
+comm file1.txt file2.txt     # Три колонки: лише у file1, лише у file2, спільні
+comm -1 file1.txt file2.txt  # Приховати колонку 1 (рядки, унікальні для file1.txt)
+comm -12 file1.txt file2.txt # Лише спільні рядки обох файлів
+comm -3 file1.txt file2.txt  # Лише рядки, що відрізняються
+# Увага: обидва файли мають бути попередньо відсортовані командою sort
 ```
 
 ## **kill**
@@ -234,7 +239,7 @@ kill -9 12345          # Примусове завершення процесу 
 chmod 755 file.txt     # Встановлення прав доступу (власник: читання, запис, виконання; група і інші: тільки читання і виконання)
 chmod u+x file.txt     # Додавання права виконання для власника
 chmod -R 644 directory # Рекурсивна зміна прав доступу для всіх файлів у каталозі
-chmod a-w file.txt     # Відбір прав запису для всіх
+chmod a-w file.txt     # Зняття права запису для всіх (захист від випадкової зміни)
 ```
 
 ## **chown**
@@ -249,7 +254,7 @@ chown user file.txt            # Зміна лише власника
 
 ## **wget**
 
-(Download Files from the Web) Створення нових каталогів
+(Download Files from the Web) Завантаження файлів з інтернету
 
 ``` bash
 wget http://example.com/file.zip      # Завантаження файлу з вказаної URL
@@ -260,7 +265,7 @@ wget --limit-rate=200k http://example.com/file.zip  # Обмеження шви�
 
 ## **sudo**
 
-(Make Directory) Створення нових каталогів
+(Superuser Do) Виконання команди з правами адміністратора
 
 ``` bash
 sudo apt-get update      # Оновлення системи на рівні адміністратора
@@ -284,7 +289,7 @@ tree -h                   # Показує розмір файлів у форм
 
 ## **pwd**
 
-(Print Working Directory) Створення нових каталогів
+(Print Working Directory) Виведення повного шляху до поточного робочого каталогу
 
 ``` bash
 pwd                       # Виводить абсолютний шлях до поточного робочого каталогу
@@ -320,7 +325,7 @@ history -r filename        # Завантажує історію команд з
 
 ## **more**
 
-тПосторінковий перегляд вмісту файлу або виведення тексту в терміналі. Вона дозволяє переглядати текст поступово, прокручуючи його по сторінках.
+Посторінковий перегляд вмісту файлу або виведення тексту в терміналі. Вона дозволяє переглядати текст поступово, прокручуючи його по сторінках.
 
 ``` bash
 more file.txt              # Відкриває файл для посторінкового перегляду
@@ -380,18 +385,408 @@ awk 'NR == 1 {min = $1} $1 < min {min = $1} END {print min}' file.txt  # Мін�
 awk 'NR == 1 {max = $1} $1 > max {max = $1} END {print max}' file.txt  # Максимальне значення в 1-й колонці
 ```
 
+Приклади для геномних форматів (GTF, BED, VCF, FASTA):
+
+``` bash
+awk '$3 == "gene"' annotation.gtf            # Лише рядки з генами
+awk '$3 == "exon" {n++} END {print n}' annotation.gtf   # Кількість екзонів
+awk '!/^#/ {print $1, $2, $4, $5}' variants.vcf   # Хромосома, позиція, реф. і альт. алелі
+awk '$1 == "chr1" && $4 > 1000000' annotation.gtf  # Гени на chr1 після позиції 1 Mb
+awk 'BEGIN {OFS="\t"} {print $1, $4-1, $5}' annotation.gtf > regions.bed  # GTF -> BED
+awk '{sum += $3 - $2} END {print sum}' regions.bed  # Сумарна довжина інтервалів у BED
+awk '/^>/ {name = $0; next} {len[name] += length($0)} END {for (n in len) print n, len[n]}' genome.fasta
+                                              # Довжина кожної послідовності у FASTA
+```
+
+# Обробка тексту і таблиць
+
+Геномні формати (FASTA, FASTQ, SAM, VCF, BED, GTF) — це звичайні текстові файли з розділенням табуляцією. Тому стандартні команди Linux дозволяють аналізувати їх без жодних спеціалізованих програм.
+
+## **sort**
+
+(Sort Lines) Сортування рядків файлу.
+
+``` bash
+sort file.txt                     # Сортування рядків за алфавітом
+sort -n numbers.txt               # Числове сортування
+sort -r file.txt                  # Сортування у зворотному порядку
+sort -u file.txt                  # Сортування з видаленням дублікатів
+sort -k 2 file.txt                # Сортування за 2-ю колонкою
+sort -k1,1 -k2,2n regions.bed     # Сортування BED: за хромосомою, потім за координатою
+sort -V chromosomes.txt           # "Природне" сортування (chr1, chr2, chr10, а не chr1, chr10, chr2)
+sort -S 4G -T /tmp big_file.bed   # Обмеження пам'яті та тимчасовий каталог для великих файлів
+```
+
+## **uniq**
+
+(Report or Omit Repeated Lines) Робота з повторюваними рядками. Файл має бути попередньо відсортований, тому **uniq** майже завжди використовують разом із **sort**.
+
+``` bash
+sort file.txt | uniq              # Видалення повторів
+sort file.txt | uniq -c           # Підрахунок кількості повторів кожного рядка
+sort file.txt | uniq -d           # Лише рядки, що повторюються
+sort file.txt | uniq -u           # Лише унікальні рядки
+sort file.txt | uniq -c | sort -rn   # Найчастіші рядки на початку списку
+grep -v '^#' variants.vcf | cut -f 1 | sort | uniq -c   # Кількість варіантів на кожній хромосомі
+awk '$3 == "gene"' annotation.gtf | cut -f 1 | sort | uniq -c  # Кількість генів на хромосому
+```
+
+## **sed**
+
+(Stream Editor) Пошук і заміна тексту, видалення та виведення окремих рядків.
+
+``` bash
+sed 's/old/new/' file.txt           # Заміна першого збігу в кожному рядку
+sed 's/old/new/g' file.txt          # Заміна всіх збігів у кожному рядку
+sed -i 's/old/new/g' file.txt       # Заміна безпосередньо у файлі (обережно, без резервної копії!)
+sed -i.bak 's/old/new/g' file.txt   # Те саме, але зі збереженням копії file.txt.bak
+sed -n '10,20p' file.txt            # Виведення рядків з 10 по 20
+sed '1d' table.tsv                  # Видалення першого рядка (заголовка)
+sed '/^#/d' variants.vcf            # Видалення всіх рядків заголовка VCF
+sed 's/^>/>sample1_/' genome.fasta  # Додавання префікса до заголовків FASTA
+sed 's/^chr//' variants.vcf         # Перейменування хромосом: chr1 -> 1
+```
+
+## **tr**
+
+(Translate Characters) Заміна або видалення окремих символів.
+
+``` bash
+tr 'a-z' 'A-Z' < sequence.txt       # Переведення послідовності у верхній регістр
+tr -d '\n' < sequence.txt           # Видалення символів нового рядка
+tr -d ' ' < sequence.txt            # Видалення пробілів
+tr ' ' '\t' < file.txt              # Заміна пробілів на табуляцію
+echo "ATGCATGC" | tr 'ATGC' 'TACG'         # Комплементарна послідовність
+echo "ATGCATGC" | rev | tr 'ATGC' 'TACG'   # Зворотно-комплементарна послідовність
+```
+
+## **paste**
+
+(Merge Lines of Files) Об'єднання файлів або рядків у колонки.
+
+``` bash
+paste file1.txt file2.txt         # Об'єднання двох файлів по колонках
+paste -d ',' file1.txt file2.txt  # Об'єднання з комою як роздільником
+paste -s file.txt                 # Об'єднання всіх рядків файлу в один рядок
+paste - - - - < reads.fastq       # Перетворення 4-рядкового запису FASTQ в один рядок з 4 колонок
+```
+
+## **join**
+
+(Join Lines on a Common Field) Об'єднання двох таблиць за спільним полем (наприклад, таблиці генів і таблиці рівнів експресії).
+
+``` bash
+join file1.txt file2.txt              # Об'єднання за спільним першим полем
+join -1 1 -2 2 file1.txt file2.txt    # За 1-м полем першого і 2-м полем другого файлу
+join -t $'\t' genes.tsv counts.tsv    # Для файлів з табуляцією як роздільником
+# Увага: обидва файли мають бути відсортовані за ключовим полем:
+sort -k1,1 genes.tsv > genes.sorted.tsv
+```
+
+# Стиснені файли та завантаження даних
+
+Геномні дані майже завжди зберігаються стисненими (`.fastq.gz`, `.vcf.gz`). Розпаковувати їх щоразу не потрібно — існують `z`-версії звичайних команд.
+
+## **zgrep**
+
+(Grep Compressed Files) Пошук у стиснених файлах без розпакування.
+
+``` bash
+zgrep 'pattern' file.gz                 # Пошук у стисненому файлі
+zgrep -c '^@SRR' reads.fastq.gz         # Підрахунок заголовків ридів у FASTQ
+zgrep -v '^#' variants.vcf.gz | wc -l   # Підрахунок варіантів без рядків заголовка
+zgrep -i 'chr1' annotation.gtf.gz       # Пошук без урахування регістру
+```
+
+## **zless**
+
+(View Compressed Files) Посторінковий перегляд стиснених файлів.
+
+``` bash
+zless reads.fastq.gz              # Посторінковий перегляд стисненого файлу
+zless -S annotation.gtf.gz        # Перегляд без переносу довгих рядків
+zcat reads.fastq.gz | head -n 8   # Перші два записи FASTQ
+```
+
+## **curl**
+
+(Transfer Data from a URL) Завантаження даних, зокрема геномів з NCBI чи Ensembl. Альтернатива команді **wget**.
+
+``` bash
+curl -O https://example.com/genome.fa.gz      # Завантаження зі збереженням оригінальної назви
+curl -L -o genome.fa.gz https://example.com/g # Збереження під іншою назвою (-L слідує за редиректами)
+curl -C - -O https://example.com/genome.fa.gz # Продовження перерваного завантаження
+curl -I https://example.com/genome.fa.gz      # Лише заголовки — перевірка доступності файлу
+```
+
+## **md5sum**
+
+(Compute Checksum) Перевірка цілісності завантажених файлів. Обов'язковий крок після завантаження великих геномів — файл може завантажитись не повністю.
+
+``` bash
+md5sum genome.fa.gz              # Обчислення контрольної суми файлу
+md5sum -c md5checksums.txt       # Перевірка всіх файлів за списком сум (NCBI надає такий файл)
+md5sum *.fastq.gz > my_md5.txt   # Збереження сум для власних файлів
+sha256sum genome.fa.gz           # Те саме, але надійніший алгоритм
+```
+
+## **tar**
+
+(Tape Archive) Створення та розпакування архівів.
+
+``` bash
+tar -czf archive.tar.gz directory/   # Створення стисненого архіву з каталогу
+tar -xzf archive.tar.gz              # Розпакування архіву
+tar -tzf archive.tar.gz              # Перегляд вмісту архіву без розпакування
+tar -xzf archive.tar.gz -C /path/    # Розпакування у вказаний каталог
+```
+
+## **split**
+
+(Split a File into Pieces) Розбиття великих файлів на частини.
+
+``` bash
+split -l 1000000 large_file.txt part_      # По 1 000 000 рядків у частині
+split -n 4 genome.fa chunk_                # На 4 приблизно рівні частини
+split -l 4000000 reads.fastq chunk_        # Для FASTQ кількість рядків має ділитись на 4!
+split -b 100M large.bam chunk_             # Частини по 100 МБ
+```
+
+## **rsync**
+
+(Remote Sync) Копіювання великих обсягів даних, зокрема на віддалений сервер. На відміну від **cp**, може продовжити перервану передачу.
+
+``` bash
+rsync -avh source/ destination/                    # Копіювання каталогу
+rsync -avh --progress reads/ user@server:/data/    # Копіювання на сервер з показом прогресу
+rsync -avh --partial user@server:/data/ ./         # Продовження перерваної передачі
+rsync -avhn source/ destination/                   # Пробний запуск без реального копіювання
+```
+
+# Пошук файлів і пакетна обробка
+
+У геномному аналізі одні й ті самі дії виконуються для десятків зразків. Наведені команди дозволяють не повторювати їх вручну.
+
+## **find**
+
+(Search for Files) Пошук файлів за назвою, розміром чи датою зміни.
+
+``` bash
+find . -name "*.fastq.gz"              # Усі FASTQ файли в поточному каталозі та підкаталогах
+find /data -type d -name "sample*"     # Пошук каталогів, назва яких починається на sample
+find . -name "*.bam" -size +1G         # BAM файли, більші за 1 ГБ
+find . -name "*.vcf" -mtime -7         # Файли, змінені за останні 7 днів
+find . -name "*.fastq" -exec gzip {} \;   # Стиснення всіх знайдених файлів
+find . -name "*.sam" -delete           # Видалення всіх SAM файлів (обережно!)
+```
+
+## **xargs**
+
+(Build and Execute Command Lines) Передає знайдені файли як аргументи іншій команді.
+
+``` bash
+ls *.fastq | xargs -n 1 gzip                     # Стиснення кожного файлу окремо
+find . -name "*.bam" | xargs -n 1 samtools index # Індексація всіх BAM файлів
+cat samples.txt | xargs -I {} mkdir -p results/{}  # Каталог результатів для кожного зразка
+find . -name "*.fastq" | xargs -P 4 -n 1 gzip    # Паралельне стиснення у 4 потоки
+```
+
+## **basename** і **dirname**
+
+(Strip Path / Strip Filename) Виділення назви файлу або шляху до нього. Незамінні всередині циклів для формування назв вихідних файлів.
+
+``` bash
+basename /data/reads/sample1.fastq.gz             # -> sample1.fastq.gz
+basename /data/reads/sample1.fastq.gz .fastq.gz   # -> sample1 (без розширення)
+dirname /data/reads/sample1.fastq.gz              # -> /data/reads
+```
+
+## **Цикл for**
+
+(Loop) Виконання однакових дій для набору файлів або зразків.
+
+``` bash
+for file in *.fastq.gz; do echo "$file"; done   # Виведення назв усіх файлів
+
+# Обробка кожного зразка з формуванням власної назви результату:
+for file in *.fastq.gz; do
+  sample=$(basename "$file" .fastq.gz)
+  fastp -i "$file" -o "trimmed_${sample}.fastq.gz"
+done
+
+for i in {1..22}; do echo "chr$i"; done         # Перебір хромосом
+while read sample; do echo "$sample"; done < samples.txt   # Читання списку зразків з файлу
+```
+
+## **Змінні та підстановка команд**
+
+(Variables and Command Substitution) Збереження шляхів і результатів команд.
+
+``` bash
+REF=/data/reference/genome.fa      # Створення змінної
+echo $REF                          # Використання змінної
+bwa mem $REF reads.fastq > aln.sam
+
+SAMPLE=$(basename reads.fastq.gz .fastq.gz)   # Підстановка результату команди
+LINES=$(zcat reads.fastq.gz | wc -l)
+echo $((LINES / 4))                # Арифметика: кількість ридів у FASTQ
+```
+
+## **ln**
+
+(Link) Створення символічних посилань. Дозволяє "підключити" референсний геном до робочого каталогу, не копіюючи файл розміром у кілька гігабайт.
+
+``` bash
+ln -s /data/reference/genome.fa genome.fa   # Посилання на референсний геном
+ln -s /big/storage/raw_data data            # Посилання на каталог з даними
+ls -l                                        # Символічні посилання позначені стрілкою ->
+```
+
+# Перенаправлення та об'єднання команд
+
+## **Перенаправлення виводу**
+
+(Redirection) Збереження результатів роботи програм і повідомлень про помилки у файли.
+
+``` bash
+command > file.txt        # Перенаправлення виводу у файл (файл перезаписується)
+command >> file.txt       # Додавання виводу в кінець файлу
+command < input.txt       # Читання даних з файлу
+command 2> errors.log     # Перенаправлення лише повідомлень про помилки
+command > out.log 2>&1    # Вивід і помилки в один файл
+command &> all.log        # Те саме, коротший запис
+bwa mem ref.fa r1.fq r2.fq > aln.sam 2> bwa.log   # Результат і лог програми окремо
+```
+
+## **tee**
+
+(Write to File and Screen) Одночасне виведення на екран і збереження у файл.
+
+``` bash
+command | tee output.txt        # Виведення на екран і збереження у файл
+command | tee -a output.txt     # Додавання в кінець файлу
+fastp -i reads.fq -o out.fq 2>&1 | tee fastp.log   # Спостереження за роботою і збереження логу
+```
+
+## **&&**, **\|\|**, **;**
+
+(Command Chaining) Послідовне виконання кількох команд.
+
+``` bash
+command1 && command2      # command2 виконається лише якщо command1 завершилась успішно
+command1 || command2      # command2 виконається лише якщо command1 завершилась з помилкою
+command1 ; command2       # Послідовне виконання незалежно від результату
+
+mkdir -p results && cd results
+bwa mem ref.fa reads.fq > aln.sam && samtools view -b aln.sam > aln.bam
+```
+
+# Довготривалі задачі та ресурси
+
+Вирівнювання ридів чи збірка геному можуть тривати години. Наведені команди дозволяють не втратити результат при розриві з'єднання з сервером.
+
+## **Фоновий режим і nohup**
+
+(Background Jobs) Запуск задач, що продовжують працювати після закриття термінала.
+
+``` bash
+command &                  # Запуск у фоновому режимі
+nohup command &            # Запуск, що не переривається при виході з сесії
+nohup bwa mem ref.fa r1.fq r2.fq > aln.sam 2> bwa.log &
+jobs                       # Список фонових задач поточної сесії
+fg %1                      # Повернення задачі №1 на передній план
+bg %1                      # Продовження призупиненої задачі у фоні
+# Ctrl+Z — призупинення поточної задачі
+```
+
+## **tmux**
+
+(Terminal Multiplexer) Сесія термінала, яка продовжує працювати на сервері після від'єднання. Найнадійніший спосіб запускати довготривалий аналіз.
+
+``` bash
+tmux new -s genomics       # Створення нової сесії з назвою genomics
+tmux ls                    # Список наявних сесій
+tmux attach -t genomics    # Повернення до сесії
+# Ctrl+b, потім d — від'єднання від сесії (процеси продовжують працювати)
+screen -S genomics         # Аналогічна програма screen: створення сесії
+screen -r genomics         # Повернення до сесії screen
+```
+
+## **time**
+
+(Measure Execution Time) Вимірювання часу виконання команди.
+
+``` bash
+time samtools sort aln.bam -o sorted.bam   # Час виконання команди
+/usr/bin/time -v command                   # Детально, зокрема пікове використання пам'яті
+```
+
+## **du**
+
+(Disk Usage) Розмір файлів і каталогів. Геномні дані швидко заповнюють диск.
+
+``` bash
+du -sh directory/            # Загальний розмір каталогу
+du -h --max-depth=1 /data    # Розмір кожного підкаталогу
+du -sh * | sort -h           # Вміст поточного каталогу, відсортований за розміром
+du -sh *.bam                 # Розмір усіх BAM файлів
+```
+
+## **htop**
+
+(Interactive Process Viewer) Зручніша версія **top** з кольоровим інтерфейсом.
+
+``` bash
+htop                # Запуск інтерактивного перегляду процесів
+htop -u username    # Процеси конкретного користувача
+# F6 — сортування, F9 — завершити процес, q — вихід
+```
+
+# Середовища для біоінформатики
+
+## **conda** / **mamba**
+
+(Package and Environment Manager) Встановлення біоінформатичних програм без прав адміністратора та розділення їх на незалежні середовища. **mamba** — швидший відповідник **conda** з тими самими командами.
+
+``` bash
+conda create -n genomics -c bioconda -c conda-forge samtools bcftools bwa fastp
+conda activate genomics        # Активація середовища
+conda deactivate               # Вихід із середовища
+conda env list                 # Список наявних середовищ
+conda install -c bioconda multiqc   # Встановлення програми в активне середовище
+conda list                     # Перелік встановлених програм і їхніх версій
+conda env export > environment.yml  # Збереження складу середовища для відтворення
+mamba create -n genomics -c bioconda samtools   # Те саме через mamba (значно швидше)
+```
+
 # Корисні поради при використанні терміналу
 
--   Повертайтеся до попередніх команд за допомогою клавіш стрілок(PgUp,PgDn)
--   Натисніть одночасно клавіші «Ctrl» і «r», щоб розпочати пошук команд, які містять пошукові терміни.
--   Використовуйте клавіші зі стрілками для циклічного перегляду всіх команд, які відповідають умовам пошуку.
--   Використовуйте клавішу «Tab» для автозаповнення.
--   Натисніть одночасно клавіші «Ctrl» і «c», щоб завершити команду.
+- Повертайтеся до попередніх команд за допомогою клавіш стрілок(PgUp,PgDn)
+- Натисніть одночасно клавіші «Ctrl» і «r», щоб розпочати пошук команд, які містять пошукові терміни.
+- Використовуйте клавіші зі стрілками для циклічного перегляду всіх команд, які відповідають умовам пошуку.
+- Використовуйте клавішу «Tab» для автозаповнення.
+- Натисніть одночасно клавіші «Ctrl» і «c», щоб завершити команду.
+- «Ctrl» + «l» очищає екран, «Ctrl» + «a» переводить курсор на початок рядка, «Ctrl» + «e» — у кінець.
+
+## Поради для роботи з геномними даними
+
+- Перед обробкою великого файлу завжди подивіться на його початок: `zcat reads.fastq.gz | head -n 8`. Це дозволяє переконатися у форматі даних.
+- Не розпаковуйте великі `.gz` файли без потреби — використовуйте `zcat`, `zless` і `zgrep`.
+- Перевіряйте команду на невеликій вибірці, перш ніж запускати її на всіх даних: `zcat reads.fastq.gz | head -n 4000 > test.fastq`.
+- Після завантаження геному обов'язково звіряйте контрольну суму: `md5sum -c md5checksums.txt`.
+- Перед `rm` з масками спочатку виконайте ту саму команду з `ls`, щоб побачити, що саме буде видалено.
+- Довготривалі задачі запускайте у `tmux` — розрив з'єднання з сервером не перерве аналіз.
+- Стежте за вільним місцем: `df -h` і `du -sh *`. Проміжні `.sam` файли займають у рази більше місця, ніж `.bam`.
 
 # Корисні посилання
 
--   [Bash Reference Manual](https://www.gnu.org/savannah-checkouts/gnu/bash/manual/bash.html)
--   [Основи Linux українською](https://linuxguide.rozh2sch.org.ua/)
--   [Посібник з біоінформатики Сергія Науменка](https://github.com/naumenko-sa/bioinf_posibnyk_public/blob/main/bioinf_posibnyk.pdf)
--   [Як писати скрипти Shell](https://itedu.center/ua/blog/guides/shell-scripting-for-beginners/?srsltid=AfmBOorm1nsiWgtSSaW4cIy9ChURvRaY9jOcGECsgn8ndIJsf5fMMEJS)
--   [Лекція 2 з курсу Applied Computational Genomics by Aaron Quinlan](https://docs.google.com/presentation/d/1YSXYqCSHUZGRVr00oTttv_v1u83ccPLpF5_TMtW0iRI/edit#slide=id.g1b53b9035b_0_151)
+- [Bash Reference Manual](https://www.gnu.org/savannah-checkouts/gnu/bash/manual/bash.html)
+- [Основи Linux українською](https://linuxguide.rozh2sch.org.ua/)
+- [Посібник з біоінформатики Сергія Науменка](https://github.com/naumenko-sa/bioinf_posibnyk_public/blob/main/bioinf_posibnyk.pdf)
+- [Як писати скрипти Shell](https://itedu.center/ua/blog/guides/shell-scripting-for-beginners/?srsltid=AfmBOorm1nsiWgtSSaW4cIy9ChURvRaY9jOcGECsgn8ndIJsf5fMMEJS)
+- [Лекція 2 з курсу Applied Computational Genomics by Aaron Quinlan](https://docs.google.com/presentation/d/1YSXYqCSHUZGRVr00oTttv_v1u83ccPLpF5_TMtW0iRI/edit#slide=id.g1b53b9035b_0_151)
+- [ExplainShell — розбір будь-якої команди по частинах](https://explainshell.com/)
+- [Software Carpentry: The Unix Shell](https://swcarpentry.github.io/shell-novice/)
+- [Data Carpentry: Introduction to the Command Line for Genomics](https://datacarpentry.org/shell-genomics/)
+- [Bioinformatics One-Liners by Stephen Turner](https://github.com/stephenturner/oneliners)
+- [Bioconda — репозиторій біоінформатичних програм](https://bioconda.github.io/)

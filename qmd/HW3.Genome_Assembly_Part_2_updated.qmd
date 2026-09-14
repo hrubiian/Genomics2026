@@ -7,7 +7,7 @@ author: "Nazarii Hrubiian"
 
 -   Виклик поліморфізмів за допомогою **bcftools**
 -   Фільтрування та анотація поліморфізмів за допомогою **SnpEff**
--   Пошук гену 16S rRNA (rrsD)/filC у консенсусному геномі
+-   Пошук гену 16S rRNA (rrsD)/fliC у консенсусному геномі
 -   Пошук поліморфізмів досліджуваних ліній та порівняння з відсеквенованими зразками на NCBI
 -   знаходження серотипу відсеквенованих зразків за допомогою **ectyper**
 -   Порівняння отриманих результатів з результатами онлайн інструментів від [Центру Геномної Епідеміології](https://www.genomicepidemiology.org/services/)
@@ -15,7 +15,7 @@ author: "Nazarii Hrubiian"
 
 # Пайплайн
 
-![](images/Genome_Assembly_Plan_2){width="338"}
+![](images/Genome_Assembly_Plan_2.png){width="338"}
 
 # Створення нового середовища та індексування референтного геному та bam файлів
 
@@ -38,7 +38,7 @@ mkdir variants
 bcftools mpileup -f reference/GCF_000005845.2_ASM584v2_genomic.fasta DRR589139.sorted.dedup.bam | bcftools call -mv -Ob --ploidy 1 -o  variants/DRR589139.vcf
 
 #показати 40 стрічок вихідного vcf файлу
-$ cat variants/DRR589139.vcf | grep -v '##' | head -4
+cat variants/DRR589139.vcf | grep -v '##' | head -4
 ```
 
 # Статистика та фільтрування VCF
@@ -51,7 +51,7 @@ tabix -p vcf variants/DRR589139.vcf
 #статистика за допомогою vcfstats
 rtg vcfstats variants/DRR589139.vcf
 #Статистика за допомогою bcftools
-bcftools stats -F reference/GCF_000005845.2_ASM584v2_genomic.fasta -s - variants/DRR589139.vcf.gz > variants/variants/DRR589139.vcf.gz.stats
+bcftools stats -F reference/GCF_000005845.2_ASM584v2_genomic.fasta -s - variants/DRR589139.vcf.gz > variants/DRR589139.vcf.gz.stats
 # Створення графіків
 mkdir variants/plots
 plot-vcfstats -p variants/plots/ variants/DRR589139.vcf.gz.stats
@@ -146,9 +146,9 @@ ectyper -i SRR18779612_1.fastq SRR18779612_2.fastq --out ectyper_out
 
 ## Побудова філогенетичного дерева
 
--   Знайдіть у створеному консенсусному геномі ген "filC" та спробуйте знайти найбільш споріднені геноми(штами) за допомогою інструменту "blastn". Відповідну інформацію у вигляді скріншоту додайте до висновків вашої презентації
+-   Знайдіть у створеному консенсусному геномі ген "fliC" та спробуйте знайти найбільш споріднені геноми(штами) за допомогою інструменту "blastn". Відповідну інформацію у вигляді скріншоту додайте до висновків вашої презентації
 -   (Optional Task)Також проведіть множинне вирівнювання та побудову філогенетичного дерева у програмі [MEGA](https://www.megasoftware.net/). Хто працює у WSL, то потрібно встановити на базі Windows. Отримані дерева додайте у презентацію. Пошук ліній для філогенетичного дерева можна здійснити також за допомогою інструменту BLAST шляхом завантаження найбільш відповідних ліній з різною спорідненістю. Список ліній E.coli можна також знайти у базі NCBI Taxonomy, також можна пошукати у базі Popset, Gene.
--   Оцінити розташування проаналізованої лінії серед інших ліній E.coli за допомогою інстументів [Центру Геномної Епідеміології](https://www.genomicepidemiology.org/services/). Скористайтесь fastq файлами відовідними інструментами:
+-   Оцінити розташування проаналізованої лінії серед інших ліній E.coli за допомогою інструментів [Центру Геномної Епідеміології](https://www.genomicepidemiology.org/services/). Скористайтесь fastq файлами відповідними інструментами:
     -   MLST 2.0
     -   SerotypeFinder 2.0
     -   KmerFinder 3.2

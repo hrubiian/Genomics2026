@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.32">
+<meta name="generator" content="quarto-1.10.18">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -10,10 +10,16 @@
 
 <title>1. Основні команди Linux – Structural and Functional Genomics</title>
 <style>
-code{white-space: pre-wrap;}
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -72,10 +78,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-9fc9979f13c68dab769c953c4c7d8074.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-5f534768425a2c127c96e39e26e01c38.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -105,6 +111,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }</script>
 
 
+<link rel="stylesheet" href="../styles.css">
 </head>
 
 <body class="nav-fixed quarto-light">
@@ -115,7 +122,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a href="../index.html" class="navbar-brand navbar-brand-logo">
-    <img src="../iht-logo-100.png" alt="" class="navbar-logo">
+    <img src="../iht-logo-100.png" alt="" class="navbar-logo light-content">
+    <img src="../iht-logo-100.png" alt="" class="navbar-logo dark-content">
     </a>
     <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">Structural and Functional Genomics</span>
@@ -230,241 +238,241 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="cd" class="level2">
 <h2 class="anchored" data-anchor-id="cd"><strong>cd</strong></h2>
 <p>(Change Directory) Зміна директорії</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> /path/to/directory  <span class="co"># Перехід до конкретного каталогу</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> /path/to/directory  <span class="co"># Перехід до конкретного каталогу</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~                   <span class="co"># Перехід до домашнього каталогу</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ..                  <span class="co"># Повернення до попередньої директорії</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ..                  <span class="co"># Повернення до попередньої директорії</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="ls" class="level2">
 <h2 class="anchored" data-anchor-id="ls"><strong>ls</strong></h2>
 <p>(List Directory) Відображення вмісту каталогу</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span>                      <span class="co"># Перелік файлів у поточному каталозі</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span>                      <span class="co"># Перелік файлів у поточному каталозі</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-l</span>                   <span class="co"># Виведення зі списком та атрибутами файлів</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-a</span>                   <span class="co"># Відображення прихованих файлів</span></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-lh</span>                  <span class="co"># Відображення списку із розмірами файлів</span></span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-R</span>                   <span class="co"># Рекурсивний список всіх файлів у підкаталогах</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-la</span>                  <span class="co"># Виведення прихованих файлів з детальним описом</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-la</span>                  <span class="co"># Виведення прихованих файлів з детальним описом</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="df" class="level2">
 <h2 class="anchored" data-anchor-id="df"><strong>df</strong></h2>
 <p>(Disk Free) Команда для зміни поточного робочого каталогу</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">df</span>                      <span class="co"># Виведення використання диску для всіх файлових систем</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">df</span>                      <span class="co"># Виведення використання диску для всіх файлових систем</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">df</span> <span class="at">-h</span>                   <span class="co"># Використання диску в доступній формі (GB, MB)</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">df</span> <span class="at">-T</span>                   <span class="co"># Показує тип файлової системи</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">df</span> <span class="at">-i</span>                   <span class="co"># Показує використання індексних дескрипторів (inodes)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">df</span> <span class="at">-i</span>                   <span class="co"># Показує використання індексних дескрипторів (inodes)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="mv" class="level2">
 <h2 class="anchored" data-anchor-id="mv"><strong>mv</strong></h2>
 <p>(Move) Переміщення або перейменування файлів і каталогів.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mv</span> file.txt /new/path/        <span class="co"># Переміщення файлу до нового каталогу</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mv</span> file.txt /new/path/        <span class="co"># Переміщення файлу до нового каталогу</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mv</span> old_name.txt new_name.txt  <span class="co"># Перейменування файлу</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mv</span> <span class="pp">*</span>.txt /new/path/           <span class="co"># Переміщення всіх .txt файлів</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="fu">mv</span> <span class="at">-i</span> file.txt /new/path/     <span class="co"># Підтвердження перед перезаписом файлів</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="fu">mv</span> <span class="at">-i</span> file.txt /new/path/     <span class="co"># Підтвердження перед перезаписом файлів</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="mkdir" class="level2">
 <h2 class="anchored" data-anchor-id="mkdir"><strong>mkdir</strong></h2>
 <p>(Make Directory) Створення нових каталогів</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> new_directory     <span class="co"># Створення нового каталогу</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> /path/to/dir   <span class="co"># Створення структури каталогів (включаючи всі проміжні)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> new_directory     <span class="co"># Створення нового каталогу</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> /path/to/dir   <span class="co"># Створення структури каталогів (включаючи всі проміжні)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="rm" class="level2">
 <h2 class="anchored" data-anchor-id="rm"><strong>rm</strong></h2>
 <p>(Remove) Створення нових каталогів</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> file.txt             <span class="co"># Видалення файлу</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> file.txt             <span class="co"># Видалення файлу</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> <span class="at">-r</span> directory         <span class="co"># Рекурсивне видалення каталогу з вмістом</span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> <span class="at">-f</span> file.txt          <span class="co"># Примусове видалення файлу без підтвердження</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> <span class="at">-i</span> file.txt          <span class="co"># Підтвердження перед кожним видаленням</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> <span class="at">-i</span> file.txt          <span class="co"># Підтвердження перед кожним видаленням</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="cat" class="level2">
 <h2 class="anchored" data-anchor-id="cat"><strong>cat</strong></h2>
 <p>(Concatenate) Відображення вмісту файлу або об’єднання файлів.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> file.txt            <span class="co"># Відображення вмісту файлу</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> file.txt            <span class="co"># Відображення вмісту файлу</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> file1.txt file2.txt <span class="co"># Об'єднання кількох файлів у вивід</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> file.txt <span class="op">&gt;</span> newfile.txt  <span class="co"># Створення нового файлу з копією вмісту</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> file.txt <span class="op">&gt;</span> newfile.txt  <span class="co"># Створення нового файлу з копією вмісту</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="gunzip" class="level2">
 <h2 class="anchored" data-anchor-id="gunzip"><strong>gunzip</strong></h2>
 <p>(Uncompress) Розпаковує стиснені файли у форматі .gz.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gunzip</span> file.gz          <span class="co"># Розпаковує файл і видаляє оригінал .gz</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gunzip</span> file.gz          <span class="co"># Розпаковує файл і видаляє оригінал .gz</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">gunzip</span> <span class="at">-k</span> file.gz       <span class="co"># Розпаковує файл, залишаючи оригінал</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">gunzip</span> <span class="pp">*</span>.gz             <span class="co"># Розпаковує всі файли з розширенням .gz</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">gunzip</span> <span class="pp">*</span>.gz             <span class="co"># Розпаковує всі файли з розширенням .gz</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="zcat" class="level2">
 <h2 class="anchored" data-anchor-id="zcat"><strong>zcat</strong></h2>
 <p>(Concatenate Compressed Files) Перегляд стисненого файлу без розпаковування.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">zcat</span> file.gz            <span class="co"># Перегляд вмісту стисненого файлу</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">zcat</span> file1.gz file2.gz  <span class="co"># Перегляд вмісту кількох стиснених файлів</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">zcat</span> file.gz            <span class="co"># Перегляд вмісту стисненого файлу</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">zcat</span> file1.gz file2.gz  <span class="co"># Перегляд вмісту кількох стиснених файлів</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="grep" class="level2">
 <h2 class="anchored" data-anchor-id="grep"><strong>grep</strong></h2>
 <p>(Global Regular Expression Print) Пошук тексту у файлах за шаблоном.</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="st">'pattern'</span> file.txt         <span class="co"># Пошук рядків, що містять 'pattern' у файлі</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="st">'pattern'</span> file.txt         <span class="co"># Пошук рядків, що містять 'pattern' у файлі</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-i</span> <span class="st">'pattern'</span> file.txt      <span class="co"># Пошук без урахування регістру</span></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-r</span> <span class="st">'pattern'</span> /path/to/dir  <span class="co"># Рекурсивний пошук по всьому каталогу</span></span>
 <span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-v</span> <span class="st">'pattern'</span> file.txt      <span class="co"># Виведення рядків, що не містять 'pattern'</span></span>
 <span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="at">--color</span> <span class="st">"example"</span> file.txt   <span class="co"># Виділяє "example" у виведенні</span></span>
 <span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="at">--color</span> <span class="at">-w</span> <span class="st">"example"</span> file.txt   <span class="co"># Пошук цілого слова з підкресленням знайдених збігів</span></span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="at">--color</span> <span class="dt">\"</span>PTPN22<span class="dt">\"</span> file.txt    <span class="co">#Виділення рядків, якщо в них є регулярні вирази у дужках</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="at">--color</span> <span class="dt">\"</span>PTPN22<span class="dt">\"</span> file.txt    <span class="co">#Виділення рядків, якщо в них є регулярні вирази у дужках</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="echo" class="level2">
 <h2 class="anchored" data-anchor-id="echo"><strong>echo</strong></h2>
 <p>(Display a Line of Text) Виведення тексту або змінної в термінал.</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Hello, World!"</span>    <span class="co"># Виведення тексту</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Hello, World!"</span>    <span class="co"># Виведення тексту</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="va">$HOME</span>              <span class="co"># Виведення значення змінної</span></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Line 1\nLine 2"</span>   <span class="co"># Виведення з новими рядками</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Line 1\nLine 2"</span>   <span class="co"># Виведення з новими рядками</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="ps" class="level2">
 <h2 class="anchored" data-anchor-id="ps"><strong>ps</strong></h2>
 <p>(Process Status) Виводить інформацію про активні процеси.</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ps</span>                      <span class="co"># Показує процеси поточного користувача</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ps</span>                      <span class="co"># Показує процеси поточного користувача</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ps</span> aux                  <span class="co"># Показує всі процеси у системі</span></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ps</span> <span class="at">-eF</span>                  <span class="co"># Детальна інформація про всі процеси</span></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ps</span> <span class="at">-p</span> 12345             <span class="co"># Інформація про процес за його PID</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ps</span> <span class="at">-p</span> 12345             <span class="co"># Інформація про процес за його PID</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="top" class="level2">
 <h2 class="anchored" data-anchor-id="top"><strong>top</strong></h2>
 <p>(Task Manager) Інтерактивне відображення процесів та їхнього використання ресурсів у реальному часі.</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="ex">top</span>                     <span class="co"># Запуск топ з інформацією про процеси</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="ex">top</span> <span class="at">-u</span> username         <span class="co"># Показує процеси конкретного користувача</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="ex">top</span>                     <span class="co"># Запуск топ з інформацією про процеси</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="ex">top</span> <span class="at">-u</span> username         <span class="co"># Показує процеси конкретного користувача</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="head" class="level2">
 <h2 class="anchored" data-anchor-id="head"><strong>head</strong></h2>
 <p>(Output the First Part of Files) Виводить перші рядки файлу.</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span> file.txt           <span class="co"># Перші 10 рядків файлу за замовчуванням</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span> <span class="at">-n</span> 20 file.txt     <span class="co"># Перші 20 рядків файлу</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span> file.txt           <span class="co"># Перші 10 рядків файлу за замовчуванням</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span> <span class="at">-n</span> 20 file.txt     <span class="co"># Перші 20 рядків файлу</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="tail" class="level2">
 <h2 class="anchored" data-anchor-id="tail"><strong>tail</strong></h2>
 <p>(Output the Last Part of Files) Виводить останні рядки файлу.</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span> file.txt           <span class="co"># Останні 10 рядків файлу за замовчуванням</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span> file.txt           <span class="co"># Останні 10 рядків файлу за замовчуванням</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span> <span class="at">-n</span> 20 file.txt     <span class="co"># Останні 20 рядків файлу</span></span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span> <span class="at">-f</span> file.txt        <span class="co"># Виведення нових рядків у реальному часі (відстеження логу)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span> <span class="at">-f</span> file.txt        <span class="co"># Виведення нових рядків у реальному часі (відстеження логу)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="section" class="level2">
 <h2 class="anchored" data-anchor-id="section"><strong>|</strong></h2>
 <p>(Pipe) Передає виведення однієї команди як вхід для іншої.</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="kw">|</span> <span class="fu">grep</span> <span class="st">'file'</span>        <span class="co"># Пошук файлів у виводі команди ls</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ps</span> aux <span class="kw">|</span> <span class="fu">grep</span> <span class="st">'process'</span> <span class="co"># Пошук процесу у виводі ps</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="kw">|</span> <span class="fu">grep</span> <span class="st">'file'</span>        <span class="co"># Пошук файлів у виводі команди ls</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ps</span> aux <span class="kw">|</span> <span class="fu">grep</span> <span class="st">'process'</span> <span class="co"># Пошук процесу у виводі ps</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="man" class="level2">
 <h2 class="anchored" data-anchor-id="man"><strong>man</strong></h2>
 <p>(Manual) Виводить документацію для команд.</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">man</span> ls                  <span class="co"># Відображає документацію для команди ls</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">man</span> <span class="at">-k</span> <span class="st">'search_term'</span>    <span class="co"># Пошук команд за ключовим словом</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">man</span> ls                  <span class="co"># Відображає документацію для команди ls</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">man</span> <span class="at">-k</span> <span class="st">'search_term'</span>    <span class="co"># Пошук команд за ключовим словом</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="touch" class="level2">
 <h2 class="anchored" data-anchor-id="touch"><strong>touch</strong></h2>
 <p>(Update Timestamp or Create Empty File) Створює новий порожній файл або оновлює час модифікації існуючого.</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">touch</span> newfile.txt       <span class="co"># Створення нового файлу</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">touch</span> <span class="at">-a</span> file.txt       <span class="co"># Оновлення часу доступу до файлу</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">touch</span> newfile.txt       <span class="co"># Створення нового файлу</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">touch</span> <span class="at">-a</span> file.txt       <span class="co"># Оновлення часу доступу до файлу</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="gzip" class="level2">
 <h2 class="anchored" data-anchor-id="gzip"><strong>gzip</strong></h2>
 <p>(Compress) Стискання файлів.</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gzip</span> file.txt           <span class="co"># Стиснення файлу</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gzip</span> file.txt           <span class="co"># Стиснення файлу</span></span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">gzip</span> <span class="at">-k</span> file.txt        <span class="co"># Стиснення без видалення оригіналу</span></span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="fu">gzip</span> <span class="pp">*</span>.txt              <span class="co"># Стиснення всіх текстових файлів у каталозі</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="fu">gzip</span> <span class="pp">*</span>.txt              <span class="co"># Стиснення всіх текстових файлів у каталозі</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="ssh" class="level2">
 <h2 class="anchored" data-anchor-id="ssh"><strong>ssh</strong></h2>
 <p>(Secure Shell) Безпечне віддалене з’єднання з сервером.</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> user@hostname       <span class="co"># Підключення до сервера</span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> <span class="at">-i</span> keyfile.pem user@hostname  <span class="co"># Підключення з використанням ключа</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> user@hostname       <span class="co"># Підключення до сервера</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> <span class="at">-i</span> keyfile.pem user@hostname  <span class="co"># Підключення з використанням ключа</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="comm" class="level2">
 <h2 class="anchored" data-anchor-id="comm"><strong>comm</strong></h2>
 <p>(Compare Two Sorted Files) Створення нових каталогів</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">comm</span> file1.txt file2.txt <span class="co"># Порівняння файлів</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">comm</span> <span class="at">-1</span> file1.txt file2.txt <span class="co"># Виведення відмінностей у другому файлі</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">comm</span> file1.txt file2.txt <span class="co"># Порівняння файлів</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">comm</span> <span class="at">-1</span> file1.txt file2.txt <span class="co"># Виведення відмінностей у другому файлі</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="kill" class="level2">
 <h2 class="anchored" data-anchor-id="kill"><strong>kill</strong></h2>
 <p>(Terminate Process) Команда для завершення процесів за їхнім PID.</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="bu">kill</span> 12345             <span class="co"># Завершення процесу з PID 12345</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="bu">kill</span> <span class="at">-9</span> 12345          <span class="co"># Примусове завершення процесу з PID 12345</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="bu">kill</span> 12345             <span class="co"># Завершення процесу з PID 12345</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="bu">kill</span> <span class="at">-9</span> 12345          <span class="co"># Примусове завершення процесу з PID 12345</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="chmod" class="level2">
 <h2 class="anchored" data-anchor-id="chmod"><strong>chmod</strong></h2>
 <p>(Change Mode) Зміна прав доступу до файлів і каталогів.</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> 755 file.txt     <span class="co"># Встановлення прав доступу (власник: читання, запис, виконання; група і інші: тільки читання і виконання)</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> 755 file.txt     <span class="co"># Встановлення прав доступу (власник: читання, запис, виконання; група і інші: тільки читання і виконання)</span></span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> u+x file.txt     <span class="co"># Додавання права виконання для власника</span></span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> <span class="at">-R</span> 644 directory <span class="co"># Рекурсивна зміна прав доступу для всіх файлів у каталозі</span></span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> a-w file.txt     <span class="co"># Відбір прав запису для всіх</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> a-w file.txt     <span class="co"># Відбір прав запису для всіх</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="chown" class="level2">
 <h2 class="anchored" data-anchor-id="chown"><strong>chown</strong></h2>
 <p>(Change Owner) Зміна власника файлів і каталогів.</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">chown</span> user:group file.txt      <span class="co"># Зміна власника і групи файлу</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">chown</span> user:group file.txt      <span class="co"># Зміна власника і групи файлу</span></span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">chown</span> <span class="at">-R</span> user:group directory  <span class="co"># Рекурсивна зміна власника для каталогу та всіх його файлів</span></span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="fu">chown</span> user file.txt            <span class="co"># Зміна лише власника</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="fu">chown</span> user file.txt            <span class="co"># Зміна лише власника</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="wget" class="level2">
 <h2 class="anchored" data-anchor-id="wget"><strong>wget</strong></h2>
 <p>(Download Files from the Web) Створення нових каталогів</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> http://example.com/file.zip      <span class="co"># Завантаження файлу з вказаної URL</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> http://example.com/file.zip      <span class="co"># Завантаження файлу з вказаної URL</span></span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-c</span> http://example.com/file.zip   <span class="co"># Продовження завантаження з місця переривання</span></span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-r</span> http://example.com/           <span class="co"># Рекурсивне завантаження всього сайту</span></span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> <span class="at">--limit-rate</span><span class="op">=</span>200k http://example.com/file.zip  <span class="co"># Обмеження швидкості завантаження</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> <span class="at">--limit-rate</span><span class="op">=</span>200k http://example.com/file.zip  <span class="co"># Обмеження швидкості завантаження</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="sudo" class="level2">
 <h2 class="anchored" data-anchor-id="sudo"><strong>sudo</strong></h2>
 <p>(Make Directory) Створення нових каталогів</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt-get update      <span class="co"># Оновлення системи на рівні адміністратора</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb26"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt-get update      <span class="co"># Оновлення системи на рівні адміністратора</span></span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl restart apache2  <span class="co"># Перезапуск служби</span></span>
 <span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> su                  <span class="co"># Перехід до суперкористувача (root)</span></span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> visudo              <span class="co"># Редагування конфігураційного файлу sudoers</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> visudo              <span class="co"># Редагування конфігураційного файлу sudoers</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="tree" class="level2">
 <h2 class="anchored" data-anchor-id="tree"><strong>tree</strong></h2>
 <p>Відображення структури каталогів і файлів у вигляді дерева</p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="ex">tree</span>                      <span class="co"># Виводить структуру поточного каталогу у вигляді дерева</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb27"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="ex">tree</span>                      <span class="co"># Виводить структуру поточного каталогу у вигляді дерева</span></span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="ex">tree</span> /path/to/directory   <span class="co"># Виводить структуру вказаного каталогу</span></span>
 <span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="ex">tree</span> <span class="at">-a</span>                   <span class="co"># Показує всі файли, включаючи приховані</span></span>
 <span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="ex">tree</span> <span class="at">-d</span>                   <span class="co"># Виводить тільки каталоги</span></span>
 <span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a><span class="ex">tree</span> <span class="at">-f</span>                   <span class="co"># Виводить повні шляхи до файлів і каталогів</span></span>
-<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a><span class="ex">tree</span> <span class="at">-h</span>                   <span class="co"># Показує розмір файлів у форматі кілобайт/мегабайт</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a><span class="ex">tree</span> <span class="at">-h</span>                   <span class="co"># Показує розмір файлів у форматі кілобайт/мегабайт</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="pwd" class="level2">
 <h2 class="anchored" data-anchor-id="pwd"><strong>pwd</strong></h2>
 <p>(Print Working Directory) Створення нових каталогів</p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="bu">pwd</span>                       <span class="co"># Виводить абсолютний шлях до поточного робочого каталогу</span></span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="bu">pwd</span> <span class="at">-P</span>                    <span class="co"># Показує фізичний шлях, реальний без символічних посилань</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb28"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="bu">pwd</span>                       <span class="co"># Виводить абсолютний шлях до поточного робочого каталогу</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="bu">pwd</span> <span class="at">-P</span>                    <span class="co"># Показує фізичний шлях, реальний без символічних посилань</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="wc" class="level2">
 <h2 class="anchored" data-anchor-id="wc"><strong>wc</strong></h2>
 <p>(Word Count) Підрахунок кількості рядків, слів і символів у файлі або виведенні тексту.</p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wc</span> file.txt             <span class="co"># Підрахунок кількості рядків, слів і символів у файлі</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb29"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wc</span> file.txt             <span class="co"># Підрахунок кількості рядків, слів і символів у файлі</span></span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="fu">wc</span> <span class="at">-l</span> file.txt          <span class="co"># Підрахунок кількості рядків у файлі</span></span>
 <span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="fu">wc</span> <span class="at">-w</span> file.txt          <span class="co"># Підрахунок кількості слів у файлі</span></span>
 <span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="fu">wc</span> <span class="at">-c</span> file.txt          <span class="co"># Підрахунок кількості байтів у файлі</span></span>
 <span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a><span class="fu">wc</span> <span class="at">-m</span> file.txt          <span class="co"># Підрахунок кількості символів у файлі (якщо використовується багатобайтове кодування)</span></span>
 <span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a><span class="fu">wc</span> <span class="at">-L</span> file.txt          <span class="co"># Виведення довжини найдовшого рядка в символах</span></span>
-<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a><span class="fu">wc</span> <span class="at">-l</span> file1.txt file2.txt    <span class="co"># Підрахунок рядків у кількох файлах</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a><span class="fu">wc</span> <span class="at">-l</span> file1.txt file2.txt    <span class="co"># Підрахунок рядків у кількох файлах</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="history" class="level2">
 <h2 class="anchored" data-anchor-id="history"><strong>history</strong></h2>
-<div class="sourceCode" id="cb30"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="bu">history</span>                    <span class="co"># Виводить список усіх раніше виконаних команд</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb30"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="bu">history</span>                    <span class="co"># Виводить список усіх раніше виконаних команд</span></span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="bu">history</span> 10                 <span class="co"># Виводить останні 10 виконаних команд</span></span>
 <span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="ex">!123</span>                       <span class="co"># Виконує команду з номером 123 з історії</span></span>
 <span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="ex">!!</span>                         <span class="co"># Повторює останню виконану команду</span></span>
 <span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a><span class="ex">!grep</span>                      <span class="co"># Виконує останню команду з історії, яка містить "grep"</span></span>
 <span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a><span class="bu">history</span> <span class="at">-c</span>                 <span class="co"># Очищає історію виконаних команд</span></span>
 <span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a><span class="bu">history</span> <span class="at">-w</span> filename        <span class="co"># Зберігає історію команд у файл filename</span></span>
-<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a><span class="bu">history</span> <span class="at">-r</span> filename        <span class="co"># Завантажує історію команд з файлу filename</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a><span class="bu">history</span> <span class="at">-r</span> filename        <span class="co"># Завантажує історію команд з файлу filename</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="more" class="level2">
 <h2 class="anchored" data-anchor-id="more"><strong>more</strong></h2>
 <p>тПосторінковий перегляд вмісту файлу або виведення тексту в терміналі. Вона дозволяє переглядати текст поступово, прокручуючи його по сторінках.</p>
-<div class="sourceCode" id="cb31"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">more</span> file.txt              <span class="co"># Відкриває файл для посторінкового перегляду</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb31"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">more</span> file.txt              <span class="co"># Відкриває файл для посторінкового перегляду</span></span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> file.txt <span class="kw">|</span> <span class="fu">more</span>        <span class="co"># Виводить вміст файлу за допомогою cat і посторінково з more</span></span>
 <span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="fu">more</span> <span class="at">-num</span> file.txt         <span class="co"># Виводить файл, показуючи num рядків одночасно</span></span>
 <span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="fu">more</span> +n file.txt           <span class="co"># Починає показ із рядка n у файлі</span></span>
 <span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a><span class="fu">more</span> <span class="pp">*</span>.txt                 <span class="co"># Послідовно переглядає кілька файлів .txt посторінково</span></span>
-<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a><span class="bu">command</span> <span class="kw">|</span> <span class="fu">more</span>             <span class="co"># Показує виведення будь-якої команди посторінково</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a><span class="bu">command</span> <span class="kw">|</span> <span class="fu">more</span>             <span class="co"># Показує виведення будь-якої команди посторінково</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="less" class="level2">
 <h2 class="anchored" data-anchor-id="less"><strong>less</strong></h2>
 <p>Команда <strong>less</strong> схожа на <strong>more</strong>, але з додатковими можливостями для перегляду файлів та виведення команд у терміналі. Вона дозволяє прокручувати текст як вперед, так і назад, і підтримує більше команд для навігації.</p>
-<div class="sourceCode" id="cb32"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">less</span> file.txt              <span class="co"># Відкриває файл для посторінкового перегляду</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb32"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">less</span> file.txt              <span class="co"># Відкриває файл для посторінкового перегляду</span></span>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="fu">less</span> +10 file.txt          <span class="co"># Починає показ із 10-го рядка файлу</span></span>
 <span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-l</span> <span class="kw">|</span> <span class="fu">less</span>               <span class="co"># Виводить результат команди ls -l посторінково</span></span>
 <span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a><span class="fu">less</span> file1.txt file2.txt    <span class="co"># Виводить кілька файлів один за одним</span></span>
@@ -475,23 +483,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a><span class="co"># b – попередня сторінка</span></span>
 <span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a><span class="co"># /текст – пошук тексту</span></span>
 <span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a><span class="co"># n – наступний результат пошуку</span></span>
-<span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a><span class="co"># q – вихід з перегляду</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a><span class="co"># q – вихід з перегляду</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="cut" class="level2">
 <h2 class="anchored" data-anchor-id="cut"><strong>cut</strong></h2>
 <p>Команда <strong>cut</strong> використовується в Unix/Linux для вибору частин рядків з текстових файлів або стандартного введення. Вона може використовуватися для видалення певних колонок, символів або полів з кожного рядка</p>
-<div class="sourceCode" id="cb33"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cut</span> <span class="at">-f</span> 1,3 file.txt          <span class="co"># Вибір 1-ї та 3-ї колонок з табуляцією як роздільником</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb33"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cut</span> <span class="at">-f</span> 1,3 file.txt          <span class="co"># Вибір 1-ї та 3-ї колонок з табуляцією як роздільником</span></span>
 <span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cut</span> <span class="at">-c</span> 1-5 file.txt          <span class="co"># Вибір символів з 1 по 5 з кожного рядка</span></span>
 <span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="fu">cut</span> <span class="at">-d</span> <span class="st">','</span> <span class="at">-f</span> 2 file.csv     <span class="co"># Вибір 2-го поля з файлу CSV, де поля розділені комою</span></span>
 <span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a><span class="fu">cut</span> <span class="at">-d</span> <span class="st">':'</span> <span class="at">-f</span> 3 /etc/passwd   <span class="co"># Вибір 3-го поля з файлу /etc/passwd</span></span>
 <span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a><span class="fu">cut</span> <span class="at">-c</span> 3- file.txt           <span class="co"># Вибір символів, починаючи з 3-го до кінця рядка</span></span>
 <span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a><span class="fu">cut</span> <span class="at">-d</span> <span class="st">','</span> <span class="at">-f</span> 1,3 file.csv    <span class="co"># Вибір 1-ї та 3-ї колонок з файлу CSV</span></span>
-<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a><span class="fu">cut</span> <span class="at">-c</span> 1-10 file.txt         <span class="co"># Вибір перших 10 символів з кожного рядка</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a><span class="fu">cut</span> <span class="at">-c</span> 1-10 file.txt         <span class="co"># Вибір перших 10 символів з кожного рядка</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="awk" class="level2">
 <h2 class="anchored" data-anchor-id="awk"><strong>awk</strong></h2>
 <p><strong>awk</strong> — це потужна командна утиліта для обробки і аналізу текстових файлів в Unix/Linux системах. Вона дозволяє працювати з рядками та полями (колонками) тексту, обчислювати значення та застосовувати різні дії до кожного рядка.</p>
-<div class="sourceCode" id="cb34"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">awk</span> <span class="st">'{print}'</span> file.txt     <span class="co"># Виводить всі рядки з файлу</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb34"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">awk</span> <span class="st">'{print}'</span> file.txt     <span class="co"># Виводить всі рядки з файлу</span></span>
 <span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="fu">awk</span> <span class="st">'{print $1}'</span> file.txt  <span class="co"># Виводить першу колонку</span></span>
 <span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="fu">awk</span> <span class="st">'$2 &gt; 100 {print $0}'</span> file.txt  <span class="co"># Виводить рядки, де значення у 2-й колонці більше за 100</span></span>
 <span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a><span class="fu">awk</span> <span class="at">-F</span> <span class="st">','</span> <span class="st">'{print $1, $3}'</span> file.csv  <span class="co"># Виводить 1-шу і 3-тю колонки з файлу CSV</span></span>
@@ -499,7 +507,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a><span class="fu">awk</span> <span class="at">-v</span> threshold=50 <span class="st">'$2 &gt; threshold {print $1, $2}'</span> file.txt  <span class="co"># Виводить рядки, де 2-а колонка більше за 50</span></span>
 <span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a><span class="fu">awk</span> <span class="st">'{print $2 - $1}'</span> file.txt  <span class="co"># Виводить різницю між 2-ю і 1-ю колонками</span></span>
 <span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a><span class="fu">awk</span> <span class="st">'NR == 1 {min = $1} $1 &lt; min {min = $1} END {print min}'</span> file.txt  <span class="co"># Мінімальне значення в 1-й колонці</span></span>
-<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a><span class="fu">awk</span> <span class="st">'NR == 1 {max = $1} $1 &gt; max {max = $1} END {print max}'</span> file.txt  <span class="co"># Максимальне значення в 1-й колонці</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a><span class="fu">awk</span> <span class="st">'NR == 1 {max = $1} $1 &gt; max {max = $1} END {print max}'</span> file.txt  <span class="co"># Максимальне значення в 1-й колонці</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 </section>
 <section id="корисні-поради-при-використанні-терміналу" class="level1">
@@ -577,13 +585,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy
@@ -598,7 +607,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp('/' + window.location.host + '/');
+        var filterRegex = new RegExp("https:\/\/hrubiian\.github\.io\/Genomics2026\/");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }

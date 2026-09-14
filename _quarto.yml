@@ -1,9 +1,18 @@
 project:
   type: website
   output-dir: docs      # <- important for GitHub Pages
+  render:
+    - "*.qmd"           # index, syllabus, resources
+    - "qmd/*.qmd"       # homework / instruction pages
+    - "!about.qmd"      # leftover Quarto template page - not published
+    - "!HTML/"          # leftover Quarto template page - not published
+  resources:
+    - .nojekyll         # stops GitHub from running Jekyll over the output
 
 website:
   title: "Structural and Functional Genomics"
+  site-url: https://hrubiian.github.io/Genomics2026/
+  repo-url: https://github.com/hrubiian/Genomics2026
   navbar:
     logo: iht-logo-100.png
     left:
@@ -16,9 +25,8 @@ website:
       # - href: HomeWork.qmd
       #   text: HomeWork
 
-
 format:
   html:
     theme: cosmo
     toc: true
-
+    css: styles.css

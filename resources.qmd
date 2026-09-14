@@ -1,5 +1,7 @@
 ---
-title: "Resourses"
+title: "Resources"
+aliases:
+  - resourses.html   # keeps old bookmarks/links working after the rename
 ---
 
 ## Good recommendations to start with
@@ -14,7 +16,7 @@ title: "Resourses"
 
 -   [Introduction to UNIX command line](https://ngs-docs.github.io/2021-august-remote-computing/introduction-to-the-unix-command-line.html)
 
--   [Workflow Manegment System by Martin Hölzer, EEBG 2024](https://docs.google.com/presentation/d/1CgFtt7W3c4mlJ9Asd0cQA0L72dPEiGHhonAhxWoDwZA/edit?slide=id.p1#slide=id.p1)
+-   [Workflow Management System by Martin Hölzer, EEBG 2024](https://docs.google.com/presentation/d/1CgFtt7W3c4mlJ9Asd0cQA0L72dPEiGHhonAhxWoDwZA/edit?slide=id.p1#slide=id.p1)
 
 ## Tools
 
@@ -28,12 +30,12 @@ title: "Resourses"
 
 ## Sequencing principles
 
--   [Illumina Sequecning adapters](https://teichlab.github.io/scg_lib_structs/methods_html/Illumina.html)
+-   [Illumina Sequencing adapters](https://teichlab.github.io/scg_lib_structs/methods_html/Illumina.html)
 
 ## Bioinformatics courses & Trainings
 
 -   [Introduction to computational biology by Mike Love](https://biodatascience.github.io/compbio/)
--   [Applied Computational Genomics By Aaron Quilan](https://github.com/quinlan-lab/applied-computational-genomics#course-lecture-slides)
+-   [Applied Computational Genomics by Aaron Quinlan](https://github.com/quinlan-lab/applied-computational-genomics#course-lecture-slides)
 -   [Structural and Functional Genomics Course](https://drive.google.com/drive/folders/1SBncGk2tQ1PPmdaPAjz-NIovsROZKrKj)
 -   [Speciation & Population Genomics: a how-to-guide](https://speciationgenomics.github.io/)
  - [Біоінформатика малих геномних варіантів (Youtube Genomics UA)](https://www.youtube.com/watch?v=2x5XLqU_U-A) 
@@ -50,5 +52,5 @@ title: "Resourses"
 -   [NGO GenomicsUA](https://genomics.org.ua/legal/)
 -   [UBDS\^3 Summer School](https://www.bds3.org/)
 -   [CRABS Summer School](https://crabs.kse.ua/)
--   [Ukraininan school in Evolutionary Biology](https://biology.karazin.ua/useb-evolbiol.html)
+-   [Ukrainian school in Evolutionary Biology](https://biology.karazin.ua/useb-evolbiol.html)
 -   [Odesa Bio Summer School](https://www.facebook.com/BioSummerSchoolONU/)

@@ -68,7 +68,7 @@ fastp --detect_adapter_for_pe --overrepresentation_analysis --correction --cut_r
 # Крок 3. Перевірка якості обрізаних рідів
 
 ``` bash
-# поверністься у папку Ecoli_analysis та створіть папку trimmed-fastqc
+# Поверніться у папку Ecoli_analysis та створіть папку trimmed-fastqc
 mkdir trimmed-fastqc
 #Генерування репорту за допомогою інструменту FASTQC вашої лінії E.coli
 fastqc -o trimmed-fastqc data/DRR589139_1.fastq data/DRR589139_2.fastq
@@ -100,7 +100,7 @@ pwd
 bwa mem mapping/reference/GCF_000005845.2_ASM584v2_genomic.fna trimmed/DRR589139_1.fastq trimmed/DRR589139_2.fastq > mapping/aln-DRR589139.sam
 ```
 
-# Пост-процессинг мапування
+# Пост-процесинг мапування
 
 ``` bash
 # фіксування пар (mates) і стиснення файлів sam
@@ -113,7 +113,7 @@ samtools sort -O bam -o DRR589139.sorted.bam DRR589139.fixmate.bam
 samtools markdup -r -S DRR589139.sorted.bam DRR589139.sorted.dedup.bam
 # Видалення попереднього fixmate і sorted файлу 
 rm DRR589139.fixmate.bam | rm DRR589139.sorted.bam
-# Статистика відфільтрованого bam фалу 
+# Статистика відфільтрованого bam файлу 
 samtools flagstat DRR589139.sorted.dedup.bam
 # Перевірка якості - оцінка глибини покриття зчитувань
 samtools depth DRR589139.sorted.dedup.bam | gzip > DRR589139.depth.txt.gz

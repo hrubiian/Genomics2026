@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.32">
+<meta name="generator" content="quarto-1.10.18">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -10,10 +10,16 @@
 
 <title>HW1_Linux_basics – Structural and Functional Genomics</title>
 <style>
-code{white-space: pre-wrap;}
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -72,10 +78,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-9fc9979f13c68dab769c953c4c7d8074.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-5f534768425a2c127c96e39e26e01c38.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -105,6 +111,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }</script>
 
 
+<link rel="stylesheet" href="../styles.css">
 </head>
 
 <body class="nav-fixed quarto-light">
@@ -115,7 +122,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a href="../index.html" class="navbar-brand navbar-brand-logo">
-    <img src="../iht-logo-100.png" alt="" class="navbar-logo">
+    <img src="../iht-logo-100.png" alt="" class="navbar-logo light-content">
+    <img src="../iht-logo-100.png" alt="" class="navbar-logo dark-content">
     </a>
     <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">Structural and Functional Genomics</span>
@@ -195,7 +203,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <p>Формат передачі генів (<strong>GTF</strong>) - це формат файлів, який використовується для зберігання інформації про структуру генів. Це текстовий формат з розділенням табуляцією, заснований на форматі загальних ознак (<strong>GFF</strong>), але містить деякі додаткові домовленості, специфічні для генної інформації. Важливою особливістю GTF є те, що його можна перевіряти: маючи послідовність і файл GTF, можна перевірити правильність формату. Це значно зменшує проблеми з обміном даними між групами.</p>
 <p><img src="images/Screenshot from 2024-09-23 20-26-09.png" class="img-fluid"></p>
-<p>Дані які будемо аналізувати це гени <em>Drosophila melanogaster</em> - модельний об’єкт для багатьох генетичних досліджень. Для цього завдання виділено 14 генів <em>Drosophila melanogster</em>. Вашим завданням буде проаналізувати їх та виконати вказівки описані нижче.</p>
+<p>Дані які будемо аналізувати це гени <em>Drosophila melanogaster</em> - модельний об’єкт для багатьох генетичних досліджень. Для цього завдання виділено 14 генів <em>Drosophila melanogaster</em>. Вашим завданням буде проаналізувати їх та виконати вказівки описані нижче.</p>
 <p>Список генів:</p>
 <ul>
 <li><strong>bcd</strong></li>
@@ -304,17 +312,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="крок-1.-завантаження-файлу" class="level1">
 <h1>Крок 1. Завантаження файлу</h1>
 <p>Для того щоб завантажити файл, використайте команду <strong>curl</strong></p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> genomics_2025     <span class="co"># створення папки в кореневій папці</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> genomics_2025        <span class="co"># Перехід у створену папку</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> HW1_Linux_basics  <span class="co"># Створення папки у новоствореній папкці</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> HW1_Linux_basics     <span class="co"># Перезід у новостворену папку</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="bu">pwd</span>                     <span class="co"># Перевірка шляху створених папкок</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># pwd_output: ~/genomics_2024/HW1_Linux_basics/</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-O</span> https://ftp.ensembl.org/pub/release-112/gtf/drosophila_melanogaster/Drosophila_melanogaster.BDGP6.46.112.gtf.gz <span class="co"># Завантаження GTF файлу референтного геному Drosophila melanogaster</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> genomics_2026     <span class="co"># Створення папки в кореневій папці</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> genomics_2026        <span class="co"># Перехід у створену папку</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> HW1_Linux_basics  <span class="co"># Створення папки у новоствореній папці</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> HW1_Linux_basics     <span class="co"># Перехід у новостворену папку</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="bu">pwd</span>                     <span class="co"># Перевірка шляху створених папок</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># pwd_output: ~/genomics_2026/HW1_Linux_basics/</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-O</span> https://ftp.ensembl.org/pub/release-112/gtf/drosophila_melanogaster/Drosophila_melanogaster.BDGP6.46.112.gtf.gz <span class="co"># Завантаження GTF файлу референтного геному Drosophila melanogaster</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="крок-2.-використання-cat-more-less-head-tail-для-перегляду-файлу" class="level1">
 <h1>Крок 2. Використання cat, more, less, head, tail для перегляду файлу</h1>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Перегляд 20 рядків файлу за допомогою команди head</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Перегляд 20 рядків файлу за допомогою команди head</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span> <span class="at">-n</span> 20 Drosophila_melanogaster.BDGP6.46.112.gtf</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Перегляд останніх 20 рядків файлу за допомогою команди tail</span></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span> <span class="at">-n</span> 20 Drosophila_melanogaster.BDGP6.46.112.gtf</span>
@@ -323,11 +331,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Перегляд файлу за допомогою more</span></span>
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="fu">more</span> Drosophila_melanogaster.BDGP6.46.112.gtf</span>
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Перегляд файлу за допомогою cat</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> Drosophila_melanogaster.BDGP6.46.112.gtf</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> Drosophila_melanogaster.BDGP6.46.112.gtf</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="крок-3.-пошук-гену-за-допомогою-команди-grep" class="level1">
 <h1>Крок 3. Пошук гену за допомогою команди grep</h1>
-<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Використання команди grep для знаходження гену "cpo"</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Використання команди grep для знаходження гену "cpo"</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="dt">\"</span>cpo<span class="dt">\"</span> <span class="at">-w</span> Drosophila_melanogaster.BDGP6.46.112.gtf</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Використання команиди wc для підрахунку унікальних Features(кількості рядків) для гена "cpo"</span></span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="dt">\"</span>cpo<span class="dt">\"</span> <span class="at">-w</span> Drosophila_melanogaster.BDGP6.46.112.gtf <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span></span>
@@ -338,22 +346,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Запис відповіді у новий gtf файл</span></span>
 <span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="dt">\"</span>cpo<span class="dt">\"</span> <span class="at">-w</span> Drosophila_melanogaster.BDGP6.46.112.gtf <span class="kw">|</span><span class="fu">grep</span> <span class="at">-w</span> <span class="st">"exon"</span> <span class="op">&gt;</span> cpo.gtf</span>
 <span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="co"># відображення отриманого результату</span></span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="fu">less</span> <span class="at">-S</span> cpo.gtf</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="fu">less</span> <span class="at">-S</span> cpo.gtf</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Запишіть кількість Елементів(Features) у excel табличку</p>
 </section>
 <section id="крок-4.-пошук-корисної-інформації-про-розташування-гена-на-хромосомі-gene_id-gene_source" class="level1">
 <h1>Крок 4. Пошук корисної інформації про розташування гена на хромосомі, gene_id, gene_source</h1>
-<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Знайти хромосому на якій розташований ген "cpo"</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Знайти хромосому на якій розташований ген "cpo"</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cut</span> <span class="at">-f</span> 1 cpo.gtf <span class="kw">|</span> <span class="fu">head</span> <span class="at">-n</span> 1</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Пошук gene_id гену "cpo"</span></span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="fu">cut</span> <span class="at">-f</span> 9 cpo.gtf <span class="kw">|</span> <span class="fu">cut</span> <span class="at">-d</span> <span class="st">';'</span> <span class="at">-f</span> 1 <span class="kw">|</span> <span class="fu">head</span> <span class="at">-n</span> 1</span>
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Пошук gene_source гену "cpo"</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="fu">cut</span> <span class="at">-f</span> 9 cpo.gtf <span class="kw">|</span> <span class="fu">cut</span> <span class="at">-d</span> <span class="st">';'</span> <span class="at">-f</span> 5 <span class="kw">|</span> <span class="fu">head</span> <span class="at">-n</span> 1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="fu">cut</span> <span class="at">-f</span> 9 cpo.gtf <span class="kw">|</span> <span class="fu">cut</span> <span class="at">-d</span> <span class="st">';'</span> <span class="at">-f</span> 5 <span class="kw">|</span> <span class="fu">head</span> <span class="at">-n</span> 1</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Таким чином отримали інформацію про <strong>хромосому</strong>, <strong>gene_id</strong> та <strong>gene_source</strong>. Запишіть отримані результати у Excel табличку</p>
 </section>
 <section id="крок-5.-знаходження-min-та-max-елементівfeatures-гена" class="level1">
 <h1>Крок 5. Знаходження Min та Max елементів(features) гена</h1>
-<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Оберіть відповідні колонки в яких міститься інформація про початок та кінець транскрипту</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Оберіть відповідні колонки в яких міститься інформація про початок та кінець транскрипту</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cut</span> <span class="at">-f</span> 4,5 cpo.gtf <span class="op">&gt;</span> length_gene.txt</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co"># відніміть значення колонки 2 від колонки 1 та запишіть у новий файл min_max_gene.txt</span></span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="fu">awk</span> <span class="st">'{print $2 - $1}'</span> length_gene.txt <span class="op">&gt;</span> min_max_gene.txt</span>
@@ -363,7 +371,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="fu">sort</span> <span class="at">-n</span> min_max_gene.txt <span class="kw">|</span> <span class="fu">tail</span> <span class="at">-n</span> 1</span>
 <span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Продвинутіший спосіб знаходження min та max</span></span>
 <span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="fu">awk</span> <span class="st">'NR == 1 {min = $1} $1 &lt; min {min = $1} END {print min}'</span> min_max_gene.txt</span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="fu">awk</span> <span class="st">'NR == 1 {max = $1} $1 &gt; max {max = $1} END {print max}'</span> min_max_gene.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="fu">awk</span> <span class="st">'NR == 1 {max = $1} $1 &gt; max {max = $1} END {print max}'</span> min_max_gene.txt</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Запишіть знайдені <strong>min</strong> та <strong>max</strong> довжину Елементів(Features) у табличку</p>
 </section>
 <section id="крок-6.-optional-shell-скрипт" class="level1">
@@ -425,13 +433,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy
@@ -446,7 +455,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp('/' + window.location.host + '/');
+        var filterRegex = new RegExp("https:\/\/hrubiian\.github\.io\/Genomics2026\/");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }

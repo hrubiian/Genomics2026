@@ -7,7 +7,7 @@ author: "Nazarii Hrubiian"
 
 ![](images/Screenshot%20from%202024-09-23%2020-26-09.png)
 
-Дані які будемо аналізувати це гени *Drosophila melanogaster* - модельний об'єкт для багатьох генетичних досліджень. Для цього завдання виділено 14 генів *Drosophila melanogster*. Вашим завданням буде проаналізувати їх та виконати вказівки описані нижче.
+Дані які будемо аналізувати це гени *Drosophila melanogaster* - модельний об'єкт для багатьох генетичних досліджень. Для цього завдання виділено 14 генів *Drosophila melanogaster*. Вашим завданням буде проаналізувати їх та виконати вказівки описані нижче.
 
 Список генів:
 
@@ -94,12 +94,12 @@ author: "Nazarii Hrubiian"
 Для того щоб завантажити файл, використайте команду **curl**
 
 ``` bash
-mkdir genomics_2025     # створення папки в кореневій папці
-cd genomics_2025        # Перехід у створену папку
-mkdir HW1_Linux_basics  # Створення папки у новоствореній папкці
-cd HW1_Linux_basics     # Перезід у новостворену папку
-pwd                     # Перевірка шляху створених папкок
-# pwd_output: ~/genomics_2024/HW1_Linux_basics/
+mkdir genomics_2026     # Створення папки в кореневій папці
+cd genomics_2026        # Перехід у створену папку
+mkdir HW1_Linux_basics  # Створення папки у новоствореній папці
+cd HW1_Linux_basics     # Перехід у новостворену папку
+pwd                     # Перевірка шляху створених папок
+# pwd_output: ~/genomics_2026/HW1_Linux_basics/
 curl -O https://ftp.ensembl.org/pub/release-112/gtf/drosophila_melanogaster/Drosophila_melanogaster.BDGP6.46.112.gtf.gz # Завантаження GTF файлу референтного геному Drosophila melanogaster
 ```
 

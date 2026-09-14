@@ -1,5 +1,5 @@
 ---
-title: "Genomics2025"
+title: "Genomics2026"
 ---
 
 This is a Quarto website.

@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.32">
+<meta name="generator" content="quarto-1.10.18">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -10,10 +10,16 @@
 
 <title>HW3.Genome Assembly. Variant Calling – Structural and Functional Genomics</title>
 <style>
-code{white-space: pre-wrap;}
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -72,10 +78,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-9fc9979f13c68dab769c953c4c7d8074.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-5f534768425a2c127c96e39e26e01c38.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -105,6 +111,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }</script>
 
 
+<link rel="stylesheet" href="../styles.css">
 </head>
 
 <body class="nav-fixed quarto-light">
@@ -115,7 +122,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a href="../index.html" class="navbar-brand navbar-brand-logo">
-    <img src="../iht-logo-100.png" alt="" class="navbar-logo">
+    <img src="../iht-logo-100.png" alt="" class="navbar-logo light-content">
+    <img src="../iht-logo-100.png" alt="" class="navbar-logo dark-content">
     </a>
     <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">Structural and Functional Genomics</span>
@@ -202,7 +210,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ul>
 <li>Виклик поліморфізмів за допомогою <strong>bcftools</strong></li>
 <li>Фільтрування та анотація поліморфізмів за допомогою <strong>SnpEff</strong></li>
-<li>Пошук гену 16S rRNA (rrsD)/filC у консенсусному геномі</li>
+<li>Пошук гену 16S rRNA (rrsD)/fliC у консенсусному геномі</li>
 <li>Пошук поліморфізмів досліджуваних ліній та порівняння з відсеквенованими зразками на NCBI</li>
 <li>знаходження серотипу відсеквенованих зразків за допомогою <strong>ectyper</strong></li>
 <li>Порівняння отриманих результатів з результатами онлайн інструментів від <a href="https://www.genomicepidemiology.org/services/">Центру Геномної Епідеміології</a></li>
@@ -215,7 +223,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="створення-нового-середовища-та-індексування-референтного-геному-та-bam-файлів" class="level1">
 <h1>Створення нового середовища та індексування референтного геному та bam файлів</h1>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#створення середовища var та активація </span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#створення середовища var та активація </span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> create <span class="at">--yes</span> <span class="at">-n</span> var samtools bamtools freebayes bedtools vcflib rtg-tools bcftools matplotlib</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate var</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co">#індексування референтного геному у папці mapping</span></span>
@@ -223,37 +231,37 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co">#індексування bam файлів</span></span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="ex">bamtools</span> index <span class="at">-in</span> DRR589139.sorted.dedup.bam</span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">#створення папки для збереження vcf файлів</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> variants</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> variants</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="виклик-поліморфізмів" class="level1">
 <h1>Виклик поліморфізмів</h1>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">#виклик поліморфізмів та запис у vcf файл у папці mapping</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">#виклик поліморфізмів та запис у vcf файл у папці mapping</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">bcftools</span> mpileup <span class="at">-f</span> reference/GCF_000005845.2_ASM584v2_genomic.fasta DRR589139.sorted.dedup.bam <span class="kw">|</span> <span class="ex">bcftools</span> call <span class="at">-mv</span> <span class="at">-Ob</span> <span class="at">--ploidy</span> 1 <span class="at">-o</span>  variants/DRR589139.vcf</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co">#показати 40 стрічок вихідного vcf файлу</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> cat variants/DRR589139.vcf <span class="kw">|</span> <span class="fu">grep</span> <span class="at">-v</span> <span class="st">'##'</span> <span class="kw">|</span> <span class="fu">head</span> <span class="at">-4</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> variants/DRR589139.vcf <span class="kw">|</span> <span class="fu">grep</span> <span class="at">-v</span> <span class="st">'##'</span> <span class="kw">|</span> <span class="fu">head</span> <span class="at">-4</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="статистика-та-фільтрування-vcf" class="level1">
 <h1>Статистика та фільтрування VCF</h1>
-<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># стиснення файлів</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># стиснення файлів</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">bgzip</span> variants/DRR589139.vcf</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># індексування vcf файлів</span></span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="ex">tabix</span> <span class="at">-p</span> vcf variants/DRR589139.vcf</span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co">#статистика за допомогою vcfstats</span></span>
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="ex">rtg</span> vcfstats variants/DRR589139.vcf</span>
 <span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co">#Статистика за допомогою bcftools</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="ex">bcftools</span> stats <span class="at">-F</span> reference/GCF_000005845.2_ASM584v2_genomic.fasta <span class="at">-s</span> <span class="at">-</span> variants/DRR589139.vcf.gz <span class="op">&gt;</span> variants/variants/DRR589139.vcf.gz.stats</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="ex">bcftools</span> stats <span class="at">-F</span> reference/GCF_000005845.2_ASM584v2_genomic.fasta <span class="at">-s</span> <span class="at">-</span> variants/DRR589139.vcf.gz <span class="op">&gt;</span> variants/DRR589139.vcf.gz.stats</span>
 <span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Створення графіків</span></span>
 <span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> variants/plots</span>
 <span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="ex">plot-vcfstats</span> <span class="at">-p</span> variants/plots/ variants/DRR589139.vcf.gz.stats</span>
 <span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="co">#Фільтрування  vcf файлу з поліморфізмами, якість яких вища 30 за шкалою Фреду (Phred score)</span></span>
 <span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="ex">rtg</span> vcffilter <span class="at">-q</span> 30 <span class="at">-i</span> variants/DRR589139.vcf.gz <span class="at">-o</span> variants/DRR589139.q30.vcf.gz</span>
 <span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="co">#Альтернативний варіант для фільтрування</span></span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="fu">zcat</span> variants/DRR589139.vcf.gz  <span class="kw">|</span> <span class="ex">vcffilter</span> <span class="at">-f</span> <span class="st">"QUAL &gt;= 30"</span> <span class="kw">|</span> <span class="fu">gzip</span> <span class="op">&gt;</span> variants/DRR589139.q30_2.vcf.gz</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="fu">zcat</span> variants/DRR589139.vcf.gz  <span class="kw">|</span> <span class="ex">vcffilter</span> <span class="at">-f</span> <span class="st">"QUAL &gt;= 30"</span> <span class="kw">|</span> <span class="fu">gzip</span> <span class="op">&gt;</span> variants/DRR589139.q30_2.vcf.gz</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="анотація-варіантів" class="level1">
 <h1>Анотація варіантів</h1>
-<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Створення нового середовища annotation та активація</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Створення нового середовища annotation та активація</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> create <span class="at">-n</span> annotation snpeff genometools-genometools bedtools</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate annotation ectyper</span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Створення папки annotated</span></span>
@@ -263,7 +271,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co">#Перейменування назви хромосоми у vcf файлі</span></span>
 <span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="ex">bcftools</span> annotate <span class="at">--rename-chrs</span> chrname.txt variants/DRR589139.q30.vcf.gz <span class="at">-o</span> variants/DRR589139_new.q30.vcf.gz</span>
 <span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Анотація за допомогою SnpEff</span></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="ex">snpEff</span> <span class="at">-v</span> Escherichia_coli_str_k_12_substr_mg1655_gca_000005845 DRR589139_new.q30.vcf <span class="op">&gt;</span> annotated/DRR589139_new.q30.anno.vcf</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="ex">snpEff</span> <span class="at">-v</span> Escherichia_coli_str_k_12_substr_mg1655_gca_000005845 DRR589139_new.q30.vcf <span class="op">&gt;</span> annotated/DRR589139_new.q30.anno.vcf</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Проаналізуйте отримані HTML репорти згенеровані програмою <strong>snpEff</strong> при запуску останньої команди. Збережіть важливі дані для презентації:</p>
 <ul>
 <li>Загальна кількість SNP</li>
@@ -279,7 +287,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="пошук-генів-та-створення-консенсусної-днк" class="level1">
 <h1>Пошук генів та Створення консенсусної ДНК</h1>
-<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Переходимо до папки variants, звідки будемо виконувати всі команди</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Переходимо до папки variants, звідки будемо виконувати всі команди</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co">#фільтрування vcf файлу та пошук гену rrsD за допомогою команди grep</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-F</span> <span class="st">"rrsD"</span> annotated/DRR.q30.anno.vcf <span class="op">&gt;</span> rrsD.vcf</span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Повернення до попередньої назви хромосоми vcf файлу</span></span>
@@ -289,7 +297,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Генерування консенсусного FASTA файлу з VCF з папки variants</span></span>
 <span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> ../GCF_000005845.2_ASM584v2_genomic.fasta <span class="kw">|</span> <span class="ex">bcftools</span> consensus annotated/DRR589139_renamed_chr.vcf <span class="op">&gt;</span> consensus_DRR589139.fasta</span>
 <span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="co">#Пошук гену rrsD консенсусного файлу</span></span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="ex">samtools</span> faidx consensus_DRR589139.fasta NC_000913.3:3427221-3428762 <span class="op">&gt;</span> rrsD_DRR589139.fasta</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="ex">samtools</span> faidx consensus_DRR589139.fasta NC_000913.3:3427221-3428762 <span class="op">&gt;</span> rrsD_DRR589139.fasta</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <section id="знаходження-серотипу-за-допомогою-ectyper" class="level2">
 <h2 class="anchored" data-anchor-id="знаходження-серотипу-за-допомогою-ectyper">Знаходження серотипу за допомогою <strong>ectyper</strong></h2>
 <p>Для знаходження серотипу як правило використовують fastq файли, оскільки створення консенсусу з референтного геному може створювати так званий “reference bias” коли частина послідовності з референтного геному з’являється у консенсусному геномі. І для того щоб обходити це, використовується маскування (створення N’s у референс геномі) для того щоб елімінувати ефекти низького покриття чи поганого мапування на референс. Відповідно будувати філогенетичні дерева на основі створеного консенсусу також буває доволі проблематично і потрібно використовувати мапування окремих генів та створення їх консенсусних послідовностей для елімінації впливу перенесених з референсу нуклеотидів.</p>
@@ -299,7 +307,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Серотипування (O та H)
+<span class="screen-reader-only">Note</span>Серотипування (O та H)
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -316,18 +324,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>👉 Практично: інструменти на кшталт ECTyper/SerotypeFinder шукають саме ці гени в рідах або контигах і віддають O:H.</p>
 </div>
 </div>
-<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># активація середовища annotation</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># активація середовища annotation</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate annotation</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co"># запуск ectyper для визначення серотипу</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="ex">ectyper</span> <span class="at">-i</span> SRR18779612_1.fastq SRR18779612_2.fastq <span class="at">--out</span> ectyper_out</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="ex">ectyper</span> <span class="at">-i</span> SRR18779612_1.fastq SRR18779612_2.fastq <span class="at">--out</span> ectyper_out</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Визначений серотип додайте до вашої презентації</p>
 </section>
 <section id="побудова-філогенетичного-дерева" class="level2">
 <h2 class="anchored" data-anchor-id="побудова-філогенетичного-дерева">Побудова філогенетичного дерева</h2>
 <ul>
-<li>Знайдіть у створеному консенсусному геномі ген “filC” та спробуйте знайти найбільш споріднені геноми(штами) за допомогою інструменту “blastn”. Відповідну інформацію у вигляді скріншоту додайте до висновків вашої презентації</li>
+<li>Знайдіть у створеному консенсусному геномі ген “fliC” та спробуйте знайти найбільш споріднені геноми(штами) за допомогою інструменту “blastn”. Відповідну інформацію у вигляді скріншоту додайте до висновків вашої презентації</li>
 <li>(Optional Task)Також проведіть множинне вирівнювання та побудову філогенетичного дерева у програмі <a href="https://www.megasoftware.net/">MEGA</a>. Хто працює у WSL, то потрібно встановити на базі Windows. Отримані дерева додайте у презентацію. Пошук ліній для філогенетичного дерева можна здійснити також за допомогою інструменту BLAST шляхом завантаження найбільш відповідних ліній з різною спорідненістю. Список ліній E.coli можна також знайти у базі NCBI Taxonomy, також можна пошукати у базі Popset, Gene.</li>
-<li>Оцінити розташування проаналізованої лінії серед інших ліній E.coli за допомогою інстументів <a href="https://www.genomicepidemiology.org/services/">Центру Геномної Епідеміології</a>. Скористайтесь fastq файлами відовідними інструментами:
+<li>Оцінити розташування проаналізованої лінії серед інших ліній E.coli за допомогою інструментів <a href="https://www.genomicepidemiology.org/services/">Центру Геномної Епідеміології</a>. Скористайтесь fastq файлами відповідними інструментами:
 <ul>
 <li>MLST 2.0</li>
 <li>SerotypeFinder 2.0</li>
@@ -392,13 +400,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy
@@ -413,7 +422,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp('/' + window.location.host + '/');
+        var filterRegex = new RegExp("https:\/\/hrubiian\.github\.io\/Genomics2026\/");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }

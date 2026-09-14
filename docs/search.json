@@ -1,24 +1,87 @@
 [
   {
-    "objectID": "HTML/task1.html",
-    "href": "HTML/task1.html",
-    "title": "Genomics2025",
+    "objectID": "syllabus.html",
+    "href": "syllabus.html",
+    "title": "Syllabus",
     "section": "",
-    "text": "This is a Quarto website.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites.\n\n1 + 1\n\n[1] 2"
+    "text": "Intro to practical course. Strategy of analysis\n\n\n\nHW: install WSL, learning basic shell commands, make HW1_shell_commands task\nPresentation - Google Slides"
   },
   {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
+    "objectID": "syllabus.html#week-1-14.09.2026",
+    "href": "syllabus.html#week-1-14.09.2026",
+    "title": "Syllabus",
     "section": "",
-    "text": "About this site\n\n1 + 1\n\n[1] 2"
+    "text": "Intro to practical course. Strategy of analysis\n\n\n\nHW: install WSL, learning basic shell commands, make HW1_shell_commands task\nPresentation - Google Slides"
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Genomics2026",
-    "section": "",
-    "text": "Welcome to the Structural and Functional Genomics Fall 2026 practice course! Browse categories for finding required information:\n\nSyllabus\nResources\nJoin link here"
+    "objectID": "syllabus.html#week-2-21.09.2026",
+    "href": "syllabus.html#week-2-21.09.2026",
+    "title": "Syllabus",
+    "section": "Week 2 (21.09.2026)",
+    "text": "Week 2 (21.09.2026)\n\nSanger Sequencing. Design of primers for Sanger Sequencing. SnapGene"
+  },
+  {
+    "objectID": "syllabus.html#week-328.09.2026",
+    "href": "syllabus.html#week-328.09.2026",
+    "title": "Syllabus",
+    "section": "Week 3(28.09.2026)",
+    "text": "Week 3(28.09.2026)\n\nNGS analysis part 1. Library preparation, sample quality assessment, QC of reads(fastQC/multiQC)"
+  },
+  {
+    "objectID": "syllabus.html#week-405.10.2026",
+    "href": "syllabus.html#week-405.10.2026",
+    "title": "Syllabus",
+    "section": "Week 4(05.10.2026)",
+    "text": "Week 4(05.10.2026)\n\nNGS analysis part 2. Mapping reads to reference genome. SAM/BAM files. De novo assembly."
+  },
+  {
+    "objectID": "syllabus.html#week-512.10.2026",
+    "href": "syllabus.html#week-512.10.2026",
+    "title": "Syllabus",
+    "section": "Week 5(12.10.2026)",
+    "text": "Week 5(12.10.2026)\n\nNGS analysis part 3. Variant calling. VCF files. Annotation of variants"
+  },
+  {
+    "objectID": "syllabus.html#week-619.10.2026",
+    "href": "syllabus.html#week-619.10.2026",
+    "title": "Syllabus",
+    "section": "Week 6(19.10.2026)",
+    "text": "Week 6(19.10.2026)\n\nAnalysis of annotated VCF files.VEP.Fst.Tajima’s D."
+  },
+  {
+    "objectID": "syllabus.html#week-726.10.2026",
+    "href": "syllabus.html#week-726.10.2026",
+    "title": "Syllabus",
+    "section": "Week 7(26.10.2026)",
+    "text": "Week 7(26.10.2026)\n\nTypes of Genetic Polymorphisms. SNPs, Indels, CNVs, Structural Variants"
+  },
+  {
+    "objectID": "syllabus.html#week-802.11.2026",
+    "href": "syllabus.html#week-802.11.2026",
+    "title": "Syllabus",
+    "section": "Week 8(02.11.2026)",
+    "text": "Week 8(02.11.2026)\n\nOxford Nanopore sequencing. Long reads. Applications."
+  },
+  {
+    "objectID": "syllabus.html#week-909.11.2026",
+    "href": "syllabus.html#week-909.11.2026",
+    "title": "Syllabus",
+    "section": "Week 9(09.11.2026)",
+    "text": "Week 9(09.11.2026)\n\nGuest Lecture"
+  },
+  {
+    "objectID": "syllabus.html#week-1016.11.2026",
+    "href": "syllabus.html#week-1016.11.2026",
+    "title": "Syllabus",
+    "section": "Week 10(16.11.2026)",
+    "text": "Week 10(16.11.2026)\n\nTBA"
+  },
+  {
+    "objectID": "syllabus.html#week-1123.11.2026",
+    "href": "syllabus.html#week-1123.11.2026",
+    "title": "Syllabus",
+    "section": "Week 11(23.11.2026)",
+    "text": "Week 11(23.11.2026)\n\nPresentation group’s results. Summary of the course"
   },
   {
     "objectID": "qmd/Linux_introduction.html",
@@ -266,6 +329,258 @@
     "text": "awk — це потужна командна утиліта для обробки і аналізу текстових файлів в Unix/Linux системах. Вона дозволяє працювати з рядками та полями (колонками) тексту, обчислювати значення та застосовувати різні дії до кожного рядка.\nawk '{print}' file.txt     # Виводить всі рядки з файлу\nawk '{print $1}' file.txt  # Виводить першу колонку\nawk '$2 &gt; 100 {print $0}' file.txt  # Виводить рядки, де значення у 2-й колонці більше за 100\nawk -F ',' '{print $1, $3}' file.csv  # Виводить 1-шу і 3-тю колонки з файлу CSV\nawk '{sum += $1} END {print sum}' file.txt  # Підсумовує значення з 1-ї колонки\nawk -v threshold=50 '$2 &gt; threshold {print $1, $2}' file.txt  # Виводить рядки, де 2-а колонка більше за 50\nawk '{print $2 - $1}' file.txt  # Виводить різницю між 2-ю і 1-ю колонками\nawk 'NR == 1 {min = $1} $1 &lt; min {min = $1} END {print min}' file.txt  # Мінімальне значення в 1-й колонці\nawk 'NR == 1 {max = $1} $1 &gt; max {max = $1} END {print max}' file.txt  # Максимальне значення в 1-й колонці"
   },
   {
+    "objectID": "qmd/Linux_introduction.html#sort",
+    "href": "qmd/Linux_introduction.html#sort",
+    "title": "1. Основні команди Linux",
+    "section": "sort",
+    "text": "sort\n(Sort Lines) Сортування рядків файлу.\nsort file.txt                     # Сортування рядків за алфавітом\nsort -n numbers.txt               # Числове сортування\nsort -r file.txt                  # Сортування у зворотному порядку\nsort -u file.txt                  # Сортування з видаленням дублікатів\nsort -k 2 file.txt                # Сортування за 2-ю колонкою\nsort -k1,1 -k2,2n regions.bed     # Сортування BED: за хромосомою, потім за координатою\nsort -V chromosomes.txt           # \"Природне\" сортування (chr1, chr2, chr10, а не chr1, chr10, chr2)\nsort -S 4G -T /tmp big_file.bed   # Обмеження пам'яті та тимчасовий каталог для великих файлів"
+  },
+  {
+    "objectID": "qmd/Linux_introduction.html#uniq",
+    "href": "qmd/Linux_introduction.html#uniq",
+    "title": "1. Основні команди Linux",
+    "section": "uniq",
+    "text": "uniq\n(Report or Omit Repeated Lines) Робота з повторюваними рядками. Файл має бути попередньо відсортований, тому uniq майже завжди використовують разом із sort.\nsort file.txt | uniq              # Видалення повторів\nsort file.txt | uniq -c           # Підрахунок кількості повторів кожного рядка\nsort file.txt | uniq -d           # Лише рядки, що повторюються\nsort file.txt | uniq -u           # Лише унікальні рядки\nsort file.txt | uniq -c | sort -rn   # Найчастіші рядки на початку списку\ngrep -v '^#' variants.vcf | cut -f 1 | sort | uniq -c   # Кількість варіантів на кожній хромосомі\nawk '$3 == \"gene\"' annotation.gtf | cut -f 1 | sort | uniq -c  # Кількість генів на хромосому"
+  },
+  {
+    "objectID": "qmd/Linux_introduction.html#sed",
+    "href": "qmd/Linux_introduction.html#sed",
+    "title": "1. Основні команди Linux",
+    "section": "sed",
+    "text": "sed\n(Stream Editor) Пошук і заміна тексту, видалення та виведення окремих рядків.\nsed 's/old/new/' file.txt           # Заміна першого збігу в кожному рядку\nsed 's/old/new/g' file.txt          # Заміна всіх збігів у кожному рядку\nsed -i 's/old/new/g' file.txt       # Заміна безпосередньо у файлі (обережно, без резервної копії!)\nsed -i.bak 's/old/new/g' file.txt   # Те саме, але зі збереженням копії file.txt.bak\nsed -n '10,20p' file.txt            # Виведення рядків з 10 по 20\nsed '1d' table.tsv                  # Видалення першого рядка (заголовка)\nsed '/^#/d' variants.vcf            # Видалення всіх рядків заголовка VCF\nsed 's/^&gt;/&gt;sample1_/' genome.fasta  # Додавання префікса до заголовків FASTA\nsed 's/^chr//' variants.vcf         # Перейменування хромосом: chr1 -&gt; 1"
+  },
+  {
+    "objectID": "qmd/Linux_introduction.html#tr",
+    "href": "qmd/Linux_introduction.html#tr",
+    "title": "1. Основні команди Linux",
+    "section": "tr",
+    "text": "tr\n(Translate Characters) Заміна або видалення окремих символів.\ntr 'a-z' 'A-Z' &lt; sequence.txt       # Переведення послідовності у верхній регістр\ntr -d '\\n' &lt; sequence.txt           # Видалення символів нового рядка\ntr -d ' ' &lt; sequence.txt            # Видалення пробілів\ntr ' ' '\\t' &lt; file.txt              # Заміна пробілів на табуляцію\necho \"ATGCATGC\" | tr 'ATGC' 'TACG'         # Комплементарна послідовність\necho \"ATGCATGC\" | rev | tr 'ATGC' 'TACG'   # Зворотно-комплементарна послідовність"
+  },
+  {
+    "objectID": "qmd/Linux_introduction.html#paste",
+    "href": "qmd/Linux_introduction.html#paste",
+    "title": "1. Основні команди Linux",
+    "section": "paste",
+    "text": "paste\n(Merge Lines of Files) Об’єднання файлів або рядків у колонки.\npaste file1.txt file2.txt         # Об'єднання двох файлів по колонках\npaste -d ',' file1.txt file2.txt  # Об'єднання з комою як роздільником\npaste -s file.txt                 # Об'єднання всіх рядків файлу в один рядок\npaste - - - - &lt; reads.fastq       # Перетворення 4-рядкового запису FASTQ в один рядок з 4 колонок"
+  },
+  {
+    "objectID": "qmd/Linux_introduction.html#join",
+    "href": "qmd/Linux_introduction.html#join",
+    "title": "1. Основні команди Linux",
+    "section": "join",
+    "text": "join\n(Join Lines on a Common Field) Об’єднання двох таблиць за спільним полем (наприклад, таблиці генів і таблиці рівнів експресії).\njoin file1.txt file2.txt              # Об'єднання за спільним першим полем\njoin -1 1 -2 2 file1.txt file2.txt    # За 1-м полем першого і 2-м полем другого файлу\njoin -t $'\\t' genes.tsv counts.tsv    # Для файлів з табуляцією як роздільником\n# Увага: обидва файли мають бути відсортовані за ключовим полем:\nsort -k1,1 genes.tsv &gt; genes.sorted.tsv"
+  },
+  {
+    "objectID": "qmd/Linux_introduction.html#zgrep",
+    "href": "qmd/Linux_introduction.html#zgrep",
+    "title": "1. Основні команди Linux",
+    "section": "zgrep",
+    "text": "zgrep\n(Grep Compressed Files) Пошук у стиснених файлах без розпакування.\nzgrep 'pattern' file.gz                 # Пошук у стисненому файлі\nzgrep -c '^@SRR' reads.fastq.gz         # Підрахунок заголовків ридів у FASTQ\nzgrep -v '^#' variants.vcf.gz | wc -l   # Підрахунок варіантів без рядків заголовка\nzgrep -i 'chr1' annotation.gtf.gz       # Пошук без урахування регістру"
+  },
+  {
+    "objectID": "qmd/Linux_introduction.html#zless",
+    "href": "qmd/Linux_introduction.html#zless",
+    "title": "1. Основні команди Linux",
+    "section": "zless",
+    "text": "zless\n(View Compressed Files) Посторінковий перегляд стиснених файлів.\nzless reads.fastq.gz              # Посторінковий перегляд стисненого файлу\nzless -S annotation.gtf.gz        # Перегляд без переносу довгих рядків\nzcat reads.fastq.gz | head -n 8   # Перші два записи FASTQ"
+  },
+  {
+    "objectID": "qmd/Linux_introduction.html#curl",
+    "href": "qmd/Linux_introduction.html#curl",
+    "title": "1. Основні команди Linux",
+    "section": "curl",
+    "text": "curl\n(Transfer Data from a URL) Завантаження даних, зокрема геномів з NCBI чи Ensembl. Альтернатива команді wget.\ncurl -O https://example.com/genome.fa.gz      # Завантаження зі збереженням оригінальної назви\ncurl -L -o genome.fa.gz https://example.com/g # Збереження під іншою назвою (-L слідує за редиректами)\ncurl -C - -O https://example.com/genome.fa.gz # Продовження перерваного завантаження\ncurl -I https://example.com/genome.fa.gz      # Лише заголовки — перевірка доступності файлу"
+  },
+  {
+    "objectID": "qmd/Linux_introduction.html#md5sum",
+    "href": "qmd/Linux_introduction.html#md5sum",
+    "title": "1. Основні команди Linux",
+    "section": "md5sum",
+    "text": "md5sum\n(Compute Checksum) Перевірка цілісності завантажених файлів. Обов’язковий крок після завантаження великих геномів — файл може завантажитись не повністю.\nmd5sum genome.fa.gz              # Обчислення контрольної суми файлу\nmd5sum -c md5checksums.txt       # Перевірка всіх файлів за списком сум (NCBI надає такий файл)\nmd5sum *.fastq.gz &gt; my_md5.txt   # Збереження сум для власних файлів\nsha256sum genome.fa.gz           # Те саме, але надійніший алгоритм"
+  },
+  {
+    "objectID": "qmd/Linux_introduction.html#tar",
+    "href": "qmd/Linux_introduction.html#tar",
+    "title": "1. Основні команди Linux",
+    "section": "tar",
+    "text": "tar\n(Tape Archive) Створення та розпакування архівів.\ntar -czf archive.tar.gz directory/   # Створення стисненого архіву з каталогу\ntar -xzf archive.tar.gz              # Розпакування архіву\ntar -tzf archive.tar.gz              # Перегляд вмісту архіву без розпакування\ntar -xzf archive.tar.gz -C /path/    # Розпакування у вказаний каталог"
+  },
+  {
+    "objectID": "qmd/Linux_introduction.html#split",
+    "href": "qmd/Linux_introduction.html#split",
+    "title": "1. Основні команди Linux",
+    "section": "split",
+    "text": "split\n(Split a File into Pieces) Розбиття великих файлів на частини.\nsplit -l 1000000 large_file.txt part_      # По 1 000 000 рядків у частині\nsplit -n 4 genome.fa chunk_                # На 4 приблизно рівні частини\nsplit -l 4000000 reads.fastq chunk_        # Для FASTQ кількість рядків має ділитись на 4!\nsplit -b 100M large.bam chunk_             # Частини по 100 МБ"
+  },
+  {
+    "objectID": "qmd/Linux_introduction.html#rsync",
+    "href": "qmd/Linux_introduction.html#rsync",
+    "title": "1. Основні команди Linux",
+    "section": "rsync",
+    "text": "rsync\n(Remote Sync) Копіювання великих обсягів даних, зокрема на віддалений сервер. На відміну від cp, може продовжити перервану передачу.\nrsync -avh source/ destination/                    # Копіювання каталогу\nrsync -avh --progress reads/ user@server:/data/    # Копіювання на сервер з показом прогресу\nrsync -avh --partial user@server:/data/ ./         # Продовження перерваної передачі\nrsync -avhn source/ destination/                   # Пробний запуск без реального копіювання"
+  },
+  {
+    "objectID": "qmd/Linux_introduction.html#find",
+    "href": "qmd/Linux_introduction.html#find",
+    "title": "1. Основні команди Linux",
+    "section": "find",
+    "text": "find\n(Search for Files) Пошук файлів за назвою, розміром чи датою зміни.\nfind . -name \"*.fastq.gz\"              # Усі FASTQ файли в поточному каталозі та підкаталогах\nfind /data -type d -name \"sample*\"     # Пошук каталогів, назва яких починається на sample\nfind . -name \"*.bam\" -size +1G         # BAM файли, більші за 1 ГБ\nfind . -name \"*.vcf\" -mtime -7         # Файли, змінені за останні 7 днів\nfind . -name \"*.fastq\" -exec gzip {} \\;   # Стиснення всіх знайдених файлів\nfind . -name \"*.sam\" -delete           # Видалення всіх SAM файлів (обережно!)"
+  },
+  {
+    "objectID": "qmd/Linux_introduction.html#xargs",
+    "href": "qmd/Linux_introduction.html#xargs",
+    "title": "1. Основні команди Linux",
+    "section": "xargs",
+    "text": "xargs\n(Build and Execute Command Lines) Передає знайдені файли як аргументи іншій команді.\nls *.fastq | xargs -n 1 gzip                     # Стиснення кожного файлу окремо\nfind . -name \"*.bam\" | xargs -n 1 samtools index # Індексація всіх BAM файлів\ncat samples.txt | xargs -I {} mkdir -p results/{}  # Каталог результатів для кожного зразка\nfind . -name \"*.fastq\" | xargs -P 4 -n 1 gzip    # Паралельне стиснення у 4 потоки"
+  },
+  {
+    "objectID": "qmd/Linux_introduction.html#basename-і-dirname",
+    "href": "qmd/Linux_introduction.html#basename-і-dirname",
+    "title": "1. Основні команди Linux",
+    "section": "basename і dirname",
+    "text": "basename і dirname\n(Strip Path / Strip Filename) Виділення назви файлу або шляху до нього. Незамінні всередині циклів для формування назв вихідних файлів.\nbasename /data/reads/sample1.fastq.gz             # -&gt; sample1.fastq.gz\nbasename /data/reads/sample1.fastq.gz .fastq.gz   # -&gt; sample1 (без розширення)\ndirname /data/reads/sample1.fastq.gz              # -&gt; /data/reads"
+  },
+  {
+    "objectID": "qmd/Linux_introduction.html#цикл-for",
+    "href": "qmd/Linux_introduction.html#цикл-for",
+    "title": "1. Основні команди Linux",
+    "section": "Цикл for",
+    "text": "Цикл for\n(Loop) Виконання однакових дій для набору файлів або зразків.\nfor file in *.fastq.gz; do echo \"$file\"; done   # Виведення назв усіх файлів\n\n# Обробка кожного зразка з формуванням власної назви результату:\nfor file in *.fastq.gz; do\n  sample=$(basename \"$file\" .fastq.gz)\n  fastp -i \"$file\" -o \"trimmed_${sample}.fastq.gz\"\ndone\n\nfor i in {1..22}; do echo \"chr$i\"; done         # Перебір хромосом\nwhile read sample; do echo \"$sample\"; done &lt; samples.txt   # Читання списку зразків з файлу"
+  },
+  {
+    "objectID": "qmd/Linux_introduction.html#змінні-та-підстановка-команд",
+    "href": "qmd/Linux_introduction.html#змінні-та-підстановка-команд",
+    "title": "1. Основні команди Linux",
+    "section": "Змінні та підстановка команд",
+    "text": "Змінні та підстановка команд\n(Variables and Command Substitution) Збереження шляхів і результатів команд.\nREF=/data/reference/genome.fa      # Створення змінної\necho $REF                          # Використання змінної\nbwa mem $REF reads.fastq &gt; aln.sam\n\nSAMPLE=$(basename reads.fastq.gz .fastq.gz)   # Підстановка результату команди\nLINES=$(zcat reads.fastq.gz | wc -l)\necho $((LINES / 4))                # Арифметика: кількість ридів у FASTQ"
+  },
+  {
+    "objectID": "qmd/Linux_introduction.html#ln",
+    "href": "qmd/Linux_introduction.html#ln",
+    "title": "1. Основні команди Linux",
+    "section": "ln",
+    "text": "ln\n(Link) Створення символічних посилань. Дозволяє “підключити” референсний геном до робочого каталогу, не копіюючи файл розміром у кілька гігабайт.\nln -s /data/reference/genome.fa genome.fa   # Посилання на референсний геном\nln -s /big/storage/raw_data data            # Посилання на каталог з даними\nls -l                                        # Символічні посилання позначені стрілкою -&gt;"
+  },
+  {
+    "objectID": "qmd/Linux_introduction.html#перенаправлення-виводу",
+    "href": "qmd/Linux_introduction.html#перенаправлення-виводу",
+    "title": "1. Основні команди Linux",
+    "section": "Перенаправлення виводу",
+    "text": "Перенаправлення виводу\n(Redirection) Збереження результатів роботи програм і повідомлень про помилки у файли.\ncommand &gt; file.txt        # Перенаправлення виводу у файл (файл перезаписується)\ncommand &gt;&gt; file.txt       # Додавання виводу в кінець файлу\ncommand &lt; input.txt       # Читання даних з файлу\ncommand 2&gt; errors.log     # Перенаправлення лише повідомлень про помилки\ncommand &gt; out.log 2&gt;&1    # Вивід і помилки в один файл\ncommand &&gt; all.log        # Те саме, коротший запис\nbwa mem ref.fa r1.fq r2.fq &gt; aln.sam 2&gt; bwa.log   # Результат і лог програми окремо"
+  },
+  {
+    "objectID": "qmd/Linux_introduction.html#tee",
+    "href": "qmd/Linux_introduction.html#tee",
+    "title": "1. Основні команди Linux",
+    "section": "tee",
+    "text": "tee\n(Write to File and Screen) Одночасне виведення на екран і збереження у файл.\ncommand | tee output.txt        # Виведення на екран і збереження у файл\ncommand | tee -a output.txt     # Додавання в кінець файлу\nfastp -i reads.fq -o out.fq 2&gt;&1 | tee fastp.log   # Спостереження за роботою і збереження логу"
+  },
+  {
+    "objectID": "qmd/Linux_introduction.html#section-1",
+    "href": "qmd/Linux_introduction.html#section-1",
+    "title": "1. Основні команди Linux",
+    "section": "&&, ||, ;",
+    "text": "&&, ||, ;\n(Command Chaining) Послідовне виконання кількох команд.\ncommand1 && command2      # command2 виконається лише якщо command1 завершилась успішно\ncommand1 || command2      # command2 виконається лише якщо command1 завершилась з помилкою\ncommand1 ; command2       # Послідовне виконання незалежно від результату\n\nmkdir -p results && cd results\nbwa mem ref.fa reads.fq &gt; aln.sam && samtools view -b aln.sam &gt; aln.bam"
+  },
+  {
+    "objectID": "qmd/Linux_introduction.html#фоновий-режим-і-nohup",
+    "href": "qmd/Linux_introduction.html#фоновий-режим-і-nohup",
+    "title": "1. Основні команди Linux",
+    "section": "Фоновий режим і nohup",
+    "text": "Фоновий режим і nohup\n(Background Jobs) Запуск задач, що продовжують працювати після закриття термінала.\ncommand &                  # Запуск у фоновому режимі\nnohup command &            # Запуск, що не переривається при виході з сесії\nnohup bwa mem ref.fa r1.fq r2.fq &gt; aln.sam 2&gt; bwa.log &\njobs                       # Список фонових задач поточної сесії\nfg %1                      # Повернення задачі №1 на передній план\nbg %1                      # Продовження призупиненої задачі у фоні\n# Ctrl+Z — призупинення поточної задачі"
+  },
+  {
+    "objectID": "qmd/Linux_introduction.html#tmux",
+    "href": "qmd/Linux_introduction.html#tmux",
+    "title": "1. Основні команди Linux",
+    "section": "tmux",
+    "text": "tmux\n(Terminal Multiplexer) Сесія термінала, яка продовжує працювати на сервері після від’єднання. Найнадійніший спосіб запускати довготривалий аналіз.\ntmux new -s genomics       # Створення нової сесії з назвою genomics\ntmux ls                    # Список наявних сесій\ntmux attach -t genomics    # Повернення до сесії\n# Ctrl+b, потім d — від'єднання від сесії (процеси продовжують працювати)\nscreen -S genomics         # Аналогічна програма screen: створення сесії\nscreen -r genomics         # Повернення до сесії screen"
+  },
+  {
+    "objectID": "qmd/Linux_introduction.html#time",
+    "href": "qmd/Linux_introduction.html#time",
+    "title": "1. Основні команди Linux",
+    "section": "time",
+    "text": "time\n(Measure Execution Time) Вимірювання часу виконання команди.\ntime samtools sort aln.bam -o sorted.bam   # Час виконання команди\n/usr/bin/time -v command                   # Детально, зокрема пікове використання пам'яті"
+  },
+  {
+    "objectID": "qmd/Linux_introduction.html#du",
+    "href": "qmd/Linux_introduction.html#du",
+    "title": "1. Основні команди Linux",
+    "section": "du",
+    "text": "du\n(Disk Usage) Розмір файлів і каталогів. Геномні дані швидко заповнюють диск.\ndu -sh directory/            # Загальний розмір каталогу\ndu -h --max-depth=1 /data    # Розмір кожного підкаталогу\ndu -sh * | sort -h           # Вміст поточного каталогу, відсортований за розміром\ndu -sh *.bam                 # Розмір усіх BAM файлів"
+  },
+  {
+    "objectID": "qmd/Linux_introduction.html#htop",
+    "href": "qmd/Linux_introduction.html#htop",
+    "title": "1. Основні команди Linux",
+    "section": "htop",
+    "text": "htop\n(Interactive Process Viewer) Зручніша версія top з кольоровим інтерфейсом.\nhtop                # Запуск інтерактивного перегляду процесів\nhtop -u username    # Процеси конкретного користувача\n# F6 — сортування, F9 — завершити процес, q — вихід"
+  },
+  {
+    "objectID": "qmd/Linux_introduction.html#conda-mamba",
+    "href": "qmd/Linux_introduction.html#conda-mamba",
+    "title": "1. Основні команди Linux",
+    "section": "conda / mamba",
+    "text": "conda / mamba\n(Package and Environment Manager) Встановлення біоінформатичних програм без прав адміністратора та розділення їх на незалежні середовища. mamba — швидший відповідник conda з тими самими командами.\nconda create -n genomics -c bioconda -c conda-forge samtools bcftools bwa fastp\nconda activate genomics        # Активація середовища\nconda deactivate               # Вихід із середовища\nconda env list                 # Список наявних середовищ\nconda install -c bioconda multiqc   # Встановлення програми в активне середовище\nconda list                     # Перелік встановлених програм і їхніх версій\nconda env export &gt; environment.yml  # Збереження складу середовища для відтворення\nmamba create -n genomics -c bioconda samtools   # Те саме через mamba (значно швидше)"
+  },
+  {
+    "objectID": "qmd/Linux_introduction.html#поради-для-роботи-з-геномними-даними",
+    "href": "qmd/Linux_introduction.html#поради-для-роботи-з-геномними-даними",
+    "title": "1. Основні команди Linux",
+    "section": "Поради для роботи з геномними даними",
+    "text": "Поради для роботи з геномними даними\n\nПеред обробкою великого файлу завжди подивіться на його початок: zcat reads.fastq.gz | head -n 8. Це дозволяє переконатися у форматі даних.\nНе розпаковуйте великі .gz файли без потреби — використовуйте zcat, zless і zgrep.\nПеревіряйте команду на невеликій вибірці, перш ніж запускати її на всіх даних: zcat reads.fastq.gz | head -n 4000 &gt; test.fastq.\nПісля завантаження геному обов’язково звіряйте контрольну суму: md5sum -c md5checksums.txt.\nПеред rm з масками спочатку виконайте ту саму команду з ls, щоб побачити, що саме буде видалено.\nДовготривалі задачі запускайте у tmux — розрив з’єднання з сервером не перерве аналіз.\nСтежте за вільним місцем: df -h і du -sh *. Проміжні .sam файли займають у рази більше місця, ніж .bam."
+  },
+  {
+    "objectID": "qmd/HW3.Genome_Assembly_Part_2_updated.html",
+    "href": "qmd/HW3.Genome_Assembly_Part_2_updated.html",
+    "title": "HW3.Genome Assembly. Variant Calling",
+    "section": "",
+    "text": "Виклик поліморфізмів за допомогою bcftools\nФільтрування та анотація поліморфізмів за допомогою SnpEff\nПошук гену 16S rRNA (rrsD)/fliC у консенсусному геномі\nПошук поліморфізмів досліджуваних ліній та порівняння з відсеквенованими зразками на NCBI\nзнаходження серотипу відсеквенованих зразків за допомогою ectyper\nПорівняння отриманих результатів з результатами онлайн інструментів від Центру Геномної Епідеміології\n(Optional) Побудова філогенетичного дерева на основі консенсусного геному або окремих генів"
+  },
+  {
+    "objectID": "qmd/HW3.Genome_Assembly_Part_2_updated.html#знаходження-серотипу-за-допомогою-ectyper",
+    "href": "qmd/HW3.Genome_Assembly_Part_2_updated.html#знаходження-серотипу-за-допомогою-ectyper",
+    "title": "HW3.Genome Assembly. Variant Calling",
+    "section": "Знаходження серотипу за допомогою ectyper",
+    "text": "Знаходження серотипу за допомогою ectyper\nДля знаходження серотипу як правило використовують fastq файли, оскільки створення консенсусу з референтного геному може створювати так званий “reference bias” коли частина послідовності з референтного геному з’являється у консенсусному геномі. І для того щоб обходити це, використовується маскування (створення N’s у референс геномі) для того щоб елімінувати ефекти низького покриття чи поганого мапування на референс. Відповідно будувати філогенетичні дерева на основі створеного консенсусу також буває доволі проблематично і потрібно використовувати мапування окремих генів та створення їх консенсусних послідовностей для елімінації впливу перенесених з референсу нуклеотидів.\n\n\n\n\n\n\nNoteСеротипування (O та H)\n\n\n\nO-антиген (O-тип): найінформативніші гени з О-кластеру капсульно-ліпополісахаридного шляху\n\nwzx (O-antigen flippase)\nwzy (O-antigen polymerase)\nwzm / wzt (ABC-транспортерний шлях для частини O-груп)\n\nЧасто достатньо парного визначення wzx/wzy або wzm/wzt для конкретної O-групи; для окремих серогруп існують «сигнатурні» гени (напр., rfbE для O157).\nH-антиген (H-тип):\nfliC (флагелін — основний маркер H-типу)\nу частини ліній — альтернативні флагелінові гени (flkA / flmA / flnA), але здебільшого достатньо fliC.\n👉 Практично: інструменти на кшталт ECTyper/SerotypeFinder шукають саме ці гени в рідах або контигах і віддають O:H.\n\n\n# активація середовища annotation\nconda activate annotation\n# запуск ectyper для визначення серотипу\nectyper -i SRR18779612_1.fastq SRR18779612_2.fastq --out ectyper_out\nВизначений серотип додайте до вашої презентації"
+  },
+  {
+    "objectID": "qmd/HW3.Genome_Assembly_Part_2_updated.html#побудова-філогенетичного-дерева",
+    "href": "qmd/HW3.Genome_Assembly_Part_2_updated.html#побудова-філогенетичного-дерева",
+    "title": "HW3.Genome Assembly. Variant Calling",
+    "section": "Побудова філогенетичного дерева",
+    "text": "Побудова філогенетичного дерева\n\nЗнайдіть у створеному консенсусному геномі ген “fliC” та спробуйте знайти найбільш споріднені геноми(штами) за допомогою інструменту “blastn”. Відповідну інформацію у вигляді скріншоту додайте до висновків вашої презентації\n(Optional Task)Також проведіть множинне вирівнювання та побудову філогенетичного дерева у програмі MEGA. Хто працює у WSL, то потрібно встановити на базі Windows. Отримані дерева додайте у презентацію. Пошук ліній для філогенетичного дерева можна здійснити також за допомогою інструменту BLAST шляхом завантаження найбільш відповідних ліній з різною спорідненістю. Список ліній E.coli можна також знайти у базі NCBI Taxonomy, також можна пошукати у базі Popset, Gene.\nОцінити розташування проаналізованої лінії серед інших ліній E.coli за допомогою інструментів Центру Геномної Епідеміології. Скористайтесь fastq файлами відповідними інструментами:\n\nMLST 2.0\nSerotypeFinder 2.0\nKmerFinder 3.2\n\n\nОтримані результати додайте до презентації та порівняйте з власноруч отриманими результатами де це релевантно."
+  },
+  {
+    "objectID": "qmd/HW2_Sanger_SnapGene.html",
+    "href": "qmd/HW2_Sanger_SnapGene.html",
+    "title": "HW2_Sanger_SnapGene",
+    "section": "",
+    "text": "Знайомство зі SnapGene\n\nSnapGene - це програмне забезпечення для молекулярної біології. Воно пропонує швидкий і простий спосіб планування, візуалізації та документування ваших молекулярно-біологічних процедур\n\n\nОпис завдання\n\nЗавантажити SnapGene Viewer або встановити 30-денну trial версію SnapGene. Ознайомитись із можливостями програми\nЗнайти плазміду в репозиторії SnapGene (Приклад - Плазміда pCAG-GFP, у якій EGFP є кодуючою послідовністю).\n\n18 плазмід на вибір:\n\nEYFP\nECFP\npKillerOrange-B\npmCherry\npTagBFP-C\npmStrawberry\npmBanana\npZsGreen\npmKO1-S1\npLSSmOrange-C1\npDG1-S1\npmPlum\npDsRed-Express\npE2-Crimson\nphKikGR1-S1\npTimer-1\npRSET-CFP\npmMiCy1-S1\n\nЗнайти праймер для секвенування кодуючої послідовності і змінити назву праймера дописавши у кінці назви “_seq”. Якщо немає праймера, або ви його не знайшли, створіть власний за допомогою програми SnapGene. Якість праймеру для секвенування можете перевірити за допомогою онлайн-інструментів eurofinsgenomics або premierbiosoft або іншого онлайн ресурсу. Також можна скористатися готовим інструментом для дизайну праймеру sequencing-primer-design\n\n\nХід роботи\nПісля того як ви завантажили плазміду, вам потрібно знайти кодуючу послідовність - Ваш ген інтересу(Gene of interest - GOI). Тобто та ділянка ДНК, яку ви клонуєте або вже заклонована всередину плазміди. Для того щоб згадати будову плазміди скористайтесь довідниковою інформацією нижче:\n\n\n\n\n\n\nNoteОсновні компоненти плазміди:\n\n\n\n\n\n\nori (origin) сайт для реплікації плазміди всередині хосту\nГен резистентності до антибіотику для селекції бактеріальних клонів виключно з вашою цільовою плазмідою.\nMultiple Cloning Site (MCS) - короткий сегмент ДНК який містить групу рестрикційних сайтів призначених для клонування гену інтересу. Найчастіше MCS розташовують після(downstream) промоторної ділянки\nГен інтересу (Insert) - Ген, промотор, або інший фрагмент ДНК вклонований у multiple cloning site\nПромоторна ділянка (Promoter) - ділянка, що ініціює транскрипцію вашого гену інтересу. Життєво важливий компонент для експресуючих векторів: визначає, в яких типах клітин експресується ген та кількість отриманого рекомбінантного білка.\nСелективний маркер (Selectable Marker) - Ген стійкості до антибіотиків дозволяє проводити селекцію в бактеріях. Однак багато плазмід також мають маркери для селекції в інших типах клітин. Особливо важливий у експресуючих векторах еукаріот, якщо потрібно проводити відбір клонів по селективному маркеру.\nМісце посадки для праймера (Primer Binding Site) - Коротка одноланцюгова послідовність ДНК, що використовується як початкова точка для ПЛР-ампліфікації або секвенування. Праймери можна використовувати для верифікації послідовності плазмід.\n\nІлюстрація плазміди та її елементів: \n\n\n\nПісля того як ви знайшли ваш ген інтересу на плазміді, потрібно вияснити скільки праймерів потрібно дизайнити для того щоб повністю покрити всю довжину гену інтересу.\n\n\n\n\n\n\nImportantДовжина ріду секвенування за Сенгером\n\n\n\nОрієнтовна довжина фрагментів секвенування складає 500-900 bp в залежності від вашого набору реактивів та секвенатора. У нашому сетапі ми орієнтуємось на довжину фрагменту 500-600 bp. Якщо ви не можете покрити довжину гену інтересу одним праймером, необхідно здизайнити другий праймер з іншої сторони(reverse primer). Зверніть увагу що довжина ріду секвенування за Сенгером залежить від полімеру який ви використовуєте та довжини капіляру (наприклад 50 або 80см). Чим більша довжина капіляру, тим більше фрагментів може краще розділитись в капілярі і відповідно більше фрагментів термінального ПЛР синтезу може зчитати пристрій. Для прикладу, який вигляд має капіляр для ABI3130xl можете знайти тут.\n\n\nЗверніть увагу, що праймер повинен дивитись у сторону вашої кодуючої послідовності, У SnapGene це відображається як фіолетова стрілка у відповідному напрямку, де початок стрілки вказує на напрямок синтезу:\n\n\n\nЗображення праймера у програмі SnapGene. M13fw - один з найпопулярніших праймерів для секвенування зі сімейства pUC плазмід\n\n\nПісля знаходження такого праймера необхідно дописати в кінці назви праймера “_seq” і зберегти файл у форматі “*.dna”. Результатом роботи є .dna файл із збереженим праймером для секвенування.\n\n\nКорисні посилання\n\nMolecular Biology Basics\nБудова Плазмід"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Genomics2026",
+    "section": "",
+    "text": "Welcome to the Structural and Functional Genomics Fall 2026 practice course! Browse categories for finding required information:\n\nSyllabus\nResources\nJoin link here"
+  },
+  {
+    "objectID": "qmd/HW1_Linux_basics.html",
+    "href": "qmd/HW1_Linux_basics.html",
+    "title": "HW1_Linux_basics",
+    "section": "",
+    "text": "Формат передачі генів (GTF) - це формат файлів, який використовується для зберігання інформації про структуру генів. Це текстовий формат з розділенням табуляцією, заснований на форматі загальних ознак (GFF), але містить деякі додаткові домовленості, специфічні для генної інформації. Важливою особливістю GTF є те, що його можна перевіряти: маючи послідовність і файл GTF, можна перевірити правильність формату. Це значно зменшує проблеми з обміном даними між групами.\n\nДані які будемо аналізувати це гени Drosophila melanogaster - модельний об’єкт для багатьох генетичних досліджень. Для цього завдання виділено 14 генів Drosophila melanogaster. Вашим завданням буде проаналізувати їх та виконати вказівки описані нижче.\nСписок генів:\n\nbcd\n\n\n\nnos\n\n\n\nhb\n\n\n\nwg\n\n\n\nhh\n\n\n\nen\n\n\n\nm\n\n\n\ndac\n\n\n\ngl\n\n\n\nftz\n\n\n\ntwi\n\n\n\ntim\n\n\n\nPi3K92E\n\n\n\nInR\n\n\nОпис завдання\nПотрібно вияснити:\n\nНа якій хромосомі знаходиться ген\ndene_id знайденого гену\ngene_source гену\nСкільки Елементів(Features) знайдено для цього гену у вигляді екзонів\nЗнайти найдовший Елемент(feature)\nЗнайти найменший Елемент(feature)\nЗаписати всі отримані резульати у вигляді таблички excel(приклад додається)\nPro-task(optional): написати скрип bash який автоматично виконає завдання(output у вигляді txt з рядками з відповідями через пробіл, приклад додається)\n\nТаблиця з кінцевим результатом матиме вигляд:\n\n\n\nОзнака\nІнформація\n\n\n\n\nРозташований на хромосомі\n3L\n\n\ngene_id\nFBgn0263995\n\n\ngene_source\nFlyBase\n\n\nКількість Елементів(Features)\n135\n\n\nMax довжина Елементу\n37\n\n\nMin довжина Елементу\n5744\n\n\n\n\n\nКрок 1. Завантаження файлу\nДля того щоб завантажити файл, використайте команду curl\nmkdir genomics_2026     # Створення папки в кореневій папці\ncd genomics_2026        # Перехід у створену папку\nmkdir HW1_Linux_basics  # Створення папки у новоствореній папці\ncd HW1_Linux_basics     # Перехід у новостворену папку\npwd                     # Перевірка шляху створених папок\n# pwd_output: ~/genomics_2026/HW1_Linux_basics/\ncurl -O https://ftp.ensembl.org/pub/release-112/gtf/drosophila_melanogaster/Drosophila_melanogaster.BDGP6.46.112.gtf.gz # Завантаження GTF файлу референтного геному Drosophila melanogaster\n\n\nКрок 2. Використання cat, more, less, head, tail для перегляду файлу\n# Перегляд 20 рядків файлу за допомогою команди head\nhead -n 20 Drosophila_melanogaster.BDGP6.46.112.gtf\n# Перегляд останніх 20 рядків файлу за допомогою команди tail\ntail -n 20 Drosophila_melanogaster.BDGP6.46.112.gtf\n# Перегляд файлу за допомогою less\nless -S Drosophila_melanogaster.BDGP6.46.112.gtf\n# Перегляд файлу за допомогою more\nmore Drosophila_melanogaster.BDGP6.46.112.gtf\n# Перегляд файлу за допомогою cat\ncat Drosophila_melanogaster.BDGP6.46.112.gtf\n\n\nКрок 3. Пошук гену за допомогою команди grep\n# Використання команди grep для знаходження гену \"cpo\"\ngrep \\\"cpo\\\" -w Drosophila_melanogaster.BDGP6.46.112.gtf\n# Використання команиди wc для підрахунку унікальних Features(кількості рядків) для гена \"cpo\"\ngrep \\\"cpo\\\" -w Drosophila_melanogaster.BDGP6.46.112.gtf | wc -l\n# Підрахунок кількості Features гену \"cpo\" для екзонів\ngrep \\\"cpo\\\" -w Drosophila_melanogaster.BDGP6.46.112.gtf |grep -w \"exon\" | wc -l\n# Перегляд у зручному форматі за допомогою команди less\ngrep \\\"cpo\\\" -w Drosophila_melanogaster.BDGP6.46.112.gtf |grep -w \"exon\" | less -S\n# Запис відповіді у новий gtf файл\ngrep \\\"cpo\\\" -w Drosophila_melanogaster.BDGP6.46.112.gtf |grep -w \"exon\" &gt; cpo.gtf\n# відображення отриманого результату\nless -S cpo.gtf\nЗапишіть кількість Елементів(Features) у excel табличку\n\n\nКрок 4. Пошук корисної інформації про розташування гена на хромосомі, gene_id, gene_source\n# Знайти хромосому на якій розташований ген \"cpo\"\ncut -f 1 cpo.gtf | head -n 1\n# Пошук gene_id гену \"cpo\"\ncut -f 9 cpo.gtf | cut -d ';' -f 1 | head -n 1\n# Пошук gene_source гену \"cpo\"\ncut -f 9 cpo.gtf | cut -d ';' -f 5 | head -n 1\nТаким чином отримали інформацію про хромосому, gene_id та gene_source. Запишіть отримані результати у Excel табличку\n\n\nКрок 5. Знаходження Min та Max елементів(features) гена\n# Оберіть відповідні колонки в яких міститься інформація про початок та кінець транскрипту\ncut -f 4,5 cpo.gtf &gt; length_gene.txt\n# відніміть значення колонки 2 від колонки 1 та запишіть у новий файл min_max_gene.txt\nawk '{print $2 - $1}' length_gene.txt &gt; min_max_gene.txt\n# Знайти мінімальне число Елементу(Feature) гена\nsort -n min_max_gene.txt | head -n 1\n# Знайти максимальне число Елементу(Feature) гена\nsort -n min_max_gene.txt | tail -n 1\n# Продвинутіший спосіб знаходження min та max\nawk 'NR == 1 {min = $1} $1 &lt; min {min = $1} END {print min}' min_max_gene.txt\nawk 'NR == 1 {max = $1} $1 &gt; max {max = $1} END {print max}' min_max_gene.txt\nЗапишіть знайдені min та max довжину Елементів(Features) у табличку\n\n\nКрок 6. (Optional) Shell скрипт\nНапишіть shell скрипт для оптимізації процесу та анотації генів у автоматичному режимі"
+  },
+  {
+    "objectID": "qmd/HW3.Genome_Assembly.html",
+    "href": "qmd/HW3.Genome_Assembly.html",
+    "title": "HW3.Genome Assembly. Part 1",
+    "section": "",
+    "text": "Ціль\nМапування визначених ліній E.coli на референтний геном з NCBI. Оцінка якості відсеквенованих зразків та оцінка глибини покриття\n\n\nПайплайн\n\n\n\nОгляд пайплайну для аналізу STEC штамів E.coli\n\n\n\n\nSRA Accession List (одна лінія для кожної групи)\n\nDRX569192(DRR588645)\nDRX569193(DRR588646)\nDRX569194(DRR588647)\nDRX569195(DRR588648)\nDRX569197(DRR588650)\nDRX569196(DRR588649)\nDRX569198(DRR588651)\n\nЗ повним переліком SRA Accession List можна ознайомитись тут.\n\n\nКрок 1. Завантаження рідів з бази даних SRA\n# Створення папки для аналізу\nmkdir Ecoli_analysis\n\n# Відкрити папку з аналізом\ncd Ecoli_analysis\n#Створення середовища SRA\nconda create -n SRA\n# Активація середовища SRA\nconda activate SRA\n# Встановлення пакунку SRA-tools\nconda install sra-tools\n# створення папки data для зберігання даних секвенування\nmkdir data | cd data\n# Команда для завантаження FASTQ файлів у цільову папку data за допомогою інструменту fasterq-dump\nfasterq-dump DRR589139\n\n\nКрок 2. Обрізка адаптерів за допомогою fastp\n# Створення нового середовища qc і встановлення інструментів fastp fastqc multiqc:\nconda create --yes -n qc fastp fastqc multiqc\n# активувати середовище qc:\nconda activate qc\n# Перейти у попередню папку\ncd ..\n#створити папку trimmed:\nmkdir trimmed\n#Обрізка адаптерів за допомогою fastp:\nfastp --detect_adapter_for_pe --overrepresentation_analysis --correction --cut_right --thread 2 --html trimmed/DRR589139.fastp.html --json trimmed/DRR589139.fastp.json -i data/DRR589139_1.fastq -I data/DRR589139_2.fastq -o trimmed/DRR589139_1.fastq -O trimmed/DRR589139_2.fastq\n\n\nКрок 3. Перевірка якості обрізаних рідів\n# Поверніться у папку Ecoli_analysis та створіть папку trimmed-fastqc\nmkdir trimmed-fastqc\n#Генерування репорту за допомогою інструменту FASTQC вашої лінії E.coli\nfastqc -o trimmed-fastqc data/DRR589139_1.fastq data/DRR589139_2.fastq\n#Run MultiQC\nmultiqc trimmed trimmed-fastqc\n\n\nКрок 4. Мапування на референтний геном\n# Створення папки для мапування\nmkdir mapping\ncd mapping\n# Завантаження референтного геному з ftp серверу NCBI\nmkdir reference\ncd reference\nwget https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/005/845/GCF_000005845.2_ASM584v2/GCF_000005845.2_ASM584v2_genomic.fna.gz\n# Створити нове середовище mapping та інсталювати у ньому програми samtools, bwa, qualimap, r-base\nconda create --yes -n mapping samtools bwa qualimap r-base\n# Активувати нове середовище \nconda activate mapping\n# Розархівування даних в папці\ngunzip GCF_000005845.2_ASM584v2_genomic.fna.gz\n\n# Індексування\nbwa index GCF_000005845.2_ASM584v2_genomic.fna\n# Paired-end мапування проводиться в папці експерименту. У нашому випадку це папка data. Щоб перевірити шлях скористайтесь командою pwd щоб бути впевненим у правильному розташуванні перед запуском програми.\npwd\nbwa mem mapping/reference/GCF_000005845.2_ASM584v2_genomic.fna trimmed/DRR589139_1.fastq trimmed/DRR589139_2.fastq &gt; mapping/aln-DRR589139.sam\n\n\nПост-процесинг мапування\n# фіксування пар (mates) і стиснення файлів sam\nsamtools sort -n -O sam aln-DRR589139.sam | samtools fixmate -m -O bam - DRR589139.fixmate.bam\n# видалення sam файлу для економії простору\nrm aln-DRR589139.sam\n# Сортування bam файлу по координатам\nsamtools sort -O bam -o DRR589139.sorted.bam DRR589139.fixmate.bam\n# Видалення дуплікацій\nsamtools markdup -r -S DRR589139.sorted.bam DRR589139.sorted.dedup.bam\n# Видалення попереднього fixmate і sorted файлу \nrm DRR589139.fixmate.bam | rm DRR589139.sorted.bam\n# Статистика відфільтрованого bam файлу \nsamtools flagstat DRR589139.sorted.dedup.bam\n# Перевірка якості - оцінка глибини покриття зчитувань\nsamtools depth DRR589139.sorted.dedup.bam | gzip &gt; DRR589139.depth.txt.gz\n# Запуск qualimap для DRR589139.sorted.dedup.bam файлу\nqualimap bamqc -bam DRR589139.sorted.dedup.bam"
+  },
+  {
     "objectID": "qmd/Install_Software.html",
     "href": "qmd/Install_Software.html",
     "title": "0. Installing Software",
@@ -273,311 +588,45 @@
     "text": "Вступ\nWindows Subsystem for Linux (WSL) дозволяє вам запускати дистрибутив Linux поруч із вашою операційною системою Windows. Цей документ надає покрокові інструкції для встановлення Ubuntu на WSL.\n\n\nПопередні вимоги\n\nWindows 10 версії 1903 або новішої, або Windows 11\nАдміністративні права на вашій машині\n\n\n\nКрок 1: Увімкнути WSL\n\nВідкрийте PowerShell від імені адміністратора.\nШукайте “PowerShell” в меню «Пуск», клацніть правою кнопкою миші та виберіть “Запустити від імені адміністратора”.\nВиконайте наступну команду для увімкнення WSL:\nwsl --install\nЦя команда завантажить останню версію WSL і встановить всі необхідні компоненти.\n\n\n\nКрок 2: Перезавантажте комп’ютер\nПісля виконання команди вам потрібно буде перезавантажити комп’ютер, щоб зміни вступили в силу.\n\n\nКрок 3: Запустіть Ubuntu\nПісля встановлення ви можете запустити Ubuntu з меню «Пуск» або набравши ubuntu у PowerShell або командному рядку.\nПід час першого запуску Ubuntu потрібно буде кілька хвилин для налаштування. Вам буде запропоновано створити обліковий запис користувача та пароль.\n\n\nКрок 4: Оновіть Ubuntu\nПісля встановлення Ubuntu корисно оновити списки пакетів, щоб переконатися, що у вас є останнє програмне забезпечення.\nsudo apt update\nsudo apt upgrade\nВи успішно встановили Ubuntu на Windows Subsystem for Linux (WSL)! Тепер ви можете використовувати Ubuntu разом із вашими Windows-додатками.\nЩоб дізнатися більше про розширені налаштування, розгляньте можливість ознайомлення з документацією WSL на вебсайті Microsoft.\n\n\nВстановлення Miniconda\n#створення папки miniconda3\nmkdir -p ~/miniconda3\n#Завантаження останньої версії дистрибутиву\nwget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda3/miniconda.sh\n#Інсталяція дистрибутиву\nbash ~/miniconda3/miniconda.sh -b -u -p ~/miniconda3\n#Видалення інсталятора\nrm ~/miniconda3/miniconda.sh\nДетальніше на сайті\n\n\nВстановлення Miniconda на MacOS\nІнсталяцію дистрибутиву можна знайти на сайті розробників conda.io"
   },
   {
-    "objectID": "syllabus.html",
-    "href": "syllabus.html",
-    "title": "Syllabus",
-    "section": "",
-    "text": "Intro to practical course. Strategy of analysis\n\n\n\nHW: install WSL, learning basic shell commands, make HW1_shell_commands task\nPresentation - Google Slides"
-  },
-  {
-    "objectID": "syllabus.html#week-1-23.09.2025",
-    "href": "syllabus.html#week-1-23.09.2025",
-    "title": "Syllabus",
-    "section": "",
-    "text": "Intro to practical course. Strategy of analysis\n\n\n\nHW: install WSL, learning basic shell commands, make HW1_shell_commands task\nPresentation - Google Slides"
-  },
-  {
-    "objectID": "syllabus.html#week-2-30.09.2025",
-    "href": "syllabus.html#week-2-30.09.2025",
-    "title": "Syllabus",
-    "section": "Week 2 (30.09.2025)",
-    "text": "Week 2 (30.09.2025)\n\nSanger Sequencing. Design of primers for Sanger Sequencing. SnapGene\nHW: Install SnapGene Viewer. Make HW2_SnapGene task.\nPresentation - Google Slides"
-  },
-  {
-    "objectID": "qmd/HW1_Linux_basics.html",
-    "href": "qmd/HW1_Linux_basics.html",
-    "title": "HW1_Linux_basics",
-    "section": "",
-    "text": "Формат передачі генів (GTF) - це формат файлів, який використовується для зберігання інформації про структуру генів. Це текстовий формат з розділенням табуляцією, заснований на форматі загальних ознак (GFF), але містить деякі додаткові домовленості, специфічні для генної інформації. Важливою особливістю GTF є те, що його можна перевіряти: маючи послідовність і файл GTF, можна перевірити правильність формату. Це значно зменшує проблеми з обміном даними між групами.\n\nДані які будемо аналізувати це гени Drosophila melanogaster - модельний об’єкт для багатьох генетичних досліджень. Для цього завдання виділено 14 генів Drosophila melanogster. Вашим завданням буде проаналізувати їх та виконати вказівки описані нижче.\nСписок генів:\n\nbcd\n\n\n\nnos\n\n\n\nhb\n\n\n\nwg\n\n\n\nhh\n\n\n\nen\n\n\n\nm\n\n\n\ndac\n\n\n\ngl\n\n\n\nftz\n\n\n\ntwi\n\n\n\ntim\n\n\n\nPi3K92E\n\n\n\nInR\n\n\nОпис завдання\nПотрібно вияснити:\n\nНа якій хромосомі знаходиться ген\ndene_id знайденого гену\ngene_source гену\nСкільки Елементів(Features) знайдено для цього гену у вигляді екзонів\nЗнайти найдовший Елемент(feature)\nЗнайти найменший Елемент(feature)\nЗаписати всі отримані резульати у вигляді таблички excel(приклад додається)\nPro-task(optional): написати скрип bash який автоматично виконає завдання(output у вигляді txt з рядками з відповідями через пробіл, приклад додається)\n\nТаблиця з кінцевим результатом матиме вигляд:\n\n\n\nОзнака\nІнформація\n\n\n\n\nРозташований на хромосомі\n3L\n\n\ngene_id\nFBgn0263995\n\n\ngene_source\nFlyBase\n\n\nКількість Елементів(Features)\n135\n\n\nMax довжина Елементу\n37\n\n\nMin довжина Елементу\n5744\n\n\n\n\n\nКрок 1. Завантаження файлу\nДля того щоб завантажити файл, використайте команду curl\nmkdir genomics_2025     # створення папки в кореневій папці\ncd genomics_2025        # Перехід у створену папку\nmkdir HW1_Linux_basics  # Створення папки у новоствореній папкці\ncd HW1_Linux_basics     # Перезід у новостворену папку\npwd                     # Перевірка шляху створених папкок\n# pwd_output: ~/genomics_2024/HW1_Linux_basics/\ncurl -O https://ftp.ensembl.org/pub/release-112/gtf/drosophila_melanogaster/Drosophila_melanogaster.BDGP6.46.112.gtf.gz # Завантаження GTF файлу референтного геному Drosophila melanogaster\n\n\nКрок 2. Використання cat, more, less, head, tail для перегляду файлу\n# Перегляд 20 рядків файлу за допомогою команди head\nhead -n 20 Drosophila_melanogaster.BDGP6.46.112.gtf\n# Перегляд останніх 20 рядків файлу за допомогою команди tail\ntail -n 20 Drosophila_melanogaster.BDGP6.46.112.gtf\n# Перегляд файлу за допомогою less\nless -S Drosophila_melanogaster.BDGP6.46.112.gtf\n# Перегляд файлу за допомогою more\nmore Drosophila_melanogaster.BDGP6.46.112.gtf\n# Перегляд файлу за допомогою cat\ncat Drosophila_melanogaster.BDGP6.46.112.gtf\n\n\nКрок 3. Пошук гену за допомогою команди grep\n# Використання команди grep для знаходження гену \"cpo\"\ngrep \\\"cpo\\\" -w Drosophila_melanogaster.BDGP6.46.112.gtf\n# Використання команиди wc для підрахунку унікальних Features(кількості рядків) для гена \"cpo\"\ngrep \\\"cpo\\\" -w Drosophila_melanogaster.BDGP6.46.112.gtf | wc -l\n# Підрахунок кількості Features гену \"cpo\" для екзонів\ngrep \\\"cpo\\\" -w Drosophila_melanogaster.BDGP6.46.112.gtf |grep -w \"exon\" | wc -l\n# Перегляд у зручному форматі за допомогою команди less\ngrep \\\"cpo\\\" -w Drosophila_melanogaster.BDGP6.46.112.gtf |grep -w \"exon\" | less -S\n# Запис відповіді у новий gtf файл\ngrep \\\"cpo\\\" -w Drosophila_melanogaster.BDGP6.46.112.gtf |grep -w \"exon\" &gt; cpo.gtf\n# відображення отриманого результату\nless -S cpo.gtf\nЗапишіть кількість Елементів(Features) у excel табличку\n\n\nКрок 4. Пошук корисної інформації про розташування гена на хромосомі, gene_id, gene_source\n# Знайти хромосому на якій розташований ген \"cpo\"\ncut -f 1 cpo.gtf | head -n 1\n# Пошук gene_id гену \"cpo\"\ncut -f 9 cpo.gtf | cut -d ';' -f 1 | head -n 1\n# Пошук gene_source гену \"cpo\"\ncut -f 9 cpo.gtf | cut -d ';' -f 5 | head -n 1\nТаким чином отримали інформацію про хромосому, gene_id та gene_source. Запишіть отримані результати у Excel табличку\n\n\nКрок 5. Знаходження Min та Max елементів(features) гена\n# Оберіть відповідні колонки в яких міститься інформація про початок та кінець транскрипту\ncut -f 4,5 cpo.gtf &gt; length_gene.txt\n# відніміть значення колонки 2 від колонки 1 та запишіть у новий файл min_max_gene.txt\nawk '{print $2 - $1}' length_gene.txt &gt; min_max_gene.txt\n# Знайти мінімальне число Елементу(Feature) гена\nsort -n min_max_gene.txt | head -n 1\n# Знайти максимальне число Елементу(Feature) гена\nsort -n min_max_gene.txt | tail -n 1\n# Продвинутіший спосіб знаходження min та max\nawk 'NR == 1 {min = $1} $1 &lt; min {min = $1} END {print min}' min_max_gene.txt\nawk 'NR == 1 {max = $1} $1 &gt; max {max = $1} END {print max}' min_max_gene.txt\nЗапишіть знайдені min та max довжину Елементів(Features) у табличку\n\n\nКрок 6. (Optional) Shell скрипт\nНапишіть shell скрипт для оптимізації процесу та анотації генів у автоматичному режимі"
-  },
-  {
-    "objectID": "syllabus.html#week-307.10.2025",
-    "href": "syllabus.html#week-307.10.2025",
-    "title": "Syllabus",
-    "section": "Week 3(07.10.2025)",
-    "text": "Week 3(07.10.2025)\n\nNGS analysis part 1. Library preparation, sample quality assessment, QC of reads(fastQC/multiQC)\nHW: Ecoli_Genome_Assembly_Part_1\nPresentation: Google Slides, DNA Purification&QC"
-  },
-  {
-    "objectID": "syllabus.html#week-414.10.2025",
-    "href": "syllabus.html#week-414.10.2025",
-    "title": "Syllabus",
-    "section": "Week 4(14.10.2025)",
-    "text": "Week 4(14.10.2025)\n\nNGS analysis part 2. Mapping reads to reference genome. SAM/BAM files. De novo assembly.\nPresentation: Google Slides"
-  },
-  {
-    "objectID": "syllabus.html#week-521.10.2025",
-    "href": "syllabus.html#week-521.10.2025",
-    "title": "Syllabus",
-    "section": "Week 5(21.10.2025)",
-    "text": "Week 5(21.10.2025)\n\nNGS analysis part 2. Mapping reads to reference genome. SAM/BAM files. De novo assembly.\nPresentation: Google Slides\nTest1"
-  },
-  {
-    "objectID": "syllabus.html#week-1102.12.2025",
-    "href": "syllabus.html#week-1102.12.2025",
-    "title": "Syllabus",
-    "section": "Week 11(02.12.2025)",
-    "text": "Week 11(02.12.2025)\n\nPresentation group’s results. Summary of the course\nTemplate of presentation - Google Slides"
-  },
-  {
-    "objectID": "syllabus.html#week-1209.12.2025",
-    "href": "syllabus.html#week-1209.12.2025",
-    "title": "Syllabus",
-    "section": "Week 12(09.12.2025)",
-    "text": "Week 12(09.12.2025)\n\nPresentation group’s results. Summary of the course\nTemplate of presentation - Google Slides"
-  },
-  {
-    "objectID": "syllabus.html#week-628.10.2025",
-    "href": "syllabus.html#week-628.10.2025",
-    "title": "Syllabus",
-    "section": "Week 6(28.10.2025)",
-    "text": "Week 6(28.10.2025)\n\nNGS analysis part 3. Variant calling. VCF files. Annotation of variants\nHW: Ecoli_Genome_Assembly_Part_2\nPresentation: Google Slides"
-  },
-  {
-    "objectID": "syllabus.html#week-704.11.2025",
-    "href": "syllabus.html#week-704.11.2025",
-    "title": "Syllabus",
-    "section": "Week 7(04.11.2025)",
-    "text": "Week 7(04.11.2025)\n\nAnalysis of annotated VCF files.VEP.Fst.Tadjima’s D.\nPresentation:Google Slides"
-  },
-  {
-    "objectID": "syllabus.html#week-811.11.2025",
-    "href": "syllabus.html#week-811.11.2025",
-    "title": "Syllabus",
-    "section": "Week 8(11.11.2025)",
-    "text": "Week 8(11.11.2025)\n\nAnalysis of annotated VCF files.VEP.Fst.Tadjima’s D.\nHW:\nPresentation:"
-  },
-  {
-    "objectID": "syllabus.html#week-918.11.2025",
-    "href": "syllabus.html#week-918.11.2025",
-    "title": "Syllabus",
-    "section": "Week 9(18.11.2025)",
-    "text": "Week 9(18.11.2025)\n\nOxford Nanopore sequencing. Long reads. Applications.\nPresentation: Google Slides"
-  },
-  {
-    "objectID": "syllabus.html#week-1025.11.2025",
-    "href": "syllabus.html#week-1025.11.2025",
-    "title": "Syllabus",
-    "section": "Week 10(25.11.2025)",
-    "text": "Week 10(25.11.2025)\n\nGuest Lecture"
-  },
-  {
     "objectID": "resources.html",
     "href": "resources.html",
-    "title": "Resourses",
+    "title": "Resources",
     "section": "",
-    "text": "Genomics tools and resources - GitHub\nNCBI Tutorials and Webinars\nEMBL-EBI Training\nLinux Basics by Martin Hölzer, EEBG 2024\nIntroduction to UNIX command line\nWorkflow Manegment System by Martin Hölzer, EEBG 2024"
+    "text": "Genomics tools and resources - GitHub\nNCBI Tutorials and Webinars\nEMBL-EBI Training\nLinux Basics by Martin Hölzer, EEBG 2024\nIntroduction to UNIX command line\nWorkflow Management System by Martin Hölzer, EEBG 2024"
   },
   {
     "objectID": "resources.html#good-recommendations-to-start-with",
     "href": "resources.html#good-recommendations-to-start-with",
-    "title": "Resourses",
+    "title": "Resources",
     "section": "",
-    "text": "Genomics tools and resources - GitHub\nNCBI Tutorials and Webinars\nEMBL-EBI Training\nLinux Basics by Martin Hölzer, EEBG 2024\nIntroduction to UNIX command line\nWorkflow Manegment System by Martin Hölzer, EEBG 2024"
-  },
-  {
-    "objectID": "resources.html#bioinformatics-courses",
-    "href": "resources.html#bioinformatics-courses",
-    "title": "Resourses",
-    "section": "Bioinformatics courses",
-    "text": "Bioinformatics courses\n\nIntroduction to computational biology by Mike Love\nApplied Computational Genomics By Aaron Quilan\nStructural and Functional Genomics Course\nSpeciation & Population Genomics: a how-to-guide"
-  },
-  {
-    "objectID": "resources.html#books",
-    "href": "resources.html#books",
-    "title": "Resourses",
-    "section": "Books",
-    "text": "Books\n\nГенетика Сиволоб\nМолекулярна біологія Сиволоб 2023\nModern Statistics for Modern Biology"
-  },
-  {
-    "objectID": "resources.html#articles",
-    "href": "resources.html#articles",
-    "title": "Resourses",
-    "section": "Articles",
-    "text": "Articles"
-  },
-  {
-    "objectID": "resources.html#research-articles",
-    "href": "resources.html#research-articles",
-    "title": "Resourses",
-    "section": "Research Articles",
-    "text": "Research Articles"
-  },
-  {
-    "objectID": "resources.html#useful-links-opportiunities-in-ukraine",
-    "href": "resources.html#useful-links-opportiunities-in-ukraine",
-    "title": "Resourses",
-    "section": "Useful Links / Opportiunities in Ukraine",
-    "text": "Useful Links / Opportiunities in Ukraine\n\nNGO Bioinformatics for Ukraine\nUBDS^3 Summer School\nCRABS Summer School\nUkraininan school in Evolutionary Biology\nOdesa Bio Summer School"
-  },
-  {
-    "objectID": "resources.html#useful-links-opportunities-in-ukraine",
-    "href": "resources.html#useful-links-opportunities-in-ukraine",
-    "title": "Resourses",
-    "section": "Useful Links / Opportunities in Ukraine",
-    "text": "Useful Links / Opportunities in Ukraine\n\nNGO Bioinformatics for Ukraine\nNGO GenomicsUA\nUBDS^3 Summer School\nCRABS Summer School\nUkraininan school in Evolutionary Biology\nOdesa Bio Summer School"
-  },
-  {
-    "objectID": "qmd/HW2_Sanger_SnapGene.html",
-    "href": "qmd/HW2_Sanger_SnapGene.html",
-    "title": "HW2_Sanger_SnapGene",
-    "section": "",
-    "text": "Знайомство зі SnapGene\n\nSnapGene - це програмне забезпечення для молекулярної біології. Воно пропонує швидкий і простий спосіб планування, візуалізації та документування ваших молекулярно-біологічних процедур\n\n\nОпис завдання\n\nЗавантажити SnapGene Viewer або встановити 30-денну trial версію SnapGene. Ознайомитись із можливостями програми\nЗнайти плазміду в репозиторії SnapGene (Приклад - Плазміда pCAG-GFP, у якій EGFP є кодуючою послідовністю).\n\n14 плазмід на вибір:\n\nEYFP\nECFP\npKillerOrange-B\npmCherry\npTagBFP-C\npmStrawberry\npmBanana\npZsGreen\npmKO1-S1\npLSSmOrange-C1\npDG1-S1\npmPlum\npDsRed-Express\npE2-Crimson\nphKikGR1-S1\npTimer-1\npRSET-CFP\npmMiCy1-S1\n\nЗнайти праймер для секвенування кодуючої послідовності і змінити назву праймера дописавши у кінці назви “_seq”. Якщо немає праймера, або ви його не знайшли, створіть власний за допомогою програми SnapGene. Якість праймеру для секвенування можете перевірити за допомогою онлайн-інструментів eurofinsgenomics або premierbiosoft або іншого онлайн ресурсу. Також можна скористатися готовим інструментом для дизайну праймеру sequencing-primer-design\n\n\nХід роботи\nПісля того як ви завантажили плазміду, вам потрібно знайти кодуючу послідовність - Ваш ген інтересу(Gene of interest - GOI). Тобто та ділянка ДНК, яку ви клонуєте або вже заклонована всередину плазміди. Для того щоб згадати будову плазміди скористайтесь довідниковою інформацією нижче:\n\n\n\n\n\n\nОсновні компонети плазміди:\n\n\n\n\n\n\nori (origin) сайт для реплікації плазміди всередині хосту\nГен резистентності до антибіотику для селекції бактеріальних клонів виключно з вашою цільовою плазмідою.\nMultiple Cloning Site (MCS) - короткий сегмент ДНК який містить групу рестрикційних сайтів призначених для клонування гену інтересу. Найчастіше MCS розташовують після(downstream) промоторної ділянки\nГен інтересу (Insert) - Ген, промотор, або інший фрагмент ДНК вклонований у multiple cloning site\nПромоторна ділянка (Promoter) - ділянка, що ініціює транскрипцію вашого гену інтересу. Життєво важливий компонент для експресуючих векторів: визначає, в яких типах клітин експресується ген та кількість отриманого рекомбінантного білка.\nСелективний маркер (Selectable Marker) - Ген стійкості до антибіотиків дозволяє проводити селекцію в бактеріях. Однак багато плазмід також мають маркери для селекції в інших типах клітин. Особливо важливий у експресуючих векторах еукаріот, якщо потрібно проводити відбір клонів по селективному маркеру.\nМісце посадки для праймера (Primer Binding Site) - Коротка одноланцюгова послідовність ДНК, що використовується як початкова точка для ПЛР-ампліфікації або секвенування. Праймери можна використовувати для верифікації послідовності плазмід.\n\nІлюстрація плазміди та її елементів: \n\n\n\nПісля того як вий знайшли ваш ген інтересу на плазміді, потрібно вияснити скільки праймерів потрібно дизайнити для того щоб повністю покрити всю довжину гену інтересу.\n\n\n\n\n\n\nДовжина ріду секвенування за Сенгером\n\n\n\nОрієнтовна довжина фрагментів секвенування складає 500-900 bp в залежності від вашого набору реактивів та секвенатора. У нашому сетапі ми орієнтуємось на довжину фрагменту 500-600 bp. Якщо ви не можете покрити довжину гену інтересу одним праймером, необхідно здизайнити другий праймер з іншої сторони(reverse primer). Зверніть увагу що довжина ріду секвенування за Сенгером залежить від полімеру який ви використовуєте та довжини капіляру (наприклад 50 або 80см). Чим більша довжина капіляру, тим більше фрагментів може краще розділитись в капілярі і відповідно більше фрагментів термінального ПЛР синтезу може зчитати пристрій. Для прикладу, який вигляд має капіляр для ABI3130xl можете знайти тут.\n\n\nЗверніть увагу, що праймер повинен дивитись у сторону вашої кодуючої послідовності, У SnapGene це відображається як фіолетова стрілка у відповідному напрямку, де початок стрілки вказує на напрямок синтезу:\n\n\n\nЗображення праймера у програмі SnapGene. M13fw - один з найпопулярніших праймерів для секвенування зі сімейства pUC плазмід\n\n\nПісля знаходження такого праймера необхідно дописати в кінці назви праймера “_seq” і зберегти файл у форматі “*.dna”. Результатом роботи є .dna файл із збереженим праймером для секвенування.\n\n\nКорисні посилання\n\nMolecular Biology Basics\nБудова Плазмід"
-  },
-  {
-    "objectID": "qmd/HW3.Genome_Assembly.html",
-    "href": "qmd/HW3.Genome_Assembly.html",
-    "title": "HW3.Genome Assembly. Part 1",
-    "section": "",
-    "text": "Ціль\nМапування визначених ліній E.coli на референтний геном з NCBI. Оцінка якості відсеквенованих зразків та оцінка глибини покриття\n\n\nПайплайн\n\n\n\nОгляд пайплайну для аналізу STEC штамів E.coli\n\n\n\n\nSRA Accession List (одна лінія для кожної групи)\n\nDRX569192(DRR588645)\nDRX569193(DRR588646)\nDRX569194(DRR588647)\nDRX569195(DRR588648)\nDRX569197(DRR588650)\nDRX569196(DRR588649)\nDRX569198(DRR588651)\n\nЗ повним переліком SRA Accession List можна ознайомитись тут.\n\n\nКрок 1. Завантаження рідів з бази даних SRA\n# Створення папки для аналізу\nmkdir Ecoli_analysis\n\n# Відкрити папку з аналізом\ncd Ecoli_analysis\n#Створення середовища SRA\nconda create -n SRA\n# Активація середовища SRA\nconda activate SRA\n# Встановлення пакунку SRA-tools\nconda install sra-tools\n# створення папки data для зберігання даних секвенування\nmkdir data | cd data\n# Команда для завантаження FASTQ файлів у цільову папку data за допомогою інструменту fasterq-dump\nfasterq-dump DRR589139\n\n\nКрок 2. Обрізка адаптерів за допомогою fastp\n# Створення нового середовища qc і встановлення інструментів fastp fastqc multiqc:\nconda create --yes -n qc fastp fastqc multiqc\n# активувати середовище qc:\nconda activate qc\n# Перейти у попередню папку\ncd ..\n#створити папку trimmed:\nmkdir trimmed\n#Обрізка адаптерів за допомогою fastp:\nfastp --detect_adapter_for_pe --overrepresentation_analysis --correction --cut_right --thread 2 --html trimmed/DRR589139.fastp.html --json trimmed/DRR589139.fastp.json -i data/DRR589139_1.fastq -I data/DRR589139_2.fastq -o trimmed/DRR589139_1.fastq -O trimmed/DRR589139_2.fastq\n\n\nКрок 3. Перевірка якості обрізаних рідів\n# поверністься у папку Ecoli_analysis та створіть папку trimmed-fastqc\nmkdir trimmed-fastqc\n#Генерування репорту за допомогою інструменту FASTQC вашої лінії E.coli\nfastqc -o trimmed-fastqc data/DRR589139_1.fastq data/DRR589139_2.fastq\n#Run MultiQC\nmultiqc trimmed trimmed-fastqc\n\n\nКрок 4. Мапування на референтний геном\n# Створення папки для мапування\nmkdir mapping\ncd mapping\n# Завантаження референтного геному з ftp серверу NCBI\nmkdir reference\ncd reference\nwget https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/005/845/GCF_000005845.2_ASM584v2/GCF_000005845.2_ASM584v2_genomic.fna.gz\n# Створити нове середовище mapping та інсталювати у ньому програми samtools, bwa, qualimap, r-base\nconda create --yes -n mapping samtools bwa qualimap r-base\n# Активувати нове середовище \nconda activate mapping\n# Розархівування даних в папці\ngunzip GCF_000005845.2_ASM584v2_genomic.fna.gz\n\n# Індексування\nbwa index GCF_000005845.2_ASM584v2_genomic.fna\n# Paired-end мапування проводиться в папці експерименту. У нашому випадку це папка data. Щоб перевірити шлях скористайтесь командою pwd щоб бути впевненим у правильному розташуванні перед запуском програми.\npwd\nbwa mem mapping/reference/GCF_000005845.2_ASM584v2_genomic.fna trimmed/DRR589139_1.fastq trimmed/DRR589139_2.fastq &gt; mapping/aln-DRR589139.sam\n\n\nПост-процессинг мапування\n# фіксування пар (mates) і стиснення файлів sam\nsamtools sort -n -O sam aln-DRR589139.sam | samtools fixmate -m -O bam - DRR589139.fixmate.bam\n# видалення sam файлу для економії простору\nrm aln-DRR589139.sam\n# Сортування bam файлу по координатам\nsamtools sort -O bam -o DRR589139.sorted.bam DRR589139.fixmate.bam\n# Видалення дуплікацій\nsamtools markdup -r -S DRR589139.sorted.bam DRR589139.sorted.dedup.bam\n# Видалення попереднього fixmate і sorted файлу \nrm DRR589139.fixmate.bam | rm DRR589139.sorted.bam\n# Статистика відфільтрованого bam фалу \nsamtools flagstat DRR589139.sorted.dedup.bam\n# Перевірка якості - оцінка глибини покриття зчитувань\nsamtools depth DRR589139.sorted.dedup.bam | gzip &gt; DRR589139.depth.txt.gz\n# Запуск qualimap для DRR589139.sorted.dedup.bam файлу\nqualimap bamqc -bam DRR589139.sorted.dedup.bam"
-  },
-  {
-    "objectID": "syllabus.html#week-3-407.10.2025-14.10.2025",
-    "href": "syllabus.html#week-3-407.10.2025-14.10.2025",
-    "title": "Syllabus",
-    "section": "Week 3-4(07.10.2025-14.10.2025)",
-    "text": "Week 3-4(07.10.2025-14.10.2025)\n\nNGS analysis part 1. Library preparation, sample quality assessment, QC of reads(fastQC/multiQC)\nHW: Ecoli_Genome_Assembly_Part_1\nPresentation: Google Slides, DNA Purification&QC"
+    "text": "Genomics tools and resources - GitHub\nNCBI Tutorials and Webinars\nEMBL-EBI Training\nLinux Basics by Martin Hölzer, EEBG 2024\nIntroduction to UNIX command line\nWorkflow Management System by Martin Hölzer, EEBG 2024"
   },
   {
     "objectID": "resources.html#tools",
     "href": "resources.html#tools",
-    "title": "Resourses",
+    "title": "Resources",
     "section": "Tools",
     "text": "Tools\n\nsamtools\nbcftools\nfastp\nbwa\nvarious vcf tools\nIGV - Integrative Genomics Viewer\nSnpEff - genetic variant annotation and effect prediction tool"
   },
   {
     "objectID": "resources.html#sequencing-principles",
     "href": "resources.html#sequencing-principles",
-    "title": "Resourses",
+    "title": "Resources",
     "section": "Sequencing principles",
-    "text": "Sequencing principles\n\nIllumina Sequecning adapters"
-  },
-  {
-    "objectID": "qmd/HW3.Genome_Assembly_Part_2_updated.html",
-    "href": "qmd/HW3.Genome_Assembly_Part_2_updated.html",
-    "title": "HW3.Genome Assembly. Variant Calling",
-    "section": "",
-    "text": "Виклик поліморфізмів за допомогою bcftools\nФільтрування та анотація поліморфізмів за допомогою SnpEff\nПошук гену 16S rRNA (rrsD)/filC у консенсусному геномі\nПошук поліморфізмів досліджуваних ліній та порівняння з відсеквенованими зразками на NCBI\nзнаходження серотипу відсеквенованих зразків за допомогою ectyper\nПорівняння отриманих результатів з результатами онлайн інструментів від Центру Геномної Епідеміології\n(Optional) Побудова філогенетичного дерева на основі консенсусного геному або окремих генів"
-  },
-  {
-    "objectID": "qmd/HW3.Genome_Assembly_Part_2_updated.html#знаходження-серотипу-за-допомогою-virulencefinder",
-    "href": "qmd/HW3.Genome_Assembly_Part_2_updated.html#знаходження-серотипу-за-допомогою-virulencefinder",
-    "title": "HW3.Genome Assembly. Variant Calling",
-    "section": "Знаходження серотипу за допомогою virulencefinder",
-    "text": "Знаходження серотипу за допомогою virulencefinder\n\nЗа допомогою інструменту BLAST знайдіть лінії, відсоток яких найбільш споріднений із вашою лінією. Отримані дані збережіть для презентації.\nТакож проведіть множинне вирівнювання та побудову філогенетичного дерева у програмі MEGA. Хто працює у WSL, то потрібно встановити на базі Windows. Отримані дерева додайте у презентацію. Пошук ліній для філогенетичного дерева можна здійснити також за допомогою інструменту BLAST шляхом завантаження найбільш відповідних ліній з різною спорідненістю. Список ліній E.coli можна також знайти у базі NCBI Taxonomy, також можна пошукати у базі Popset, Gene.\nОцінити розташування проаналізованої лінії серед інших ліній E.coli.\n(Optional) Знайти додатково висококонсервативний ген з геному E.coli та провести з ним такі ж маніпуляції. Порівняти отримані філогенетичні дерева та співставити між собою.\n(Optional Pro Task) Завантажити програму Mauve і використати повний файл консенсусної ДНК для повногеномного вирівнювання з лініями E.coli. Побудувати множинні вирівнювання а також філогенетичні дерева з використанням цієї програми. Увага! Ця програма має Java інтерфейс, тому встановлення на Ubuntu складне і довге. Краще цю програму використовувати у Windows."
-  },
-  {
-    "objectID": "qmd/HW3.Genome_Assembly_Part_2_updated.html#знаходження-серотипу-за-допомогою-ectyper",
-    "href": "qmd/HW3.Genome_Assembly_Part_2_updated.html#знаходження-серотипу-за-допомогою-ectyper",
-    "title": "HW3.Genome Assembly. Variant Calling",
-    "section": "Знаходження серотипу за допомогою ectyper",
-    "text": "Знаходження серотипу за допомогою ectyper\nДля знаходження серотипу як правило використовують fastq файли, оскільки створення консенсусу з референтного геному може створювати так званий “reference bias” коли частина послідовності з референтного геному з’являється у консенсусному геномі. І для того щоб обходити це, використовується маскування (створення N’s у референс геномі) для того щоб елімінувати ефекти низького покриття чи поганого мапування на референс. Відповідно будувати філогенетичні дерева на основі створеного консенсусу також буває доволі проблематично і потрібно використовувати мапування окремих генів та створення їх консенсусних послідовностей для елімінації впливу перенесених з референсу нуклеотидів.\n\n\n\n\n\n\nСеротипування (O та H)\n\n\n\nO-антиген (O-тип): найінформативніші гени з О-кластеру капсульно-ліпополісахаридного шляху\n\nwzx (O-antigen flippase)\nwzy (O-antigen polymerase)\nwzm / wzt (ABC-транспортерний шлях для частини O-груп)\n\nЧасто достатньо парного визначення wzx/wzy або wzm/wzt для конкретної O-групи; для окремих серогруп існують «сигнатурні» гени (напр., rfbE для O157).\nH-антиген (H-тип):\nfliC (флагелін — основний маркер H-типу)\nу частини ліній — альтернативні флагелінові гени (flkA / flmA / flnA), але здебільшого достатньо fliC.\n👉 Практично: інструменти на кшталт ECTyper/SerotypeFinder шукають саме ці гени в рідах або контигах і віддають O:H.\n\n\n# активація середовища annotation\nconda activate annotation\n# запуск ectyper для визначення серотипу\nectyper -i SRR18779612_1.fastq SRR18779612_2.fastq --out ectyper_out\nВизначений серотип додайте до вашої презентації"
-  },
-  {
-    "objectID": "qmd/HW3.Genome_Assembly_Part_2_updated.html#побудова-філогенетичного-дерева",
-    "href": "qmd/HW3.Genome_Assembly_Part_2_updated.html#побудова-філогенетичного-дерева",
-    "title": "HW3.Genome Assembly. Variant Calling",
-    "section": "Побудова філогенетичного дерева",
-    "text": "Побудова філогенетичного дерева\n\nЗнайдіть у створеному консенсусному геномі ген “filC” та спробуйте знайти найбільш споріднені геноми(штами) за допомогою інструменту “blastn”. Відповідну інформацію у вигляді скріншоту додайте до висновків вашої презентації\n(Optional Task)Також проведіть множинне вирівнювання та побудову філогенетичного дерева у програмі MEGA. Хто працює у WSL, то потрібно встановити на базі Windows. Отримані дерева додайте у презентацію. Пошук ліній для філогенетичного дерева можна здійснити також за допомогою інструменту BLAST шляхом завантаження найбільш відповідних ліній з різною спорідненістю. Список ліній E.coli можна також знайти у базі NCBI Taxonomy, також можна пошукати у базі Popset, Gene.\nОцінити розташування проаналізованої лінії серед інших ліній E.coli за допомогою інстументів Центру Геномної Епідеміології. Скористайтесь fastq файлами відовідними інструментами:\n\nMLST 2.0\nSerotypeFinder 2.0\nKmerFinder 3.2\n\n\nОтримані результати додайте до презентації та порівняйте з власноруч отриманими результатами де це релевантно."
+    "text": "Sequencing principles\n\nIllumina Sequencing adapters"
   },
   {
     "objectID": "resources.html#bioinformatics-courses-trainings",
     "href": "resources.html#bioinformatics-courses-trainings",
-    "title": "Resourses",
+    "title": "Resources",
     "section": "Bioinformatics courses & Trainings",
-    "text": "Bioinformatics courses & Trainings\n\nIntroduction to computational biology by Mike Love\nApplied Computational Genomics By Aaron Quilan\nStructural and Functional Genomics Course\nSpeciation & Population Genomics: a how-to-guide\nБіоінформатика малих геномних варіантів (Youtube Genomics UA)\nIntroduction to Bioconductor in R - DataCamp ## Books\nГенетика Сиволоб\nМолекулярна біологія Сиволоб 2023\nModern Statistics for Modern Biology"
+    "text": "Bioinformatics courses & Trainings\n\nIntroduction to computational biology by Mike Love\nApplied Computational Genomics by Aaron Quinlan\nStructural and Functional Genomics Course\nSpeciation & Population Genomics: a how-to-guide\nБіоінформатика малих геномних варіантів (Youtube Genomics UA)\nIntroduction to Bioconductor in R - DataCamp ## Books\nГенетика Сиволоб\nМолекулярна біологія Сиволоб 2023\nModern Statistics for Modern Biology"
   },
   {
-    "objectID": "syllabus.html#week-711.11.2025",
-    "href": "syllabus.html#week-711.11.2025",
-    "title": "Syllabus",
-    "section": "Week 7(11.11.2025)",
-    "text": "Week 7(11.11.2025)\n\nTypes of Genetic Polymorphisms. SNPs, Indels, CNVs, Structural Variants\nPresentation: Google Slides"
-  },
-  {
-    "objectID": "syllabus.html#week-1-14.09.2026",
-    "href": "syllabus.html#week-1-14.09.2026",
-    "title": "Syllabus",
-    "section": "",
-    "text": "Intro to practical course. Strategy of analysis\n\n\n\nHW: install WSL, learning basic shell commands, make HW1_shell_commands task\nPresentation - Google Slides"
-  },
-  {
-    "objectID": "syllabus.html#week-2-21.09.2025",
-    "href": "syllabus.html#week-2-21.09.2025",
-    "title": "Syllabus",
-    "section": "Week 2 (21.09.2025)",
-    "text": "Week 2 (21.09.2025)\n\nSanger Sequencing. Design of primers for Sanger Sequencing. SnapGene"
-  },
-  {
-    "objectID": "syllabus.html#week-328.09.2026",
-    "href": "syllabus.html#week-328.09.2026",
-    "title": "Syllabus",
-    "section": "Week 3(28.09.2026)",
-    "text": "Week 3(28.09.2026)\n\nNGS analysis part 1. Library preparation, sample quality assessment, QC of reads(fastQC/multiQC)"
-  },
-  {
-    "objectID": "syllabus.html#week-405.10.2026",
-    "href": "syllabus.html#week-405.10.2026",
-    "title": "Syllabus",
-    "section": "Week 4(05.10.2026)",
-    "text": "Week 4(05.10.2026)\n\nNGS analysis part 2. Mapping reads to reference genome. SAM/BAM files. De novo assembly."
-  },
-  {
-    "objectID": "syllabus.html#week-512.10.2026",
-    "href": "syllabus.html#week-512.10.2026",
-    "title": "Syllabus",
-    "section": "Week 5(12.10.2026)",
-    "text": "Week 5(12.10.2026)\n\nNGS analysis part 3. Variant calling. VCF files. Annotation of variants"
-  },
-  {
-    "objectID": "syllabus.html#week-619.10.2026",
-    "href": "syllabus.html#week-619.10.2026",
-    "title": "Syllabus",
-    "section": "Week 6(19.10.2026)",
-    "text": "Week 6(19.10.2026)\n\nAnalysis of annotated VCF files.VEP.Fst.Tadjima’s D."
-  },
-  {
-    "objectID": "syllabus.html#week-726.10.2026",
-    "href": "syllabus.html#week-726.10.2026",
-    "title": "Syllabus",
-    "section": "Week 7(26.10.2026)",
-    "text": "Week 7(26.10.2026)\n\nTypes of Genetic Polymorphisms. SNPs, Indels, CNVs, Structural Variants"
-  },
-  {
-    "objectID": "syllabus.html#week-802.11.2026",
-    "href": "syllabus.html#week-802.11.2026",
-    "title": "Syllabus",
-    "section": "Week 8(02.11.2026)",
-    "text": "Week 8(02.11.2026)\n\nOxford Nanopore sequencing. Long reads. Applications."
-  },
-  {
-    "objectID": "syllabus.html#week-909.11.2026",
-    "href": "syllabus.html#week-909.11.2026",
-    "title": "Syllabus",
-    "section": "Week 9(09.11.2026)",
-    "text": "Week 9(09.11.2026)\n\nGuest Lecture"
-  },
-  {
-    "objectID": "syllabus.html#week-1016.11.2026",
-    "href": "syllabus.html#week-1016.11.2026",
-    "title": "Syllabus",
-    "section": "Week 10(16.11.2026)",
-    "text": "Week 10(16.11.2026)\n\nTBA"
-  },
-  {
-    "objectID": "syllabus.html#week-1123.11.2026",
-    "href": "syllabus.html#week-1123.11.2026",
-    "title": "Syllabus",
-    "section": "Week 11(23.11.2026)",
-    "text": "Week 11(23.11.2026)\n\nPresentation group’s results. Summary of the course"
+    "objectID": "resources.html#useful-links-opportunities-in-ukraine",
+    "href": "resources.html#useful-links-opportunities-in-ukraine",
+    "title": "Resources",
+    "section": "Useful Links / Opportunities in Ukraine",
+    "text": "Useful Links / Opportunities in Ukraine\n\nNGO Bioinformatics for Ukraine\nNGO GenomicsUA\nUBDS^3 Summer School\nCRABS Summer School\nUkrainian school in Evolutionary Biology\nOdesa Bio Summer School"
   }
 ]

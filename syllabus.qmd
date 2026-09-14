@@ -2,7 +2,7 @@
 title: "Syllabus"
 ---
 
-## Week 1 (23.09.2025)
+## Week 1 (14.09.2026)
 
 -   Intro to practical course. Strategy of analysis
 
@@ -12,54 +12,54 @@ title: "Syllabus"
 
 -   Presentation - [Google Slides](https://docs.google.com/presentation/d/1PRIB2bWGBoKb1OlVK-6dyEmj8xGSuaCg4YV7x72MTeA/edit?slide=id.p#slide=id.p)
 
-## Week 2 (30.09.2025)
+## Week 2 (21.09.2025)
 
 -   Sanger Sequencing. Design of primers for Sanger Sequencing. [SnapGene](https://www.snapgene.com/snapgene-viewer)
 
--   HW: Install SnapGene Viewer. Make [HW2_SnapGene task](/qmd/HW2_Sanger_SnapGene.qmd).
+<!-- -   HW: Install SnapGene Viewer. Make [HW2_SnapGene task](/qmd/HW2_Sanger_SnapGene.qmd). -->
 
--   Presentation - [Google Slides](https://docs.google.com/presentation/d/15XIOrtm3CwoUuHgWN01H-UV6W7iY7-5fMgWqJO3IFn4/edit?usp=sharing)
+<!-- -   Presentation - [Google Slides](https://docs.google.com/presentation/d/15XIOrtm3CwoUuHgWN01H-UV6W7iY7-5fMgWqJO3IFn4/edit?usp=sharing) -->
 
-## Week 3-4(07.10.2025-14.10.2025)
+## Week 3(28.09.2026)
 
 -   NGS analysis part 1. Library preparation, sample quality assessment, QC of reads(fastQC/multiQC)
 
--   HW: [Ecoli_Genome_Assembly_Part_1](qmd/HW3.Genome_Assembly.qmd)
+<!-- -   HW: [Ecoli_Genome_Assembly_Part_1](qmd/HW3.Genome_Assembly.qmd) -->
 
--   Presentation: [Google Slides](https://docs.google.com/presentation/d/1jJhFPur4iUgZYTLSmxUQPAx0JiWnFpeco5uT-WJJAoE/edit?usp=sharing), [DNA Purification&QC](https://drive.google.com/file/d/12y7v0vlOY82tfc5DDYumEpEF4ELF2UI5/view?usp=sharing)
+<!-- -   Presentation: [Google Slides](https://docs.google.com/presentation/d/1jJhFPur4iUgZYTLSmxUQPAx0JiWnFpeco5uT-WJJAoE/edit?usp=sharing), [DNA Purification&QC](https://drive.google.com/file/d/12y7v0vlOY82tfc5DDYumEpEF4ELF2UI5/view?usp=sharing) -->
 
-## Week 5(21.10.2025)
+## Week 4(05.10.2026)
 
 -   NGS analysis part 2. Mapping reads to reference genome. SAM/BAM files. De novo assembly.
--   Presentation: [Google Slides](https://docs.google.com/presentation/d/1DnwiXaZ2-g_ylStrPSO_FofjpP99LizGSNskZgrzQFo/edit?slide=id.p#slide=id.p)
-- [Test1](https://forms.gle/X91gpBF7Kemu57Lq8)
+<!-- -   Presentation: [Google Slides](https://docs.google.com/presentation/d/1DnwiXaZ2-g_ylStrPSO_FofjpP99LizGSNskZgrzQFo/edit?slide=id.p#slide=id.p) -->
+<!-- - [Test1](https://forms.gle/X91gpBF7Kemu57Lq8) -->
 
-## Week 6(28.10.2025)
+## Week 5(12.10.2026)
 
 -   NGS analysis part 3. Variant calling. VCF files. Annotation of variants
--   HW: [Ecoli_Genome_Assembly_Part_2](qmd/HW3.Genome_Assembly_Part_2_updated.qmd)
--   Presentation: [Google Slides](https://docs.google.com/presentation/d/1NyhgarYwe4h0ba1X6RU2AU5lOMGAertPuj_E1kTjo5M/edit?usp=sharing)
+<!-- -   HW: [Ecoli_Genome_Assembly_Part_2](qmd/HW3.Genome_Assembly_Part_2_updated.qmd) -->
+<!-- -   Presentation: [Google Slides](https://docs.google.com/presentation/d/1NyhgarYwe4h0ba1X6RU2AU5lOMGAertPuj_E1kTjo5M/edit?usp=sharing) -->
 
-## Week 7(04.11.2025)
+## Week 6(19.10.2026)
 
 -   Analysis of annotated VCF files.VEP.Fst.Tadjima's D.
--   Presentation:[Google Slides](https://docs.google.com/presentation/d/17XSWzw3bsfNZbTr5naQzfR4gZ5vkgYA-aLiA7bdn10o/edit?slide=id.g29d89553eed_0_16#slide=id.g29d89553eed_0_16)
+<!-- -   Presentation:[Google Slides](https://docs.google.com/presentation/d/17XSWzw3bsfNZbTr5naQzfR4gZ5vkgYA-aLiA7bdn10o/edit?slide=id.g29d89553eed_0_16#slide=id.g29d89553eed_0_16) -->
 
-## Week 7(11.11.2025)
+## Week 7(26.10.2026)
 
 -   Types of Genetic Polymorphisms. SNPs, Indels, CNVs, Structural Variants
--   Presentation: [Google Slides](https://docs.google.com/presentation/d/13M6hbFiviR-XhK61JRIr9q4udzad_1KpULmZk5LVKP8/edit?usp=sharing)
+<!-- -   Presentation: [Google Slides](https://docs.google.com/presentation/d/13M6hbFiviR-XhK61JRIr9q4udzad_1KpULmZk5LVKP8/edit?usp=sharing) -->
 
-## Week 9(18.11.2025)
+## Week 8(02.11.2026)
 
 -   Oxford Nanopore sequencing. Long reads. Applications.
--   Presentation: [Google Slides](https://docs.google.com/presentation/d/1GFkwqwKna9uiec4MrmYDCI-2OhFh-fz6IK5io4MbEwY/edit?usp=sharing)
+<!-- -   Presentation: [Google Slides](https://docs.google.com/presentation/d/1GFkwqwKna9uiec4MrmYDCI-2OhFh-fz6IK5io4MbEwY/edit?usp=sharing) -->
 
-## Week 10(25.11.2025)
+## Week 9(09.11.2026)
 
 -   Guest Lecture
 
-## Week 11(02.12.2025)
+## Week 10(16.11.2026)
 
 -   Presentation group's results. Summary of the course
-- Template of presentation - [Google Slides](https://docs.google.com/presentation/d/1y_OozXxONxVYAfu7k68_F-MTNjz7ekUS1Mb9qtOXUec/edit?slide=id.g311d8853ae9_0_32#slide=id.g311d8853ae9_0_32)
+<!-- - Template of presentation - [Google Slides](https://docs.google.com/presentation/d/1y_OozXxONxVYAfu7k68_F-MTNjz7ekUS1Mb9qtOXUec/edit?slide=id.g311d8853ae9_0_32#slide=id.g311d8853ae9_0_32) -->

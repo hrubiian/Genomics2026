@@ -502,5 +502,75 @@
     "title": "Syllabus",
     "section": "Week 7(11.11.2025)",
     "text": "Week 7(11.11.2025)\n\nTypes of Genetic Polymorphisms. SNPs, Indels, CNVs, Structural Variants\nPresentation: Google Slides"
+  },
+  {
+    "objectID": "syllabus.html#week-1-14.09.2026",
+    "href": "syllabus.html#week-1-14.09.2026",
+    "title": "Syllabus",
+    "section": "",
+    "text": "Intro to practical course. Strategy of analysis\n\n\n\nHW: install WSL, learning basic shell commands, make HW1_shell_commands task\nPresentation - Google Slides"
+  },
+  {
+    "objectID": "syllabus.html#week-2-21.09.2025",
+    "href": "syllabus.html#week-2-21.09.2025",
+    "title": "Syllabus",
+    "section": "Week 2 (21.09.2025)",
+    "text": "Week 2 (21.09.2025)\n\nSanger Sequencing. Design of primers for Sanger Sequencing. SnapGene"
+  },
+  {
+    "objectID": "syllabus.html#week-328.09.2026",
+    "href": "syllabus.html#week-328.09.2026",
+    "title": "Syllabus",
+    "section": "Week 3(28.09.2026)",
+    "text": "Week 3(28.09.2026)\n\nNGS analysis part 1. Library preparation, sample quality assessment, QC of reads(fastQC/multiQC)"
+  },
+  {
+    "objectID": "syllabus.html#week-405.10.2026",
+    "href": "syllabus.html#week-405.10.2026",
+    "title": "Syllabus",
+    "section": "Week 4(05.10.2026)",
+    "text": "Week 4(05.10.2026)\n\nNGS analysis part 2. Mapping reads to reference genome. SAM/BAM files. De novo assembly."
+  },
+  {
+    "objectID": "syllabus.html#week-512.10.2026",
+    "href": "syllabus.html#week-512.10.2026",
+    "title": "Syllabus",
+    "section": "Week 5(12.10.2026)",
+    "text": "Week 5(12.10.2026)\n\nNGS analysis part 3. Variant calling. VCF files. Annotation of variants"
+  },
+  {
+    "objectID": "syllabus.html#week-619.10.2026",
+    "href": "syllabus.html#week-619.10.2026",
+    "title": "Syllabus",
+    "section": "Week 6(19.10.2026)",
+    "text": "Week 6(19.10.2026)\n\nAnalysis of annotated VCF files.VEP.Fst.Tadjima’s D."
+  },
+  {
+    "objectID": "syllabus.html#week-726.10.2026",
+    "href": "syllabus.html#week-726.10.2026",
+    "title": "Syllabus",
+    "section": "Week 7(26.10.2026)",
+    "text": "Week 7(26.10.2026)\n\nTypes of Genetic Polymorphisms. SNPs, Indels, CNVs, Structural Variants"
+  },
+  {
+    "objectID": "syllabus.html#week-802.11.2026",
+    "href": "syllabus.html#week-802.11.2026",
+    "title": "Syllabus",
+    "section": "Week 8(02.11.2026)",
+    "text": "Week 8(02.11.2026)\n\nOxford Nanopore sequencing. Long reads. Applications."
+  },
+  {
+    "objectID": "syllabus.html#week-909.11.2026",
+    "href": "syllabus.html#week-909.11.2026",
+    "title": "Syllabus",
+    "section": "Week 9(09.11.2026)",
+    "text": "Week 9(09.11.2026)\n\nGuest Lecture"
+  },
+  {
+    "objectID": "syllabus.html#week-1016.11.2026",
+    "href": "syllabus.html#week-1016.11.2026",
+    "title": "Syllabus",
+    "section": "Week 10(16.11.2026)",
+    "text": "Week 10(16.11.2026)\n\nPresentation group’s results. Summary of the course"
   }
 ]

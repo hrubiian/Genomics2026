@@ -1,1 +1,1 @@
-To see content, please visit: https://hrubiian.github.io/Genomics2025/
+To see content, please visit: https://hrubiian.github.io/Genomics2026/

@@ -1,11 +1,11 @@
 ---
-title: "Genomics2025"
+title: "Genomics2026"
 ---
 
-Welcome to the **Structural and Functional Genomics** Fall 2025 practice course! Browse categories for finding required information:
+Welcome to the **Structural and Functional Genomics** Fall 2026 practice course! Browse categories for finding required information:
 
--   [Syllabus](syllabus.qmd)
+- [Syllabus](syllabus.qmd)
 
--   [Resources](resources.qmd)
+- [Resources](resources.qmd)
 
-    Join link [here](https://meet.google.com/mzr-xckt-fru)
+  Join link [here](https://meet.google.com/mzr-xckt-fru)

@@ -16,9 +16,9 @@ title: "Syllabus"
 
 - Sanger Sequencing. Design of primers for Sanger Sequencing. [SnapGene](https://www.snapgene.com/snapgene-viewer)
 
-<!-- -   HW: Install SnapGene Viewer. Make [HW2_SnapGene task](/qmd/HW2_Sanger_SnapGene.qmd). -->
+-   HW: Install SnapGene Viewer. Make [HW2_SnapGene task](/qmd/HW2_Sanger_SnapGene.qmd).
 
-<!-- -   Presentation - [Google Slides](https://docs.google.com/presentation/d/15XIOrtm3CwoUuHgWN01H-UV6W7iY7-5fMgWqJO3IFn4/edit?usp=sharing) -->
+-   Presentation - [Google Slides](https://docs.google.com/presentation/d/1hPudn3gnEG12q_c29gWemCXGA-GGDID75PyUds8dkgY/edit?usp=sharing)
 
 ## Week 3(28.09.2026)
 

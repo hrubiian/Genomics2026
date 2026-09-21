@@ -8,4 +8,3 @@ Welcome to the **Structural and Functional Genomics** Fall 2026 practice course!
 
 - [Resources](resources.qmd)
 
-  Join link [here](https://meet.google.com/mzr-xckt-fru)

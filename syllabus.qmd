@@ -24,9 +24,9 @@ title: "Syllabus"
 
 - NGS analysis part 1. Library preparation, sample quality assessment, QC of reads(fastQC/multiQC)
 
-<!-- -   HW: [Ecoli_Genome_Assembly_Part_1](qmd/HW3.Genome_Assembly.qmd) -->
+HW: [Ecoli_Genome_Assembly_Part_1](qmd/HW3.Genome_Assembly.qmd)
 
-<!-- -   Presentation: [Google Slides](https://docs.google.com/presentation/d/1jJhFPur4iUgZYTLSmxUQPAx0JiWnFpeco5uT-WJJAoE/edit?usp=sharing), [DNA Purification&QC](https://drive.google.com/file/d/12y7v0vlOY82tfc5DDYumEpEF4ELF2UI5/view?usp=sharing) -->
+Presentation: [Google Slides](https://docs.google.com/presentation/d/1GyUxdYE31nC8Qodwb91d1SyBe9FTNoGlAsW1STYnPq4/edit?usp=sharing), [DNA Purification&QC](https://drive.google.com/file/d/12y7v0vlOY82tfc5DDYumEpEF4ELF2UI5/view?usp=sharing)
 
 ## Week 4(05.10.2026)
 

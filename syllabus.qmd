@@ -30,7 +30,8 @@ Presentation: [Google Slides](https://docs.google.com/presentation/d/1GyUxdYE31n
 
 ## Week 4(05.10.2026)
 
-- NGS analysis part 2. Mapping reads to reference genome. SAM/BAM files. De novo assembly. <!-- -   Presentation: [Google Slides](https://docs.google.com/presentation/d/1DnwiXaZ2-g_ylStrPSO_FofjpP99LizGSNskZgrzQFo/edit?slide=id.p#slide=id.p) --> <!-- - [Test1](https://forms.gle/X91gpBF7Kemu57Lq8) -->
+- NGS analysis part 2. Mapping reads to reference genome. SAM/BAM files. De novo assembly. 
+Presentation: [Google Slides](https://docs.google.com/presentation/d/13Q5hAa-1P9XbVoqAQBpA4FgYXell1_kwvkNdJ1ufBCg/edit?usp=sharing) <!-- - [Test1](https://forms.gle/X91gpBF7Kemu57Lq8) -->
 
 ## Week 5(12.10.2026)
 

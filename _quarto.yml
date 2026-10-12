@@ -22,6 +22,8 @@ website:
         text: Syllabus
       - href: resources.qmd
         text: Resources
+      - href: AI_prompts.qmd
+        text: AI Prompts
       # - href: HomeWork.qmd
       #   text: HomeWork
 

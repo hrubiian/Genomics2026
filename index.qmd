@@ -8,3 +8,4 @@ Welcome to the **Structural and Functional Genomics** Fall 2026 practice course!
 
 - [Resources](resources.qmd)
 
+- [AI Prompts](AI_prompts.qmd) - промпти для вивчення геноміки з LLM та AI-агентами

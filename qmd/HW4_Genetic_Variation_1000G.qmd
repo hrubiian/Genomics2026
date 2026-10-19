@@ -1,0 +1,930 @@
+---
+title: "HW4. Генетична мінливість: інтерактивний практикум"
+author: "Nazarii Hrubiian"
+html-table-processing: none
+include-after-body: _interactive_helpers.html
+---
+
+```{=html}
+<style>
+.lab{--lab-bg:#f8fafc;--lab-line:#dde3ea;--ink:#1f2933;--ink2:#52606d;--ink3:#7b8794;
+  --s1:#2a78d6;--s2:#eb6834;--s3:#1baf7a;--good:#1f8a4c;--bad:#c62828;--warn:#b26a00;
+  --bA:#1f9d55;--bC:#2a6fd6;--bG:#d97b00;--bT:#d33a3a;
+  border:1px solid var(--lab-line);border-radius:10px;background:var(--lab-bg);
+  padding:16px 18px 18px;margin:1.25rem 0 2.25rem;color:var(--ink)}
+.lab .ttl{font-weight:600;font-size:1rem;margin:0 0 .75rem;color:var(--ink)}
+.lab .ttl small{font-weight:400;color:var(--ink3);margin-left:.4rem}
+.lab .ctl{display:flex;flex-wrap:wrap;gap:12px 22px;align-items:flex-end;margin-bottom:12px}
+.lab .ctl label{display:flex;flex-direction:column;gap:2px;font-size:.82rem;color:var(--ink2);min-width:170px;flex:1 1 170px;max-width:300px}
+.lab .ctl label b{color:var(--ink);font-variant-numeric:tabular-nums}
+.lab .ctl .btns{display:flex;flex-wrap:wrap;gap:6px}
+.lab canvas{display:block;width:100%;background:#fff;border:1px solid var(--lab-line);border-radius:6px}
+.lab .out{font-variant-numeric:tabular-nums;font-size:.92rem;margin-top:10px;line-height:1.55}
+.lab .grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
+.lab .grid2>*{min-width:0}
+.lab .pill{display:inline-block;padding:2px 10px;border-radius:999px;font-size:.82rem;font-weight:600;color:#fff}
+.lab .pill.p1{background:var(--s1)}.lab .pill.p2{background:var(--s2)}.lab .pill.p3{background:var(--s3)}
+.lab .pill.good{background:var(--good)}.lab .pill.bad{background:var(--bad)}.lab .pill.warn{background:var(--warn)}
+.lab .seq{font-family:SFMono-Regular,Menlo,Consolas,monospace;font-size:1rem;line-height:2;overflow-x:auto;white-space:nowrap;padding:4px 0}
+.lab .codon{display:inline-block;margin-right:7px;padding:0 2px;border-bottom:2px solid transparent}
+.lab .b{display:inline-block;width:1.25em;text-align:center;border-radius:3px;cursor:pointer;font-weight:600}
+.lab .b:hover{background:#e4ebf3}.lab .b.sel{outline:2px solid var(--ink);background:#fff}
+.lab .b.mut{background:#ffe9a8}
+.lab .bA{color:var(--bA)}.lab .bC{color:var(--bC)}.lab .bG{color:var(--bG)}.lab .bT{color:var(--bT)}
+.lab .aa{display:inline-block;min-width:2.4em;text-align:center;font-family:SFMono-Regular,Menlo,Consolas,monospace;font-size:.85rem;padding:2px 3px;margin:2px 3px 2px 0;border-radius:4px;background:#eef2f6}
+.lab .aa.diff{background:#ffe0d2;color:#9c2a00;font-weight:700}.lab .aa.stop{background:#1f2933;color:#fff}
+.lab table.mini{border-collapse:collapse;font-size:.88rem;font-variant-numeric:tabular-nums}
+.lab table.mini td,.lab table.mini th{padding:3px 10px;border-bottom:1px solid var(--lab-line);text-align:right}
+.lab table.mini th:first-child,.lab table.mini td:first-child{text-align:left}
+.lab .chrom{display:flex;gap:2px;flex-wrap:nowrap;overflow-x:auto;margin:6px 0}
+.lab .blk{min-width:30px;height:30px;display:flex;align-items:center;justify-content:center;font-weight:700;color:#fff;border-radius:4px;font-size:.85rem}
+.lab .blk.inv{transform:scaleX(-1)}
+.lab .hapcell{width:38px;height:30px;border-radius:4px;border:none;font-weight:700;color:#fff;cursor:pointer}
+.lab .hint{font-size:.82rem;color:var(--ink3);margin-top:6px}
+.lab input[type=number]{width:90px}
+.quiz .q{border-top:1px solid var(--lab-line);padding:12px 0}
+.quiz .q:first-child{border-top:none}
+.quiz .q p{margin:0 0 6px;font-weight:600}
+.quiz .opt{display:block;width:100%;text-align:left;margin:4px 0;padding:6px 10px;border:1px solid var(--lab-line);border-radius:6px;background:#fff;color:var(--ink)}
+.quiz .opt:hover:not([disabled]){border-color:var(--s1)}
+.quiz .opt.right{border-color:var(--good);background:#e6f4ea}
+.quiz .opt.wrong{border-color:var(--bad);background:#fdecea}
+.quiz .expl{font-size:.88rem;color:var(--ink2);margin-top:4px}
+.lab #m4seq{white-space:normal}
+.lab .seq .hint{font-family:inherit;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;white-space:normal}
+.lab .form-range::-webkit-slider-runnable-track{background:#cfd8e3}
+.lab .form-range::-moz-range-track{background:#cfd8e3}
+.lab button:focus-visible,.lab input:focus-visible{outline:2px solid var(--s1);outline-offset:2px}
+</style>
+```
+
+# Як працювати з цим практикумом
+
+Цей практикум замість команд у терміналі пропонує **інтерактивні моделі**. Кожен розділ відповідає слайду лекції [Типи генетичної мінливості](https://docs.google.com/presentation/d/1K9W07kr51umJofHRvLYKCYJ8g9X7BuDPzHIvh9OkoHU/edit?usp=sharing): короткий текст, панель, яку можна крутити, і питання **«Спробуйте»**. Рухайте повзунки, запускайте симуляції кілька разів і шукайте закономірності. Наприкінці є **тест для самоперевірки**.
+
+::: callout-tip
+## Що здати
+
+Скріншоти 4–5 панелей з вашими спостереженнями (одне–два речення до кожної) та результат тесту. Додайте їх до вашої презентації, як у попередніх завданнях.
+:::
+
+Продовження з моделями структури популяцій, F~ST~, PCA, коалесценту, Tajima's D, слідів відбору, GWAS та інбридингу — на сторінці [Популяційна геноміка: інтерактивні моделі](Population_Genomics_Interactive.qmd). Ще більше тем за підручником Pierce (гл. 24–26) — на сторінці [Еволюційна і кількісна генетика](Evolutionary_Genetics_Interactive.qmd).
+
+::: callout-note
+## Перш ніж почати
+
+Тут потрібні базові поняття: **ген, алель, генотип, гаплотип**, як утворюються гамети і як читати рядок VCF. Якщо щось із цього незнайоме, спершу пройдіть [Основи генетики](Genetics_Basics_Interactive.qmd) (≈ 30–40 хв), особливо розділи [2. Алелі](Genetics_Basics_Interactive.qmd#b-alleles), [3. Мейоз](Genetics_Basics_Interactive.qmd#b-meiosis), [5. Випадковість](Genetics_Basics_Interactive.qmd#b-chance) і [7. Від ДНК до VCF](Genetics_Basics_Interactive.qmd#b-vcf).
+
+Розділи позначено рівнями: [● Базовий]{.lvl .lvl1} [●● Середній]{.lvl .lvl2} [●●● Поглиблений]{.lvl .lvl3}. Почніть з базових, а поглиблені залиште на потім. Під кожним заголовком є блок **«Простими словами»** з аналогією. Терміни, підкреслені пунктиром, мають підказку: наведіть курсор або торкніться.
+:::
+
+# 1. Мутація ≠ поліморфізм
+
+[● Базовий рівень]{.lvl .lvl1}
+
+::: {.callout-tip collapse="true"}
+## Простими словами
+
+Уявіть, що хтось у місті почав говорити з новим рідкісним акцентом — це «мутація». Якщо так говорить кожен десятий, це вже звичайний «діалект», тобто поліморфізм. Сам варіант той самий; різниця лише в тому, у скількох людей він є.
+
+**Запам'ятайте:** мутацію від поліморфізму відрізняє лише частота (поріг 1 %).
+:::
+
+
+Різниця між ними — це **частота алеля в популяції**. Класичний поріг: алель з частотою **≥ 1 %** називають поліморфізмом, рідший — рідкісним варіантом (мутацією). Сьогодні частіше кажуть просто **«варіант»** і окремо вказують його частоту.
+
+```{=html}
+<div class="lab" id="m1">
+  <div class="ttl">1 000 хромосом у популяції <small>кожен квадрат — одна хромосома</small></div>
+  <div class="ctl">
+    <label>Частота альтернативного алеля: <b id="m1v"></b>
+      <input type="range" class="form-range" id="m1s" min="0" max="100" value="35"></label>
+    <div><span class="pill" id="m1pill"></span></div>
+  </div>
+  <canvas id="m1c"></canvas>
+  <div class="out" id="m1o"></div>
+</div>
+```
+
+**Спробуйте:** знайдіть частоту, за якої варіант стає поліморфізмом. Скільки копій рідкісного алеля (AF = 0,1 %) очікується у вибірці 1000 Genomes (2 504 людини = 5 008 хромосом)?
+
+# 2. Гаплотип і генотип
+
+[● Базовий рівень]{.lvl .lvl1}
+
+::: {.callout-tip collapse="true"}
+## Простими словами
+
+Ви отримали два томи однієї книги — від мами і від тата. Гаплотип — це текст одного тому. Генотип — це перелік варіантів слів, які у вас є взагалі, без інформації, у якому томі яке слово стоїть.
+
+**Запам'ятайте:** `0|1` — відомо, яка копія від кого; `0/1` — невідомо.
+:::
+
+
+Людина **диплоїдна**: одна копія кожної хромосоми від батька, друга — від матері. Набір алелів на одній хромосомі — це **гаплотип**. Генотип показує, які алелі є в кожному локусі, але не каже, на якій хромосомі вони лежать. У VCF це видно з запису: `0/1` — фаза невідома, `0|1` — фаза відома.
+
+```{=html}
+<div class="lab" id="m2">
+  <div class="ttl">Натискайте на алелі, щоб змінити гаплотипи</div>
+  <div style="overflow-x:auto">
+  <table class="mini" id="m2t"></table>
+  </div>
+  <div class="out" id="m2o"></div>
+</div>
+```
+
+**Спробуйте:** зробіть 1, 2, 3 і 4 гетерозиготні локуси. Як зростає кількість можливих пар гаплотипів? Чому для фазування потрібні тріо (батьки + дитина) або довгі ріди?
+
+# 3. Типи мінливості за розміром
+
+[● Базовий рівень]{.lvl .lvl1}
+
+::: {.callout-tip collapse="true"}
+## Простими словами
+
+Геном — як дуже довгий текст. Можна змінити одну літеру (SNV), дописати чи викреслити кілька літер (indel), а можна вирвати, скопіювати або перевернути цілу сторінку чи розділ (структурний варіант).
+
+**Запам'ятайте:** механізм подій той самий — різниця в масштабі; межа між indel і SV — 50 п.о.
+:::
+
+
+Однакова за механізмом подія (наприклад, делеція) може мати будь-який розмір: від 1 нуклеотиду до мільйонів. Від розміру залежить, як варіант називають і яким методом його можна знайти.
+
+```{=html}
+<div class="lab" id="m3">
+  <div class="ttl">Оберіть подію та її розмір</div>
+  <div class="ctl">
+    <label>Подія
+      <select class="form-select form-select-sm" id="m3type">
+        <option value="sub">Заміна</option>
+        <option value="ins">Інсерція</option>
+        <option value="del" selected>Делеція</option>
+        <option value="dup">Дуплікація</option>
+        <option value="inv">Інверсія</option>
+        <option value="tra">Транслокація</option>
+      </select></label>
+    <label>Розмір: <b id="m3v"></b>
+      <input type="range" class="form-range" id="m3s" min="0" max="7" step="0.05" value="0.6"></label>
+    <div><span class="pill" id="m3pill"></span></div>
+  </div>
+  <div id="m3nuc"></div>
+  <div id="m3blk"></div>
+  <div class="out" id="m3o"></div>
+</div>
+```
+
+**Спробуйте:** знайдіть межу, де indel стає структурним варіантом (SV). Які події змінюють кількість копій ДНК (CNV), а які — ні? Чому інверсію і збалансовану транслокацію важко побачити короткими рідами?
+
+# 4. Наслідки мутацій у кодуючій ділянці
+
+[● Базовий рівень]{.lvl .lvl1}
+
+::: {.callout-tip collapse="true"}
+## Простими словами
+
+Ген читається трилітерними «словами» — кодонами. Візьміть речення **ЦЕЙ КІТ БУВ ТАМ**. Заміна літери може не змінити змісту (синонімічна), змінити слово на інше (міссенс) або поставити «крапку» посеред речення (нонсенс). Якщо ж випала одна літера — **ЦЕК ІТБ УВТ АМ** — усі наступні слова зсуваються і текст стає безглуздим: це зсув рамки.
+
+**Запам'ятайте:** найруйнівніші — нонсенс і зсув рамки (LoF).
+:::
+
+
+Нижче — коротка кодуюча послідовність (CDS) гіпотетичного гена. Натисніть на будь-який нуклеотид, а потім замініть, вставте або видаліть його. Білок перекладається наживо за генетичним кодом, а панель визначає тип наслідку і записує варіант у номенклатурі **HGVS**.
+
+```{=html}
+<div class="lab" id="m4">
+  <div class="ttl">Редактор кодуючої послідовності</div>
+  <div class="seq" id="m4seq"></div>
+  <div class="ctl" style="margin-top:8px">
+    <div class="btns" id="m4btns"></div>
+    <button class="btn btn-sm btn-outline-secondary" id="m4reset">Скинути</button>
+  </div>
+  <div><b style="font-size:.85rem">Референсний білок</b><div id="m4ref"></div></div>
+  <div style="margin-top:6px"><b style="font-size:.85rem">Білок з варіантом</b><div id="m4alt"></div></div>
+  <div class="out" id="m4o"><span class="hint">Спочатку виберіть нуклеотид у послідовності.</span></div>
+</div>
+```
+
+::: {.callout-note collapse="true"}
+## Групи амінокислот (для консервативних і неконсервативних замін)
+
+-   **Неполярні:** G, A, V, L, I, M, P, F, W
+-   **Полярні незаряджені:** S, T, C, Y, N, Q
+-   **Позитивно заряджені:** K, R, H
+-   **Негативно заряджені:** D, E
+
+Заміна в межах групи — **консервативна** (часто м'якший ефект), між групами — **неконсервативна**.
+:::
+
+**Спробуйте отримати кожен тип:** synonymous (підказка: третя позиція кодону), консервативний і неконсервативний missense, nonsense (кодон TGG), frameshift, start lost і stop lost. Яка з цих подій найчастіше є loss-of-function? Чому вставка або делеція одного нуклеотиду завжди зсуває рамку, а делеція трьох — ні (див. розділ 3)?
+
+# 5. Транзиції та трансверсії
+
+[●● Середній рівень]{.lvl .lvl2}
+
+::: {.callout-tip collapse="true"}
+## Простими словами
+
+Основи ДНК — як дві пари схожих деталей: великі пурини (A, G) і малі піримідини (C, T). Замінити велику деталь на іншу велику (транзиція) хімічно легше, ніж велику на малу (трансверсія). Тому транзицій більше, хоча можливих трансверсій удвічі більше.
+
+**Запам'ятайте:** у людини Ts/Tv ≈ 2; значення близько 0,5 вказує на випадкові помилки.
+:::
+
+
+**Транзиції** — заміни в межах одного класу основ: пурин ↔ пурин (A ↔ G) або піримідин ↔ піримідин (C ↔ T). **Трансверсії** — між класами. Можливих трансверсій удвічі більше (8 проти 4), тож за випадкових замін Ts/Tv = 0,5. У геномі людини Ts/Tv ≈ 2,0–2,1, бо транзиції трапляються значно частіше (зокрема через дезамінування метильованого цитозину в CpG: C → T).
+
+```{=html}
+<div class="lab" id="m5">
+  <div class="ttl">Симуляція 2 000 замін</div>
+  <div class="ctl">
+    <label>У скільки разів транзиція ймовірніша за кожну трансверсію (κ): <b id="m5v"></b>
+      <input type="range" class="form-range" id="m5s" min="0" max="100" value="0"></label>
+    <div class="btns"><button class="btn btn-sm btn-primary" id="m5go">Згенерувати заміни</button></div>
+  </div>
+  <div class="grid2">
+    <canvas id="m5d"></canvas>
+    <canvas id="m5c"></canvas>
+  </div>
+  <div class="out" id="m5o"></div>
+</div>
+```
+
+**Спробуйте:** яке κ відповідає Ts/Tv ≈ 2,1 як у людини? Чому значно нижчий Ts/Tv у ваших викликаних варіантах сигналізує про помилки (випадкові помилки секвенування дають Ts/Tv ближче до 0,5)?
+
+# 6. Германні, соматичні та de novo мутації
+
+[● Базовий рівень]{.lvl .lvl1}
+
+::: {.callout-tip collapse="true"}
+## Простими словами
+
+Організм — як дерево копій одного документа. Помилка в оригіналі (зиготі) буде в усіх копіях і передасться дітям. Помилка в копії, зробленій для шкіри, залишиться лише в шкірі: діти «копіюються» з окремої гілки — зародкової лінії.
+
+**Запам'ятайте:** нащадкам передаються лише мутації в зародковій лінії.
+:::
+
+
+Розвиток організму — це дерево клітинних поділів. Натисніть на будь-яку клітину в дереві: мутація виникає в ній і передається **всім її нащадкам**. Клітини з золотою рамкою дають початок **зародковій лінії** (яйцеклітинам або сперматозоїдам).
+
+```{=html}
+<div class="lab" id="m6">
+  <div class="ttl">Дерево клітинних поділів <small>натисніть на клітину</small></div>
+  <canvas id="m6c"></canvas>
+  <div class="out" id="m6o"></div>
+  <hr>
+  <div class="ttl">Скільки de novo мутацій отримує дитина <small>наближена модель</small></div>
+  <div class="ctl">
+    <label>Вік батька при зачатті: <b id="m6fv"></b>
+      <input type="range" class="form-range" id="m6f" min="18" max="60" value="30"></label>
+    <label>Вік матері при зачатті: <b id="m6mv"></b>
+      <input type="range" class="form-range" id="m6m" min="18" max="45" value="30"></label>
+  </div>
+  <canvas id="m6b"></canvas>
+  <div class="out" id="m6bo"></div>
+  <div class="hint">Модель: ≈ 1,5 нової мутації на кожен рік віку батька і ≈ 0,4 на рік віку матері (за оцінками Jónsson et al., Nature 2017). Числа орієнтовні.</div>
+</div>
+```
+
+**Спробуйте:** де має виникнути мутація, щоб дитина отримала її в усіх клітинах? Що таке **мозаїцизм**? Чому більшість de novo мутацій мають батьківське (♂) походження?
+
+# 7. Дрейф генів і відбір
+
+[●● Середній рівень]{.lvl .lvl2}
+
+::: {.callout-tip collapse="true"}
+## Простими словами
+
+Візьміть мішечок з 50 червоними і 50 синіми кульками, витягніть 10 і з них зробіть новий мішечок. Через кілька таких «поколінь» частка кольорів зміниться просто випадково — це дрейф. Що менше кульок тягнете, то сильніше «блукає» частка. Відбір — це коли кульки одного кольору трохи частіше потрапляють у руку.
+
+**Запам'ятайте:** дрейф випадковий і сильніший у малих популяціях; відбір має напрямок.
+:::
+
+
+У кожному поколінні наступні 2N копій гена — це **випадкова вибірка** з попереднього покоління. Через це частота алеля «блукає» навіть без жодного відбору: це **дрейф генів**. Кожна лінія на графіку — окрема незалежна популяція.
+
+```{=html}
+<div class="lab" id="m7">
+  <div class="ttl">Модель Райта–Фішера, 20 популяцій, 200 поколінь</div>
+  <div class="ctl">
+    <label>Розмір популяції N: <b id="m7nv"></b>
+      <input type="range" class="form-range" id="m7n" min="1" max="3.3" step="0.01" value="1.7"></label>
+    <label>Початкова частота алеля p₀: <b id="m7pv"></b>
+      <input type="range" class="form-range" id="m7p" min="0.02" max="0.98" step="0.01" value="0.5"></label>
+    <label>Коефіцієнт відбору s: <b id="m7sv"></b>
+      <input type="range" class="form-range" id="m7s" min="-0.1" max="0.1" step="0.005" value="0"></label>
+    <div class="btns"><button class="btn btn-sm btn-primary" id="m7go">Запустити ще раз</button></div>
+  </div>
+  <canvas id="m7c"></canvas>
+  <div class="out" id="m7o"></div>
+</div>
+```
+
+**Спробуйте:** порівняйте N = 10 і N = 1 000. Як швидко алелі фіксуються або втрачаються? Поставте s = 0,02 (корисний алель) і p₀ = 0,05: чи завжди корисний алель перемагає в малій популяції? А у великій?
+
+# 8. Ефект вузького місця і ефект засновника
+
+[●● Середній рівень]{.lvl .lvl2}
+
+::: {.callout-tip collapse="true"}
+## Простими словами
+
+Вузьке місце — як пісочний годинник: з усього різноманіття крізь вузьку шийку проходить лише кілька піщинок, і далі популяція росте вже з них. Ефект засновника — як колекція марок, розпочата з пригорщі, взятої навмання з великого альбому: деякі рідкісні марки випадково стали у вас частими, а більшість не потрапила зовсім.
+
+**Запам'ятайте:** обидва ефекти зменшують різноманіття і випадково змінюють частоти.
+:::
+
+
+**Вузьке місце:** популяція різко скорочується (катастрофа), а потім знову зростає. **Ефект засновника:** невелика група відокремлюється і засновує нову популяцію (колонізація). В обох випадках нова популяція отримує лише **частину** генетичного різноманіття вихідної.
+
+```{=html}
+<div class="lab" id="m8">
+  <div class="ttl">Вузьке місце <small>20 алелів, частина з них рідкісні</small></div>
+  <div class="ctl">
+    <label>Розмір популяції у вузькому місці: <b id="m8nv"></b>
+      <input type="range" class="form-range" id="m8n" min="0.7" max="3.7" step="0.01" value="1.3"></label>
+    <label>Тривалість вузького місця, поколінь: <b id="m8tv"></b>
+      <input type="range" class="form-range" id="m8t" min="1" max="60" value="10"></label>
+    <div class="btns"><button class="btn btn-sm btn-primary" id="m8go">Запустити ще раз</button></div>
+  </div>
+  <div class="grid2">
+    <canvas id="m8a"></canvas>
+    <canvas id="m8b"></canvas>
+  </div>
+  <div class="out" id="m8o"></div>
+  <hr>
+  <div class="ttl">Ефект засновника</div>
+  <div class="ctl">
+    <label>Кількість засновників (осіб): <b id="m8kv"></b>
+      <input type="range" class="form-range" id="m8k" min="2" max="60" value="8"></label>
+    <div class="btns"><button class="btn btn-sm btn-primary" id="m8fgo">Заснувати нову колонію</button></div>
+  </div>
+  <canvas id="m8f"></canvas>
+  <div class="out" id="m8fo"></div>
+</div>
+```
+
+**Спробуйте:** яке вузьке місце сильніше зменшує гетерозиготність — коротке і дуже вузьке чи довге і помірне? Чому рідкісні алелі зникають першими? Заснуйте кілька колоній з 5 осіб: чи трапляється, що рідкісний алель стає в колонії частим? Так пояснюють високу частоту окремих спадкових хвороб в ізольованих популяціях (фінська популяція, аміші, євреї-ашкеназі).
+
+# 9. Закон Харді–Вайнберга
+
+[●● Середній рівень]{.lvl .lvl2}
+
+::: {.callout-tip collapse="true"}
+## Простими словами
+
+Якщо люди обирають партнерів незалежно від генів, діти утворюються як випадкові пари кульок з «мішка» алелів. Тоді частку генотипів можна передбачити лише з частот алелів: p², 2pq, q². Відхилення від цього — сигнал: схрещування не випадкове, вибірка змішана або є помилки генотипування.
+
+**Запам'ятайте:** частоти генотипів за HWE визначаються частотами алелів.
+:::
+
+
+Якщо частота алеля A дорівнює p, а алеля a — q = 1 − p, то в ідеальній популяції (велика, випадкове схрещування, без відбору, мутацій, міграції і дрейфу) генотипи розподіляються як **p² : 2pq : q²**, і цей розподіл встановлюється вже за **одне покоління** випадкового схрещування.
+
+Частота алеля рахується з кількостей генотипів: $p = \dfrac{2 N_{AA} + N_{Aa}}{2N}$.
+
+```{=html}
+<div class="lab" id="m9">
+  <div class="grid2">
+    <div>
+      <div class="ttl">Очікувані частоти генотипів</div>
+      <div class="ctl"><label>Частота алеля A (p): <b id="m9pv"></b>
+        <input type="range" class="form-range" id="m9p" min="0" max="1" step="0.01" value="0.3"></label></div>
+      <canvas id="m9c"></canvas>
+    </div>
+    <div>
+      <div class="ttl">Перевірка вибірки (χ²)</div>
+      <div class="ctl">
+        <label style="min-width:70px;flex:1 1 70px">AA <input type="number" class="form-control form-control-sm" id="m9AA" value="38" min="0"></label>
+        <label style="min-width:70px;flex:1 1 70px">Aa <input type="number" class="form-control form-control-sm" id="m9Aa" value="30" min="0"></label>
+        <label style="min-width:70px;flex:1 1 70px">aa <input type="number" class="form-control form-control-sm" id="m9aa" value="32" min="0"></label>
+      </div>
+      <div class="btns"><button class="btn btn-sm btn-outline-primary" id="m9mate">Одне покоління випадкового схрещування</button></div>
+      <div class="out" id="m9o"></div>
+    </div>
+  </div>
+  <hr>
+  <div class="ttl">Ефект Валунда: об'єднання двох популяцій</div>
+  <div class="ctl">
+    <label>p у популяції 1: <b id="m9w1v"></b><input type="range" class="form-range" id="m9w1" min="0" max="1" step="0.01" value="0.1"></label>
+    <label>p у популяції 2: <b id="m9w2v"></b><input type="range" class="form-range" id="m9w2" min="0" max="1" step="0.01" value="0.8"></label>
+  </div>
+  <div class="out" id="m9wo"></div>
+</div>
+```
+
+**Спробуйте:** за якого p частка гетерозигот максимальна і чому вона ніколи не перевищує 50 %? Введіть вибірку з нестачею гетерозигот і натисніть «Одне покоління випадкового схрещування». Розсуньте p двох популяцій: як змінюється нестача гетерозигот в об'єднаній вибірці?
+
+# 10. Кросинговер і сантиморгани
+
+[●● Середній рівень]{.lvl .lvl2}
+
+::: {.callout-tip collapse="true"}
+## Простими словами
+
+Перед утворенням гамети хромосоми від мами і тата «обмінюються шматками», як дві колоди карт, розрізані в одному місці й поміняні половинами. Що далі два гени один від одного, то частіше між ними буде розріз, і тим частіше вони розійдуться.
+
+**Запам'ятайте:** сантиморган — одиниця «відстані за ймовірністю розрізу»: 1 cM = 1 % за мейоз.
+:::
+
+
+Під час мейозу гомологічні хромосоми обмінюються ділянками (**кросинговер**). Якщо між двома локусами відбулася непарна кількість кросинговерів, гамета несе **рекомбінантний** гаплотип. **1 сантиморган (cM)** — це відстань, на якій імовірність рекомбінації за один мейоз становить 1 %.
+
+```{=html}
+<div class="lab" id="m10">
+  <div class="ctl">
+    <label>Генетична відстань між A і B: <b id="m10dv"></b>
+      <input type="range" class="form-range" id="m10d" min="0" max="150" value="20"></label>
+    <label>Частота рекомбінації в регіоні: <b id="m10rv"></b>
+      <input type="range" class="form-range" id="m10r" min="-1" max="1" step="0.01" value="0"></label>
+    <div class="btns">
+      <button class="btn btn-sm btn-primary" id="m10one">Один мейоз</button>
+      <button class="btn btn-sm btn-outline-primary" id="m10many">1 000 мейозів</button>
+      <button class="btn btn-sm btn-outline-secondary" id="m10clr">Очистити графік</button>
+    </div>
+  </div>
+  <div class="grid2">
+    <canvas id="m10m"></canvas>
+    <canvas id="m10c"></canvas>
+  </div>
+  <div class="out" id="m10o"></div>
+</div>
+```
+
+**Спробуйте:** для 1, 10, 50 і 100 cM запустіть по 1 000 мейозів і порівняйте частку рекомбінантів з прямою d/100. Чому частка рекомбінантів ніколи не перевищує 50 %? Як змінюється фізична відстань у Mb, якщо частота рекомбінації в регіоні висока (гаряча точка)?
+
+# 11. Нерівновага за зчепленням (LD)
+
+[●●● Поглиблений рівень]{.lvl .lvl3}
+
+::: {.callout-tip collapse="true"}
+## Простими словами
+
+Сусідні варіанти успадковуються «пакетом», бо розріз між ними трапляється рідко — як слова одного речення, які зазвичай копіюють разом. Тому, знаючи одне слово, можна вгадати сусіднє. З покоління в покоління рекомбінація поступово розбиває пакети.
+
+**Запам'ятайте:** r² показує, наскільки один SNP передбачає інший.
+:::
+
+
+Два SNP поруч на хромосомі утворюють 4 можливі гаплотипи: AB, Ab, aB, ab. Якщо алелі поєднуються випадково, $p_{AB} = p_A p_B$ (**рівновага за зчепленням**). Відхилення від цього — **нерівновага за зчепленням**: $D = p_{AB} - p_A p_B$. Нормовані міри: $D' = D / D_{max}$ та $r^2 = \dfrac{D^2}{p_A(1-p_A)\,p_B(1-p_B)}$.
+
+```{=html}
+<div class="lab" id="m11">
+  <div class="ctl">
+    <label>Частота алеля A: <b id="m11av"></b><input type="range" class="form-range" id="m11a" min="0.05" max="0.95" step="0.01" value="0.4"></label>
+    <label>Частота алеля B: <b id="m11bv"></b><input type="range" class="form-range" id="m11b" min="0.05" max="0.95" step="0.01" value="0.4"></label>
+    <label>D′ (сила зчеплення): <b id="m11dv"></b><input type="range" class="form-range" id="m11d" min="-1" max="1" step="0.01" value="0.9"></label>
+  </div>
+  <div class="grid2">
+    <div><canvas id="m11g"></canvas><div class="out" id="m11o"></div></div>
+    <div>
+      <div class="ctl"><label>Частота рекомбінації між SNP за мейоз (r): <b id="m11rv"></b>
+        <input type="range" class="form-range" id="m11r" min="-4" max="-0.31" step="0.01" value="-2"></label></div>
+      <canvas id="m11c"></canvas>
+      <div class="out" id="m11h"></div>
+    </div>
+  </div>
+</div>
+```
+
+**Спробуйте:** коли r² = 1, а коли D′ = 1, але r² малий (підказка: різні частоти алелів)? Чому для GWAS і імпутації генотипів важливий саме r²? Як швидко LD руйнується між SNP на відстані 1 cM (r = 0,01) і 0,01 cM (r = 0,0001)? Чому в африканських популяціях, давніших і без сильного вузького місця, LD спадає на коротших відстанях?
+
+# 12. Частотний спектр алелів (SFS)
+
+[●●● Поглиблений рівень]{.lvl .lvl3}
+
+::: {.callout-tip collapse="true"}
+## Простими словами
+
+Якщо порахувати, скільки разів трапляється кожен варіант, виявиться, що більшість варіантів рідкісні — «у одного-двох людей». Кожна нова мутація починає з однієї копії, і більшість так і лишаються рідкісними або зникають. Людство до того ж швидко зростало, тож нових рідкісних варіантів дуже багато.
+
+**Запам'ятайте:** найчисленніший клас варіантів — singletons.
+:::
+
+
+Якщо у вибірці n хромосом, варіант може бути присутній в 1, 2, …, n − 1 з них. Для нейтральних варіантів у популяції сталого розміру очікувана кількість сайтів з i копіями пропорційна **1/i**: найчисленніший клас — **singletons** (одна копія). У реальних людських даних рідкісних варіантів ще більше через стрімке зростання популяції за останні тисячоліття.
+
+```{=html}
+<div class="lab" id="m12">
+  <div class="ctl">
+    <label>Кількість хромосом у вибірці n: <b id="m12v"></b>
+      <input type="range" class="form-range" id="m12s" min="1" max="3.7" step="0.01" value="2"></label>
+  </div>
+  <canvas id="m12c"></canvas>
+  <div class="out" id="m12o"></div>
+</div>
+```
+
+**Спробуйте:** як змінюється частка рідкісних (AF < 1 %) варіантів, коли вибірка зростає від 20 до 5 000 хромосом? Чому для пошуку рідкісних патогенних варіантів потрібні великі бази (gnomAD)?
+
+# Тест для самоперевірки
+
+```{=html}
+<div class="lab quiz" id="quiz">
+  <div id="qbox"></div>
+  <div class="out" id="qscore"></div>
+  <button class="btn btn-sm btn-outline-secondary" id="qreset">Пройти ще раз</button>
+</div>
+
+<script>
+(function(){
+"use strict";
+const $=id=>document.getElementById(id);
+const redraws=[];
+const rnd=Math.random;
+const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+const f2=v=>v.toLocaleString('uk-UA',{maximumFractionDigits:2});
+const f3=v=>v.toLocaleString('uk-UA',{maximumFractionDigits:3});
+const pct=(v,d=1)=>(100*v).toLocaleString('uk-UA',{maximumFractionDigits:d})+' %';
+const C={ink:'#1f2933',ink2:'#52606d',ink3:'#7b8794',grid:'#e6ebf0',axis:'#a3adb8',s1:'#2a78d6',s2:'#eb6834',s3:'#1baf7a',good:'#1f8a4c',bad:'#c62828',gold:'#d4a017',
+  A:'#1f9d55',Cb:'#2a6fd6',G:'#d97b00',T:'#d33a3a',ref:'#c9d3dd'};
+const baseCol={A:C.A,C:C.Cb,G:C.G,T:C.T};
+
+function canvas(id,h){const c=$(id);c.style.width='100%';const w=Math.max(240,c.clientWidth||c.parentElement.clientWidth-2);const d=window.devicePixelRatio||1;
+  c.width=Math.round(w*d);c.height=Math.round(h*d);c.style.height=h+'px';const x=c.getContext('2d');x.setTransform(d,0,0,d,0,0);
+  x.clearRect(0,0,w,h);x.font='12px system-ui,-apple-system,Segoe UI,Roboto,sans-serif';return {x,w,h,c};}
+function niceTicks(a,b,n){const span=b-a||1;const s0=span/n;const m=Math.pow(10,Math.floor(Math.log10(s0)));const r=s0/m;
+  const st=(r<1.5?1:r<3?2:r<7?5:10)*m;const t=[];for(let v=Math.ceil(a/st-1e-9)*st;v<=b+1e-9;v+=st)t.push(+v.toFixed(10));return t;}
+function area(x,w,h,o){
+  const L=o.L??54,R=o.R??14,T=o.T??14,B=o.B??42;const W=w-L-R,H=h-T-B;
+  const xmin=o.xmin??0,xmax=o.xmax,ymin=o.ymin??0,ymax=o.ymax;
+  const sx=v=>L+(v-xmin)/(xmax-xmin)*W;
+  const sy=o.ylog?v=>T+H-(Math.log10(v)-Math.log10(ymin))/(Math.log10(ymax)-Math.log10(ymin))*H:v=>T+H-(v-ymin)/(ymax-ymin)*H;
+  x.lineWidth=1;
+  const yt=o.yt||(o.ylog?(()=>{const t=[];for(let e=Math.ceil(Math.log10(ymin));e<=Math.floor(Math.log10(ymax));e++)t.push(Math.pow(10,e));return t;})():niceTicks(ymin,ymax,o.yn||5));
+  for(const v of yt){const y=sy(v);x.strokeStyle=C.grid;x.beginPath();x.moveTo(L,y);x.lineTo(L+W,y);x.stroke();
+    x.fillStyle=C.ink2;x.textAlign='right';x.textBaseline='middle';x.fillText((o.yf||f2)(v),L-6,y);}
+  if(!o.noX){const xt=o.xt||niceTicks(xmin,xmax,o.xn||6);
+    for(const v of xt){x.fillStyle=C.ink2;x.textAlign='center';x.textBaseline='top';x.fillText((o.xf||f2)(v),sx(v),T+H+6);}}
+  x.strokeStyle=C.axis;x.beginPath();x.moveTo(L,T);x.lineTo(L,T+H);x.lineTo(L+W,T+H);x.stroke();
+  x.fillStyle=C.ink2;
+  if(o.xl){x.textAlign='center';x.textBaseline='bottom';x.fillText(o.xl,L+W/2,h-4);}
+  if(o.yl){x.save();x.translate(13,T+H/2);x.rotate(-Math.PI/2);x.textAlign='center';x.textBaseline='middle';x.fillText(o.yl,0,0);x.restore();}
+  return {sx,sy,L,T,W,H};
+}
+function line(x,pts,col,wd=2,dash){x.strokeStyle=col;x.lineWidth=wd;x.setLineDash(dash||[]);x.beginPath();pts.forEach((p,i)=>i?x.lineTo(p[0],p[1]):x.moveTo(p[0],p[1]));x.stroke();x.setLineDash([]);}
+function rrect(x,X,Y,W,H,r,col){r=Math.min(r,W/2,Math.abs(H)/2);x.fillStyle=col;x.beginPath();x.moveTo(X,Y+H);x.lineTo(X,Y+r);x.quadraticCurveTo(X,Y,X+r,Y);x.lineTo(X+W-r,Y);x.quadraticCurveTo(X+W,Y,X+W,Y+r);x.lineTo(X+W,Y+H);x.closePath();x.fill();}
+function binom(n,p){if(p<=0)return 0;if(p>=1)return n;if(n<=3000){let k=0;for(let i=0;i<n;i++)if(rnd()<p)k++;return k;}
+  const m=n*p,s=Math.sqrt(n*p*(1-p));let u=0,v=0;while(!u)u=rnd();while(!v)v=rnd();return clamp(Math.round(m+s*Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v)),0,n);}
+function poisson(l){const L=Math.exp(-l);let k=0,p=1;do{k++;p*=rnd();}while(p>L);return k-1;}
+function legend(x,items,X,Y,maxW){let cx=X,cy=Y;x.textBaseline='middle';x.textAlign='left';for(const [lab,col] of items){const iw=x.measureText(lab).width+19;if(maxW&&cx>X&&cx+iw>X+maxW){cx=X;cy+=17;}x.fillStyle=col;x.fillRect(cx,cy-5,14,10);x.fillStyle=C.ink2;x.fillText(lab,cx+19,cy);cx+=iw+19;}}
+
+/* ---------- 1. mutation vs polymorphism ---------- */
+(function(){
+  const vals=[];for(let i=0;i<=100;i++)vals.push(Math.pow(10,-3+i*(Math.log10(0.5)+3)/100));
+  const order=[...Array(1000).keys()].sort(()=>rnd()-.5);
+  function draw(){const af=vals[+$('m1s').value];$('m1v').textContent=(af*100<1?f3(af*100):f2(af*100))+' %';
+    const k=Math.round(af*1000);const H=200;const {x,w}=canvas('m1c',H);
+    const cols=50,rows=20,g=1.5;const cw=(w-20)/cols,ch=(H-20)/rows;
+    const set=new Set(order.slice(0,k));
+    for(let i=0;i<1000;i++){const r=Math.floor(i/cols),c=i%cols;x.fillStyle=set.has(i)?C.s2:C.ref;x.fillRect(10+c*cw+g/2,10+r*ch+g/2,cw-g,ch-g);}
+    const poly=af>=0.01;const pill=$('m1pill');pill.className='pill '+(poly?'p1':'p2');pill.textContent=poly?'поліморфізм (AF ≥ 1 %)':'рідкісний варіант (AF < 1 %)';
+    $('m1o').innerHTML=`Носіїв альтернативного алеля серед 1 000 хромосом: <b>${k}</b> (у середньому ${f2(af*1000)}). У вибірці 1000 Genomes (5 008 хромосом) очікується <b>${f2(af*5008)}</b> копій, у gnomAD (≈ 1,6 млн хромосом) — <b>${Math.round(af*1.6e6).toLocaleString('uk-UA')}</b>.`;}
+  $('m1s').addEventListener('input',draw);redraws.push(draw);
+})();
+
+/* ---------- 2. haplotype vs genotype ---------- */
+(function(){
+  const loci=[['A','G'],['C','T'],['G','A'],['T','C']];
+  const hap=[[0,1,0,0],[1,1,1,0]];
+  function render(){
+    let h='<tr><th></th>'+loci.map((l,i)=>`<th style="text-align:center">SNP ${i+1}<br><span style="font-weight:400;color:#7b8794">${l[0]}/${l[1]}</span></th>`).join('')+'</tr>';
+    ['Хромосома від батька','Хромосома від матері'].forEach((nm,r)=>{h+=`<tr><td>${nm}</td>`+loci.map((l,i)=>{const a=l[hap[r][i]];
+      return `<td style="text-align:center"><button class="hapcell" data-r="${r}" data-i="${i}" style="background:${baseCol[a]}" aria-label="${nm}, SNP ${i+1}: ${a}">${a}</button></td>`;}).join('')+'</tr>';});
+    h+='<tr><td>Генотип (фаза невідома)</td>'+loci.map((l,i)=>{const s=[hap[0][i],hap[1][i]].sort();return `<td style="text-align:center"><code>${s[0]}/${s[1]}</code></td>`;}).join('')+'</tr>';
+    h+='<tr><td>Фазований генотип</td>'+loci.map((l,i)=>`<td style="text-align:center"><code>${hap[0][i]}|${hap[1][i]}</code></td>`).join('')+'</tr>';
+    $('m2t').innerHTML=h;
+    $('m2t').querySelectorAll('.hapcell').forEach(b=>b.onclick=()=>{const r=+b.dataset.r,i=+b.dataset.i;hap[r][i]^=1;render();});
+    const het=loci.map((_,i)=>hap[0][i]!==hap[1][i]);const k=het.filter(Boolean).length;const pairs=k?Math.pow(2,k-1):1;
+    const hi=het.map((v,i)=>v?i:-1).filter(i=>i>=0);const list=[];
+    if(k){for(let m=0;m<pairs;m++){const a=[],b=[];loci.forEach((l,i)=>{if(!het[i]){a.push(l[hap[0][i]]);b.push(l[hap[0][i]]);}else{const j=hi.indexOf(i);const bit=j===0?0:(m>>(j-1))&1;a.push(l[bit]);b.push(l[1-bit]);}});list.push(a.join('')+' + '+b.join(''));}}
+    $('m2o').innerHTML=`Гетерозиготних локусів: <b>${k}</b>. Пар гаплотипів, що дають цей самий генотип: <b>${pairs}</b>${k>1?' (2<sup>'+k+'−1</sup>)':''}.`+(k?`<br>Можливі пари: ${list.map(s=>'<code>'+s+'</code>').join(', ')}`:' Особа гомозиготна за всіма локусами, фаза однозначна.')+`<br>Справжні гаплотипи: <code>${loci.map((l,i)=>l[hap[0][i]]).join('')}</code> (батько) і <code>${loci.map((l,i)=>l[hap[1][i]]).join('')}</code> (мати).`;
+  }
+  render();
+})();
+
+/* ---------- 3. variant types by size ---------- */
+(function(){
+  const ref='ATGCGTACCTGAAGTCCATGGCTAAGTTCGACGTTAGCCAGTATGCAC';
+  const blocks='ABCDEFGHIJ'.split('');const bcol=i=>`hsl(${205+i*14},55%,${42+(i%2)*8}%)`;
+  const fmtbp=v=>v<1000?Math.round(v)+' bp':v<1e6?f2(v/1000)+' kb':f2(v/1e6)+' Mb';
+  function blk(arr,extra=''){return '<div class="chrom">'+arr.map(b=>{if(typeof b==='string')return `<div class="blk" style="background:${bcol(b.charCodeAt(0)-65)}">${b}</div>`;
+    return `<div class="blk ${b.inv?'inv':''}" style="background:${b.c||bcol(b.l.charCodeAt(0)-65)};${b.o?'outline:3px solid #1f2933;outline-offset:-3px':''}">${b.l}</div>`;}).join('')+'</div>'+extra;}
+  function draw(){
+    const t=$('m3type').value;let size=t==='sub'?1:Math.round(Math.pow(10,+$('m3s').value));$('m3s').disabled=t==='sub';
+    $('m3v').textContent=fmtbp(size);
+    let cls,pc,notes=[];
+    if(t==='sub'){cls='SNV (однонуклеотидний варіант)';pc='p1';}
+    else if(t==='inv'||t==='tra'){cls='SV (збалансований)';pc='p3';notes.push('Кількість ДНК не змінюється, тож це не CNV. Межі події видно лише за ридами, що перетинають точки розриву (split/discordant reads), або довгими ридами.');}
+    else if(size<50){cls='indel (< 50 bp)';pc='p1';}
+    else {cls=(t==='del'||t==='dup')&&size>=1000?'SV + CNV':'SV (≥ 50 bp)';pc='p2';}
+    if((t==='del'||t==='dup')&&size>=1000)notes.push('Змінює кількість копій ділянки: це CNV (зазвичай від ≈ 1 kb). Видно за зміною покриття.');
+    if(t==='ins'&&size>=50)notes.push('Великі інсерції (наприклад, мобільні елементи Alu ≈ 300 bp, L1 до 6 kb) короткі ріди часто пропускають.');
+    if(size>=5e6&&t!=='sub')notes.push('Подія такого розміру видима навіть на каріотипі під мікроскопом.');
+    if(t==='del'&&size%3!==0&&size<50)notes.push('У кодуючій ділянці делеція, не кратна 3, зсуває рамку зчитування.');
+    if(t==='del'&&size%3===0&&size<50)notes.push('Кратна 3: у кодуючій ділянці рамка зчитування збережеться (in-frame).');
+    $('m3pill').className='pill '+pc;$('m3pill').textContent=cls;
+    // nucleotide view
+    let nuc='';
+    if(t==='sub'||((t==='ins'||t==='del'||t==='dup')&&size<=24)){
+      const p=12;const s=ref.split('');let alt;const col=ch=>`<span class="b${ch} b" style="cursor:default">${ch}</span>`;
+      const hl=chs=>`<span style="background:#ffe9a8;border-radius:3px">${chs.map(col).join('')}</span>`;
+      if(t==='sub'){alt=s.slice(0,p).map(col).join('')+hl(['A'])+s.slice(p+1).map(col).join('');}
+      else if(t==='del'){alt=s.slice(0,p).map(col).join('')+`<span style="color:#c62828;font-weight:700">${'−'.repeat(size)}</span>`+s.slice(p+size).map(col).join('');}
+      else if(t==='ins'){const ins='TTAGC'.repeat(5).slice(0,size).split('');alt=s.slice(0,p).map(col).join('')+hl(ins)+s.slice(p).map(col).join('');}
+      else {alt=s.slice(0,p+size).map(col).join('')+hl(s.slice(p,p+size))+s.slice(p+size).map(col).join('');}
+      nuc=`<div class="hint">Нуклеотидний рівень</div><div class="seq">REF ${s.map(col).join('')}<br>ALT ${alt}</div>`;
+    }
+    $('m3nuc').innerHTML=nuc;
+    // block view
+    let h='<div class="hint">Хромосомний рівень (кожен блок — ділянка)</div>'+blk(blocks);
+    if(t==='del')h+=blk(['A','B','C','D','G','H','I','J'],'<div class="hint">E–F видалено</div>');
+    if(t==='dup')h+=blk(['A','B','C','D',{l:'E',o:1},{l:'F',o:1},{l:'E',o:1},{l:'F',o:1},'G','H','I','J'],'<div class="hint">E–F подвоєно (тандемна дуплікація)</div>');
+    if(t==='ins')h+=blk(['A','B','C','D','E',{l:'X',c:'#eb6834'},{l:'Y',c:'#eb6834'},'F','G','H','I','J'],'<div class="hint">X–Y — нова вставлена послідовність</div>');
+    if(t==='inv')h+=blk(['A','B','C','D',{l:'F',inv:1,o:1},{l:'E',inv:1,o:1},'G','H','I','J'],'<div class="hint">E–F розвернуто на 180°</div>');
+    if(t==='tra'){h+='<div class="hint">Інша хромосома</div>'+'<div class="chrom">'+'KLMNOP'.split('').map(b=>`<div class="blk" style="background:#8a63c9">${b}</div>`).join('')+'</div>';
+      h+='<div class="hint">Після взаємної транслокації</div>'+blk(['A','B','C','D','E','F',{l:'O',c:'#8a63c9'},{l:'P',c:'#8a63c9'}])+'<div class="chrom">'+['K','L','M','N'].map(b=>`<div class="blk" style="background:#8a63c9">${b}</div>`).join('')+['G','H','I','J'].map((b,i)=>`<div class="blk" style="background:${bcol(6+i)}">${b}</div>`).join('')+'</div>';}
+    if(t==='sub')h='';
+    $('m3blk').innerHTML=h;
+    $('m3o').innerHTML=notes.map(n=>'• '+n).join('<br>');
+  }
+  $('m3type').addEventListener('change',draw);$('m3s').addEventListener('input',draw);draw();
+})();
+
+/* ---------- 4. coding consequences ---------- */
+const CODE=(()=>{const b='TCAG',a='FFLLSSSSYY**CC*WLLLLPPPPHHQQRRRRIIIMTTTTNNKKSSRRVVVVAAAADDEEGGGG';const m={};let n=0;for(const i of b)for(const j of b)for(const k of b)m[i+j+k]=a[n++];return m;})();
+const AA3={A:'Ala',R:'Arg',N:'Asn',D:'Asp',C:'Cys',Q:'Gln',E:'Glu',G:'Gly',H:'His',I:'Ile',L:'Leu',K:'Lys',M:'Met',F:'Phe',P:'Pro',S:'Ser',T:'Thr',W:'Trp',Y:'Tyr',V:'Val','*':'Ter'};
+const GRP={};'GAVLIMPFW'.split('').forEach(a=>GRP[a]='неполярна');'STCYNQ'.split('').forEach(a=>GRP[a]='полярна');'KRH'.split('').forEach(a=>GRP[a]='позитивна');'DE'.split('').forEach(a=>GRP[a]='негативна');
+(function(){
+  const CDS='ATGGCTAAAGAGCTGTGGCGTTTCGGACAATAA',UTR='GCTAAGTGATAGCAAGTGACCTGATCGA';
+  const REF=CDS+UTR;let sel=-1,alt=null,ev=null;
+  function tr(s){let p='';for(let i=0;i+3<=s.length;i+=3){const a=CODE[s.slice(i,i+3)];p+=a;if(a==='*')break;}return p;}
+  const refP=tr(REF);
+  function seqView(){const s=alt??REF;let h='';const cdsLen=CDS.length+(alt?alt.length-REF.length:0);
+    for(let i=0;i<s.length;i++){if(i%3===0)h+=`<span class="codon" style="${i>=cdsLen?'opacity:.45':''}">`;
+      const isMut=ev&&((ev.type==='sub'&&i===ev.pos)||(ev.type==='ins'&&i===ev.pos+1));
+      h+=`<span class="b b${s[i]}${i===sel?' sel':''}${isMut?' mut':''}" data-i="${i}" role="button" tabindex="0" aria-label="позиція ${i+1}: ${s[i]}">${s[i]}</span>`;
+      if(i%3===2||i===s.length-1)h+='</span>';}
+    $('m4seq').innerHTML=h+'<div class="hint">Кодони згруповано по 3. Сірим — 3′-нетрансльована ділянка (3′UTR) після стоп-кодону.</div>';
+    $('m4seq').querySelectorAll('.b').forEach(e=>{const f=()=>{if(alt){alt=null;ev=null;}sel=+e.dataset.i;if(sel>=REF.length)sel=REF.length-1;update();};e.onclick=f;e.onkeydown=k=>{if(k.key==='Enter'||k.key===' '){k.preventDefault();f();}};});}
+  function protView(p,ref,id){$(id).innerHTML=p.split('').map((a,i)=>`<span class="aa${a==='*'?' stop':''}${ref!==null&&ref[i]!==a?' diff':''}" title="${AA3[a]}">${i+1} ${AA3[a]}</span>`).join('')+(p.endsWith('*')?'':'<span class="aa">… без стоп-кодону</span>');}
+  function btns(){const b=$('m4btns');if(sel<0){b.innerHTML='';return;}const cur=REF[sel];
+    b.innerHTML=`<span style="font-size:.82rem;color:#52606d;align-self:center">Позиція c.${sel+1} (${cur}):</span>`+
+      'ACGT'.split('').filter(n=>n!==cur).map(n=>`<button class="btn btn-sm btn-outline-primary" data-a="sub" data-n="${n}">${cur}→${n}</button>`).join('')+
+      'ACGT'.split('').map(n=>`<button class="btn btn-sm btn-outline-secondary" data-a="ins" data-n="${n}">вставити ${n}</button>`).join('')+
+      `<button class="btn btn-sm btn-outline-danger" data-a="del">видалити ${cur}</button>`;
+    b.querySelectorAll('button').forEach(x=>x.onclick=()=>apply(x.dataset.a,x.dataset.n));}
+  function apply(a,n){const p=sel;if(a==='sub'){alt=REF.slice(0,p)+n+REF.slice(p+1);ev={type:'sub',pos:p,ref:REF[p],alt:n};}
+    if(a==='ins'){alt=REF.slice(0,p+1)+n+REF.slice(p+1);ev={type:'ins',pos:p,alt:n};}
+    if(a==='del'){alt=REF.slice(0,p)+REF.slice(p+1);ev={type:'del',pos:p,ref:REF[p]};}
+    update();}
+  function classify(){
+    const ap=tr(alt);const inCDS=ev.pos<CDS.length;let cls,col,hg='',expl='';
+    if(!inCDS){return {ap,cls:'варіант у 3′UTR',col:'p3',hg:ev.type==='sub'?`c.*${ev.pos-CDS.length+1}${ev.ref}>${ev.alt}`:'',expl:'Варіант поза кодуючою ділянкою: білок не змінюється, але 3′UTR впливає на стабільність мРНК і регуляцію (наприклад, сайти мікроРНК).'};}
+    const cpos=ev.pos+1;
+    if(ev.type==='sub')hg=`c.${cpos}${ev.ref}>${ev.alt}`;
+    if(ev.type==='del')hg=`c.${cpos}del${ev.ref}`;
+    if(ev.type==='ins')hg=`c.${cpos}_${cpos+1}ins${ev.alt}`;
+    let i=0;while(i<refP.length&&refP[i]===ap[i])i++;
+    const n=i+1,ra=refP[i],aa=ap[i];
+    if(ev.type!=='sub'){
+      if(ev.pos<3&&ap[0]!=='M'){return {ap,cls:'start lost',col:'bad',hg:hg+' (p.Met1?)',expl:'Зруйновано старт-кодон ATG: трансляція не почнеться в цьому місці.'};}
+      cls='frameshift';col='bad';
+      const st=ap.indexOf('*');const k=st>=0?st-i+1:'?';
+      hg+=i<refP.length?` (p.${AA3[ra]}${n}${aa?AA3[aa]:''}fsTer${k})`:'';
+      expl='Довжина зміни не кратна 3: рамка зчитування зсувається, після мутації всі кодони інші, і стоп-кодон з\'являється в новому місці. Це LoF-варіант.';
+      return {ap,cls,col,hg,expl};}
+    if(i>=refP.length&&ap.length===refP.length)return {ap,cls:'synonymous (silent)',col:'good',hg:hg+` (p.${AA3[refP[Math.floor(ev.pos/3)]]}${Math.floor(ev.pos/3)+1}=)`,expl:'Кодон змінився, але кодує ту саму амінокислоту (вироджений генетичний код). Найчастіше — у третій позиції кодону.'};
+    if(i===0&&ra==='M')return {ap,cls:'start lost',col:'bad',hg:hg+' (p.Met1?)',expl:'Старт-кодон ATG змінено: трансляція не почнеться в цьому місці. LoF-варіант.'};
+    if(aa==='*')return {ap,cls:'nonsense (stop gained)',col:'bad',hg:hg+` (p.${AA3[ra]}${n}Ter)`,expl:'Утворився передчасний стоп-кодон: білок обривається. Такі мРНК часто руйнуються (nonsense-mediated decay). LoF-варіант.'};
+    if(ra==='*')return {ap,cls:'stop lost',col:'warn',hg:hg+` (p.Ter${n}${AA3[aa]}ext)`,expl:'Стоп-кодон зник: трансляція продовжується в 3′UTR до наступного стоп-кодону, білок подовжується.'};
+    const cons=GRP[ra]===GRP[aa];
+    return {ap,cls:'missense, '+(cons?'консервативна':'неконсервативна'),col:cons?'p1':'p2',hg:hg+` (p.${AA3[ra]}${n}${AA3[aa]})`,
+      expl:`${AA3[ra]} (${GRP[ra]}) → ${AA3[aa]} (${GRP[aa]}). ${cons?'Обидві амінокислоти з однієї групи, ефект на білок часто м\'якший.':'Амінокислоти з різних груп: більший шанс порушити структуру чи функцію білка.'}`};
+  }
+  function update(){seqView();btns();protView(refP,null,'m4ref');
+    if(!alt){protView(refP,refP,'m4alt');if(sel>=0)$('m4o').innerHTML='<span class="hint">Оберіть заміну, вставку або делецію для позиції c.'+(sel+1)+'.</span>';return;}
+    const r=classify();protView(r.ap,refP,'m4alt');
+    $('m4o').innerHTML=`<span class="pill ${r.col}">${r.cls}</span> <code style="margin-left:6px">${r.hg}</code><div style="margin-top:6px">${r.expl}</div>`;}
+  $('m4reset').onclick=()=>{alt=null;ev=null;sel=-1;update();$('m4o').innerHTML='<span class="hint">Спочатку виберіть нуклеотид у послідовності.</span>';};
+  update();
+})();
+
+/* ---------- 5. Ts/Tv ---------- */
+(function(){
+  const kap=v=>Math.pow(10,v/50);let res=null;
+  function sim(){const k=kap(+$('m5s').value);const pts=4*k,ptv=8;const pTs=pts/(pts+ptv);let ts=0;for(let i=0;i<2000;i++)if(rnd()<pTs)ts++;res={ts,tv:2000-ts,k};draw();}
+  function draw(){const k=kap(+$('m5s').value);$('m5v').textContent=f2(k);
+    {const {x,w,h}=canvas('m5d',220);const P={A:[w*0.25,50],G:[w*0.75,50],C:[w*0.25,175],T:[w*0.75,175]};
+     const ed=[['A','G',1],['C','T',1],['A','C',0],['A','T',0],['G','C',0],['G','T',0]];
+     for(const [a,b,ts] of ed){x.strokeStyle=ts?C.s1:C.s2;x.lineWidth=ts?2+Math.min(8,k):2;x.beginPath();x.moveTo(...P[a]);x.lineTo(...P[b]);x.stroke();}
+     for(const n in P){x.fillStyle='#fff';x.beginPath();x.arc(...P[n],20,0,7);x.fill();x.strokeStyle=baseCol[n];x.lineWidth=3;x.stroke();x.fillStyle=baseCol[n];x.font='bold 18px system-ui';x.textAlign='center';x.textBaseline='middle';x.fillText(n,...P[n]);}
+     x.font='12px system-ui';x.fillStyle=C.ink2;x.textAlign='center';x.fillText('пурини',w/2,18);x.fillText('піримідини',w/2,212);
+     x.fillStyle=C.s1;x.fillText('транзиції',w/2,64);x.fillStyle=C.s2;x.fillText('трансверсії',w*0.34,112);}
+    const {x,w,h}=canvas('m5c',220);
+    if(!res){x.fillStyle=C.ink3;x.textAlign='center';x.fillText('Натисніть «Згенерувати заміни»',w/2,h/2);$('m5o').innerHTML='';return;}
+    const a=area(x,w,h,{xmin:0,xmax:2,ymin:0,ymax:2000,noX:true,yl:'кількість замін',B:30});
+    [['транзиції',res.ts,C.s1],['трансверсії',res.tv,C.s2]].forEach(([l,v,c],i)=>{const bw=a.W/2*0.5,X=a.L+a.W/4*(1+2*i)-bw/2;rrect(x,X,a.sy(v),bw,a.sy(0)-a.sy(v),4,c);x.fillStyle=C.ink;x.textAlign='center';x.textBaseline='bottom';x.fillText(v,X+bw/2,a.sy(v)-3);x.textBaseline='top';x.fillStyle=C.ink2;x.fillText(l,X+bw/2,a.T+a.H+6);});
+    const r=res.ts/res.tv;$('m5o').innerHTML=`Ts/Tv = <b>${f2(r)}</b> (теоретично для κ = ${f2(res.k)}: ${f2(res.k/2)}). ${r<0.8?'Близько до випадкових замін (0,5).':r>1.8&&r<2.5?'Близько до значення для геному людини (≈ 2,0–2,1).':''}`;}
+  $('m5s').addEventListener('input',()=>{draw();});$('m5go').onclick=sim;redraws.push(draw);
+})();
+
+/* ---------- 6. germline / somatic tree ---------- */
+(function(){
+  const D=5;let mut=null;const germ=new Set([22,23]);// leaves 0..31 at depth 5; leaves index among level 5
+  const names=['зигота','2 клітини','4 клітини','8 клітин','16 клітин','32 клітини (тканини)'];
+  let nodes=[];
+  function draw(){const {x,w,h}=canvas('m6c',250);nodes=[];const top=24,bot=h-40;
+    for(let d=0;d<=D;d++){const n=1<<d;for(let i=0;i<n;i++){const X=(i+0.5)*w/n,Y=top+d*(bot-top)/D;nodes.push({d,i,X,Y});}}
+    const isMut=(d,i)=>mut&&d>=mut.d&&(i>>(d-mut.d))===mut.i;
+    for(const nd of nodes)if(nd.d<D){for(const c of [0,1]){const ch=nodes.find(m=>m.d===nd.d+1&&m.i===nd.i*2+c);line(x,[[nd.X,nd.Y],[ch.X,ch.Y]],isMut(ch.d,ch.i)?C.s2:'#cfd6de',isMut(ch.d,ch.i)?2:1);}}
+    const r=Math.min(9,w/32/2-1);
+    for(const nd of nodes){const g=nd.d===D&&germ.has(nd.i);const rr=nd.d===D?r:9;x.beginPath();x.arc(nd.X,nd.Y,rr,0,7);x.fillStyle=isMut(nd.d,nd.i)?C.s2:'#fff';x.fill();x.lineWidth=g?3:1.5;x.strokeStyle=g?C.gold:'#8795a1';x.stroke();}
+    x.fillStyle=C.ink3;x.textAlign='left';x.textBaseline='middle';x.fillText(names[0],8,top);x.textAlign='left';x.fillText('тканини тіла (32 клітинні лінії)',8,h-14);
+    x.fillStyle=C.gold;x.textAlign='right';x.fillText('◯ зародкова лінія',w-8,h-14);
+    const leaves=32;let mf=0,mg=0;for(let i=0;i<leaves;i++){if(isMut(D,i)){mf++;if(germ.has(i))mg++;}}
+    let txt;if(!mut)txt='Натисніть на клітину, щоб внести мутацію.';
+    else{const fr=mf/leaves,gf=mg/germ.size,pt=gf*0.5;
+      const kind=mut.d===0?'<span class="pill p2">конституційна (германна / de novo у гаметі батьків)</span>':mg>0?'<span class="pill warn">мозаїцизм, у тому числі в зародковій лінії</span>':'<span class="pill p1">соматична</span>';
+      txt=`${kind}<br>Мутацію несуть <b>${pct(fr,0)}</b> клітин тіла. Імовірність передати її дитині: <b>${pct(pt,0)}</b>${mut.d===0?' (гетерозигота: половина гамет несе мутацію)':mg?' (мутацію несе лише частина гамет)':' (зародкова лінія не уражена)'}.`;}
+    $('m6o').innerHTML=txt;}
+  $('m6c').addEventListener('click',e=>{const b=$('m6c').getBoundingClientRect();const X=e.clientX-b.left,Y=e.clientY-b.top;let best=null,bd=1e9;
+    for(const nd of nodes){const dd=Math.hypot(nd.X-X,nd.Y-Y);if(dd<bd){bd=dd;best=nd;}}if(best&&bd<22){mut={d:best.d,i:best.i};draw();}});
+  function bar(){const fa=+$('m6f').value,ma=+$('m6m').value;$('m6fv').textContent=fa+' р.';$('m6mv').textContent=ma+' р.';
+    const pat=6+1.5*fa,mat=5+0.4*ma;const {x,w}=canvas('m6b',64);const max=110,L=10,W=w-20;const sx=v=>L+v/max*W;
+    rrect(x,sx(0),6,sx(pat)-sx(0),24,3,C.s1);rrect(x,sx(pat)+2,6,sx(pat+mat)-sx(pat)-2,24,3,C.s2);
+    legend(x,[['від батька',C.s1],['від матері',C.s2]],L,50);
+    $('m6bo').innerHTML=`≈ <b>${Math.round(pat+mat)}</b> de novo SNV у дитини: від батька ≈ <b>${Math.round(pat)}</b> (${pct(pat/(pat+mat),0)}), від матері ≈ <b>${Math.round(mat)}</b>.`;}
+  $('m6f').addEventListener('input',bar);$('m6m').addEventListener('input',bar);redraws.push(draw,bar);
+})();
+
+/* ---------- 7. drift & selection ---------- */
+(function(){
+  let runs=[];
+  function sim(){const N=Math.round(Math.pow(10,+$('m7n').value)),p0=+$('m7p').value,s=+$('m7s').value;runs=[];
+    for(let r=0;r<20;r++){let p=p0;const tr=[p];for(let g=0;g<200;g++){const ps=p*(1+s)/(1+p*s);p=binom(2*N,ps)/(2*N);tr.push(p);}runs.push(tr);}draw();}
+  function labels(){const N=Math.round(Math.pow(10,+$('m7n').value));$('m7nv').textContent=N.toLocaleString('uk-UA');$('m7pv').textContent=f2(+$('m7p').value);const s=+$('m7s').value;$('m7sv').textContent=(s>0?'+':'')+f3(s)+(s===0?' (нейтральний)':s>0?' (корисний)':' (шкідливий)');}
+  function draw(){labels();const {x,w,h}=canvas('m7c',280);const a=area(x,w,h,{xmin:0,xmax:200,ymin:0,ymax:1,xl:'покоління',yl:'частота алеля'});
+    const pal=['#2a78d6','#5b93dd','#3466a8','#7aa9e6','#1f5aa6'];
+    runs.forEach((tr,i)=>line(x,tr.map((p,g)=>[a.sx(g),a.sy(p)]),pal[i%5]+'cc',1.6));
+    const fx=runs.filter(t=>t[200]===1).length,ls=runs.filter(t=>t[200]===0).length;
+    const N=Math.round(Math.pow(10,+$('m7n').value));const s=+$('m7s').value;
+    $('m7o').innerHTML=`Через 200 поколінь: алель <b>зафіксувався</b> (частота 1) у <b>${fx}</b> з 20 популяцій, <b>втрачений</b> у <b>${ls}</b>, ще сегрегує у <b>${20-fx-ls}</b>. `+
+      (s===0?`Для нейтрального алеля ймовірність фіксації дорівнює p₀ = ${f2(+$('m7p').value)}. `:`4Ns = ${f2(4*N*s)}: ${Math.abs(4*N*s)<1?'дрейф сильніший за відбір.':'відбір домінує над дрейфом.'} `)+
+      `Середній час до фіксації нейтральної нової мутації ≈ 4N = ${(4*N).toLocaleString('uk-UA')} поколінь.`;}
+  let q7=0;['m7n','m7p','m7s'].forEach(id=>$(id).addEventListener('input',()=>{labels();cancelAnimationFrame(q7);q7=requestAnimationFrame(sim);}));$('m7go').onclick=sim;redraws.push(draw);sim();
+})();
+
+/* ---------- 8. bottleneck & founder ---------- */
+const NAL=20;const SRC=(()=>{const f=[];for(let i=1;i<=NAL;i++)f.push(1/Math.pow(i,1.3));const s=f.reduce((a,b)=>a+b);return f.map(v=>v/s);})();
+const alCol=i=>`hsl(${(i*137.5)%360},${55+(i%3)*10}%,${45+(i%2)*10}%)`;
+function multinom(n,p){const c=new Array(p.length).fill(0);const cum=[];let s=0;for(const v of p){s+=v;cum.push(s);}for(let i=0;i<n;i++){const u=rnd()*s;let lo=0,hi=cum.length-1;while(lo<hi){const m=(lo+hi)>>1;if(cum[m]<u)lo=m+1;else hi=m;}c[lo]++;}return c;}
+(function(){
+  const N0=5000,G=160,start=20;let out=null;
+  function sizes(){const Nb=Math.round(Math.pow(10,+$('m8n').value)),tb=+$('m8t').value;const Ns=[];
+    for(let g=0;g<=G;g++){if(g<start)Ns.push(N0);else if(g<start+tb)Ns.push(Nb);else{const k=g-start-tb;Ns.push(Math.round(Math.min(N0,Nb*Math.pow(1.3,k+1))));}}return Ns;}
+  function sim(){const Ns=sizes();let p=SRC.slice();const H=[],A=[],He=[];let he=1-SRC.reduce((a,v)=>a+v*v,0);
+    for(let g=0;g<=G;g++){const h=1-p.reduce((a,v)=>a+v*v,0);H.push(h);A.push(p.filter(v=>v>0).length);He.push(he);
+      const n=2*Ns[g];const c=multinom(n,p);p=c.map(v=>v/n);he*=1-1/(2*Ns[g]);}
+    out={Ns,H,A,He};draw();}
+  function draw(){const Nb=Math.round(Math.pow(10,+$('m8n').value)),tb=+$('m8t').value;$('m8nv').textContent=Nb.toLocaleString('uk-UA')+' осіб';$('m8tv').textContent=tb;if(!out)return;
+    {const {x,w,h}=canvas('m8a',250);const a=area(x,w,h,{xmin:0,xmax:G,ymin:1,ymax:10000,ylog:true,xl:'покоління',yl:'розмір популяції N',yf:v=>v.toLocaleString('uk-UA')});
+      line(x,out.Ns.map((v,g)=>[a.sx(g),a.sy(Math.max(1,v))]),C.ink2,2);}
+    const {x,w,h}=canvas('m8b',250);const a=area(x,w,h,{T:48,xmin:0,xmax:G,ymin:0,ymax:1,xl:'покоління',yl:'гетерозиготність H'});
+    line(x,out.He.map((v,g)=>[a.sx(g),a.sy(v)]),C.s2,2,[5,4]);line(x,out.H.map((v,g)=>[a.sx(g),a.sy(v)]),C.s1,2);
+    legend(x,[['симуляція',C.s1],['очікування H·(1−1/2N)',C.s2]],a.L,12,w-a.L-10);
+    const h0=out.H[0],h1=out.H[G];
+    $('m8o').innerHTML=`Гетерозиготність: <b>${f2(h0)}</b> → <b>${f2(h1)}</b> (втрачено ${pct(1-h1/h0,0)}). Алелів збереглося: <b>${out.A[G]}</b> з ${NAL}. Після відновлення чисельності втрачені алелі <b>не повертаються</b>: їх можуть дати лише нові мутації або міграція.`;}
+  let q8=0;['m8n','m8t'].forEach(id=>$(id).addEventListener('input',()=>{cancelAnimationFrame(q8);q8=requestAnimationFrame(sim);}));$('m8go').onclick=sim;redraws.push(draw);sim();
+  let col=null;
+  function found(){const k=+$('m8k').value;const c=multinom(2*k,SRC);col=c.map(v=>v/(2*k));fdraw();}
+  function fdraw(){const k=+$('m8k').value;$('m8kv').textContent=k+' (= '+2*k+' хромосом)';if(!col)return;
+    const {x,w,h}=canvas('m8f',260);const mx=Math.max(...SRC,...col);const a=area(x,w,h,{xmin:0,xmax:NAL,ymin:0,ymax:Math.ceil(mx*10)/10,noX:true,yl:'частота алеля',yf:v=>pct(v,0),B:34,T:34});
+    const bw=a.W/NAL;for(let i=0;i<NAL;i++){const X=a.L+i*bw;rrect(x,X+2,a.sy(SRC[i]),bw/2-3,a.sy(0)-a.sy(SRC[i]),3,'#b9c4cf');if(col[i]>0)rrect(x,X+bw/2,a.sy(col[i]),bw/2-3,a.sy(0)-a.sy(col[i]),3,C.s2);
+      x.fillStyle=C.ink3;x.textAlign='center';x.textBaseline='top';x.fillText(i+1,X+bw/2,a.T+a.H+5);}
+    legend(x,[['вихідна популяція','#b9c4cf'],['нова колонія',C.s2]],a.L,12,w-a.L-10);
+    const lost=col.filter(v=>v===0).length;const enr=col.map((v,i)=>v/SRC[i]).map((r,i)=>[r,i]).filter(([r,i])=>SRC[i]<0.03&&r>=3);
+    $('m8fo').innerHTML=`Втрачено алелів: <b>${lost}</b> з ${NAL}. `+(enr.length?`Рідкісні у вихідній популяції алелі стали частішими щонайменше втричі: <b>${enr.map(([r,i])=>'№'+(i+1)+' ('+pct(SRC[i])+' → '+pct(col[i])+')').join(', ')}</b>.`:'Жоден рідкісний алель не став помітно частішим. Спробуйте ще раз.');}
+  $('m8k').addEventListener('input',found);$('m8fgo').onclick=found;redraws.push(fdraw);found();
+})();
+
+/* ---------- 9. HWE ---------- */
+(function(){
+  function curve(){const p=+$('m9p').value;$('m9pv').textContent=f2(p);const {x,w,h}=canvas('m9c',270);const a=area(x,w,h,{xmin:0,xmax:1,ymin:0,ymax:1,xl:'частота алеля A (p)',yl:'частота генотипу',T:48});
+    const xs=[...Array(101).keys()].map(i=>i/100);
+    line(x,xs.map(v=>[a.sx(v),a.sy(v*v)]),C.s1);line(x,xs.map(v=>[a.sx(v),a.sy(2*v*(1-v))]),C.s3);line(x,xs.map(v=>[a.sx(v),a.sy((1-v)*(1-v))]),C.s2);
+    x.strokeStyle=C.axis;x.setLineDash([3,3]);x.beginPath();x.moveTo(a.sx(p),a.T);x.lineTo(a.sx(p),a.T+a.H);x.stroke();x.setLineDash([]);
+    [[p*p,C.s1],[2*p*(1-p),C.s3],[(1-p)*(1-p),C.s2]].forEach(([v,c])=>{x.beginPath();x.arc(a.sx(p),a.sy(v),5,0,7);x.fillStyle=c;x.fill();x.strokeStyle='#fff';x.lineWidth=2;x.stroke();});
+    legend(x,[[`AA = p² = ${f2(p*p)}`,C.s1],[`Aa = 2pq = ${f2(2*p*(1-p))}`,C.s3],[`aa = q² = ${f2((1-p)**2)}`,C.s2]],a.L,12,w-a.L-10);}
+  function chi(){const AA=Math.max(0,+$('m9AA').value||0),Aa=Math.max(0,+$('m9Aa').value||0),aa=Math.max(0,+$('m9aa').value||0);const N=AA+Aa+aa;if(!N){$('m9o').textContent='Введіть кількості.';return;}
+    const p=(2*AA+Aa)/(2*N),q=1-p;const E=[p*p*N,2*p*q*N,q*q*N],O=[AA,Aa,aa];let c2=0;for(let i=0;i<3;i++)if(E[i]>0)c2+=(O[i]-E[i])**2/E[i];
+    const pv=erfc(Math.sqrt(c2/2));const ok=pv>=0.05;
+    $('m9o').innerHTML=`<div>p = (2·${AA} + ${Aa}) / (2·${N}) = <b>${f3(p)}</b>, q = <b>${f3(q)}</b></div>
+      <table class="mini" style="margin:6px 0"><tr><th></th><th>AA</th><th>Aa</th><th>aa</th></tr><tr><td>Спостережено</td>${O.map(v=>`<td>${v}</td>`).join('')}</tr><tr><td>Очікувано</td>${E.map(v=>`<td>${f2(v)}</td>`).join('')}</tr></table>
+      χ² = <b>${f2(c2)}</b> (1 ступінь свободи), p-value = <b>${pv<0.001?'< 0,001':f3(pv)}</b> <span class="pill ${ok?'good':'bad'}">${ok?'узгоджується з HWE':'відхилення від HWE'}</span>${!ok&&O[1]<E[1]?' — нестача гетерозигот':!ok?' — надлишок гетерозигот':''}`;}
+  function erfc(z){const t=1/(1+0.5*z);const r=t*Math.exp(-z*z-1.26551223+t*(1.00002368+t*(0.37409196+t*(0.09678418+t*(-0.18628806+t*(0.27886807+t*(-1.13520398+t*(1.48851587+t*(-0.82215223+t*0.17087277)))))))));return z>=0?r:2-r;}
+  $('m9mate').onclick=()=>{const AA=+$('m9AA').value||0,Aa=+$('m9Aa').value||0,aa=+$('m9aa').value||0;const N=AA+Aa+aa;const p=(2*AA+Aa)/(2*N);
+    const nAA=Math.round(p*p*N),nAa=Math.round(2*p*(1-p)*N);$('m9AA').value=nAA;$('m9Aa').value=nAa;$('m9aa').value=N-nAA-nAa;chi();};
+  ['m9AA','m9Aa','m9aa'].forEach(id=>$(id).addEventListener('input',chi));
+  function wah(){const p1=+$('m9w1').value,p2=+$('m9w2').value;$('m9w1v').textContent=f2(p1);$('m9w2v').textContent=f2(p2);const pb=(p1+p2)/2;
+    const obs=(2*p1*(1-p1)+2*p2*(1-p2))/2,exp=2*pb*(1-pb);
+    $('m9wo').innerHTML=`Об'єднана вибірка (порівну з обох популяцій): p̄ = ${f2(pb)}. Гетерозигот спостерігається <b>${pct(obs)}</b>, а за HWE для p̄ очікується <b>${pct(exp)}</b>. Нестача гетерозигот: <b>${pct(exp-obs)}</b> = 2·Var(p) = ${f3(2*((p1-p2)/2)**2)}. Кожна популяція окремо при цьому може бути в рівновазі.`;}
+  $('m9p').addEventListener('input',curve);['m9w1','m9w2'].forEach(id=>$(id).addEventListener('input',wah));redraws.push(curve);chi();wah();
+})();
+
+/* ---------- 10. crossing over & cM ---------- */
+(function(){
+  let last=null;const pts=[];
+  const rate=()=>Math.pow(10,+$('m10r').value);
+  function meiosis(d){const k=poisson(d/100);const xs=[];for(let i=0;i<k;i++)xs.push(rnd()*d);xs.sort((a,b)=>a-b);const s=rnd()<0.5?0:1;return {xs,s,rec:k%2===1};}
+  function labels(){const d=+$('m10d').value;$('m10dv').textContent=d+' cM';const r=rate();$('m10rv').textContent=f2(r)+' cM/Mb';
+    $('m10o').innerHTML=`За формулою Голдейна (без інтерференції) частка рекомбінантів r = ½(1 − e<sup>−2d/100</sup>) = <b>${pct(0.5*(1-Math.exp(-2*d/100)))}</b>. При ${f2(r)} cM/Mb ця відстань відповідає ≈ <b>${f2(d/r)} Mb</b> (${Math.round(d/r*1e6).toLocaleString('uk-UA')} п.о.).`+(last?`<br>Останній мейоз: кросинговерів між A і B — <b>${last.xs.length}</b>, гамета <span class="pill ${last.rec?'p2':'p1'}">${last.rec?'рекомбінантна':'нерекомбінантна'}</span>`:'');}
+  function drawM(){const {x,w,h}=canvas('m10m',250);const d=+$('m10d').value;const L=40,R=w-30;const span=Math.max(d,1);const sx=v=>L+v/span*(R-L);
+    const yP=40,yM=105,yG=190;
+    const bar=(y,col)=>{x.fillStyle=col;x.beginPath();x.roundRect?x.roundRect(L-10,y-9,R-L+20,18,9):x.rect(L-10,y-9,R-L+20,18);x.fill();};
+    bar(yP,C.s1);bar(yM,C.s2);
+    x.fillStyle=C.ink2;x.textAlign='left';x.textBaseline='bottom';x.fillText('хромосома від батька',L-10,yP-12);x.textBaseline='top';x.fillText('хромосома від матері',L-10,yM+12);x.textBaseline='bottom';x.fillText('гамета',L-10,yG-12);
+    if(last){let cur=last.s;let pos=0;const segs=[];for(const c of last.xs){segs.push([pos,c,cur]);cur^=1;pos=c;}segs.push([pos,span,cur]);
+      for(const [a,b,s] of segs){x.fillStyle=s?C.s2:C.s1;x.fillRect(sx(a),yG-9,Math.max(1,sx(b)-sx(a)),18);}
+      for(const c of last.xs){x.strokeStyle=C.ink;x.lineWidth=1.5;x.beginPath();x.moveTo(sx(c),yP+9);x.lineTo(sx(c),yM-9);x.stroke();x.beginPath();x.moveTo(sx(c)-5,(yP+yM)/2-5);x.lineTo(sx(c)+5,(yP+yM)/2+5);x.moveTo(sx(c)+5,(yP+yM)/2-5);x.lineTo(sx(c)-5,(yP+yM)/2+5);x.stroke();}}
+    else{x.strokeStyle='#cfd6de';x.setLineDash([4,4]);x.strokeRect(L,yG-9,R-L,18);x.setLineDash([]);x.fillStyle=C.ink3;x.textAlign='center';x.textBaseline='middle';x.fillText('натисніть «Один мейоз»',(L+R)/2,yG);}
+    for(const [v,lab] of [[0,'A'],[span,'B']]){x.fillStyle=C.ink;x.font='bold 13px system-ui';x.textAlign='center';x.textBaseline='top';x.fillText(lab,sx(v),yG+14);x.font='12px system-ui';
+      x.strokeStyle=C.ink;x.lineWidth=2;[yP,yM,yG].forEach(y=>{x.beginPath();x.moveTo(sx(v),y-11);x.lineTo(sx(v),y+11);x.stroke();});}
+    x.fillStyle=C.ink2;x.textAlign='center';x.textBaseline='top';x.fillText(d+' cM',(sx(0)+sx(span))/2,yG+14);}
+  function drawC(){const {x,w,h}=canvas('m10c',250);const a=area(x,w,h,{T:48,xmin:0,xmax:150,ymin:0,ymax:0.8,xl:'відстань d, cM',yl:'частка рекомбінантів',yf:v=>pct(v,0)});
+    const xs=[...Array(151).keys()];line(x,xs.filter(d=>d<=80).map(d=>[a.sx(d),a.sy(d/100)]),C.ink3,1.5,[5,4]);line(x,xs.map(d=>[a.sx(d),a.sy(0.5*(1-Math.exp(-2*d/100)))]),C.s1,2);
+    for(const [d,r] of pts){x.beginPath();x.arc(a.sx(d),a.sy(r),5,0,7);x.fillStyle=C.s2;x.fill();x.strokeStyle='#fff';x.lineWidth=2;x.stroke();}
+    legend(x,[['d / 100',C.ink3],['Голдейн',C.s1],['ваші 1 000 мейозів',C.s2]],a.L,12,w-a.L-10);}
+  $('m10one').onclick=()=>{last=meiosis(+$('m10d').value);drawM();labels();};
+  $('m10many').onclick=()=>{const d=+$('m10d').value;let r=0;for(let i=0;i<1000;i++)if(meiosis(d).rec)r++;pts.push([d,r/1000]);drawC();};
+  $('m10clr').onclick=()=>{pts.length=0;drawC();};
+  $('m10d').addEventListener('input',()=>{last=null;drawM();labels();});$('m10r').addEventListener('input',labels);
+  redraws.push(drawM,drawC);labels();
+})();
+
+/* ---------- 11. LD ---------- */
+(function(){
+  function calc(){const pA=+$('m11a').value,pB=+$('m11b').value,Dp=+$('m11d').value;const qA=1-pA,qB=1-pB;
+    const Dmax=Dp>=0?Math.min(pA*qB,qA*pB):Math.min(pA*pB,qA*qB);const D=Dp*Dmax;
+    const h={AB:pA*pB+D,Ab:pA*qB-D,aB:qA*pB-D,ab:qA*qB+D};const r2=D*D/(pA*qA*pB*qB);return {pA,pB,Dp,D,h,r2};}
+  function draw(){const s=calc();$('m11av').textContent=f2(s.pA);$('m11bv').textContent=f2(s.pB);$('m11dv').textContent=f2(s.Dp);
+    const keys=['AB','Ab','aB','ab'];const fr=keys.map(k=>Math.max(0,s.h[k])*100);const base=fr.map(Math.floor);let rem=100-base.reduce((a,b)=>a+b);
+    fr.map((v,i)=>[v-base[i],i]).sort((a,b)=>b[0]-a[0]).slice(0,rem).forEach(([_,i])=>base[i]++);
+    const seq=[];keys.forEach((k,i)=>{for(let j=0;j<base[i];j++)seq.push(k);});
+    const {x,w,h}=canvas('m11g',190);const cols=20,cw=(w-16)/cols,ch=34;
+    seq.forEach((k,i)=>{const r=Math.floor(i/cols),c=i%cols;const X=8+c*cw,Y=8+r*ch;x.fillStyle=k[0]==='A'?C.s1:'#c9d3dd';x.fillRect(X+1,Y,cw/2-1.5,ch-6);x.fillStyle=k[1]==='B'?C.s2:'#e3e8ee';x.fillRect(X+cw/2+.5,Y,cw/2-1.5,ch-6);});
+    legend(x,[['алель A',C.s1],['алель B',C.s2]],8,h-8);
+    $('m11o').innerHTML=`<table class="mini"><tr><th>Гаплотип</th>${keys.map(k=>`<th>${k}</th>`).join('')}</tr><tr><td>частота</td>${keys.map(k=>`<td>${f3(Math.max(0,s.h[k]))}</td>`).join('')}</tr><tr><td>якщо незалежні</td>${keys.map(k=>`<td>${f3((k[0]==='A'?s.pA:1-s.pA)*(k[1]==='B'?s.pB:1-s.pB))}</td>`).join('')}</tr></table>
+      D = <b>${f3(s.D)}</b>, D′ = <b>${f2(s.Dp)}</b>, r² = <b>${f2(s.r2)}</b>. ${s.r2>0.8?'Один SNP добре передбачає інший: достатньо генотипувати один (tag-SNP).':Math.abs(s.Dp)>0.9&&s.r2<0.5?'D′ високий, але r² низький: зчеплення повне, проте частоти алелів різні, тож один SNP погано передбачає інший.':''}<div class="hint">Кожна пара смужок — одна з 100 хромосом: ліва частина — SNP 1, права — SNP 2.</div>`;
+    const r=Math.pow(10,+$('m11r').value);$('m11rv').textContent=r<0.01?r.toExponential(1).replace('e-','·10^-'):f3(r);
+    const c=canvas('m11c',230);const G=Math.min(5000,Math.max(50,Math.ceil(3/r)));const a=area(c.x,c.w,c.h,{xmin:0,xmax:G,ymin:0,ymax:Math.max(0.05,Math.abs(s.D)*1.05),xl:'покоління',yl:'|D|',yf:f3,xf:v=>v.toLocaleString('uk-UA')});
+    const pts=[];for(let i=0;i<=100;i++){const g=G*i/100;pts.push([a.sx(g),a.sy(Math.abs(s.D)*Math.pow(1-r,g))]);}line(c.x,pts,C.s1);
+    const half=Math.log(2)/-Math.log(1-r);$('m11h').innerHTML=`|D| зменшується вдвічі за ≈ <b>${Math.round(half).toLocaleString('uk-UA')}</b> поколінь (≈ ${Math.round(half*25).toLocaleString('uk-UA')} років при 25 роках на покоління).`;}
+  ['m11a','m11b','m11d','m11r'].forEach(id=>$(id).addEventListener('input',draw));redraws.push(draw);
+})();
+
+/* ---------- 12. SFS ---------- */
+(function(){
+  function draw(){const n=Math.round(Math.pow(10,+$('m12s').value));$('m12v').textContent=n.toLocaleString('uk-UA');
+    let an=0;for(let i=1;i<n;i++)an+=1/i;const sh=i=>(1/i)/an;const K=Math.min(n-1,30);
+    const {x,w,h}=canvas('m12c',260);const a=area(x,w,h,{T:34,xmin:0,xmax:K,ymin:0,ymax:Math.ceil(sh(1)*20)/20,noX:true,xl:'кількість копій алеля у вибірці (i)',yl:'частка сайтів',yf:v=>pct(v,0)});
+    const bw=a.W/K;for(let i=1;i<=K;i++){const X=a.L+(i-1)*bw;const isR=i/n<0.01;rrect(x,X+1,a.sy(sh(i)),Math.max(1,bw-2),a.sy(0)-a.sy(sh(i)),3,isR?C.s2:C.s1);
+      if(K<=30&&(i<=10||i%5===0)){x.fillStyle=C.ink2;x.textAlign='center';x.textBaseline='top';x.fillText(i,X+bw/2,a.T+a.H+5);}}
+    legend(x,[['рідкісні (AF < 1 %)',C.s2],['AF ≥ 1 %',C.s1]],a.L,12,w-a.L-10);
+    let rare=0,low=0;for(let i=1;i<n;i++){if(i/n<0.01)rare+=sh(i);else if(i/n<0.05)low+=sh(i);}
+    $('m12o').innerHTML=`Singletons: <b>${pct(sh(1))}</b> сайтів. Рідкісні (AF < 1 %): <b>${pct(rare)}</b>; низькочастотні (1–5 %): <b>${pct(low)}</b>; часті (≥ 5 %): <b>${pct(1-rare-low)}</b>. Показано перші ${K} класів.${n<100?' За n < 100 жоден варіант у вибірці не може мати AF < 1 %, окрім відсутніх.':''}`;}
+  $('m12s').addEventListener('input',draw);redraws.push(draw);
+})();
+
+/* ---------- quiz ---------- */
+(function(){
+  const Q=[
+   ['Варіант має частоту 0,3 % у популяції. Як його класично називають?',['поліморфізм','рідкісний варіант (мутація)','структурний варіант','CNV'],1,'Поріг поліморфізму — 1 %. 0,3 % < 1 %, тож це рідкісний варіант.'],
+   ['Людина гетерозиготна за 3 SNP, фаза невідома. Скільки пар гаплотипів сумісні з її генотипом?',['3','4','6','8'],1,'2^(k−1) = 2² = 4 пари гаплотипів.'],
+   ['Делеція довжиною 120 bp — це…',['SNV','indel < 50 bp','структурний варіант (SV)','транслокація'],2,'Варіанти ≥ 50 bp класифікують як структурні.'],
+   ['Кодон GAG (Glu) змінився на GAA (Glu). Тип наслідку:',['missense','synonymous','nonsense','frameshift'],1,'Амінокислота та сама: синонімічна (silent) заміна.'],
+   ['Кодон TGG (Trp) змінився на TGA. Тип наслідку:',['synonymous','missense','nonsense (stop gained)','stop lost'],2,'TGA — стоп-кодон: білок обривається.'],
+   ['Делеція 2 нуклеотидів у середині кодуючої ділянки спричиняє…',['in-frame делецію','зсув рамки зчитування','синонімічну заміну','stop lost'],1,'2 не кратне 3: рамка зчитування зсувається.'],
+   ['Яким було б Ts/Tv, якби всі 12 типів замін були рівноймовірні?',['0,5','1','2','3'],0,'4 транзиції проти 8 трансверсій: 4/8 = 0,5.'],
+   ['Мутація виникла в клітині шкіри дорослої людини. Чи передасться вона дітям?',['так, завжди','з імовірністю 50 %','ні, це соматична мутація','лише синам'],2,'Соматичні мутації не потрапляють у гамети.'],
+   ['У якій популяції дрейф генів змінює частоти алелів найшвидше?',['N = 10 000','N = 1 000','N = 20','швидкість не залежить від N'],2,'Дисперсія зміни частоти за покоління = pq/2N: чим менше N, тим сильніший дрейф.'],
+   ['Чим ефект засновника відрізняється від ефекту вузького місця?',['засновник — це відбір, вузьке місце — дрейф','засновник виникає через колонізацію невеликою групою, вузьке місце — через скорочення наявної популяції','вони не пов\'язані з дрейфом','засновник збільшує різноманіття'],1,'Обидва — приклади дрейфу; різниця в механізмі: колонізація проти катастрофи.'],
+   ['Частота алеля p = 0,2. Яка очікувана частка гетерозигот за HWE?',['0,04','0,16','0,32','0,64'],2,'2pq = 2 · 0,2 · 0,8 = 0,32.'],
+   ['Ви об\'єднали вибірки з двох популяцій з дуже різними частотами алеля. Що покаже тест HWE?',['надлишок гетерозигот','нестачу гетерозигот','ідеальну рівновагу','нічого не зміниться'],1,'Ефект Валунда: в об\'єднаній вибірці гетерозигот менше, ніж очікується за середньою частотою.'],
+   ['Яка ймовірність рекомбінації між локусами на відстані 1 cM за один мейоз?',['≈ 0,1 %','≈ 1 %','≈ 10 %','≈ 50 %'],1,'Це визначення сантиморгана.'],
+   ['r² між двома SNP дорівнює 1. Що це означає?',['SNP незалежні','знаючи алель одного SNP, можна точно передбачити алель іншого','SNP лежать на різних хромосомах','D = 0'],1,'Повна кореляція: такі SNP взаємозамінні як tag-SNP у GWAS.'],
+   ['Чому у великих вибірках (gnomAD, 1000 Genomes) більшість варіантів рідкісні?',['через помилки секвенування','більшість мутацій молоді, а популяція людей стрімко зросла','через відбір на користь рідкісних алелів','через рекомбінацію'],1,'Нейтральний SFS ∝ 1/i, а зростання популяції ще збільшує частку рідкісних варіантів.']
+  ];
+  let ans=new Array(Q.length).fill(null);
+  function render(){$('qbox').innerHTML=Q.map((q,i)=>`<div class="q" id="q${i}"><p>${i+1}. ${q[0]}</p>${q[1].map((o,j)=>`<button class="opt" data-q="${i}" data-o="${j}">${o}</button>`).join('')}<div class="expl" id="qe${i}"></div></div>`).join('');
+    $('qbox').querySelectorAll('.opt').forEach(b=>b.onclick=()=>pick(+b.dataset.q,+b.dataset.o));score();}
+  function pick(i,j){if(ans[i]!==null)return;ans[i]=j;const q=Q[i];document.querySelectorAll(`#q${i} .opt`).forEach((b,k)=>{b.disabled=true;if(k===q[2])b.classList.add('right');else if(k===j)b.classList.add('wrong');});
+    $('qe'+i).innerHTML=(j===q[2]?'<b style="color:#1f8a4c">Правильно.</b> ':'<b style="color:#c62828">Неправильно.</b> ')+q[3];score();}
+  function score(){const done=ans.filter(v=>v!==null).length,ok=ans.filter((v,i)=>v===Q[i][2]).length;
+    $('qscore').innerHTML=done<Q.length?`Відповіли на ${done} з ${Q.length} питань.`:`<span class="pill ${ok>=12?'good':ok>=8?'warn':'bad'}">Результат: ${ok} з ${Q.length}</span> ${ok>=12?'Чудово!':ok>=8?'Непогано. Перегляньте розділи з помилками.':'Поверніться до розділів, де були помилки, і пограйтеся з панелями ще раз.'}`;}
+  $('qreset').onclick=()=>{ans=new Array(Q.length).fill(null);render();};render();
+})();
+
+let rt;window.addEventListener('resize',()=>{clearTimeout(rt);rt=setTimeout(()=>redraws.forEach(f=>f()),150);});
+redraws.forEach(f=>f());
+})();
+</script>
+```

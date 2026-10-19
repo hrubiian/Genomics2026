@@ -1,0 +1,1233 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Nazarii Hrubiian">
+
+<title>Основи генетики: з чого почати – Structural and Functional Genomics</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-5f534768425a2c127c96e39e26e01c38.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../iht-logo-100.png" alt="" class="navbar-logo light-content">
+    <img src="../iht-logo-100.png" alt="" class="navbar-logo dark-content">
+    </a>
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Structural and Functional Genomics</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../syllabus.html"> 
+<span class="menu-text">Syllabus</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../resources.html"> 
+<span class="menu-text">Resources</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../AI_prompts.html"> 
+<span class="menu-text">AI Prompts</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Інтерактив</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-">    
+        <li>
+    <a class="dropdown-item" href="../qmd/Genetics_Basics_Interactive.html">
+ <span class="dropdown-text">0. Основи генетики (почніть звідси)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../qmd/HW4_Genetic_Variation_1000G.html">
+ <span class="dropdown-text">1. Типи генетичної мінливості (HW4)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../qmd/Population_Genomics_Interactive.html">
+ <span class="dropdown-text">2. Популяційна геноміка</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../qmd/Evolutionary_Genetics_Interactive.html">
+ <span class="dropdown-text">3. Еволюційна і кількісна генетика</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#навіщо-ця-сторінка" id="toc-навіщо-ця-сторінка" class="nav-link active" data-scroll-target="#навіщо-ця-сторінка">Навіщо ця сторінка</a></li>
+  <li><a href="#b-zoom" id="toc-b-zoom" class="nav-link" data-scroll-target="#b-zoom">1. Від клітини до однієї «літери» ДНК</a></li>
+  <li><a href="#b-alleles" id="toc-b-alleles" class="nav-link" data-scroll-target="#b-alleles">2. Алель, генотип і фенотип</a></li>
+  <li><a href="#b-meiosis" id="toc-b-meiosis" class="nav-link" data-scroll-target="#b-meiosis">3. Мейоз: як утворюються гамети</a></li>
+  <li><a href="#b-cross" id="toc-b-cross" class="nav-link" data-scroll-target="#b-cross">4. Схрещування: решітка Пеннета і випадковість</a></li>
+  <li><a href="#b-chance" id="toc-b-chance" class="nav-link" data-scroll-target="#b-chance">5. Випадковість і розмір вибірки</a></li>
+  <li><a href="#b-pool" id="toc-b-pool" class="nav-link" data-scroll-target="#b-pool">6. Від родини до популяції: «мішок» алелів</a></li>
+  <li><a href="#b-vcf" id="toc-b-vcf" class="nav-link" data-scroll-target="#b-vcf">7. Від прочитаної ДНК до рядка VCF</a></li>
+  <li><a href="#b-glossary" id="toc-b-glossary" class="nav-link" data-scroll-target="#b-glossary">Глосарій</a></li>
+  <li><a href="#b-quiz" id="toc-b-quiz" class="nav-link" data-scroll-target="#b-quiz">Тест для самоперевірки</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Основи генетики: з чого почати</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Nazarii Hrubiian </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<style>
+.lab{--lab-bg:#f8fafc;--lab-line:#dde3ea;--ink:#1f2933;--ink2:#52606d;--ink3:#7b8794;
+  --s1:#2a78d6;--s2:#eb6834;--s3:#1baf7a;--good:#1f8a4c;--bad:#c62828;--warn:#b26a00;
+  border:1px solid var(--lab-line);border-radius:10px;background:var(--lab-bg);
+  padding:16px 18px 18px;margin:1.25rem 0 2.25rem;color:var(--ink)}
+.lab .ttl{font-weight:600;font-size:1rem;margin:0 0 .75rem;color:var(--ink)}
+.lab .ttl small{font-weight:400;color:var(--ink3);margin-left:.4rem}
+.lab .ctl{display:flex;flex-wrap:wrap;gap:12px 22px;align-items:flex-end;margin-bottom:12px}
+.lab .ctl label{display:flex;flex-direction:column;gap:2px;font-size:.82rem;color:var(--ink2);min-width:170px;flex:1 1 170px;max-width:300px}
+.lab .ctl label b{color:var(--ink);font-variant-numeric:tabular-nums}
+.lab .btns{display:flex;flex-wrap:wrap;gap:6px}
+.lab canvas{display:block;width:100%;background:#fff;border:1px solid var(--lab-line);border-radius:6px}
+.lab .out{font-variant-numeric:tabular-nums;font-size:.92rem;margin-top:10px;line-height:1.55}
+.lab .grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px}
+.lab .grid2>*{min-width:0}
+.lab .pill{display:inline-block;padding:2px 10px;border-radius:999px;font-size:.82rem;font-weight:600;color:#fff}
+.lab .pill.p1{background:var(--s1)}.lab .pill.p2{background:var(--s2)}.lab .pill.p3{background:var(--s3)}
+.lab .pill.good{background:var(--good)}.lab .pill.bad{background:var(--bad)}.lab .pill.warn{background:var(--warn)}
+.lab .hint{font-size:.82rem;color:var(--ink3);margin-top:6px}
+.lab .form-range::-webkit-slider-runnable-track{background:#cfd8e3}
+.lab .form-range::-moz-range-track{background:#cfd8e3}
+.lab .step-note{background:#fff;border:1px solid var(--lab-line);border-left:4px solid var(--s1);border-radius:6px;padding:10px 12px;margin-top:10px;font-size:.92rem;line-height:1.55}
+.lab .chrrow{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:6px 0}
+.lab .chrbar{flex:1 1 220px;height:30px;border-radius:15px;position:relative;min-width:0}
+.lab .chrbar.m{background:#f6c9b3}.lab .chrbar.f{background:#bcd6f5}
+.lab .allele{position:absolute;left:55%;top:-6px;height:42px;min-width:84px;border-radius:8px;border:2px solid #1f2933;background:#fff;font-weight:700;font-size:.85rem;cursor:pointer;padding:0 8px}
+.lab .allele.alt{background:#c62828;color:#fff;border-color:#8e1b1b}
+.lab .pun{display:grid;grid-template-columns:repeat(3,minmax(60px,110px));gap:4px;margin:6px 0;font-variant-numeric:tabular-nums}
+.lab .pun div{padding:10px 6px;text-align:center;border-radius:6px;font-weight:600;font-size:.9rem}
+.lab .pun .hd{background:#eef2f6;color:#52606d;font-weight:600}
+.lab .g0{background:#d8f0e3;color:#14532d}.lab .g1{background:#dbe8fa;color:#1e3a8a}.lab .g2{background:#fde3d6;color:#9a3412}
+.lab .kids{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px}
+.lab .kid{width:74px;text-align:center;font-size:.8rem;border-radius:8px;padding:6px 4px}
+.lab .kid .face{font-size:1.6rem;line-height:1}
+.lab .vgrid{font-family:SFMono-Regular,Menlo,Consolas,monospace;font-size:.9rem;overflow-x:auto;padding-bottom:4px}
+.lab .vrow{display:flex;align-items:center;white-space:nowrap}
+.lab .vrow .who{width:190px;min-width:190px;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;font-size:.8rem;color:#52606d;padding-right:8px}
+.lab .vc{display:inline-block;width:22px;text-align:center;padding:2px 0;border-radius:3px}
+.lab .vc.var{background:#eef4fb;cursor:pointer}
+.lab .vc.alt{background:#c62828;color:#fff;font-weight:700}
+.lab .vc.sel{outline:2px solid #1f2933}
+.lab .vc.hd{font-size:.7rem;color:#7b8794;cursor:default}
+.lab .vc.hd.var{color:#1f5aa6;font-weight:700;cursor:pointer}
+.lab .vcf{font-family:SFMono-Regular,Menlo,Consolas,monospace;font-size:.82rem;background:#1f2933;color:#e5edf5;padding:10px 12px;border-radius:6px;overflow-x:auto;white-space:pre;margin-top:8px}
+.quiz .q{border-top:1px solid var(--lab-line);padding:12px 0}
+.quiz .q:first-child{border-top:none}
+.quiz .q p{margin:0 0 6px;font-weight:600}
+.quiz .opt{display:block;width:100%;text-align:left;margin:4px 0;padding:6px 10px;border:1px solid var(--lab-line);border-radius:6px;background:#fff;color:var(--ink)}
+.quiz .opt:hover:not([disabled]){border-color:var(--s1)}
+.quiz .opt.right{border-color:var(--good);background:#e6f4ea}
+.quiz .opt.wrong{border-color:var(--bad);background:#fdecea}
+.quiz .expl{font-size:.88rem;color:var(--ink2);margin-top:4px}
+.lab button:focus-visible,.lab input:focus-visible,.lab select:focus-visible,.lab .vc:focus-visible{outline:2px solid var(--s1);outline-offset:2px}
+</style>
+<section id="навіщо-ця-сторінка" class="level1">
+<h1>Навіщо ця сторінка</h1>
+<p>Інтерактивні заняття з популяційної геноміки спираються на кілька базових ідей: що таке ген і алель, чому в нас дві копії кожної хромосоми, як утворюються гамети, як рахують частоту алеля і чому випадковість важлива в малих вибірках. Тут ці ідеї пояснено з нуля, на одному прикладі: гені <strong>CFTR</strong>, варіанти якого спричиняють муковісцидоз. Це займе приблизно 30–40 хвилин.</p>
+<div class="route">
+  <a class="card here" href="Genetics_Basics_Interactive.html"><div class="step">Крок 0 · ви тут</div><div class="nm">Основи генетики</div><ul><li>ген, алель, генотип</li><li>мейоз і гамети</li><li>частота алеля, VCF</li></ul></a>
+  <a class="card" href="HW4_Genetic_Variation_1000G.html"><div class="step">Крок 1</div><div class="nm">Типи генетичної мінливості (HW4)</div><ul><li>SNV, indel, SV</li><li>наслідки мутацій</li><li>дрейф, Харді–Вайнберг, LD</li></ul></a>
+  <a class="card" href="Population_Genomics_Interactive.html"><div class="step">Крок 2</div><div class="nm">Популяційна геноміка</div><ul><li>F<sub>ST</sub>, PCA</li><li>Tajima's D, сліди відбору</li><li>GWAS, ROH</li></ul></a>
+  <a class="card" href="Evolutionary_Genetics_Interactive.html"><div class="step">Крок 3</div><div class="nm">Еволюційна і кількісна генетика</div><ul><li>мутація, міграція, N<sub>e</sub></li><li>молекулярний годинник</li><li>спадковість</li></ul></a>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Як працювати
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>У кожному розділі: пояснення простими словами, інтерактивна панель і питання <strong>«Перевірте себе»</strong>. Терміни, підкреслені пунктиром, мають підказку: наведіть курсор або торкніться. Повний список термінів — у <a href="#b-glossary">глосарії</a> внизу сторінки.</p>
+</div>
+</div>
+</section>
+<section id="b-zoom" class="level1">
+<h1>1. Від клітини до однієї «літери» ДНК</h1>
+<p>ДНК організовано як бібліотеку: <strong>геном</strong> — уся бібліотека, <strong>хромосома</strong> — один том, <strong>ген</strong> — один рецепт у томі, <strong>нуклеотид</strong> — одна літера. Натискайте кнопки, щоб «наблизитися» від цілої клітини до трьох літер ДНК, які кодують одну амінокислоту.</p>
+<div class="lab" id="b1">
+  <div class="btns" id="b1lv"></div>
+  <canvas id="b1c" style="margin-top:10px"></canvas>
+  <div class="btns" style="margin-top:8px"><button class="btn btn-sm btn-outline-danger" id="b1del" hidden="">Показати мутацію F508del</button></div>
+  <div class="step-note" id="b1o"></div>
+</div>
+<p><strong>Перевірте себе:</strong> скільки хромосом у клітині людини і скільки з них ви отримали від мами? Чому один ген займає лише крихітну частину хромосоми? Що стається з білком, якщо зникають три літери ДНК?</p>
+</section>
+<section id="b-alleles" class="level1">
+<h1>2. Алель, генотип і фенотип</h1>
+<p>Кожен ген у вас є у <strong>двох копіях</strong>: одна на хромосомі від мами, друга від тата. Різні варіанти того самого гена називають <strong>алелями</strong>. Пара алелів, яку має людина, — це її <strong>генотип</strong>, а ознака, яку видно, — <strong>фенотип</strong>.</p>
+<p>Натисніть на алель на хромосомі, щоб змінити його.</p>
+<div class="lab" id="b2">
+  <div class="ttl">Ген CFTR <small>нормальний алель або F508del</small></div>
+  <div class="chrrow"><span style="width:150px;font-size:.85rem;color:#52606d">Хромосома 7 від мами</span><div class="chrbar m"><button class="allele" id="b2a0"></button></div></div>
+  <div class="chrrow"><span style="width:150px;font-size:.85rem;color:#52606d">Хромосома 7 від тата</span><div class="chrbar f"><button class="allele" id="b2a1"></button></div></div>
+  <div class="step-note" id="b2o"></div>
+  <hr>
+  <div class="ttl">Інший тип успадкування: групи крові AB0 <small>три алелі</small></div>
+  <div class="ctl">
+    <label>Алель від мами<select class="form-select form-select-sm" id="b2m"><option>A</option><option>B</option><option selected="">0</option></select></label>
+    <label>Алель від тата<select class="form-select form-select-sm" id="b2f"><option selected="">A</option><option>B</option><option>0</option></select></label>
+  </div>
+  <div class="out" id="b2abo"></div>
+</div>
+<p><strong>Перевірте себе:</strong> чому носій (одна копія F508del) здоровий? Яка група крові в людини з генотипом A0, а яка в AB? Чим <strong>рецесивне</strong> успадкування відрізняється від <strong>кодомінантного</strong>?</p>
+</section>
+<section id="b-meiosis" class="level1">
+<h1>3. Мейоз: як утворюються гамети</h1>
+<p>Яйцеклітина і сперматозоїд (<strong>гамети</strong>) несуть лише <strong>одну</strong> копію кожної хромосоми, інакше в кожному поколінні хромосом ставало б удвічі більше. Під час <strong>мейозу</strong> з кожної пари в гамету випадково потрапляє одна хромосома. Тому гени на <strong>різних</strong> хромосомах успадковуються незалежно, а гени на <strong>одній</strong> хромосомі — разом, доки їх не розділить <strong>кросинговер</strong>.</p>
+<div class="lab" id="b3">
+  <div class="ctl">
+    <label>Де лежать гени A і B
+      <select class="form-select form-select-sm" id="b3mode"><option value="ind">На різних хромосомах</option><option value="link">На одній хромосомі</option></select></label>
+    <label id="b3rl">Імовірність кросинговеру між A і B: <b id="b3rv"></b><input type="range" class="form-range" id="b3r" min="0" max="0.5" step="0.01" value="0.1"></label>
+  </div>
+  <div class="btns">
+    <button class="btn btn-sm btn-primary" id="b3one">Утворити одну гамету</button>
+    <button class="btn btn-sm btn-outline-primary" id="b3many">Утворити 1000 гамет</button>
+    <button class="btn btn-sm btn-outline-secondary" id="b3clr">Очистити</button>
+  </div>
+  <div class="grid2" style="margin-top:10px">
+    <canvas id="b3c"></canvas>
+    <canvas id="b3t"></canvas>
+  </div>
+  <div class="step-note" id="b3o"></div>
+</div>
+<p><strong>Перевірте себе:</strong> скільки типів гамет утворює особа AaBb? Чому при генах на одній хромосомі гамети AB і ab трапляються частіше за Ab і aB? Що станеться, якщо підняти імовірність кросинговеру до 0,5?</p>
+</section>
+<section id="b-cross" class="level1">
+<h1>4. Схрещування: решітка Пеннета і випадковість</h1>
+<p>Дитина отримує одну гамету від мами і одну від тата. <strong>Решітка Пеннета</strong> показує всі комбінації та їхні ймовірності. Але ймовірність — це не гарантія: у конкретній родині з чотирма дітьми розподіл може сильно відрізнятися від очікуваного.</p>
+<div class="lab" id="b4">
+  <div class="ctl">
+    <label>Генотип мами<select class="form-select form-select-sm" id="b4m"><option value="NN">N/N (здорова)</option><option value="Nf" selected="">N/f (носійка)</option><option value="ff">f/f (муковісцидоз)</option></select></label>
+    <label>Генотип тата<select class="form-select form-select-sm" id="b4f"><option value="NN">N/N (здоровий)</option><option value="Nf" selected="">N/f (носій)</option><option value="ff">f/f (муковісцидоз)</option></select></label>
+  </div>
+  <div class="grid2">
+    <div><div class="pun" id="b4p"></div><div class="out" id="b4e"></div></div>
+    <div>
+      <div class="btns"><button class="btn btn-sm btn-primary" id="b4fam">Сім'я з 4 дітьми</button><button class="btn btn-sm btn-outline-primary" id="b4many">1000 дітей</button></div>
+      <div class="kids" id="b4k"></div>
+      <canvas id="b4c" style="margin-top:10px"></canvas>
+    </div>
+  </div>
+  <div class="step-note" id="b4o"></div>
+</div>
+<p><strong>Перевірте себе:</strong> яка ймовірність, що в двох носіїв народиться хвора дитина? Натисніть «Сім’я з 4 дітьми» кілька разів: як часто серед 4 дітей немає жодної хворої дитини? Чому на 1000 дітей частки майже збігаються з очікуваними?</p>
+</section>
+<section id="b-chance" class="level1">
+<h1>5. Випадковість і розмір вибірки</h1>
+<p>Монетка падає «гербом» з імовірністю 50 %. Але якщо кинути її лише 10 разів, легко отримати 7 гербів, а з 1000 кидків частка буде дуже близькою до 50 %. Це те саме явище, що й <strong>дрейф генів</strong>: у малій популяції в наступне покоління потрапляє «мала вибірка» алелів, тож їхні частоти випадково змінюються.</p>
+<div class="lab" id="b5">
+  <div class="ctl">
+    <label>Кількість кидків у досліді: <b id="b5nv"></b><input type="range" class="form-range" id="b5n" min="1" max="4" step="0.01" value="1.3"></label>
+    <div class="btns"><button class="btn btn-sm btn-primary" id="b5go">Провести 30 дослідів</button><button class="btn btn-sm btn-outline-secondary" id="b5clr">Очистити</button></div>
+  </div>
+  <canvas id="b5c"></canvas>
+  <div class="step-note" id="b5o"></div>
+</div>
+<p><strong>Перевірте себе:</strong> у скільки разів треба збільшити кількість кидків, щоб розкид зменшився вдвічі? Яка «монетка» відповідає популяції з 10 людей (20 копій гена)?</p>
+</section>
+<section id="b-pool" class="level1">
+<h1>6. Від родини до популяції: «мішок» алелів</h1>
+<p>Популяційна генетика дивиться не на одну родину, а на всю популяцію. Уявіть, що всі копії гена в популяції лежать в одному мішку: це <strong>генофонд</strong>. <strong>Частота алеля</strong> — частка кульок певного кольору. Кожна дитина наступного покоління — це дві випадково витягнуті кульки.</p>
+<div class="lab" id="b6">
+  <div class="ctl">
+    <label>Кількість людей N: <b id="b6nv"></b><input type="range" class="form-range" id="b6n" min="10" max="120" step="1" value="40"></label>
+    <label>Початкова частота алеля A (p): <b id="b6pv"></b><input type="range" class="form-range" id="b6p" min="0.05" max="0.95" step="0.05" value="0.3"></label>
+    <div class="btns"><button class="btn btn-sm btn-primary" id="b6go">Наступне покоління</button><button class="btn btn-sm btn-outline-primary" id="b6go10">+10 поколінь</button><button class="btn btn-sm btn-outline-secondary" id="b6rs">Почати знову</button></div>
+  </div>
+  <div class="grid2">
+    <canvas id="b6c"></canvas>
+    <div><div class="out" id="b6o" style="margin-top:0"></div><canvas id="b6h" style="margin-top:10px"></canvas></div>
+  </div>
+  <div class="step-note" id="b6s"></div>
+</div>
+<p><strong>Перевірте себе:</strong> як порахувати p, знаючи кількість людей AA, Aa і aa? Чому частка гетерозигот близька до 2pq? Що відбувається з частотою алеля за багато поколінь у популяції з 10 людей порівняно зі 120?</p>
+</section>
+<section id="b-vcf" class="level1">
+<h1>7. Від прочитаної ДНК до рядка VCF</h1>
+<p>Секвенування дає послідовності ДНК кожної людини. Програма вирівнює їх до <strong>референсного</strong> геному і шукає позиції, де люди відрізняються: це <strong>варіанти</strong>. Їх записують у файл <strong>VCF</strong>: позиція, референсний алель (REF), альтернативний (ALT) і генотип кожної людини. Саме такі файли ви аналізували на попередніх заняттях і в 1000 Genomes.</p>
+<p>Нижче шість людей, у кожного дві копії ділянки. Сині стовпчики — варіантні позиції. Натисніть на ▼ над стовпчиком, щоб побачити рядок VCF для цього варіанта, або на літеру, щоб змінити алель у конкретної людини.</p>
+<div class="lab" id="b7">
+  <div class="vgrid" id="b7g"></div>
+  <div class="vcf" id="b7v"></div>
+  <div class="step-note" id="b7o"></div>
+</div>
+<p><strong>Перевірте себе:</strong> що означають поля AC, AN і AF? Скільки копій ALT має людина з генотипом 1|1? Варіант у другому синьому стовпчику (позиція 1014) є лише в однієї людини: чим такий варіант відрізняється від поліморфізму?</p>
+</section>
+<section id="b-glossary" class="level1">
+<h1>Глосарій</h1>
+<div id="glossary"></div>
+</section>
+<section id="b-quiz" class="level1">
+<h1>Тест для самоперевірки</h1>
+<div class="lab quiz" id="quiz">
+  <div id="qbox"></div>
+  <div class="out" id="qscore"></div>
+  <button class="btn btn-sm btn-outline-secondary" id="qreset">Пройти ще раз</button>
+</div>
+
+<script>
+(function(){
+"use strict";
+const $=id=>document.getElementById(id);
+const redraws=[];const rnd=Math.random;
+const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+const f2=v=>v.toLocaleString('uk-UA',{maximumFractionDigits:2});
+const f3=v=>v.toLocaleString('uk-UA',{maximumFractionDigits:3});
+const pct=(v,d=1)=>(100*v).toLocaleString('uk-UA',{maximumFractionDigits:d})+' %';
+const int=v=>Math.round(v).toLocaleString('uk-UA');
+const C={ink:'#1f2933',ink2:'#52606d',ink3:'#7b8794',grid:'#e6ebf0',axis:'#a3adb8',s1:'#2a78d6',s2:'#eb6834',s3:'#1baf7a',s4:'#8a63c9',good:'#1f8a4c',bad:'#c62828',ref:'#c9d3dd',mom:'#eb6834',dad:'#2a78d6',
+  A:'#1f9d55',Cb:'#2a6fd6',G:'#d97b00',T:'#d33a3a'};
+const BC={A:C.A,C:C.Cb,G:C.G,T:C.T};
+function canvas(id,h){const c=$(id);c.style.width='100%';const w=Math.max(240,c.clientWidth||c.parentElement.clientWidth-2);const d=window.devicePixelRatio||1;
+  c.width=Math.round(w*d);c.height=Math.round(h*d);c.style.height=h+'px';const x=c.getContext('2d');x.setTransform(d,0,0,d,0,0);
+  x.clearRect(0,0,w,h);x.font='12px system-ui,-apple-system,Segoe UI,Roboto,sans-serif';return {x,w,h,c};}
+function niceTicks(a,b,n){const span=b-a||1;const s0=span/n;const m=Math.pow(10,Math.floor(Math.log10(s0)));const r=s0/m;
+  const st=(r<1.5?1:r<3?2:r<7?5:10)*m;const t=[];for(let v=Math.ceil(a/st-1e-9)*st;v<=b+1e-9;v+=st)t.push(+v.toFixed(10));return t;}
+function area(x,w,h,o){
+  const L=o.L??54,R=o.R??14,T=o.T??14,B=o.B??42;const W=w-L-R,H=h-T-B;
+  const xmin=o.xmin??0,xmax=o.xmax,ymin=o.ymin??0,ymax=o.ymax;const lx=o.xlog;const tx=v=>lx?Math.log10(v):v;
+  const sx=v=>L+(tx(v)-tx(xmin))/(tx(xmax)-tx(xmin))*W;const sy=v=>T+H-(v-ymin)/(ymax-ymin)*H;
+  x.lineWidth=1;const yt=o.yt||niceTicks(ymin,ymax,o.yn||5);
+  for(const v of yt){const y=sy(v);x.strokeStyle=C.grid;x.beginPath();x.moveTo(L,y);x.lineTo(L+W,y);x.stroke();x.fillStyle=C.ink2;x.textAlign='right';x.textBaseline='middle';x.fillText((o.yf||f2)(v),L-6,y);}
+  if(!o.noX){const xt=o.xt||niceTicks(xmin,xmax,o.xn||6);for(const v of xt){x.fillStyle=C.ink2;x.textAlign='center';x.textBaseline='top';x.fillText((o.xf||f2)(v),sx(v),T+H+6);}}
+  x.strokeStyle=C.axis;x.beginPath();x.moveTo(L,T);x.lineTo(L,T+H);x.lineTo(L+W,T+H);x.stroke();x.fillStyle=C.ink2;
+  if(o.xl){x.textAlign='center';x.textBaseline='bottom';x.fillText(o.xl,L+W/2,h-4);}
+  if(o.yl){x.save();x.translate(13,T+H/2);x.rotate(-Math.PI/2);x.textAlign='center';x.textBaseline='middle';x.fillText(o.yl,0,0);x.restore();}
+  return {sx,sy,L,T,W,H};}
+function line(x,pts,col,wd=2,dash){x.strokeStyle=col;x.lineWidth=wd;x.setLineDash(dash||[]);x.beginPath();pts.forEach((p,i)=>i?x.lineTo(p[0],p[1]):x.moveTo(p[0],p[1]));x.stroke();x.setLineDash([]);}
+function rrect(x,X,Y,W,H,r,col){r=Math.max(0,Math.min(r,W/2,Math.abs(H)/2));x.fillStyle=col;x.beginPath();x.moveTo(X+r,Y);x.lineTo(X+W-r,Y);x.quadraticCurveTo(X+W,Y,X+W,Y+r);x.lineTo(X+W,Y+H-r);x.quadraticCurveTo(X+W,Y+H,X+W-r,Y+H);x.lineTo(X+r,Y+H);x.quadraticCurveTo(X,Y+H,X,Y+H-r);x.lineTo(X,Y+r);x.quadraticCurveTo(X,Y,X+r,Y);x.closePath();x.fill();}
+function legend(x,items,X,Y,maxW){let cx=X,cy=Y;x.textBaseline='middle';x.textAlign='left';for(const [lab,col,dash] of items){const iw=x.measureText(lab).width+19;if(maxW&&cx>X&&cx+iw>X+maxW){cx=X;cy+=17;}
+  if(dash){line(x,[[cx,cy],[cx+14,cy]],col,2,[4,3]);}else{x.fillStyle=col;x.fillRect(cx,cy-5,14,10);}x.fillStyle=C.ink2;x.fillText(lab,cx+19,cy);cx+=iw+19;}}
+function binom(n,p){let k=0;for(let i=0;i<n;i++)if(rnd()<p)k++;return k;}
+function txt(x,s,X,Y,o={}){x.fillStyle=o.c||C.ink2;x.textAlign=o.a||'left';x.textBaseline=o.b||'middle';if(o.f)x.font=o.f;x.fillText(s,X,Y);x.font='12px system-ui,-apple-system,Segoe UI,Roboto,sans-serif';}
+
+/* ---------- 1. zoom ---------- */
+(function(){
+  const LV=['Клітина','Хромосоми','Хромосома 7','Ген CFTR','Подвійна спіраль ДНК','Кодони і білок'];
+  const CHR=[248,242,198,190,181,171,159,145,138,134,135,133,114,107,102,90,83,80,59,64,47,51,156];
+  const sticks=[...Array(46)].map((_,i)=>({a:rnd()*Math.PI*2,r:Math.sqrt(rnd()),rot:rnd()*Math.PI,len:7+CHR[i%23]/248*13,mom:i>=23}));
+  let lv=0,del=false;
+  const TXT=[
+   '<b>Клітина.</b> У ядрі майже кожної клітини вашого тіла лежать <b>46 хромосом</b>: 23 ви отримали від мами (помаранчеві) і 23 від тата (сині). Разом у них ≈ 6,2 млрд «літер» ДНК: два набори по ≈ 3,1 млрд. Розтягнута ДНК однієї клітини мала б довжину ≈ 2 метри.',
+   '<b>Хромосоми.</b> 46 хромосом утворюють <b>23 пари</b>. Хромосоми однієї пари схожі за розміром і несуть ті самі гени, але можуть мати різні варіанти (алелі) цих генів. Тут показано жіночий набір (пара XX); у чоловіків замість другої X є маленька Y. Обведено пару хромосом 7: у ній лежить ген CFTR.',
+   '<b>Хромосома 7</b> — ≈ 159 млн пар основ. Ген CFTR займає лише невелику ділянку біля 117 млн. Обидві копії хромосоми несуть цей ген: одна від мами, друга від тата. Усі ≈ 20 000 генів, що кодують білки, разом займають лише ≈ 1–2 % геному.',
+   '<b>Ген CFTR</b> ≈ 190 тис. пар основ. Він складається з <b>27 екзонів</b> (кодують білок) і інтронів між ними (їх вирізають з РНК). Після вирізання інтронів кодуюча частина має лише ≈ 4 400 літер, які кодують білок з 1480 амінокислот. Білок CFTR — канал для іонів хлору в клітинах легень і підшлункової залози.',
+   '<b>ДНК</b> — дві нитки, закручені в спіраль. Літер лише чотири: A, C, G, T. Навпроти A завжди стоїть T, навпроти G — C. Тому, знаючи одну нитку, можна відновити другу: саме так ДНК копіюється при поділі клітини. Тут показано 15 літер з екзону 11 гена CFTR.',
+   '<b>Кодони.</b> Клітина читає ДНК трилітерними «словами» — <b>кодонами</b>. Кожен кодон відповідає одній амінокислоті: ATC — ізолейцин (Ile), TTT — фенілаланін (Phe), GGT — гліцин (Gly). Натисніть «Показати мутацію F508del»: зникають три літери, і з білка випадає одна амінокислота — фенілаланін у позиції 508. Цього достатньо, щоб білок неправильно згортався: це найчастіша причина муковісцидозу.'];
+  function btns(){$('b1lv').innerHTML=LV.map((n,i)=>`<button class="btn btn-sm ${i===lv?'btn-primary':'btn-outline-primary'}" data-i="${i}" aria-pressed="${i===lv}">${i+1}. ${n}</button>`).join('');
+    $('b1lv').querySelectorAll('button').forEach(b=>b.onclick=()=>{lv=+b.dataset.i;if(lv!==5)del=false;draw();});}
+  function draw(){btns();const {x,w,h}=canvas('b1c',300);
+    if(lv===0){const cx=w/2,cy=h/2,R=Math.min(w*0.42,h*0.46),Rn=R*0.55;x.fillStyle='#eef4fb';x.beginPath();x.ellipse(cx,cy,R*1.25,R,0,0,7);x.fill();x.strokeStyle='#a9c4e4';x.lineWidth=2;x.stroke();
+      x.fillStyle='#fdf3ea';x.beginPath();x.arc(cx,cy,Rn,0,7);x.fill();x.strokeStyle='#e8b896';x.stroke();
+      x.lineCap='round';sticks.forEach(s=>{const px=cx+Math.cos(s.a)*s.r*Rn*0.82,py=cy+Math.sin(s.a)*s.r*Rn*0.82;x.strokeStyle=s.mom?C.mom:C.dad;x.lineWidth=4;x.beginPath();x.moveTo(px-Math.cos(s.rot)*s.len/2,py-Math.sin(s.rot)*s.len/2);x.lineTo(px+Math.cos(s.rot)*s.len/2,py+Math.sin(s.rot)*s.len/2);x.stroke();});x.lineCap='butt';
+      txt(x,'клітина',cx-R*1.2,cy-R*0.75,{c:C.ink2});txt(x,'ядро: 46 хромосом',cx+Rn+8,cy-Rn*0.6,{c:C.ink});legend(x,[['від мами',C.mom],['від тата',C.dad]],12,h-14);}
+    if(lv===1){const n=23,L=14,R=w-14,T=24,B=h-30;const slot=(R-L)/n;const bw=Math.max(3,slot/2-3);
+      for(let i=0;i<n;i++){const hh=CHR[i]/248*(B-T);const X=L+i*slot+slot/2;[[X-bw-1,C.dad],[X+1,C.mom]].forEach(([xx,c])=>rrect(x,xx,B-hh,bw,hh,bw/2,c));
+        if(i===6){x.strokeStyle=C.ink;x.lineWidth=2;x.strokeRect(X-bw-4,B-hh-4,2*bw+8,hh+8);}
+        txt(x,i===22?'X':String(i+1),X,B+12,{a:'center',c:i===6?C.ink:C.ink3});}
+      txt(x,'23 пари хромосом (каріотип)',L,12,{c:C.ink});}
+    if(lv===2){const L=60,R=w-20,len=159,cen=60;const sx=v=>L+v/len*(R-L);
+      [[70,C.dad,'від тата'],[150,C.mom,'від мами']].forEach(([y,c,lab])=>{rrect(x,sx(0),y-13,sx(cen-2)-sx(0),26,13,c);rrect(x,sx(cen+2),y-13,sx(len)-sx(cen+2),26,13,c);
+        x.fillStyle='rgba(255,255,255,.35)';for(let b=5;b<len;b+=11){if(Math.abs(b-cen)<4)continue;x.fillRect(sx(b),y-13,sx(b+3)-sx(b),26);}
+        txt(x,lab,8,y,{c:C.ink2});x.fillStyle='#fff';x.fillRect(sx(117.2),y-15,Math.max(3,sx(117.8)-sx(117.2)),30);x.strokeStyle=C.ink;x.lineWidth=1.5;x.strokeRect(sx(117.2)-1,y-16,Math.max(5,sx(117.8)-sx(117.2))+2,32);});
+      line(x,[[sx(117.5),180],[sx(117.5),212]],C.ink,1.5);txt(x,'ген CFTR (≈ 117,5 млн п.о.)',sx(117.5),224,{a:'center',c:C.ink});
+      [0,40,80,120,159].forEach(v=>txt(x,v+' млн',sx(v),h-14,{a:'center',c:C.ink3}));txt(x,'центромера',sx(cen),36,{a:'center',c:C.ink3});}
+    if(lv===3){const L=30,R=w-30,y=h/2;line(x,[[L,y],[R,y]],C.ink3,3);const nE=27;
+      for(let i=0;i<nE;i++){const X=L+(i+0.5)*(R-L)/nE;const bw=Math.max(4,(R-L)/nE*0.45);const hi=i===10;rrect(x,X-bw/2,y-16,bw,32,3,hi?C.s2:C.s1);
+        if(i%5===0||hi)txt(x,String(i+1),X,y+30,{a:'center',c:hi?C.s2:C.ink3});}
+      const hx=L+10.5*(R-L)/nE;line(x,[[hx,y-20],[hx,y-58]],C.s2,1.5);txt(x,'екзон 11: тут кодон 508',hx,y-68,{a:'center',c:C.s2,f:'bold 12px system-ui'});
+      legend(x,[['екзон (кодує білок)',C.s1],['інтрон (вирізається)',C.ink3]],L,h-16);txt(x,'≈ 190 тис. п.о.',R,22,{a:'right',c:C.ink3});}
+    if(lv===4){const top='ATCATCTTTGGTGTT',comp={A:'T',T:'A',G:'C',C:'G'};const n=top.length;const tile=Math.min(36,(w-100)/n);const L=(w-tile*n)/2,y1=h/2-50,y2=h/2+28;
+      for(let i=0;i<n;i++){const X=L+i*tile;const b=top[i],c=comp[b];
+        rrect(x,X+2,y1,tile-4,tile-4,5,BC[b]);rrect(x,X+2,y2,tile-4,tile-4,5,BC[c]);txt(x,b,X+tile/2,y1+(tile-4)/2,{a:'center',c:'#fff',f:'bold 15px system-ui'});txt(x,c,X+tile/2,y2+(tile-4)/2,{a:'center',c:'#fff',f:'bold 15px system-ui'});
+        x.strokeStyle=C.ink3;x.lineWidth=1.5;x.setLineDash([3,3]);x.beginPath();x.moveTo(X+tile/2,y1+tile-2);x.lineTo(X+tile/2,y2-2);x.stroke();x.setLineDash([]);}
+      txt(x,"5′",L-18,y1+tile/2-2,{a:'center',c:C.ink});txt(x,"3′",L+n*tile+14,y1+tile/2-2,{a:'center',c:C.ink});txt(x,"3′",L-18,y2+tile/2-2,{a:'center',c:C.ink});txt(x,"5′",L+n*tile+14,y2+tile/2-2,{a:'center',c:C.ink});
+      txt(x,'A — T     G — C',w/2,h-18,{a:'center',c:C.ink2,f:'bold 13px system-ui'});}
+    if(lv===5){const ref=[['ATC','Ile',506],['ATC','Ile',507],['TTT','Phe',508],['GGT','Gly',509],['GTT','Val',510]];
+      const alt=[['ATC','Ile',506],['ATT','Ile',507],['GGT','Gly',509],['GTT','Val',510]];const rows=del?[ref,alt]:[ref];
+      const bw=Math.min(110,(w-60)/5);const L=(w-bw*5)/2;
+      rows.forEach((row,ri)=>{const y=ri===0?40:170;txt(x,ri===0?'норма':'F508del',8,y+30,{c:ri===0?C.ink:C.bad,f:'bold 12px system-ui'});
+        row.forEach(([cod,aa,n],i)=>{const X=L+i*bw;rrect(x,X+4,y,bw-8,34,6,'#eef4fb');
+          for(let k=0;k<3;k++){const ch=cod[k];const dl=del&&ri===0&&((i===1&&k===2)||(i===2&&k<2));txt(x,ch,X+bw/2+(k-1)*14,y+17,{a:'center',c:dl?C.bad:BC[ch],f:'bold 15px ui-monospace,Menlo,monospace'});
+            if(dl){line(x,[[X+bw/2+(k-1)*14-6,y+17],[X+bw/2+(k-1)*14+6,y+17]],C.bad,2);}}
+          rrect(x,X+10,y+44,bw-20,30,15,aa==='Phe'?'#fde3d6':'#e6f4ea');txt(x,aa+' '+n,X+bw/2,y+59,{a:'center',c:C.ink,f:'bold 12px system-ui'});});});
+      if(!del)txt(x,'Кожні 3 літери → 1 амінокислота',w/2,h-24,{a:'center',c:C.ink2});else txt(x,'Зникли 3 літери (CTT) → зникла 1 амінокислота (Phe508)',w/2,h-14,{a:'center',c:C.bad});}
+    $('b1del').hidden=lv!==5;$('b1del').textContent=del?'Сховати мутацію':'Показати мутацію F508del';$('b1o').innerHTML=TXT[lv];}
+  $('b1del').onclick=()=>{del=!del;draw();};redraws.push(draw);
+})();
+
+/* ---------- 2. alleles ---------- */
+(function(){
+  const al=[0,1];
+  function draw(){[0,1].forEach(i=>{const b=$('b2a'+i);b.className='allele'+(al[i]?' alt':'');b.textContent=al[i]?'F508del (f)':'норма (N)';b.setAttribute('aria-label',(i?'Алель від тата: ':'Алель від мами: ')+b.textContent+'. Натисніть, щоб змінити');});
+    const k=al[0]+al[1];const g=['N/N','N/f','f/f'][k],vcf=['0/0','0/1','1/1'][k];
+    const ph=[['<span class="pill good">здоровий</span>','Обидві копії гена працюють.'],['<span class="pill good">здоровий носій</span>','Одна робоча копія виробляє достатньо білка, тож людина здорова. Але з імовірністю 50 % вона передасть алель f дитині.'],['<span class="pill bad">муковісцидоз</span>','Жодна копія не дає робочого білка: густий слиз у легенях і травній системі.']][k];
+    $('b2o').innerHTML=`Генотип: <b>${g}</b> (${k===1?'гетерозигота':'гомозигота'}). У файлі VCF: <code>${vcf}</code> — кількість альтернативних алелів: ${k}.<br>Фенотип: ${ph[0]} ${ph[1]}<div class="hint">Хвороба проявляється лише за двох копій f, тому алель f <b>рецесивний</b>.</div>`;}
+  [0,1].forEach(i=>$('b2a'+i).onclick=()=>{al[i]^=1;draw();});
+  function abo(){const a=$('b2m').value,b=$('b2f').value;const s=new Set([a,b]);const grp=s.has('A')&&s.has('B')?'AB':s.has('A')?'A':s.has('B')?'B':'0';
+    const why=grp==='AB'?'алелі A і B <b>кодомінантні</b>: проявляються обидва одночасно.':grp==='0'?'група 0 буває лише в людини з двома алелями 0, бо алель 0 <b>рецесивний</b>.':(a===b?'обидва алелі однакові.':'алель 0 рецесивний, тож проявляється лише '+grp+'.');
+    const gt=[a,b].sort((u,v)=>'AB0'.indexOf(u)-'AB0'.indexOf(v)).join('');$('b2abo').innerHTML=`Генотип <b>${gt}</b> → група крові <b>${grp}</b>: ${why}`;}
+  ['b2m','b2f'].forEach(id=>$(id).addEventListener('change',abo));draw();abo();
+})();
+
+/* ---------- 3. meiosis ---------- */
+(function(){
+  let tally={AB:0,Ab:0,aB:0,ab:0},last=null,lastRec=false;
+  function make(){const link=$('b3mode').value==='link',r=+$('b3r').value;
+    if(!link){const a=rnd()<0.5?'A':'a',b=rnd()<0.5?'B':'b';return {g:a+b,src:[a==='A'?0:1,b==='B'?0:1],rec:false};}
+    const fromDad=rnd()<0.5;const rec=rnd()<r;let g=fromDad?'AB':'ab';if(rec)g=fromDad?'Ab':'aB';return {g,src:fromDad?[0,rec?1:0]:[1,rec?0:1],rec};}
+  function labels(){const link=$('b3mode').value==='link';$('b3rl').style.display=link?'':'none';$('b3rv').textContent=f2(+$('b3r').value)+' ('+pct(+$('b3r').value,0)+' гамет — рекомбінантні)';}
+  function chrom(x,X,Y,H,col,labs){rrect(x,X,Y,18,H,9,col);labs.forEach(([t,f])=>{const yy=Y+H*f;x.fillStyle='#fff';x.fillRect(X-2,yy-8,22,16);x.strokeStyle=C.ink;x.lineWidth=1;x.strokeRect(X-2,yy-8,22,16);txt(x,t,X+9,yy,{a:'center',c:C.ink,f:'bold 12px system-ui'});});}
+  function draw(){labels();const link=$('b3mode').value==='link';
+    {const {x,w,h}=canvas('b3c',230);const cx=w*0.28,cy=h/2;x.fillStyle='#f4f8fe';x.beginPath();x.ellipse(cx,cy,w*0.22,h*0.42,0,0,7);x.fill();x.strokeStyle='#bfd3f0';x.stroke();
+      txt(x,'клітина батька (AaBb)',cx,14,{a:'center',c:C.ink});
+      if(!link){chrom(x,cx-50,cy-60,90,C.dad,[['A',0.5]]);chrom(x,cx-26,cy-60,90,C.mom,[['a',0.5]]);chrom(x,cx+10,cy-35,60,C.dad,[['B',0.5]]);chrom(x,cx+34,cy-35,60,C.mom,[['b',0.5]]);}
+      else{chrom(x,cx-24,cy-75,150,C.dad,[['A',0.25],['B',0.75]]);chrom(x,cx+6,cy-75,150,C.mom,[['a',0.25],['b',0.75]]);}
+      const gx=w*0.78;x.fillStyle='#fdf3ea';x.beginPath();x.arc(gx,cy,Math.min(w*0.15,h*0.36),0,7);x.fill();x.strokeStyle='#e8b896';x.stroke();txt(x,'гамета',gx,14,{a:'center',c:C.ink});
+      if(last){const [s1,s2]=last.src;if(!link){chrom(x,gx-26,cy-45,90,s1?C.mom:C.dad,[[last.g[0],0.5]]);chrom(x,gx+8,cy-30,60,s2?C.mom:C.dad,[[last.g[1],0.5]]);}
+        else{const H=130,Y=cy-65;if(!last.rec)chrom(x,gx-9,Y,H,s1?C.mom:C.dad,[[last.g[0],0.25],[last.g[1],0.75]]);
+          else{rrect(x,gx-9,Y,18,H/2,9,s1?C.mom:C.dad);rrect(x,gx-9,Y+H/2,18,H/2,9,s2?C.mom:C.dad);[[last.g[0],0.25],[last.g[1],0.75]].forEach(([t,f])=>{const yy=Y+H*f;x.fillStyle='#fff';x.fillRect(gx-11,yy-8,22,16);x.strokeStyle=C.ink;x.strokeRect(gx-11,yy-8,22,16);txt(x,t,gx,yy,{a:'center',c:C.ink,f:'bold 12px system-ui'});});txt(x,'✂ кросинговер',gx+16,cy,{c:C.bad});}}}
+      else txt(x,'натисніть «Утворити одну гамету»',gx,cy,{a:'center',c:C.ink3});
+      legend(x,[['хромосома від його тата',C.dad],['від його мами',C.mom]],10,h-12,w-20);}
+    {const {x,w,h}=canvas('b3t',230);const keys=['AB','Ab','aB','ab'];const tot=keys.reduce((s,k)=>s+tally[k],0);const exp=link?[(1-+$('b3r').value)/2,+$('b3r').value/2,+$('b3r').value/2,(1-+$('b3r').value)/2]:[0.25,0.25,0.25,0.25];
+      const a=area(x,w,h,{T:48,xmin:0,xmax:4,ymin:0,ymax:0.6,noX:true,yl:'частка гамет',yf:v=>pct(v,0),B:30});const bw=a.W/4;
+      keys.forEach((k,i)=>{const v=tot?tally[k]/tot:0;const X=a.L+i*bw+bw*0.2;rrect(x,X,a.sy(v),bw*0.6,a.sy(0)-a.sy(v),4,(k==='AB'||k==='ab')?C.s1:C.s2);
+        line(x,[[X-4,a.sy(exp[i])],[X+bw*0.6+4,a.sy(exp[i])]],C.ink,2,[4,3]);txt(x,k,X+bw*0.3,a.T+a.H+12,{a:'center',c:C.ink,f:'bold 12px system-ui'});if(tot)txt(x,String(tally[k]),X+bw*0.3,a.sy(v)-8,{a:'center',c:C.ink});});
+      legend(x,[[link?'батьківські комбінації':'гамети',C.s1],...(link?[['рекомбінантні',C.s2]]:[]),['очікування',C.ink,1]],a.L,12,w-a.L-10);}
+    const tot=Object.values(tally).reduce((a,b)=>a+b,0);
+    $('b3o').innerHTML=(link?'Гени на одній хромосомі успадковуються разом: гамета найчастіше отримує або «татову» комбінацію AB, або «мамину» ab. Нові комбінації Ab і aB з\'являються лише тоді, коли між генами відбувся кросинговер.':'Кожна пара хромосом розходиться незалежно, тому чотири типи гамет — AB, Ab, aB, ab — утворюються однаково часто (по 25 %). Це закон незалежного успадкування Менделя.')+
+      (tot?` Утворено гамет: <b>${int(tot)}</b>.`:'')+(last&&last.rec?' Остання гамета — рекомбінантна.':'');}
+  $('b3one').onclick=()=>{last=make();tally[last.g]++;draw();};
+  $('b3many').onclick=()=>{for(let i=0;i<1000;i++){const g=make();tally[g.g]++;last=g;}draw();};
+  $('b3clr').onclick=()=>{tally={AB:0,Ab:0,aB:0,ab:0};last=null;draw();};
+  $('b3mode').addEventListener('change',()=>{tally={AB:0,Ab:0,aB:0,ab:0};last=null;draw();});$('b3r').addEventListener('input',()=>{tally={AB:0,Ab:0,aB:0,ab:0};draw();});redraws.push(draw);
+})();
+
+/* ---------- 4. Punnett ---------- */
+(function(){
+  const NAME=['N/N','N/f','f/f'],CLS=['g0','g1','g2'],PH=['здоровий','носій','хворий'],FACE=['🙂','🙂','😷'];
+  let fam=null,many=null;
+  function geno(a,b){return (a==='f')+(b==='f');}
+  function probs(){const m=$('b4m').value,f=$('b4f').value;const p=[0,0,0];for(const a of m)for(const b of f)p[geno(a,b)]+=0.25;return p;}
+  function draw(){const m=$('b4m').value,f=$('b4f').value;const p=probs();
+    let h='<div class="hd">мама ↓ / тато →</div>'+[...f].map(b=>`<div class="hd">${b}</div>`).join('');
+    for(const a of m){h+=`<div class="hd">${a}</div>`;for(const b of f){const g=geno(a,b);h+=`<div class="${CLS[g]}">${a}/${b}<br><span style="font-weight:400;font-size:.78rem">${PH[g]}</span></div>`;}}
+    $('b4p').innerHTML=h;
+    $('b4e').innerHTML=`Імовірність для кожної дитини: здорова (N/N) <b>${pct(p[0],0)}</b>, носій (N/f) <b>${pct(p[1],0)}</b>, хвора (f/f) <b>${pct(p[2],0)}</b>.`;
+    if(fam)$('b4k').innerHTML=fam.map((g,i)=>`<div class="kid ${CLS[g]}"><div class="face" aria-hidden="true">${FACE[g]}</div>дитина ${i+1}<br><b>${NAME[g]}</b></div>`).join('');else $('b4k').innerHTML='<span class="hint">Натисніть «Сім\'я з 4 дітьми».</span>';
+    const {x,w,h:H}=canvas('b4c',220);const a=area(x,w,H,{T:48,xmin:0,xmax:3,ymin:0,ymax:1,noX:true,yl:'частка дітей',yf:v=>pct(v,0),B:28});const bw=a.W/3;
+    const obs=many?many.map(v=>v/many.reduce((s,c)=>s+c,0)):null;
+    for(let g=0;g<3;g++){const X=a.L+g*bw+bw*0.2;if(obs)rrect(x,X,a.sy(obs[g]),bw*0.6,a.sy(0)-a.sy(obs[g]),4,[C.good,C.s1,C.s2][g]);line(x,[[X-4,a.sy(p[g])],[X+bw*0.6+4,a.sy(p[g])]],C.ink,2,[4,3]);
+      txt(x,NAME[g],X+bw*0.3,a.T+a.H+12,{a:'center',c:C.ink,f:'bold 12px system-ui'});if(obs)txt(x,pct(obs[g],1),X+bw*0.3,a.sy(obs[g])-9,{a:'center',c:C.ink});}
+    legend(x,[['очікування за решіткою',C.ink,1],...(obs?[['1000 дітей',C.s1]]:[])],a.L,12,w-a.L-10);
+    let note='Кожна дитина — окреме «підкидання монетки»: що сталося з першою дитиною, не впливає на другу.';
+    if(fam){const sick=fam.filter(g=>g===2).length;note=`У цій сім'ї хворих дітей: <b>${sick}</b> з 4 (очікувано в середньому ${f2(4*p[2])}).`+(p[2]>0&&p[2]<1?` Імовірність, що серед 4 дітей не буде жодної хворої: (1 − ${f2(p[2])})⁴ = <b>${pct(Math.pow(1-p[2],4),0)}</b>. Мала вибірка може сильно відрізнятися від очікування — як і мала популяція.`:'');}
+    $('b4o').innerHTML=note;}
+  function child(){const m=$('b4m').value,f=$('b4f').value;return geno(m[rnd()<0.5?0:1],f[rnd()<0.5?0:1]);}
+  $('b4fam').onclick=()=>{fam=[child(),child(),child(),child()];draw();};
+  $('b4many').onclick=()=>{many=[0,0,0];for(let i=0;i<1000;i++)many[child()]++;draw();};
+  ['b4m','b4f'].forEach(id=>$(id).addEventListener('change',()=>{fam=null;many=null;draw();}));redraws.push(draw);
+})();
+
+/* ---------- 5. coins ---------- */
+(function(){
+  let pts=[];
+  function run(n){for(let r=0;r<30;r++)pts.push({n,p:binom(n,0.5)/n});}
+  function N(){return Math.round(Math.pow(10,+$('b5n').value));}
+  function draw(){const n=N();$('b5nv').textContent=int(n);const {x,w,h}=canvas('b5c',280);
+    const a=area(x,w,h,{T:34,xlog:true,xmin:5,xmax:20000,ymin:0,ymax:1,xt:[10,100,1000,10000],xf:int,xl:'кількість кидків у досліді (логарифмічна шкала)',yl:'частка «гербів»',yf:v=>pct(v,0)});
+    const up=[],dn=[];for(let i=0;i<=100;i++){const v=Math.pow(10,Math.log10(5)+i/100*(Math.log10(20000)-Math.log10(5)));const s=2*Math.sqrt(0.25/v);up.push([a.sx(v),a.sy(Math.min(1,0.5+s))]);dn.push([a.sx(v),a.sy(Math.max(0,0.5-s))]);}
+    x.fillStyle='rgba(42,120,214,.08)';x.beginPath();up.forEach((p,i)=>i?x.lineTo(...p):x.moveTo(...p));dn.slice().reverse().forEach(p=>x.lineTo(...p));x.fill();
+    line(x,[[a.sx(5),a.sy(0.5)],[a.sx(20000),a.sy(0.5)]],C.ink3,1.5,[5,4]);
+    pts.forEach(p=>{x.beginPath();x.arc(a.sx(p.n)+(rnd()-0.5)*4,a.sy(p.p),3.2,0,7);x.fillStyle='rgba(235,104,52,.75)';x.fill();});
+    legend(x,[['результат одного досліду',C.s2],['очікувано 50 %',C.ink3,1],['95 % дослідів потрапляють сюди','rgba(42,120,214,.25)']],a.L,12,w-a.L-10);
+    const cur=pts.filter(p=>p.n===n);const lo=cur.length?Math.min(...cur.map(p=>p.p)):null,hi=cur.length?Math.max(...cur.map(p=>p.p)):null;
+    $('b5o').innerHTML=(cur.length?`При ${int(n)} кидках частка «гербів» у 30 дослідах коливалась від <b>${pct(lo,0)}</b> до <b>${pct(hi,0)}</b>. `:'')+
+      `Очікуваний розкид (±2 стандартні відхилення) при ${int(n)} кидках: ±<b>${pct(2*Math.sqrt(0.25/n),1)}</b>. Що більше кидків, то ближче результат до 50 % — розкид зменшується пропорційно 1/√n.`;}
+  $('b5go').onclick=()=>{run(N());draw();};$('b5clr').onclick=()=>{pts=[];draw();};$('b5n').addEventListener('input',draw);
+  [10,100,1000].forEach(run);redraws.push(draw);
+})();
+
+/* ---------- 6. gene pool ---------- */
+(function(){
+  let pop=[],hist=[],gen=0;
+  function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(rnd()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+  function init(){const N=+$('b6n').value,p=+$('b6p').value;const k=Math.round(2*N*p);const al=shuffle([...Array(2*N)].map((_,i)=>i<k?1:0));pop=[];for(let i=0;i<N;i++)pop.push([al[2*i],al[2*i+1]]);gen=0;hist=[freq()];draw();}
+  function freq(){let s=0;pop.forEach(p=>s+=p[0]+p[1]);return s/(2*pop.length);}
+  function next(){const all=[];pop.forEach(p=>all.push(p[0],p[1]));pop=pop.map(()=>[all[Math.floor(rnd()*all.length)],all[Math.floor(rnd()*all.length)]]);gen++;hist.push(freq());}
+  function draw(){const N=pop.length;$('b6nv').textContent=+$('b6n').value;$('b6pv').textContent=f2(+$('b6p').value);
+    {const {x,w,h}=canvas('b6c',290);const cols=Math.ceil(Math.sqrt(N*w/h));const rows=Math.ceil(N/cols);const cw=(w-20)/cols,ch=(h-40)/rows;const r=Math.max(3,Math.min(cw,ch)*0.38);
+      pop.forEach((p,i)=>{const cx=10+(i%cols+0.5)*cw,cy=10+(Math.floor(i/cols)+0.5)*ch;[[p[0],Math.PI/2,Math.PI*1.5],[p[1],-Math.PI/2,Math.PI/2]].forEach(([a,s,e])=>{x.beginPath();x.moveTo(cx,cy);x.arc(cx,cy,r,s,e);x.closePath();x.fillStyle=a?C.s1:C.s2;x.fill();});x.strokeStyle='#fff';x.lineWidth=1;x.beginPath();x.arc(cx,cy,r,0,7);x.stroke();});
+      legend(x,[['алель A',C.s1],['алель a',C.s2],['коло = людина, половинки = дві копії гена','#ffffff']],10,h-12,w-20);}
+    const nAA=pop.filter(p=>p[0]+p[1]===2).length,nAa=pop.filter(p=>p[0]+p[1]===1).length,naa=N-nAA-nAa;const p=(2*nAA+nAa)/(2*N),q=1-p;
+    $('b6o').innerHTML=`<b>Покоління ${gen}</b><table class="mini" style="margin-top:6px"><tr><th></th><th>AA</th><th>Aa</th><th>aa</th></tr><tr><td>людей зараз</td><td>${nAA}</td><td>${nAa}</td><td>${naa}</td></tr><tr><td>очікувано p², 2pq, q²</td><td>${f2(p*p*N)}</td><td>${f2(2*p*q*N)}</td><td>${f2(q*q*N)}</td></tr></table>`+
+      `<div style="margin-top:6px">p = (2·${nAA} + ${nAa}) / (2·${N}) = <b>${f3(p)}</b>, q = 1 − p = <b>${f3(q)}</b></div>`;
+    {const {x,w,h}=canvas('b6h',150);const G=Math.max(20,hist.length-1);const a=area(x,w,h,{T:12,B:34,xmin:0,xmax:G,ymin:0,ymax:1,xl:'покоління',yl:'p',xf:int});line(x,[[a.L,a.sy(+$('b6p').value)],[a.L+a.W,a.sy(+$('b6p').value)]],C.ink3,1,[4,3]);line(x,hist.map((v,i)=>[a.sx(i),a.sy(v)]),C.s1,2);}
+    const fixed=p===0||p===1;
+    $('b6s').innerHTML=fixed?`<b>Алель ${p===1?'A':'a'} зафіксувався</b> (частота 100 %): інший алель випадково зник з популяції. Без нових мутацій чи мігрантів він уже не повернеться. Це крайній наслідок дрейфу генів.`:
+      `Кожна дитина отримує дві випадкові копії гена з «мішка» батьківського покоління. Тому розподіл генотипів близький до p² : 2pq : q² (закон Харді–Вайнберга), а частота алеля від покоління до покоління трохи «блукає» — це дрейф генів. У маленькій популяції блукання сильніше.`;}
+  $('b6go').onclick=()=>{if(freq()>0&&freq()<1)next();draw();};$('b6go10').onclick=()=>{for(let i=0;i<10;i++)if(freq()>0&&freq()<1)next();draw();};$('b6rs').onclick=init;
+  ['b6n','b6p'].forEach(id=>$(id).addEventListener('input',init));redraws.push(draw);init();
+})();
+
+/* ---------- 7. reads to VCF ---------- */
+(function(){
+  const REF='GATTACAGGCTTACGATCCATGAA';const START=1001;
+  const V=[{i:5,alt:'T'},{i:13,alt:'A'},{i:19,alt:'G'}];
+  const P=['Олена','Андрій','Марія','Тарас','Ірина','Богдан'];
+  const G0=[[[0,1],[1,1],[0,0],[0,1],[0,0],[1,0]],[[0,0],[0,0],[0,0],[0,1],[0,0],[0,0]],[[1,1],[1,0],[1,1],[0,1],[1,1],[1,1]]];
+  let GT=G0.map(v=>v.map(g=>g.slice()));let sel=0;
+  const PUR=new Set(['A','G']);
+  function draw(){let h='<div class="vrow"><span class="who">варіант (натисніть ▼)</span>'+[...REF].map((_,j)=>{const vi=V.findIndex(v=>v.i===j);return `<span class="vc hd${vi>=0?' var':''}${vi===sel?' sel':''}" ${vi>=0?`data-v="${vi}" tabindex="0" role="button" title="позиція ${START+j}" aria-label="Варіант на позиції ${START+j}"`:''}>${vi>=0?'▼':''}</span>`;}).join('')+'</div>';
+    h+='<div class="vrow"><span class="who"><b>Референс (REF)</b></span>'+[...REF].map((b,j)=>`<span class="vc${V.some(v=>v.i===j)?' var':''}">${b}</span>`).join('')+'</div>';
+    P.forEach((nm,pi)=>{[0,1].forEach(c=>{h+=`<div class="vrow"><span class="who">${c===0?'<b>'+nm+'</b> · копія від мами':'&nbsp;&nbsp;&nbsp;копія від тата'}</span>`+[...REF].map((b,j)=>{const vi=V.findIndex(v=>v.i===j);if(vi<0)return `<span class="vc">${b}</span>`;const a=GT[vi][pi][c];
+      return `<span class="vc var${a?' alt':''}${vi===sel?' sel':''}" data-v="${vi}" data-p="${pi}" data-c="${c}" tabindex="0" role="button" aria-label="${nm}, копія ${c+1}, позиція ${START+j}: ${a?V[vi].alt:b}">${a?V[vi].alt:b}</span>`;}).join('')+'</div>';});});
+    $('b7g').innerHTML=h;
+    $('b7g').querySelectorAll('.vc[data-v]').forEach(e=>{const f=()=>{const vi=+e.dataset.v;if(e.dataset.p!==undefined){GT[vi][+e.dataset.p][+e.dataset.c]^=1;}sel=vi;draw();};e.onclick=f;e.onkeydown=k=>{if(k.key==='Enter'||k.key===' '){k.preventDefault();f();}};});
+    const v=V[sel],ref=REF[v.i];const g=GT[sel];const AC=g.reduce((s,x)=>s+x[0]+x[1],0),AN=12,AF=AC/AN;
+    const carriers=g.filter(x=>x[0]+x[1]>0).length;const hom=g.filter(x=>x[0]+x[1]===2).length;
+    const ts=PUR.has(ref)===PUR.has(v.alt);
+    const hdr=['#CHROM','POS','ID','REF','ALT','QUAL','FILTER','INFO','FORMAT',...P];
+    const row=['chr7',String(START+v.i),'.',ref,v.alt,'50','PASS',`AC=${AC};AN=${AN};AF=${AF.toFixed(3)}`,'GT',...g.map(x=>x[0]+'|'+x[1])];
+    const wd=hdr.map((hh,i)=>Math.max(hh.length,row[i].length)+2);
+    $('b7v').textContent=hdr.map((hh,i)=>hh.padEnd(wd[i])).join('')+'\n'+row.map((c,i)=>c.padEnd(wd[i])).join('');
+    $('b7o').innerHTML=`<b>Позиція ${START+v.i}:</b> REF = ${ref}, ALT = ${v.alt} — однонуклеотидний варіант (SNV), ${ts?'транзиція':'трансверсія'}.<br>`+
+      `<b>AC</b> (кількість копій ALT) = ${AC}; <b>AN</b> (усього копій: 6 людей × 2) = ${AN}; <b>AF</b> = AC / AN = <b>${f3(AF)}</b>. Алель ALT мають ${carriers} з 6 людей, з них ${hom} — у двох копіях (1|1).`+
+      `<div class="hint">Символ «|» означає, що відомо, яка копія від мами, а яка від тата (фазований генотип); «/» — що невідомо. Координати умовні. ${AC===1?'Варіант лише в одній копії у вибірці — це singleton: можлива нова, рідкісна мутація.':''}</div>`;}
+  draw();
+})();
+
+/* ---------- quiz ---------- */
+(function(){
+  const Q=[
+   ['Скільки копій кожного гена (на аутосомах) є в клітині людини?',['одна','дві: від мами і від тата','чотири','залежить від гена'],1,'Клітини тіла диплоїдні: кожна хромосома, а отже й кожен ген, є у двох копіях.'],
+   ['Що таке алель?',['будь-яка ділянка ДНК','один з варіантів того самого гена чи позиції','білок, що кодує ген','пара хромосом'],1,'Наприклад, нормальний алель і алель F508del — два алелі гена CFTR.'],
+   ['Людина має генотип N/f за геном CFTR. Вона…',['хвора на муковісцидоз','здоровий носій','не може мати дітей з муковісцидозом','гомозигота'],1,'F508del рецесивний: однієї робочої копії достатньо.'],
+   ['Скільки літер ДНК кодують одну амінокислоту?',['1','2','3','4'],2,'Кодон — три нуклеотиди.'],
+   ['Скільки хромосом у гаметі людини?',['46','23','92','2'],1,'Гамета гаплоїдна: одна хромосома з кожної з 23 пар.'],
+   ['Двоє носіїв N/f мають дитину. Імовірність, що дитина хвора (f/f):',['0','25 %','50 %','100 %'],1,'½ (алель f від мами) × ½ (алель f від тата) = ¼.'],
+   ['Чому в сім\'ї з 4 дітьми частки генотипів можуть сильно відрізнятися від решітки Пеннета?',['решітка неправильна','мала вибірка: на кожну дитину діє випадковість','діти успадковують лише від мами','через мутації'],1,'Ймовірність описує середнє на великій кількості; у малій вибірці випадкові відхилення великі.'],
+   ['У популяції 50 людей: 20 AA, 20 Aa, 10 aa. Частота алеля A:',['0,4','0,5','0,6','0,8'],2,'p = (2·20 + 20) / (2·50) = 60/100 = 0,6.'],
+   ['Що означає генотип 1|1 у файлі VCF?',['обидві копії мають референсний алель','одна копія ALT, одна REF','обидві копії мають альтернативний алель','генотип невідомий'],2,'0 — REF, 1 — ALT; «|» — фаза відома.'],
+   ['У вибірці 100 людей алель ALT має AC = 5. Чому дорівнює AF?',['0,05','0,025','0,5','5'],1,'AN = 2 × 100 = 200 копій; AF = 5 / 200 = 0,025.']
+  ];
+  let ans=new Array(Q.length).fill(null);
+  function render(){$('qbox').innerHTML=Q.map((q,i)=>`<div class="q" id="q${i}"><p>${i+1}. ${q[0]}</p>${q[1].map((o,j)=>`<button class="opt" data-q="${i}" data-o="${j}">${o}</button>`).join('')}<div class="expl" id="qe${i}"></div></div>`).join('');
+    $('qbox').querySelectorAll('.opt').forEach(b=>b.onclick=()=>pick(+b.dataset.q,+b.dataset.o));score();}
+  function pick(i,j){if(ans[i]!==null)return;ans[i]=j;const q=Q[i];document.querySelectorAll(`#q${i} .opt`).forEach((b,k)=>{b.disabled=true;if(k===q[2])b.classList.add('right');else if(k===j)b.classList.add('wrong');});
+    $('qe'+i).innerHTML=(j===q[2]?'<b style="color:#1f8a4c">Правильно.</b> ':'<b style="color:#c62828">Неправильно.</b> ')+q[3];score();}
+  function score(){const done=ans.filter(v=>v!==null).length,ok=ans.filter((v,i)=>v===Q[i][2]).length;const n=Q.length;
+    $('qscore').innerHTML=done<n?`Відповіли на ${done} з ${n} питань.`:`<span class="pill ${ok>=8?'good':ok>=6?'warn':'bad'}">Результат: ${ok} з ${n}</span> ${ok>=8?'Чудово! Можна переходити до <a href="HW4_Genetic_Variation_1000G.html">HW4</a>.':'Поверніться до розділів з помилками і спробуйте ще раз.'}`;}
+  $('qreset').onclick=()=>{ans=new Array(Q.length).fill(null);render();};render();
+})();
+
+let rt;window.addEventListener('resize',()=>{clearTimeout(rt);rt=setTimeout(()=>redraws.forEach(f=>f()),150);});
+redraws.forEach(f=>f());
+})();
+</script>
+
+
+</section>
+
+</main> <!-- /main -->
+<style>
+.lvl{display:inline-block;padding:2px 10px;border-radius:999px;font-size:.8rem;font-weight:600;margin-right:4px;border:1px solid transparent}
+.lvl1{background:#e6f4ea;color:#1b6b3a;border-color:#b9dfc6}
+.lvl2{background:#e8f0fb;color:#1f5aa6;border-color:#bfd3f0}
+.lvl3{background:#f1eafa;color:#5b3a99;border-color:#d6c6ef}
+.gl{border-bottom:1.5px dotted #2a78d6;cursor:help;outline:none}
+.gl:focus-visible{outline:2px solid #2a78d6;outline-offset:2px;border-radius:2px}
+#gl-pop{position:absolute;z-index:2000;max-width:320px;background:#1f2933;color:#fff;font-size:.86rem;line-height:1.45;padding:10px 12px;border-radius:8px;box-shadow:0 6px 20px rgba(0,0,0,.18);display:none}
+#gl-pop b{font-size:.92rem}
+#gl-pop .en{color:#b8c4d0;font-size:.8rem;margin-left:4px}
+#gl-pop a{color:#9cc8ff}
+.ig-progress{display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-size:.88rem;color:#52606d;margin:.5rem 0 1rem}
+.ig-progress .bar{flex:1 1 180px;height:8px;background:#e3e8ee;border-radius:99px;overflow:hidden;max-width:360px}
+.ig-progress .bar span{display:block;height:100%;background:#1f8a4c;border-radius:99px;transition:width .3s}
+.ig-done{display:inline-flex;align-items:center;gap:6px;margin:.25rem 0 1.5rem;padding:4px 12px;border:1px solid #cfd8e3;border-radius:999px;background:#fff;color:#52606d;font-size:.85rem;cursor:pointer}
+.ig-done[aria-pressed="true"]{background:#e6f4ea;border-color:#9ccfae;color:#1b6b3a}
+.ig-done:focus-visible{outline:2px solid #2a78d6;outline-offset:2px}
+.route{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:1rem 0 1.5rem}
+.route a.card{display:block;text-decoration:none;color:#1f2933;border:1px solid #dde3ea;border-radius:10px;padding:12px 14px;background:#fff;min-width:0}
+.route a.card:hover{border-color:#2a78d6}
+.route a.card.here{border:2px solid #2a78d6;background:#f4f8fe}
+.route .step{font-size:.78rem;color:#7b8794;text-transform:uppercase;letter-spacing:.04em}
+.route .nm{font-weight:600;margin:2px 0 6px}
+.route ul{margin:0;padding-left:1.1em;font-size:.84rem;color:#52606d}
+#glossary .glsearch{max-width:360px;margin-bottom:10px}
+#glossary dl{display:grid;grid-template-columns:minmax(140px,220px) 1fr;gap:6px 16px;margin:0}
+#glossary dt{font-weight:600}
+#glossary dt .en{display:block;font-weight:400;font-size:.8rem;color:#7b8794}
+#glossary dd{margin:0;color:#334155}
+#glossary .row:target dt,#glossary .row:target dd{background:#fff6d6}
+@media (max-width:560px){#glossary dl{grid-template-columns:1fr}#glossary dd{margin-bottom:8px}}
+</style>
+<div id="gl-pop" role="tooltip"></div>
+<script>
+(function(){
+"use strict";
+var BASICS="Genetics_Basics_Interactive.html";
+var G=[
+ ["genome","геном","genome","геном(?!ік)\\p{L}*","Уся ДНК організму. У людини ≈ 3,1 млрд пар основ на один набір хромосом; у кожній клітині таких наборів два."],
+ ["genomics","геноміка","genomics","геномік\\p{L}*","Наука, що вивчає геноми цілком: усі гени та всю мінливість одночасно."],
+ ["chromosome","хромосома","chromosome","хромосом\\p{L}*","Одна дуже довга молекула ДНК, упакована з білками. У людини 23 пари: одна хромосома кожної пари від мами, друга від тата."],
+ ["gene","ген","gene",null,"Ділянка ДНК, що містить «рецепт» білка або функціональної РНК. У людини ≈ 20 000 генів, що кодують білки."],
+ ["nucleotide","нуклеотид","nucleotide / base","нуклеотид\\p{L}*","Одна «літера» ДНК: A, C, G або T. У подвійній спіралі A завжди навпроти T, а G навпроти C."],
+ ["codon","кодон","codon","кодон\\p{L}*","Три нуклеотиди поспіль, що кодують одну амінокислоту або сигнал «стоп»."],
+ ["exon","екзон","exon","екзон\\p{L}*","Частина гена, що залишається в мРНК після сплайсингу і (здебільшого) кодує білок."],
+ ["intron","інтрон","intron","інтрон\\p{L}*","Частина гена, яку вирізають з РНК під час сплайсингу."],
+ ["locus","локус","locus","локус\\p{L}*","Певне місце на хромосомі: позиція SNP або ген."],
+ ["allele","алель","allele","алел\\p{L}*","Один з варіантів того самого локусу. Наприклад, нормальний алель і алель F508del гена CFTR."],
+ ["allelefreq","частота алеля","allele frequency (AF)","частот\\p{L}* алел\\p{L}*","Частка копій певного алеля серед усіх копій цього локусу в популяції. У VCF — поле AF = AC / AN."],
+ ["diploid","диплоїдний","diploid","диплоїдн\\p{L}*","Має дві копії кожної хромосоми (від мами і від тата). Більшість клітин людини диплоїдні."],
+ ["haploid","гаплоїдний","haploid","гаплоїдн\\p{L}*","Має одну копію кожної хромосоми. Гамети (яйцеклітини, сперматозоїди) гаплоїдні."],
+ ["genotype","генотип","genotype","генотип\\p{L}*","Які два алелі має особа в локусі: 0/0, 0/1 або 1/1 (у записі VCF)."],
+ ["phenotype","фенотип","phenotype","фенотип\\p{L}*","Ознака, яку можна спостерігати чи виміряти: група крові, зріст, наявність хвороби."],
+ ["haplotype","гаплотип","haplotype","гаплотип\\p{L}*","Набір алелів на одній хромосомі (одній копії). Кожна людина має два гаплотипи для кожної ділянки."],
+ ["homozygote","гомозигота","homozygote","гомозигот(?!ност)\\p{L}*","Особа з двома однаковими алелями в локусі (0/0 або 1/1)."],
+ ["heterozygosity","гетерозиготність","heterozygosity (H)","гетерозиготн\\p{L}*","Частка гетерозиготних генотипів; для двох алелів очікується 2pq. Головна міра генетичного різноманіття."],
+ ["heterozygote","гетерозигота","heterozygote","гетерозигот(?!н)\\p{L}*","Особа з двома різними алелями в локусі (0/1)."],
+ ["dominant","домінантний","dominant","домінантн\\p{L}*","Алель, що проявляється навіть в одній копії (у гетерозиготі)."],
+ ["recessive","рецесивний","recessive","рецесивн\\p{L}*","Алель, що проявляється лише у двох копіях (у гомозиготі). Носії з однією копією зазвичай здорові."],
+ ["codominance","кодомінантність","codominance","кодомінант\\p{L}*","Обидва алелі проявляються в гетерозиготі одночасно, як A і B у групі крові AB."],
+ ["mutation","мутація","mutation","мутаці\\p{L}*","Зміна послідовності ДНК. Нова мутація спочатку існує в одній копії."],
+ ["polymorphism","поліморфізм","polymorphism","поліморфізм\\p{L}*","Варіант, що трапляється в популяції з частотою ≥ 1 %."],
+ ["snp","SNP","single nucleotide polymorphism","SNP","Поширений однонуклеотидний варіант (поліморфізм)."],
+ ["snv","SNV","single nucleotide variant","SNV","Заміна однієї літери ДНК незалежно від частоти."],
+ ["indel","indel","insertion/deletion","indel\\p{L}*","Вставка або втрата кількох нуклеотидів (до 50 п.о.)."],
+ ["sv","структурний варіант","structural variant (SV)","структурн\\p{L}* варіант\\p{L}*","Велика зміна ДНК (≥ 50 п.о.): делеція, дуплікація, інверсія, транслокація."],
+ ["cnv","CNV","copy number variant","CNV","Варіант кількості копій ділянки ДНК (делеція чи дуплікація зазвичай від ≈ 1 тис. п.о.)."],
+ ["transition","транзиція","transition","транзиці\\p{L}*","Заміна пурину на пурин (A↔G) або піримідину на піримідин (C↔T)."],
+ ["transversion","трансверсія","transversion","трансверсі\\p{L}*","Заміна пурину на піримідин чи навпаки (наприклад, A↔C)."],
+ ["missense","міссенс","missense","міссенс|missense","Заміна, яка змінює одну амінокислоту в білку."],
+ ["nonsense","нонсенс","nonsense / stop gained","нонсенс|nonsense","Заміна, яка створює передчасний стоп-кодон: білок обривається."],
+ ["synonymous","синонімічна заміна","synonymous / silent","синонімічн\\p{L}*","Заміна, яка не змінює амінокислоту (завдяки виродженості генетичного коду)."],
+ ["frameshift","зсув рамки зчитування","frameshift","зсув\\p{L}* рамки|frameshift","Вставка чи делеція, не кратна 3: усі наступні кодони читаються неправильно."],
+ ["lof","LoF","loss-of-function","loss-of-function|LoF","Варіант, що руйнує функцію гена: нонсенс, зсув рамки, порушення сплайсингу."],
+ ["meiosis","мейоз","meiosis","мейоз\\p{L}*","Поділ клітини, при якому утворюються гаплоїдні гамети; під час нього відбувається кросинговер."],
+ ["gamete","гамета","gamete","гамет\\p{L}*","Статева клітина (яйцеклітина або сперматозоїд) з одним набором хромосом."],
+ ["crossover","кросинговер","crossing over","кросинговер\\p{L}*","Обмін ділянками між хромосомами від мами і від тата під час мейозу."],
+ ["recombination","рекомбінація","recombination","рекомбінаці\\p{L}*|рекомбінант\\p{L}*","Утворення нових комбінацій алелів на хромосомі внаслідок кросинговеру."],
+ ["cm","сантиморган","centimorgan (cM)","сантиморган\\p{L}*","Генетична відстань: 1 cM — 1 % імовірності рекомбінації між двома локусами за один мейоз."],
+ ["ld","нерівновага за зчепленням","linkage disequilibrium (LD)","нерівноваг\\p{L}* за зчепленням|LD","Невипадкове поєднання алелів сусідніх локусів: вони успадковуються «пакетом»."],
+ ["germline","германна мутація","germline mutation","германн\\p{L}*|зародков\\p{L}* лін\\p{L}*","Мутація в клітинах, з яких утворюються гамети. Передається нащадкам."],
+ ["somatic","соматична мутація","somatic mutation","соматичн\\p{L}*","Мутація в клітинах тіла. Не передається нащадкам."],
+ ["denovo","de novo мутація","de novo mutation","de novo","Нова мутація, якої немає в жодного з батьків: виникла в їхній гаметі."],
+ ["mosaic","мозаїцизм","mosaicism","мозаїцизм\\p{L}*","Стан, коли мутацію несуть лише частина клітин організму."],
+ ["drift","дрейф генів","genetic drift","дрейф\\p{L}*","Випадкові зміни частот алелів через те, що в наступне покоління потрапляє лише вибірка генів. Сильніший у малих популяціях."],
+ ["selection","природний відбір","natural selection","відб[іо]р\\p{L}*","Різний внесок генотипів у наступне покоління через різну виживаність чи плодючість."],
+ ["fixation","фіксація","fixation","фіксаці\\p{L}*|зафіксува\\p{L}*","Стан, коли алель досяг частоти 100 %: інших алелів у популяції не лишилось."],
+ ["bottleneck","вузьке місце","bottleneck","вузьк\\p{L}* міс\\p{L}*","Різке скорочення чисельності популяції, після якого лишається лише частина різноманіття."],
+ ["founder","ефект засновника","founder effect","ефект\\p{L}* засновника","Нова популяція засновується невеликою групою, тож її частоти алелів випадково відрізняються від вихідних."],
+ ["hwe","закон Харді–Вайнберга","Hardy–Weinberg equilibrium","Харді","За випадкового схрещування генотипи розподіляються як p², 2pq, q², а частоти алелів не змінюються."],
+ ["inbreeding","інбридинг","inbreeding","інбридинг\\p{L}*|інбредн\\p{L}*","Схрещування родичів. Збільшує частку гомозигот, не змінюючи частот алелів."],
+ ["migration","міграція","migration / gene flow","міграці\\p{L}*","Перенесення алелів між популяціями. Робить популяції схожішими."],
+ ["ne","ефективний розмір популяції","effective population size (Ne)","ефективн\\p{L}* розмір\\p{L}*","Розмір ідеальної популяції з таким самим дрейфом. Зазвичай менший за фактичну чисельність."],
+ ["pca","PCA","principal component analysis","PCA","Метод, що зводить тисячі генотипів до кількох осей і показує людей точками: схожі генотипи опиняються поруч."],
+ ["coalescent","коалесцент","coalescent","коалесцен\\p{L}*","Генеалогія вибірки, простежена назад у часі до спільного предка."],
+ ["tajima","Tajima's D","Tajima's D","Tajima","Статистика, що порівнює кількість рідкісних і частих варіантів; ≈ 0 для нейтральної популяції сталого розміру."],
+ ["sweep","селективне вимітання","selective sweep","вимітанн\\p{L}*","Швидке поширення корисного алеля разом із сусідньою ділянкою хромосоми; лишає довгий спільний гаплотип."],
+ ["gwas","GWAS","genome-wide association study","GWAS","Пошук асоціацій ознаки з мільйонами SNP по всьому геному."],
+ ["roh","ділянка гомозиготності","run of homozygosity (ROH)","ROH|ділянк\\p{L}* гомозиготності","Довга смуга гомозиготних генотипів: дві копії однієї предкової ділянки."],
+ ["heritability","спадковість","heritability (h²)","спадковіст\\p{L}*","Частка мінливості ознаки, зумовлена генетичними відмінностями в цій популяції."],
+ ["polygenic","полігенна ознака","polygenic trait","полігенн\\p{L}*","Ознака, на яку впливає багато генів з малими ефектами (зріст, маса)."],
+ ["clock","молекулярний годинник","molecular clock","молекулярн\\p{L}* годинник\\p{L}*","Оцінка часу розходження видів за кількістю відмінностей у послідовностях."],
+ ["dnds","dN/dS","dN/dS ratio","dN/dS","Відношення швидкостей несинонімічних і синонімічних замін: показує силу відбору."],
+ ["phylogeny","філогенетичне дерево","phylogenetic tree","філогенетичн\\p{L}* дерев\\p{L}*","Схема еволюційної спорідненості видів чи генів."],
+ ["vcf","VCF","Variant Call Format","VCF","Текстовий формат для варіантів: позиція, REF, ALT і генотипи кожної особи."]
+];
+window.GLOSSARY=G;
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[c];});}
+var onBasics=!!document.getElementById("glossary");
+/* glossary list (basics page) */
+function renderGlossary(){var box=document.getElementById("glossary");if(!box)return;
+  var items=G.slice().sort(function(a,b){return a[1].localeCompare(b[1],"uk");});
+  box.innerHTML='<input type="search" class="form-control form-control-sm glsearch" id="glq" placeholder="Пошук терміну українською або англійською" aria-label="Пошук у глосарії"><dl>'+
+    items.map(function(g){return '<div class="row" id="gl-'+g[0]+'" style="display:contents"><dt>'+esc(g[1])+'<span class="en">'+esc(g[2])+'</span></dt><dd>'+esc(g[4])+'</dd></div>';}).join("")+'</dl>';
+  var q=document.getElementById("glq");q.addEventListener("input",function(){var v=q.value.trim().toLowerCase();
+    box.querySelectorAll(".row").forEach(function(r){r.style.display=(!v||r.textContent.toLowerCase().indexOf(v)>=0)?"contents":"none";});});}
+/* tooltips */
+var pop=document.getElementById("gl-pop");var cur=null;
+function show(el){var g=G.find(function(x){return x[0]===el.dataset.gl;});if(!g)return;cur=el;
+  pop.innerHTML='<b>'+esc(g[1])+'</b><span class="en">'+esc(g[2])+'</span><div style="margin-top:4px">'+esc(g[4])+'</div>'+(onBasics?'':'<div style="margin-top:6px"><a href="'+BASICS+'#gl-'+g[0]+'">Глосарій →</a></div>');
+  pop.style.display="block";var r=el.getBoundingClientRect();var pw=pop.offsetWidth;var left=Math.max(8,Math.min(window.scrollX+r.left,window.scrollX+document.documentElement.clientWidth-pw-8));
+  pop.style.left=left+"px";pop.style.top=(window.scrollY+r.bottom+6)+"px";}
+function hide(){pop.style.display="none";cur=null;}
+document.addEventListener("keydown",function(e){if(e.key==="Escape")hide();});
+document.addEventListener("click",function(e){var t=e.target.closest?e.target.closest(".gl"):null;if(t){e.preventDefault();if(cur===t)hide();else show(t);}else if(!pop.contains(e.target))hide();});
+function wrapTerms(){
+  var root=document.querySelector("main#quarto-document-content")||document.querySelector("main")||document.body;
+  var autos=G.filter(function(g){return g[3];});
+  var parts;try{parts=autos.map(function(g){return new RegExp("(?<![\\p{L}\\p{N}])(?:"+g[3]+")(?![\\p{L}\\p{N}])","u");});}catch(e){return;}
+  var sections=root.querySelectorAll("section.level1");if(!sections.length)sections=[root];
+  var skip="pre,code,a,h1,h2,h3,h4,h5,h6,.lab,.math,.gl,.quiz,#glossary,.route,.callout-header,.lvl,script,style,button,input,select,label,canvas,mjx-container";
+  sections.forEach(function(sec){var used={};
+    var blocks=sec.querySelectorAll("p,li,dd");
+    blocks.forEach(function(b){if(b.closest(skip))return;
+      var walker=document.createTreeWalker(b,NodeFilter.SHOW_TEXT,{acceptNode:function(n){return n.parentElement&&n.parentElement.closest(skip)?NodeFilter.FILTER_REJECT:NodeFilter.FILTER_ACCEPT;}});
+      var nodes=[];while(walker.nextNode())nodes.push(walker.currentNode);
+      nodes.forEach(function(node){var text=node.nodeValue;var best=null;
+        for(var i=0;i<autos.length;i++){if(used[autos[i][0]])continue;var m=parts[i].exec(text);if(m&&(best===null||m.index<best.idx||(m.index===best.idx&&m[0].length>best.len)))best={idx:m.index,len:m[0].length,i:i};}
+        if(!best)return;used[autos[best.i][0]]=1;
+        var before=text.slice(0,best.idx),word=text.slice(best.idx,best.idx+best.len),after=text.slice(best.idx+best.len);
+        var span=document.createElement("span");span.className="gl";span.tabIndex=0;span.dataset.gl=autos[best.i][0];span.textContent=word;span.setAttribute("role","button");span.setAttribute("aria-label",word+": пояснення терміну");
+        span.addEventListener("mouseenter",function(){show(span);});span.addEventListener("mouseleave",function(){setTimeout(function(){if(!pop.matches(":hover")&&cur===span)hide();},150);});
+        span.addEventListener("focus",function(){show(span);});span.addEventListener("blur",function(){setTimeout(function(){if(document.activeElement&&pop.contains(document.activeElement))return;if(cur===span)hide();},150);});
+        var frag=document.createDocumentFragment();if(before)frag.appendChild(document.createTextNode(before));frag.appendChild(span);if(after)frag.appendChild(document.createTextNode(after));
+        node.parentNode.replaceChild(frag,node);});
+    });});
+  pop.addEventListener("mouseleave",hide);}
+/* progress */
+function progress(){var root=document.querySelector("main#quarto-document-content")||document.body;
+  var secs=[].slice.call(root.querySelectorAll("section.level1")).filter(function(s){var h=s.querySelector("h1");return h&&/^\s*\d+\./.test(h.textContent);});
+  if(!secs.length)return;var key="ig-progress:"+location.pathname.split("/").pop();var st={};try{st=JSON.parse(localStorage.getItem(key)||"{}");}catch(e){st={};}
+  var bar=document.createElement("div");bar.className="ig-progress";bar.innerHTML='<span id="ig-ptxt"></span><div class="bar"><span id="ig-pbar"></span></div>';
+  secs[0].parentNode.insertBefore(bar,secs[0]);
+  function upd(){var n=secs.filter(function(s){return st[s.id];}).length;document.getElementById("ig-ptxt").textContent="Ви розібрали "+n+" з "+secs.length+" розділів";document.getElementById("ig-pbar").style.width=(100*n/secs.length)+"%";}
+  secs.forEach(function(s){var b=document.createElement("button");b.type="button";b.className="ig-done";
+    function lab(){var on=!!st[s.id];b.setAttribute("aria-pressed",on?"true":"false");b.textContent=on?"✓ Розібрався з цим розділом":"Позначити розділ як розібраний";}
+    b.addEventListener("click",function(){st[s.id]=!st[s.id];try{localStorage.setItem(key,JSON.stringify(st));}catch(e){}lab();upd();});lab();s.appendChild(b);});
+  upd();}
+function init(){try{renderGlossary();}catch(e){}try{wrapTerms();}catch(e){}try{progress();}catch(e){}}
+if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init);else init();
+})();
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/hrubiian\.github\.io\/Genomics2026\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

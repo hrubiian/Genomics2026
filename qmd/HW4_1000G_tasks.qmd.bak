@@ -1,0 +1,540 @@
+---
+title: "HW4. Генетична мінливість людини. 1000 Genomes"
+author: "Nazarii Hrubiian"
+---
+
+# Ціль
+
+На реальних даних проєкту **1000 Genomes** закріпити всі поняття з лекції [Типи генетичної мінливості](https://docs.google.com/presentation/d/1K9W07kr51umJofHRvLYKCYJ8g9X7BuDPzHIvh9OkoHU/edit?usp=sharing):
+
+-   **Генотип і гаплотип**: як фазовані генотипи (`0|1`) записані у VCF
+-   **Типи мінливості**: SNV, indel, структурні варіанти (SV), мультиалельні сайти
+-   **Транзиції та трансверсії**, Ts/Tv як метрика якості
+-   **Мутація ≠ поліморфізм**: частота алеля, рідкісні та часті варіанти, частотний спектр (SFS)
+-   **Наслідки варіантів**: missense / nonsense (stop_gained) / synonymous / frameshift, **loss-of-function**, номенклатура HGVS
+-   **Частоти алелів у популяціях**: природний відбір, **ефект засновника**, **ефект вузького місця**
+-   **Закон Харді–Вайнберга** і що його порушує
+-   **Рекомбінація**: сантиморгани, гарячі точки рекомбінації, кросинговер у тріо
+-   **Нерівновага за зчепленням (LD)**: D, D′, r², спад LD з відстанню, tag-SNP
+-   **De novo мутації** та менделівські помилки в тріо
+-   **Соматичні vs германні** мутації: що можна і чого не можна побачити в цих даних
+
+# Дані
+
+Ми використовуємо високопокривне (30×) повногеномне секвенування розширеної когорти 1000 Genomes: **3202 особи з 26 популяцій**, серед них **602 тріо** (батько–мати–дитина). Варіанти викликані відносно **GRCh38** і **фазовані** (SNV, indel та SV в одному файлі).
+
+-   Стаття: [Byrska-Bishop et al., Cell 2022](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC9439720/)
+-   FTP-папка: <https://ftp.1000genomes.ebi.ac.uk/vol1/ftp/data_collections/1000G_2504_high_coverage/>
+-   Фазовані VCF по хромосомах: папка `working/20220422_3202_phased_SNV_INDEL_SV/`
+
+::: callout-important
+## Розмір даних
+
+Повний файл хромосоми 22 має кілька сотень мегабайт, а весь геном — сотні гігабайт. Тому ми **не завантажуємо весь файл**: `bcftools` вміє читати лише потрібний регіон напряму з сервера за індексом (`.tbi`). Працюємо з ділянкою **chr22:20–30 Mb** (\~10 Mb, усі 3202 особи). Якщо інтернет повільний або мало місця на диску, зменшіть регіон до 5 Mb (наприклад, `chr22:20000000-25000000`).
+:::
+
+# Пайплайн
+
+1.  Завантаження регіону chr22 і таблиці популяцій
+2.  Структура VCF, генотипи та гаплотипи
+3.  Типи варіантів, Ts/Tv
+4.  Частоти алелів і частотний спектр
+5.  Анотація наслідків (`bcftools csq`), LoF, HGVS, gnomAD/ClinVar
+6.  Частоти в популяціях: відбір, ефект засновника, вузьке місце
+7.  Харді–Вайнберг
+8.  Генетична карта і сантиморгани
+9.  LD (`plink`)
+10. Тріо: de novo мутації, менделівські помилки, кросинговер
+
+# 0. Середовище та завантаження даних
+
+``` bash
+# створення середовища popgen та активація
+conda create --yes -n popgen -c conda-forge -c bioconda bcftools htslib samtools plink pandas matplotlib
+conda activate popgen
+# робоча папка
+mkdir -p HW4_1000G/{data,results,plots}
+cd HW4_1000G
+
+# адреси файлів
+BASE=https://ftp.1000genomes.ebi.ac.uk/vol1/ftp/data_collections/1000G_2504_high_coverage
+VCF=$BASE/working/20220422_3202_phased_SNV_INDEL_SV/1kGP_high_coverage_Illumina.chr22.filtered.SNV_INDEL_SV_phased_panel.vcf.gz
+
+# таблиця зразків: родина, батько, мати, стать, популяція, суперпопуляція
+wget -P data $BASE/20130606_g1k_3202_samples_ped_population.txt
+head data/20130606_g1k_3202_samples_ped_population.txt
+
+# завантаження лише регіону chr22:20-30 Mb напряму з сервера
+bcftools view -r chr22:20000000-30000000 $VCF -Oz -o data/chr22_20-30Mb.vcf.gz
+bcftools index -t data/chr22_20-30Mb.vcf.gz
+```
+
+::: callout-tip
+## Якщо `wget` або `bcftools` пише "not found"
+
+Назви файлів на FTP іноді змінюються. Відкрийте посилання з розділу **Дані** у браузері, знайдіть файл для `chr22` (закінчується на `.vcf.gz`) і таблицю зразків (`*samples_ped_population.txt`), та підставте актуальні назви у змінні `VCF` і `wget`.
+:::
+
+Допоміжні списки зразків, які знадобляться далі:
+
+``` bash
+P=data/20130606_g1k_3202_samples_ped_population.txt
+# зразок -> популяція (26 популяцій, напр. YRI, CEU, FIN, CHB)
+awk 'NR>1{print $2"\t"$6}' $P > data/sample2pop.txt
+# зразок -> суперпопуляція (AFR, AMR, EAS, EUR, SAS)
+awk 'NR>1{print $2"\t"$7}' $P > data/sample2superpop.txt
+# неспоріднені особи (без батьків у таблиці) - для частот і HWE
+awk 'NR>1 && $3=="0" && $4=="0"{print $2}' $P > data/unrelated.txt
+wc -l data/unrelated.txt
+# скільки зразків у кожній популяції
+cut -f2 data/sample2pop.txt | sort | uniq -c
+```
+
+# 1. Структура VCF: генотип і гаплотип
+
+``` bash
+# заголовок: які поля INFO та FORMAT є у файлі
+bcftools view -h data/chr22_20-30Mb.vcf.gz | grep -E '^##(INFO|FORMAT)'
+# кількість зразків
+bcftools query -l data/chr22_20-30Mb.vcf.gz | wc -l
+# перші записи (лише 3 зразки, щоб влізло в екран)
+bcftools view -H data/chr22_20-30Mb.vcf.gz | head -5 | cut -f1-12
+
+# гетерозиготні позиції однієї особи (NA12878 - відомий референсний зразок)
+bcftools query -s NA12878 -i 'GT="het"' -f '%POS\t%REF\t%ALT\t[%GT]\n' data/chr22_20-30Mb.vcf.gz | head -20
+
+# два гаплотипи NA12878 на ділянці 100 kb (лише позиції з альтернативним алелем)
+bcftools query -s NA12878 -r chr22:25000000-25100000 -i 'GT="alt"' -f '%POS\t%REF\t%ALT\t[%GT]\n' data/chr22_20-30Mb.vcf.gz | head -15 \
+  | awk -F'\t' '{split($4,a,"|"); h1=h1 (a[1]=="0"?$2:$3) " "; h2=h2 (a[2]=="0"?$2:$3) " "} END{print "гаплотип 1: " h1; print "гаплотип 2: " h2}'
+```
+
+**Завдання**
+
+-   Поясніть різницю між `0/1` і `0|1`. Що означає `|`?
+-   Що таке гаплотип і генотип на прикладі NA12878? Скільки гаплотипів має диплоїдна особа?
+-   Чи можна з фазованого генотипу `0|1` сказати, від якого з батьків отримано алель? Чому ні без тріо?
+
+# 2. Типи мінливості
+
+Мультиалельні сайти (`ALT=A,T`) спочатку розбиваємо на окремі записи, щоб кожен рядок мав один альтернативний алель:
+
+``` bash
+bcftools norm -m -any data/chr22_20-30Mb.vcf.gz -Oz -o data/chr22.split.vcf.gz
+bcftools index -t data/chr22.split.vcf.gz
+
+# загальна статистика
+bcftools stats data/chr22.split.vcf.gz > results/chr22.stats
+grep '^SN' results/chr22.stats
+
+# кількість за типами
+for t in snps indels mnps other; do echo -n "$t: "; bcftools view -H -v $t data/chr22.split.vcf.gz | wc -l; done
+
+# класи за розміром: SNV, indel < 50 bp, SV >= 50 bp, символьні SV (<DEL>, <INV> ...)
+bcftools query -f '%TYPE\t%REF\t%ALT\n' data/chr22.split.vcf.gz \
+  | awk -F'\t' '{d=length($3)-length($2); if(d<0)d=-d;
+      if($1=="SNP") c="SNV"; else if($3 ~ /^</) c="SV (symbolic)"; else if(d<50) c="indel <50 bp"; else c="SV >=50 bp";
+      n[c]++} END{for(k in n) print k"\t"n[k]}'
+
+# розподіл довжин indel (від'ємні - делеції, додатні - інсерції)
+bcftools query -i 'TYPE="indel"' -f '%REF\t%ALT\n' data/chr22.split.vcf.gz \
+  | awk '{print length($2)-length($1)}' | sort -n | uniq -c > results/indel_lengths.txt
+awk '$2>=-20 && $2<=20' results/indel_lengths.txt
+```
+
+**Завдання**
+
+-   Скільки в регіоні SNV, indel, SV? Скільки було мультиалельних сайтів (див. вивід `bcftools norm`)?
+-   Яких indel більше: інсерцій чи делецій? Яка довжина найчастіша? Чому indel довжиною, кратною 3, особливо цікаві для кодуючих ділянок?
+-   Знайдіть у заголовку VCF, як позначені структурні варіанти (`##INFO=<ID=SVTYPE` або символьні алелі `<DEL>`). Знайдіть одну делецію ≥ 50 bp та одну символьну SV і відкрийте їх у [UCSC Genome Browser](https://genome.ucsc.edu/) (GRCh38).
+-   Чи є в цих даних CNV? Чим CNV відрізняється від звичайної делеції?
+
+# 3. Транзиції та трансверсії
+
+``` bash
+# Ts/Tv
+grep -A1 '^# TSTV' results/chr22.stats
+# спектр замін (A>C, A>G, ...)
+grep '^ST' results/chr22.stats
+# (Optional) графіки
+plot-vcfstats -p plots/vcfstats results/chr22.stats
+```
+
+**Завдання**
+
+-   Яке значення Ts/Tv ви отримали? Порівняйте з твердженням з лекції, що транзиції трапляються вдвічі частіше за трансверсії. Яке значення ви отримали для *E. coli* у HW3?
+-   Можливих трансверсій удвічі більше, ніж транзицій. Яким було б Ts/Tv, якби заміни були випадковими? Чому Ts/Tv використовують як метрику якості виклику варіантів?
+-   Яка заміна найчастіша? Пов'яжіть це з дезамінуванням 5-метилцитозину в CpG.
+
+# 4. Мутація чи поліморфізм: частотний спектр
+
+Частоти рахуємо лише для **неспоріднених** осіб, інакше діти «подвоюють» алелі батьків:
+
+``` bash
+bcftools view -S data/unrelated.txt data/chr22.split.vcf.gz -Ou \
+  | bcftools +fill-tags -Oz -o data/chr22.unrel.tags.vcf.gz -- -t AC,AN,AF,MAF,HWE
+bcftools index -t data/chr22.unrel.tags.vcf.gz
+
+# AC і MAF для SNV
+bcftools query -i 'TYPE="snp" && AC>0' -f '%AC\t%MAF\n' data/chr22.unrel.tags.vcf.gz > results/snp_ac_maf.txt
+
+# частки рідкісних і частих варіантів
+awk '{ if($1==1) s++; else if($2<0.01) r++; else if($2<0.05) l++; else c++ } END{ t=s+r+l+c;
+  printf "singletons (AC=1)\t%d\t%.1f%%\nрідкісні (MAF<1%%)\t%d\t%.1f%%\nнизькочастотні (1-5%%)\t%d\t%.1f%%\nчасті (MAF>=5%%)\t%d\t%.1f%%\n",
+  s,100*s/t, r,100*r/t, l,100*l/t, c,100*c/t }' results/snp_ac_maf.txt
+```
+
+Частотний спектр алелів (SFS):
+
+``` bash
+python3 - <<'EOF'
+import pandas as pd, matplotlib
+matplotlib.use("Agg")
+import matplotlib.pyplot as plt
+d = pd.read_csv("results/snp_ac_maf.txt", sep="\t", names=["AC", "MAF"])
+ax = d["AC"].clip(upper=50).value_counts().sort_index().plot(kind="bar", figsize=(10, 4), width=0.9)
+ax.set_xlabel("Кількість копій альтернативного алеля (AC; 50 = 50 і більше)")
+ax.set_ylabel("Кількість SNV")
+ax.set_title("Частотний спектр алелів (SFS), chr22:20-30 Mb")
+plt.tight_layout(); plt.savefig("plots/sfs.png", dpi=150)
+EOF
+```
+
+**Завдання**
+
+-   За класичним визначенням поліморфізм має частоту ≥ 1 % у популяції. Яка частка SNV у вашому регіоні є поліморфізмами, а яка — рідкісними варіантами («мутаціями»)?
+-   Чому singletons (AC = 1) — найчисленніший клас? Пов'яжіть це зі швидким зростанням людської популяції.
+-   Чому сучасні рекомендації (ACMG) радять говорити «варіант» замість «мутація» і «поліморфізм»?
+
+# 5. Наслідки варіантів: missense, nonsense, LoF
+
+Анотуємо варіанти за допомогою `bcftools csq` з анотацією генів Ensembl. Як і в HW3, назву хромосоми потрібно перейменувати (`chr22` → `22`):
+
+``` bash
+# референс chr22 і анотація генів Ensembl (GRCh38)
+wget -P data https://ftp.ensembl.org/pub/release-112/fasta/homo_sapiens/dna/Homo_sapiens.GRCh38.dna.chromosome.22.fa.gz
+wget -P data https://ftp.ensembl.org/pub/release-112/gff3/homo_sapiens/Homo_sapiens.GRCh38.112.chromosome.22.gff3.gz
+gunzip data/Homo_sapiens.GRCh38.dna.chromosome.22.fa.gz
+samtools faidx data/Homo_sapiens.GRCh38.dna.chromosome.22.fa
+
+# перейменування хромосоми і видалення генотипів (анотуємо сайти, AF зберігається)
+echo "chr22 22" > data/chrname.txt
+bcftools view -G data/chr22.unrel.tags.vcf.gz -Ou | bcftools annotate --rename-chrs data/chrname.txt -Oz -o data/chr22.sites.vcf.gz
+
+# анотація: -l = кожен варіант окремо (без урахування гаплотипу)
+bcftools csq -l -f data/Homo_sapiens.GRCh38.dna.chromosome.22.fa -g data/Homo_sapiens.GRCh38.112.chromosome.22.gff3.gz \
+  data/chr22.sites.vcf.gz -Oz -o results/chr22.csq.vcf.gz
+
+# приклади анотації (поле BCSQ: наслідок|ген|транскрипт|біотип|ланцюг|зміна білка|зміна ДНК)
+bcftools query -i 'BCSQ!="."' -f '%POS\t%REF\t%ALT\t%AF\t%BCSQ\n' results/chr22.csq.vcf.gz | cut -c1-200 | head
+
+# таблиця: наслідок, AF, позиція
+bcftools query -i 'BCSQ!="."' -f '%POS\t%AF\t%BCSQ\n' results/chr22.csq.vcf.gz \
+  | awk -F'\t' '{split($3,a,"|"); c=a[1]; sub(/^\*/,"",c); split(c,b,"&"); print b[1]"\t"$2"\t"$1}' > results/csq_af.txt
+cut -f1 results/csq_af.txt | sort | uniq -c | sort -nr
+```
+
+Порівняння частот алелів для різних наслідків:
+
+``` bash
+python3 - <<'EOF'
+import pandas as pd, matplotlib
+matplotlib.use("Agg")
+import matplotlib.pyplot as plt
+d = pd.read_csv("results/csq_af.txt", sep="\t", names=["csq", "AF", "POS"])
+keep = ["synonymous", "missense", "stop_gained", "frameshift", "splice_donor", "splice_acceptor"]
+d = d[d.csq.isin(keep)]
+order = [k for k in keep if k in set(d.csq)]
+print(d.groupby("csq").AF.agg(count="count", median="median", rare=lambda x: (x < 0.01).mean()))
+fig, ax = plt.subplots(figsize=(9, 4))
+ax.boxplot([d.loc[d.csq == k, "AF"] for k in order])
+ax.set_xticks(range(1, len(order) + 1)); ax.set_xticklabels(order)
+ax.set_yscale("symlog", linthresh=1e-3); ax.set_ylabel("AF (неспоріднені особи)")
+ax.set_title("Частота алелів за наслідком варіанта")
+plt.tight_layout(); plt.savefig("plots/csq_af.png", dpi=150)
+EOF
+```
+
+**Завдання**
+
+-   Скільки в регіоні missense, synonymous (silent), stop_gained (nonsense), frameshift та splice-варіантів? Чому некодуючих варіантів у сотні разів більше?
+-   Які з цих класів належать до **loss-of-function (LoF)**? Порівняйте медіанну AF і частку рідкісних варіантів між synonymous, missense і LoF. Як це пояснює **очищувальний (негативний) відбір**?
+-   Виберіть один `stop_gained` або `frameshift` варіант:
+    -   запишіть його у форматі HGVS на рівні білка (наприклад, `123R>123*` у BCSQ → `p.Arg123Ter`);
+    -   знайдіть його у [gnomAD](https://gnomad.broadinstitute.org/) (GRCh38, формат `22-ПОЗИЦІЯ-REF-ALT`) і [ClinVar](https://www.ncbi.nlm.nih.gov/clinvar/). Порівняйте частоту з 1000 Genomes. Чи пов'язаний ген із захворюванням ([OMIM](https://omim.org/))?
+-   Виберіть один missense-варіант і визначте, чи заміна консервативна (амінокислоти зі схожим бічним ланцюгом) чи неконсервативна.
+
+# 6. Частоти алелів у популяціях: відбір та ефект засновника
+
+``` bash
+# AF окремо для кожної суперпопуляції: AF_AFR, AF_AMR, AF_EAS, AF_EUR, AF_SAS
+bcftools +fill-tags data/chr22.unrel.tags.vcf.gz -Oz -o data/chr22.pop.vcf.gz -- -S data/sample2superpop.txt -t AF
+bcftools index -t data/chr22.pop.vcf.gz
+bcftools query -f '%POS\t%REF\t%ALT\t%AF\t%AF_AFR\t%AF_AMR\t%AF_EAS\t%AF_EUR\t%AF_SAS\n' data/chr22.pop.vcf.gz | head
+
+# "приватні" варіанти: часті (>5%) в одній суперпопуляції і відсутні в інших
+for SP in AFR AMR EAS EUR SAS; do
+  others=$(for o in AFR AMR EAS EUR SAS; do [ $o != $SP ] && echo -n " && AF_$o=0"; done)
+  echo -n "$SP: "; bcftools view -H -i "AF_$SP>0.05$others" data/chr22.pop.vcf.gz | wc -l
+done
+```
+
+**Ефект засновника.** Фінська популяція (FIN) пройшла через невелику групу засновників та ізоляцію. Порівняйте FIN з іншими європейськими популяціями:
+
+``` bash
+awk -F'\t' '$2=="FIN"{print $1"\tFIN"} $2=="CEU"||$2=="GBR"||$2=="TSI"||$2=="IBS"{print $1"\tEURnoFIN"}' data/sample2pop.txt > data/fin_vs_eur.txt
+bcftools +fill-tags data/chr22.unrel.tags.vcf.gz -Ou -- -S data/fin_vs_eur.txt -t AF \
+  | bcftools query -i 'AF_FIN>0.05 && AF_EURnoFIN<0.01' -f '%POS\t%REF\t%ALT\t%AF_FIN\t%AF_EURnoFIN\n' > results/fin_enriched.txt
+wc -l results/fin_enriched.txt
+```
+
+**Відбір.** Знайдіть позиції (GRCh38) цих SNP у [dbSNP](https://www.ncbi.nlm.nih.gov/snp/) і порівняйте частоти в 26 популяціях:
+
+| rsID | Ген | Ознака |
+|------------------------|------------------------|------------------------|
+| rs4988235 | MCM6/LCT | збереження лактази у дорослих |
+| rs1426654 | SLC24A5 | світла пігментація шкіри |
+| rs3827760 | EDAR | товщина волосся, форма зубів |
+| rs2814778 | ACKR1 (Duffy) | стійкість до *P. vivax* малярії |
+| rs671 | ALDH2 | реакція на алкоголь |
+| rs334 | HBB | серпоподібноклітинна анемія / стійкість до малярії |
+
+``` bash
+# приклад: SNP на хромосомі 2 (замініть CHR і POS на значення з dbSNP)
+CHR=chr2; POS=ПОЗИЦІЯ
+bcftools view -r $CHR:$POS ${VCF/chr22/$CHR} -Ou \
+  | bcftools view -S data/unrelated.txt -Ou \
+  | bcftools +fill-tags -Ou -- -S data/sample2pop.txt -t AF \
+  | bcftools query -f '%CHROM:%POS %REF>%ALT\n%INFO\n' | tr ';' '\n' | grep -E '^AF_|^chr'
+```
+
+**Завдання**
+
+-   У якій суперпопуляції найбільше «приватних» варіантів? Чому?
+-   Скільки варіантів частіші у FIN, ніж в інших європейців? Як ефект засновника змінює частоти рідкісних алелів? Порівняйте з прикладом «Finnish disease heritage».
+-   Для 2–3 SNP з таблиці побудуйте графік частот по популяціях. Як природний відбір (позитивний або балансуючий) пояснює ці частоти? Чим частоти під дією відбору відрізняються від частот під дією дрейфу?
+
+# 7. Ефект вузького місця: гетерозиготність
+
+``` bash
+# статистика по кожному зразку (PSC: nNonRefHom, nHets, nSingletons)
+bcftools stats -s - data/chr22.unrel.tags.vcf.gz | awk -F'\t' '$1=="PSC"{print $3"\t"$5"\t"$6"\t"$11}' > results/psc.tsv
+
+python3 - <<'EOF'
+import pandas as pd, matplotlib
+matplotlib.use("Agg")
+import matplotlib.pyplot as plt
+psc = pd.read_csv("results/psc.tsv", sep="\t", names=["sample", "nHomAlt", "nHet", "nSingletons"])
+pop = pd.read_csv("data/sample2superpop.txt", sep="\t", names=["sample", "superpop"])
+d = psc.merge(pop, on="sample")
+print(d.groupby("superpop")[["nHet", "nHomAlt", "nSingletons"]].median().sort_values("nHet"))
+order = list(d.groupby("superpop").nHet.median().sort_values().index)
+fig, ax = plt.subplots(figsize=(7, 4))
+ax.boxplot([d.loc[d.superpop == p, "nHet"] for p in order])
+ax.set_xticks(range(1, len(order) + 1)); ax.set_xticklabels(order)
+ax.set_ylabel("Гетерозиготних SNV на особу"); ax.set_title("Гетерозиготність за суперпопуляціями")
+plt.tight_layout(); plt.savefig("plots/heterozygosity.png", dpi=150)
+EOF
+```
+
+**Завдання**
+
+-   У якій суперпопуляції гетерозиготність найвища, а в якій — найнижча? Як це пов'язано з виходом людей з Африки (out-of-Africa) і ефектом вузького місця?
+-   Чому в неафриканських популяціях менше гетерозигот, але більше гомозигот за альтернативним алелем?
+-   (Optional) Повторіть аналіз на рівні 26 популяцій (`sample2pop.txt`). Де гетерозиготність найнижча? Чи відповідає це історії цих популяцій?
+
+# 8. Закон Харді–Вайнберга
+
+``` bash
+# HWE для всієї когорти неспоріднених (тег HWE додано у кроці 4)
+echo -n "SNV з MAF>=5%: "; bcftools view -H -i 'TYPE="snp" && MAF>=0.05' data/chr22.unrel.tags.vcf.gz | wc -l
+echo -n "з них HWE p<0.001: "; bcftools view -H -i 'TYPE="snp" && MAF>=0.05 && HWE<0.001' data/chr22.unrel.tags.vcf.gz | wc -l
+
+# HWE лише в одній популяції (YRI)
+awk -F'\t' '$2=="YRI"' data/sample2pop.txt | cut -f1 | grep -Fxf data/unrelated.txt > data/YRI.txt
+bcftools view -S data/YRI.txt data/chr22.split.vcf.gz -Ou | bcftools +fill-tags -Oz -o data/chr22.YRI.vcf.gz -- -t AF,MAF,HWE
+bcftools index -t data/chr22.YRI.vcf.gz
+echo -n "YRI, SNV з MAF>=5%: "; bcftools view -H -i 'TYPE="snp" && MAF>=0.05' data/chr22.YRI.vcf.gz | wc -l
+echo -n "YRI, HWE p<0.001: "; bcftools view -H -i 'TYPE="snp" && MAF>=0.05 && HWE<0.001' data/chr22.YRI.vcf.gz | wc -l
+
+# підрахунок генотипів одного SNP вручну
+POS=$(bcftools query -i 'TYPE="snp" && MAF>0.3' -f '%POS\n' data/chr22.YRI.vcf.gz | head -1)
+bcftools query -r chr22:$POS -f '[%GT\n]' data/chr22.YRI.vcf.gz | sed 's/|/\//; s/1\/0/0\/1/' | sort | uniq -c
+```
+
+**Завдання**
+
+-   Для вибраного SNP порахуйте вручну p, q, очікувані кількості генотипів (p²N, 2pqN, q²N) та χ². Чи виконується закон Харді–Вайнберга?
+-   Порівняйте частку SNV з HWE p < 0.001 у всій когорті та лише в YRI. Чому об'єднання різних популяцій створює **нестачу гетерозигот** (ефект Валунда)?
+-   Яку з умов закону Харді–Вайнберга порушує така об'єднана вибірка? Які ще умови не виконуються для реальних людських популяцій?
+-   Чому HWE-фільтр використовують для пошуку помилок генотипування?
+
+# 9. Рекомбінація і сантиморгани
+
+Генетична карта chr22 (GRCh38) з сайту програми Beagle:
+
+``` bash
+wget -P data https://bochet.gcc.biostat.washington.edu/beagle/genetic_maps/plink.GRCh38.map.zip
+unzip -o data/plink.GRCh38.map.zip plink.chr22.GRCh38.map -d data
+head -3 data/plink.chr22.GRCh38.map   # хромосома, ID, позиція в cM, позиція в bp
+
+python3 - <<'EOF'
+import pandas as pd, matplotlib
+matplotlib.use("Agg")
+import matplotlib.pyplot as plt
+m = pd.read_csv("data/plink.chr22.GRCh38.map", sep=r"\s+", names=["chr", "id", "cM", "bp"])
+print("фізична довжина карти, Mb:", round((m.bp.max() - m.bp.min()) / 1e6, 1))
+print("генетична довжина, cM:", round(m.cM.max() - m.cM.min(), 1))
+print("середнє cM/Mb:", round((m.cM.max() - m.cM.min()) / ((m.bp.max() - m.bp.min()) / 1e6), 2))
+m["Mb"] = m.bp // 1_000_000
+w = m.groupby("Mb").agg(cM_min=("cM", "min"), cM_max=("cM", "max"))
+w["cM_per_Mb"] = w.cM_max - w.cM_min
+print("Вікна з найвищою частотою рекомбінації:\n", w.sort_values("cM_per_Mb", ascending=False).head(5))
+fig, ax = plt.subplots(1, 2, figsize=(11, 4))
+ax[0].plot(m.bp / 1e6, m.cM); ax[0].set_xlabel("Позиція, Mb"); ax[0].set_ylabel("cM"); ax[0].set_title("Генетична карта chr22")
+ax[1].bar(w.index, w.cM_per_Mb); ax[1].axhline(1, color="red", ls="--", label="1 cM/Mb")
+ax[1].set_xlabel("Вікно, Mb"); ax[1].set_ylabel("cM/Mb"); ax[1].legend()
+plt.tight_layout(); plt.savefig("plots/genetic_map.png", dpi=150)
+EOF
+```
+
+**Завдання**
+
+-   Яка генетична довжина chr22 у cM і середнє cM/Mb? Порівняйте з правилом «1 cM ≈ 1 Mb». Чому для chr22 воно не виконується точно?
+-   Чому карта починається не з 0 Mb (згадайте будову акроцентричних хромосом)?
+-   Знайдіть вікна з найвищою частотою рекомбінації (гарячі точки). Чи є вони у регіоні 20–30 Mb, з яким ви працюєте?
+-   Яка ймовірність кросинговеру між двома локусами на відстані 5 cM за один мейоз?
+
+# 10. Нерівновага за зчепленням (LD)
+
+``` bash
+# неспоріднені CEU (європейці); список YRI створено в кроці 8
+awk -F'\t' '$2=="CEU"' data/sample2pop.txt | cut -f1 | grep -Fxf data/unrelated.txt > data/CEU.txt
+
+# LD для біалельних SNV з MAF>=5% на ділянці 1 Mb
+for POP in CEU YRI; do
+  bcftools view -S data/$POP.txt -r chr22:25000000-26000000 -v snps data/chr22.split.vcf.gz -Ou \
+    | bcftools view -q 0.05:minor -Oz -o data/ld_$POP.vcf.gz
+  plink --vcf data/ld_$POP.vcf.gz --double-id --allow-extra-chr --set-missing-var-ids '@:#:$1:$2' \
+    --r2 --ld-window-kb 300 --ld-window 99999 --ld-window-r2 0 --out results/ld_$POP
+  # tag-SNP: скільки SNV залишиться, якщо прибрати сильно зчеплені (r2>0.8)
+  plink --vcf data/ld_$POP.vcf.gz --double-id --allow-extra-chr --set-missing-var-ids '@:#:$1:$2' \
+    --indep-pairwise 50 5 0.8 --out results/tag_$POP
+done
+wc -l results/tag_*.prune.in results/tag_*.prune.out
+
+# спад LD з відстанню
+python3 - <<'EOF'
+import pandas as pd, matplotlib
+matplotlib.use("Agg")
+import matplotlib.pyplot as plt
+fig, ax = plt.subplots(figsize=(7, 4))
+for pop in ["CEU", "YRI"]:
+    ld = pd.read_csv(f"results/ld_{pop}.ld", sep=r"\s+")
+    ld["bin"] = ((ld.BP_B - ld.BP_A) / 1000 // 10) * 10
+    m = ld.groupby("bin").R2.mean()
+    ax.plot(m.index, m.values, label=pop)
+ax.set_xlabel("Відстань між SNV, kb"); ax.set_ylabel("Середній r²"); ax.set_title("Спад LD з відстанню")
+ax.legend(); plt.tight_layout(); plt.savefig("plots/ld_decay.png", dpi=150)
+EOF
+```
+
+**D, D′ та r² вручну.** Виберіть із `results/ld_CEU.ld` пару SNV з високим r² (позиції `BP_A` і `BP_B`) і порахуйте гаплотипи:
+
+``` bash
+P1=ПОЗИЦІЯ_A; P2=ПОЗИЦІЯ_B
+bcftools query -S data/CEU.txt -r chr22:$P1,chr22:$P2 -f '[%GT\t]\n' data/chr22.split.vcf.gz > results/two_snps.txt
+
+python3 - <<'EOF'
+from collections import Counter
+a, b = [l.rstrip("\t\n").split("\t") for l in open("results/two_snps.txt")]
+haps = Counter()
+for ga, gb in zip(a, b):
+    for x, y in zip(ga.split("|"), gb.split("|")):
+        haps[x + y] += 1
+n = sum(haps.values())
+for h in ["00", "01", "10", "11"]:
+    print(f"гаплотип {h}: {haps[h]}  частота {haps[h] / n:.3f}")
+EOF
+```
+
+**Завдання**
+
+-   З частот гаплотипів порахуйте p~A~, p~B~, p~AB~, D = p~AB~ − p~A~p~B~, D′ і r². Чи збігається ваш r² з результатом `plink`?
+-   Що означало б D = 0 (рівновага за зчепленням)?
+-   У якій популяції LD спадає повільніше? Пов'яжіть це з ефектом вузького місця та історією популяцій.
+-   Скільки tag-SNP потрібно в CEU і в YRI, щоб охопити ту саму ділянку? Чому для GWAS та імпутації генотипів в африканських популяціях потрібно більше маркерів?
+
+# 11. Тріо: de novo мутації та кросинговер
+
+``` bash
+# тріо: дитина, батько, мати, популяція
+awk 'NR>1 && $3!="0" && $4!="0"{print $2"\t"$3"\t"$4"\t"$6}' data/20130606_g1k_3202_samples_ped_population.txt | head
+# виберіть одне тріо (у кожного студента - своє)
+CHILD=ДИТИНА; FATHER=БАТЬКО; MOTHER=МАТИ
+
+# генотипи тріо; AC рахується по всій когорті (-I не перераховує AC після вибору зразків)
+bcftools +fill-tags data/chr22.split.vcf.gz -Ou -- -t AC \
+  | bcftools view -I -s $CHILD,$FATHER,$MOTHER -Ou \
+  | bcftools query -f '%POS\t%REF\t%ALT\t%AC[\t%SAMPLE=%GT]\n' > results/trio_gt.tsv
+
+# менделівські помилки та кандидати de novo (дитина 0/1, обоє батьків 0/0)
+awk -F'\t' -v c=$CHILD -v f=$FATHER -v m=$MOTHER 'BEGIN{OFS="\t"}
+  {for(i=5;i<=NF;i++){split($i,a,"="); g=a[2]; gsub(/\|/,"/",g); if(g=="1/0")g="0/1"; G[a[1]]=g}
+   gc=G[c]; gf=G[f]; gm=G[m]; n++; err=0
+   if(gc=="0/1" && gf=="0/0" && gm=="0/0") {err=1; dn++; print $1,$2,$3,"AC="$4,"child="gc,"father="gf,"mother="gm > "results/dnm_candidates.tsv"}
+   else if(gc=="1/1" && (gf=="0/0"||gm=="0/0")) err=1
+   else if(gc=="0/0" && (gf=="1/1"||gm=="1/1")) err=1
+   else if(gc=="0/1" && gf=="1/1" && gm=="1/1") err=1
+   me+=err}
+  END{print "сайтів:",n; print "менделівських помилок:",me; print "з них кандидатів de novo:",dn}' results/trio_gt.tsv
+cat results/dnm_candidates.tsv
+```
+
+**(Optional) Кросинговер.** На сайтах, де батько гетерозиготний, а мати гомозиготна, видно, який з двох гаплотипів батька отримала дитина. Перемикання з гаплотипу 1 на гаплотип 2 — це кросинговер у мейозі батька (або помилка фазування):
+
+``` bash
+awk -F'\t' -v c=$CHILD -v f=$FATHER -v m=$MOTHER '{for(i=5;i<=NF;i++){split($i,a,"="); G[a[1]]=a[2]}
+  split(G[f],F,"|"); split(G[m],M,/[|\/]/); split(G[c],C,/[|\/]/)
+  if(F[1]==F[2] || M[1]!=M[2]) next          # батько гетерозигота, мати гомозигота
+  pat = (C[1]==M[1]) ? C[2] : C[1]           # алель від батька
+  if(pat==F[1]) h=1; else if(pat==F[2]) h=2; else next
+  print $1"\t"h}' results/trio_gt.tsv > results/paternal_hap.tsv
+awk 'NR>1 && $2!=prev{print "перемикання між", ppos, "і", $1} {prev=$2; ppos=$1}' results/paternal_hap.tsv
+```
+
+**Завдання**
+
+-   Скільки кандидатів de novo знайдено? За лекцією, у кожної дитини \~60–80 de novo SNV на весь геном (\~3,1 Gb). Скільки ви очікували б на 10 Mb? Чому кандидатів зазвичай більше, ніж очікується, і що треба перевірити (покриття, якість, присутність у когорті — AC, IGV)?
+-   Чи є серед кандидатів варіанти з AC = 1 (лише в дитини)? Чому справжня de novo мутація повинна бути відсутня в інших неспоріднених людей?
+-   (Optional) Скільки перемикань гаплотипу батька ви бачите на 10 Mb? Скільки кросинговерів очікується, виходячи з cM/Mb з кроку 9? Повторіть для матері (поміняйте ролі батька і матері в команді) і порівняйте.
+
+# 12. Соматичні та германні мутації
+
+Дані 1000 Genomes отримані з ДНК **лімфобластоїдних клітинних ліній**. Дайте відповіді:
+
+-   Ці варіанти германні чи соматичні? Як можна було б відрізнити соматичну мутацію, що виникла в клітинній лінії, від германної (підказка: тріо, частка рідів з альтернативним алелем, порівняння пухлина–норма в онкогеноміці)?
+-   Чому соматичні мутації не передаються нащадкам, а de novo мутації з кроку 11 — передаються?
+
+# Що додати до презентації
+
+-   Таблиця типів варіантів (SNV / indel \< 50 bp / SV ≥ 50 bp) і розподіл довжин indel
+-   Ts/Tv і спектр замін, порівняння з *E. coli* з HW3
+-   Графік SFS і частки рідкісних і частих варіантів
+-   Кількість missense / synonymous / stop_gained / frameshift, графік AF за наслідками, один LoF варіант у HGVS + gnomAD/ClinVar
+-   «Приватні» варіанти суперпопуляцій, FIN vs інші європейці, частоти 2–3 SNP під відбором
+-   Графік гетерозиготності за суперпопуляціями
+-   Розрахунок HWE для одного SNP і порівняння YRI vs уся когорта
+-   Генетична карта chr22, cM/Mb, гарячі точки рекомбінації
+-   Графік спаду LD (CEU vs YRI), розрахунок D, D′, r² для однієї пари, кількість tag-SNP
+-   Результати по тріо: менделівські помилки, кандидати de novo, (optional) кросинговери
+-   Короткі висновки: як кожне поняття з лекції проявляється в реальних даних
+
+::: {.callout-note collapse="true"}
+## Для самоперевірки (орієнтири)
+
+-   Ts/Tv для повногеномних SNV людини близько **2,0–2,1** (в екзомах вище, \~3).
+-   Найбільша гетерозиготність і найбільше «приватних» варіантів — в **AFR**.
+-   LD спадає повільніше в **CEU**, ніж у **YRI**, тому в YRI потрібно більше tag-SNP.
+-   Більшість варіантів **рідкісні**, а LoF варіанти в середньому рідкісніші за synonymous.
+-   Генетична довжина chr22 — близько 70–75 cM, тобто понад 1 cM/Mb.
+:::

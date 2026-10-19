@@ -39,11 +39,23 @@ Presentation: [Google Slides](https://docs.google.com/presentation/d/13Q5hAa-1P9
 
 ## Week 6(19.10.2026)
 
-- Analysis of annotated VCF files.VEP.Fst.Tajima's D. <!-- -   Presentation:[Google Slides](https://docs.google.com/presentation/d/17XSWzw3bsfNZbTr5naQzfR4gZ5vkgYA-aLiA7bdn10o/edit?slide=id.g29d89553eed_0_16#slide=id.g29d89553eed_0_16) -->
+- Analysis of annotated VCF files.VEP.Fst.Tajima's D.
+
+  Почніть звідси: [Основи генетики (інтерактивно)](qmd/Genetics_Basics_Interactive.qmd)
+
+  Interactive: [Популяційна геноміка: інтерактивні моделі](qmd/Population_Genomics_Interactive.qmd)
+
+  Interactive: [Еволюційна і кількісна генетика (за Pierce, гл. 24–26)](qmd/Evolutionary_Genetics_Interactive.qmd)
+
+ <!-- -   Presentation:[Google Slides](https://docs.google.com/presentation/d/17XSWzw3bsfNZbTr5naQzfR4gZ5vkgYA-aLiA7bdn10o/edit?slide=id.g29d89553eed_0_16#slide=id.g29d89553eed_0_16) -->
 
 ## Week 7(26.10.2026)
 
-- Types of Genetic Polymorphisms. SNPs, Indels, CNVs, Structural Variants <!-- -   Presentation: [Google Slides](https://docs.google.com/presentation/d/13M6hbFiviR-XhK61JRIr9q4udzad_1KpULmZk5LVKP8/edit?usp=sharing) -->
+- Types of Genetic Polymorphisms. SNPs, Indels, CNVs, Structural Variants
+
+  HW: [HW4_Genetic_Variation (інтерактивний практикум)](qmd/HW4_Genetic_Variation_1000G.qmd)
+
+ <!-- -   Presentation: [Google Slides](https://docs.google.com/presentation/d/13M6hbFiviR-XhK61JRIr9q4udzad_1KpULmZk5LVKP8/edit?usp=sharing) -->
 
 ## Week 8(02.11.2026)
 

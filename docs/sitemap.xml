@@ -2,11 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://hrubiian.github.io/Genomics2026/syllabus.html</loc>
-    <lastmod>2026-10-12T10:52:40.331Z</lastmod>
+    <lastmod>2026-10-19T10:19:55.787Z</lastmod>
   </url>
   <url>
-    <loc>https://hrubiian.github.io/Genomics2026/qmd/Linux_introduction.html</loc>
-    <lastmod>2026-09-14T17:18:01.969Z</lastmod>
+    <loc>https://hrubiian.github.io/Genomics2026/qmd/Population_Genomics_Interactive.html</loc>
+    <lastmod>2026-10-19T10:12:12.771Z</lastmod>
+  </url>
+  <url>
+    <loc>https://hrubiian.github.io/Genomics2026/qmd/Install_Software.html</loc>
+    <lastmod>2025-09-22T18:19:36.434Z</lastmod>
   </url>
   <url>
     <loc>https://hrubiian.github.io/Genomics2026/qmd/HW3.Genome_Assembly_Part_2_updated.html</loc>
@@ -17,12 +21,20 @@
     <lastmod>2026-09-14T14:39:44.971Z</lastmod>
   </url>
   <url>
+    <loc>https://hrubiian.github.io/Genomics2026/qmd/Genetics_Basics_Interactive.html</loc>
+    <lastmod>2026-10-19T10:12:11.659Z</lastmod>
+  </url>
+  <url>
     <loc>https://hrubiian.github.io/Genomics2026/index.html</loc>
-    <lastmod>2026-10-12T10:14:23.781Z</lastmod>
+    <lastmod>2026-10-19T10:12:14.016Z</lastmod>
   </url>
   <url>
     <loc>https://hrubiian.github.io/Genomics2026/AI_prompts.html</loc>
     <lastmod>2026-10-12T10:14:22.758Z</lastmod>
+  </url>
+  <url>
+    <loc>https://hrubiian.github.io/Genomics2026/qmd/Evolutionary_Genetics_Interactive.html</loc>
+    <lastmod>2026-10-19T10:12:13.301Z</lastmod>
   </url>
   <url>
     <loc>https://hrubiian.github.io/Genomics2026/qmd/HW1_Linux_basics.html</loc>
@@ -33,8 +45,12 @@
     <lastmod>2026-09-14T14:39:44.972Z</lastmod>
   </url>
   <url>
-    <loc>https://hrubiian.github.io/Genomics2026/qmd/Install_Software.html</loc>
-    <lastmod>2025-09-22T18:19:36.434Z</lastmod>
+    <loc>https://hrubiian.github.io/Genomics2026/qmd/HW4_Genetic_Variation_1000G.html</loc>
+    <lastmod>2026-10-19T10:12:12.403Z</lastmod>
+  </url>
+  <url>
+    <loc>https://hrubiian.github.io/Genomics2026/qmd/Linux_introduction.html</loc>
+    <lastmod>2026-09-14T17:18:01.969Z</lastmod>
   </url>
   <url>
     <loc>https://hrubiian.github.io/Genomics2026/resources.html</loc>

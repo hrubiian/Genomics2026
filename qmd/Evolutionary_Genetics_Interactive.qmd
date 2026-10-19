@@ -1,0 +1,736 @@
+---
+title: "Еволюційна і кількісна генетика: інтерактивні моделі"
+author: "Nazarii Hrubiian"
+html-table-processing: none
+include-after-body: _interactive_helpers.html
+---
+
+```{=html}
+<style>
+.lab{--lab-bg:#f8fafc;--lab-line:#dde3ea;--ink:#1f2933;--ink2:#52606d;--ink3:#7b8794;
+  --s1:#2a78d6;--s2:#eb6834;--s3:#1baf7a;--good:#1f8a4c;--bad:#c62828;--warn:#b26a00;
+  border:1px solid var(--lab-line);border-radius:10px;background:var(--lab-bg);
+  padding:16px 18px 18px;margin:1.25rem 0 2.25rem;color:var(--ink)}
+.lab .ttl{font-weight:600;font-size:1rem;margin:0 0 .75rem;color:var(--ink)}
+.lab .ttl small{font-weight:400;color:var(--ink3);margin-left:.4rem}
+.lab .ctl{display:flex;flex-wrap:wrap;gap:12px 22px;align-items:flex-end;margin-bottom:12px}
+.lab .ctl label{display:flex;flex-direction:column;gap:2px;font-size:.82rem;color:var(--ink2);min-width:170px;flex:1 1 170px;max-width:300px}
+.lab .ctl label b{color:var(--ink);font-variant-numeric:tabular-nums}
+.lab .ctl .btns{display:flex;flex-wrap:wrap;gap:6px}
+.lab canvas{display:block;width:100%;background:#fff;border:1px solid var(--lab-line);border-radius:6px}
+.lab .out{font-variant-numeric:tabular-nums;font-size:.92rem;margin-top:10px;line-height:1.55}
+.lab .grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px}
+.lab .grid2>*{min-width:0}
+.lab .pill{display:inline-block;padding:2px 10px;border-radius:999px;font-size:.82rem;font-weight:600;color:#fff}
+.lab .pill.p1{background:var(--s1)}.lab .pill.p2{background:var(--s2)}.lab .pill.p3{background:var(--s3)}
+.lab .pill.good{background:var(--good)}.lab .pill.bad{background:var(--bad)}.lab .pill.warn{background:var(--warn)}
+.lab .hint{font-size:.82rem;color:var(--ink3);margin-top:6px}
+.lab .src{font-size:.78rem;color:var(--ink3);margin-top:8px;font-style:italic}
+.lab .form-range::-webkit-slider-runnable-track{background:#cfd8e3}
+.lab .form-range::-moz-range-track{background:#cfd8e3}
+.lab table.mini{border-collapse:collapse;font-size:.88rem;font-variant-numeric:tabular-nums}
+.lab table.mini td,.lab table.mini th{padding:3px 10px;border-bottom:1px solid var(--lab-line);text-align:right}
+.lab table.mini th:first-child,.lab table.mini td:first-child{text-align:left}
+.lab .seqin{font-family:SFMono-Regular,Menlo,Consolas,monospace;font-size:.88rem;width:100%;text-transform:uppercase}
+.lab .seqrow{display:grid;grid-template-columns:70px 1fr;gap:8px;align-items:center;margin:4px 0}
+.lab .tip{position:fixed;pointer-events:none;background:#1f2933;color:#fff;font-size:.8rem;padding:4px 8px;border-radius:4px;z-index:1000;display:none;white-space:nowrap}
+.quiz .q{border-top:1px solid var(--lab-line);padding:12px 0}
+.quiz .q:first-child{border-top:none}
+.quiz .q p{margin:0 0 6px;font-weight:600}
+.quiz .opt{display:block;width:100%;text-align:left;margin:4px 0;padding:6px 10px;border:1px solid var(--lab-line);border-radius:6px;background:#fff;color:var(--ink)}
+.quiz .opt:hover:not([disabled]){border-color:var(--s1)}
+.quiz .opt.right{border-color:var(--good);background:#e6f4ea}
+.quiz .opt.wrong{border-color:var(--bad);background:#fdecea}
+.quiz .expl{font-size:.88rem;color:var(--ink2);margin-top:4px}
+.lab button:focus-visible,.lab input:focus-visible,.lab select:focus-visible{outline:2px solid var(--s1);outline-offset:2px}
+</style>
+```
+
+# Про цю сторінку
+
+Ця сторінка розширює [HW4](HW4_Genetic_Variation_1000G.qmd) і [Популяційну геноміку](Population_Genomics_Interactive.qmd) темами класичної популяційної, еволюційної і кількісної генетики, зокрема тими, що не входять у лекції курсу. Структура і приклади спираються на підручник **B. A. Pierce, *Genetics: A Conceptual Approach*, 4th ed.** (розділи 24–26). У кожній панелі вказано відповідний розділ книги, щоб можна було прочитати теорію докладніше. Дані з таблиць підручника позначено як такі.
+
+::: callout-tip
+## Як працювати
+
+Спочатку прочитайте короткий текст, потім змінюйте параметри й порівнюйте результат з формулами. Питання **«Спробуйте»** допоможуть помітити головне. Наприкінці є тест для самоперевірки.
+:::
+
+::: callout-note
+## Перш ніж почати
+
+Тут знадобляться [Основи генетики](Genetics_Basics_Interactive.qmd) (алель, генотип, частота алеля, домінантність, решітка Пеннета) і закон Харді–Вайнберга з [HW4](HW4_Genetic_Variation_1000G.qmd). Для розділу про полігенні ознаки корисно згадати [решітку Пеннета](Genetics_Basics_Interactive.qmd#b-cross), а для дрейфу — [досліди з монеткою](Genetics_Basics_Interactive.qmd#b-chance).
+
+Розділи позначено рівнями: [● Базовий]{.lvl .lvl1} [●● Середній]{.lvl .lvl2} [●●● Поглиблений]{.lvl .lvl3}. Під кожним заголовком є блок **«Простими словами»**; терміни, підкреслені пунктиром, мають підказку.
+:::
+
+# 1. Закон Харді–Вайнберга: розширення
+
+[●● Середній рівень]{.lvl .lvl2}
+
+::: {.callout-tip collapse="true"}
+## Простими словами
+
+Той самий «мішок алелів», але алелів може бути три (як групи крові A, B, 0), або ген лежить на X-хромосомі. У чоловіків одна X, тож рецесивна X-зчеплена ознака проявляється одразу — тому дальтонізм і гемофілія значно частіші в чоловіків.
+
+**Запам'ятайте:** X-зчеплена рецесивна ознака: у чоловіків q, у жінок q².
+:::
+
+
+Закон працює не лише для двох алелів. Для **трьох алелів** з частотами p, q, r генотипи розподіляються як $(p+q+r)^2$: шість генотипів. Для **X-зчепленого** локусу самці мають одну копію, тож рецесивна ознака трапляється в самців з частотою $q$, а в самиць — $q^2$. Для рецесивних хвороб частоту алеля можна **оцінити з частоти хворих**: $q = \sqrt{f(aa)}$, а звідси — частку носіїв $2pq$.
+
+```{=html}
+<div class="lab" id="e1">
+  <div class="grid2">
+    <div>
+      <div class="ttl">Три алелі (як у системі груп крові ABO)</div>
+      <div class="ctl">
+        <label>p (A₁): <b id="e1pv"></b><input type="range" class="form-range" id="e1p" min="0" max="1" step="0.01" value="0.3"></label>
+        <label>q (A₂): <b id="e1qv"></b><input type="range" class="form-range" id="e1q" min="0" max="1" step="0.01" value="0.1"></label>
+      </div>
+      <canvas id="e1c"></canvas>
+      <div class="out" id="e1o"></div>
+    </div>
+    <div>
+      <div class="ttl">X-зчеплений рецесивний алель</div>
+      <div class="ctl"><label>Частота алеля q: <b id="e1xv"></b><input type="range" class="form-range" id="e1x" min="-4" max="-0.5" step="0.01" value="-4"></label></div>
+      <div class="out" id="e1xo"></div>
+      <hr>
+      <div class="ttl">Оцінка частоти носіїв за частотою хвороби</div>
+      <div class="ctl"><label>Хворіє 1 з N людей, N = <b id="e1dv"></b><input type="range" class="form-range" id="e1d" min="2" max="6" step="0.01" value="3.3"></label></div>
+      <div class="out" id="e1do"></div>
+    </div>
+  </div>
+  <div class="src">Pierce, розд. 25.2: розширення закону Харді–Вайнберга (табл. 25.1), приклади з гемофілією A та муковісцидозом.</div>
+</div>
+```
+
+**Спробуйте:** за якої частоти X-зчепленого алеля ознака трапляється в самців у 1000 разів частіше, ніж у самиць? Встановіть частоту хвороби 1 на 2 000 (муковісцидоз серед європейців): який відсоток людей — носії? Чому скринінг носіїв ефективніший за пошук хворих для зменшення частоти рецесивних хвороб?
+
+# 2. Інбридинг у часі та інбредна депресія
+
+[●● Середній рівень]{.lvl .lvl2}
+
+::: {.callout-tip collapse="true"}
+## Простими словами
+
+Інбридинг не змінює, які алелі є в популяції, а лише як вони розкладаються по парах: однакових пар (гомозигот) стає більше. Самозапилення — найшвидший шлях: щопокоління гетерозигот удвічі менше.
+
+**Запам'ятайте:** інбридинг змінює частоти генотипів, а не алелів.
+:::
+
+
+Інбридинг не змінює частот **алелів**, але змінює частоти **генотипів**: $f(AA) = p^2 + Fpq$, $f(Aa) = 2pq(1-F)$, $f(aa) = q^2 + Fpq$. Якщо інбридинг повторюється з покоління в покоління, F накопичується. Самозапліднення щопокоління вдвічі зменшує частку гетерозигот. Інбредна депресія — зниження життєздатності через зростання частки гомозигот за шкідливими рецесивними алелями.
+
+```{=html}
+<div class="lab" id="e2">
+  <div class="ctl">
+    <label>Частота алеля p: <b id="e2pv"></b><input type="range" class="form-range" id="e2p" min="0.05" max="0.95" step="0.01" value="0.5"></label>
+    <label>Покоління для таблиці генотипів: <b id="e2tv"></b><input type="range" class="form-range" id="e2t" min="0" max="15" value="3"></label>
+  </div>
+  <div class="grid2">
+    <canvas id="e2c"></canvas>
+    <div>
+      <div class="out" id="e2o" style="margin-top:0"></div>
+      <canvas id="e2j" style="margin-top:10px"></canvas>
+      <div class="hint">Смертність дітей до 12 років у Японії залежно від спорідненості батьків (дані Schull & Neel, наведені в табл. 25.3 Pierce).</div>
+    </div>
+  </div>
+  <div class="src">Pierce, розд. 25.3: невипадкове схрещування, коефіцієнт інбридингу F, рис. 25.5 і табл. 25.2–25.3.</div>
+</div>
+```
+
+**Спробуйте:** скільки поколінь самозапліднення потрібно, щоб гетерозигот залишилося менше 1 %? Порівняйте швидкість накопичення F при схрещуванні братів і сестер та напівсибсів. Чому інбредні лінії (наприклад, у кукурудзи чи лабораторних мишей) з часом можуть позбутися шкідливих рецесивних алелів?
+
+# 3. Мутація як еволюційна сила
+
+[●● Середній рівень]{.lvl .lvl2}
+
+::: {.callout-tip collapse="true"}
+## Простими словами
+
+Мутації — як рідкісні описки при переписуванні книги: вони постійно трапляються, але настільки рідко, що за одне покоління частоти майже не змінюються. Якщо шкідливі описки постійно виникають і постійно відсіюються відбором, встановлюється баланс.
+
+**Запам'ятайте:** мутація — джерело нових алелів, але дуже повільна сила зміни частот.
+:::
+
+
+Мутації постійно змінюють частоти алелів, але дуже повільно. Якщо алель G₁ мутує в G₂ зі швидкістю μ, а назад — зі швидкістю ν, зміна за покоління $\Delta q = \mu p - \nu q$, а рівновага $\hat{q} = \dfrac{\mu}{\mu + \nu}$.
+
+Якщо мутантний алель шкідливий, відбір його видаляє, а мутації знову створюють: встановлюється **рівновага мутація–відбір**. Для рецесивного алеля $\hat{q} = \sqrt{\mu / s}$, для домінантного $\hat{q} \approx \mu / s$.
+
+```{=html}
+<div class="lab" id="e3">
+  <div class="ttl">Рівновага прямих і зворотних мутацій</div>
+  <div class="ctl">
+    <label>Пряма мутація μ (G₁ → G₂): <b id="e3uv"></b><input type="range" class="form-range" id="e3u" min="-7" max="-3" step="0.01" value="-5"></label>
+    <label>Зворотна мутація ν (G₂ → G₁): <b id="e3vv"></b><input type="range" class="form-range" id="e3v" min="-7" max="-3" step="0.01" value="-5.52"></label>
+  </div>
+  <canvas id="e3c"></canvas>
+  <div class="out" id="e3o"></div>
+  <hr>
+  <div class="ttl">Рівновага мутація–відбір</div>
+  <div class="ctl">
+    <label>Тип алеля
+      <select class="form-select form-select-sm" id="e3dom"><option value="rec">Рецесивний</option><option value="dom" selected>Домінантний</option></select></label>
+    <label>Швидкість мутації μ: <b id="e3muv"></b><input type="range" class="form-range" id="e3mu" min="-7" max="-4" step="0.01" value="-4.52"></label>
+    <label>Коефіцієнт відбору s: <b id="e3sv"></b><input type="range" class="form-range" id="e3s" min="0.01" max="1" step="0.01" value="0.26"></label>
+  </div>
+  <canvas id="e3b"></canvas>
+  <div class="out" id="e3bo"></div>
+  <div class="src">Pierce, розд. 25.4: мутація (рівняння 25.11–25.13, рис. 25.8–25.9), рівновага мутація–відбір і приклад з ахондроплазією (рівняння 25.19–25.20).</div>
+</div>
+```
+
+**Спробуйте:** скільки поколінь потрібно, щоб частота наблизилася до рівноваги при типових μ ≈ 10⁻⁵? Відтворіть приклад з книги: ахондроплазія — домінантна, μ ≈ 3 × 10⁻⁵, люди з нею мають ≈ 74 % дітей від середнього (s = 0,26). Порівняйте рецесивний і домінантний алель з однаковими μ і s: чому рецесивний шкідливий алель зберігається на значно вищій частоті?
+
+# 4. Міграція і «генетичний порятунок»
+
+[● Базовий рівень]{.lvl .lvl1}
+
+::: {.callout-tip collapse="true"}
+## Простими словами
+
+Міграція — як змішування фарб: щодня додавайте трохи синьої фарби до жовтої, і колір поступово наблизиться до кольору джерела. Маленька популяція, яка довго була ізольована, «оживає», коли в неї приходять нові алелі.
+
+**Запам'ятайте:** міграція робить популяції схожими і додає різноманіття.
+:::
+
+
+За однобічної міграції з популяції I в популяцію II частка m мігрантів щопокоління змінює частоту алеля: $q'_{II} = m\,q_I + (1-m)\,q_{II}$, тобто $\Delta q = m(q_I - q_{II})$. Міграція робить популяції схожими і **додає мінливість** у популяцію-реципієнт. На цьому базується **генетичний порятунок**: підселення кількох особин у малу інбредну популяцію (як з товсторогими баранами в заповіднику National Bison Range у вступі до розд. 25).
+
+```{=html}
+<div class="lab" id="e4">
+  <div class="grid2">
+    <div>
+      <div class="ttl">Однобічна міграція</div>
+      <div class="ctl">
+        <label>Частка мігрантів m: <b id="e4mv"></b><input type="range" class="form-range" id="e4m" min="0" max="0.3" step="0.005" value="0.05"></label>
+      </div>
+      <canvas id="e4a"></canvas>
+    </div>
+    <div>
+      <div class="ttl">Генетичний порятунок <small>мала ізольована популяція, N = 30</small></div>
+      <div class="ctl">
+        <label>Мігрантів за покоління (з 40-го): <b id="e4kv"></b><input type="range" class="form-range" id="e4k" min="0" max="5" step="0.5" value="1"></label>
+        <div class="btns"><button class="btn btn-sm btn-primary" id="e4go">Запустити ще раз</button></div>
+      </div>
+      <canvas id="e4b"></canvas>
+    </div>
+  </div>
+  <div class="out" id="e4o"></div>
+  <div class="src">Pierce, розд. 25.4: міграція (рівняння 25.14–25.15, рис. 25.10); вступ до розд. 25 про генетичний порятунок.</div>
+</div>
+```
+
+**Спробуйте:** скільки поколінь потрібно, щоб різниця частот між популяціями зменшилася вдвічі при m = 0,05? Чи достатньо одного мігранта за покоління, щоб зупинити втрату гетерозиготності в малій популяції? Що відбувається з кількістю алелів після початку міграції?
+
+# 5. Дрейф: дослід Бурі та ефективний розмір популяції
+
+[●● Середній рівень]{.lvl .lvl2}
+
+::: {.callout-tip collapse="true"}
+## Простими словами
+
+Дрейф — як серія підкидань монетки в багатьох маленьких популяціях: частоти розбігаються в різні боки, доки кожна популяція не зафіксує один з алелів. Ефективний розмір — це «скільки особин насправді передають гени»: якщо розмножуються лише кілька самців, популяція поводиться як значно менша.
+
+**Запам'ятайте:** N~e~ зазвичай менший за фактичну чисельність.
+:::
+
+
+Пітер Бурі створив 107 лабораторних популяцій дрозофіли по 8 самців і 8 самиць і 19 поколінь стежив за частотою алеля *bw⁷⁵* (на старті 0,5). Дисперсія частоти між популяціями після одного покоління $\sigma^2 = \dfrac{pq}{2N}$. Нижче — симуляція цього досліду.
+
+**Ефективний розмір популяції N~e~** — розмір ідеальної популяції з таким самим дрейфом. Він менший за фактичну чисельність, якщо співвідношення статей нерівне, $N_e = \dfrac{4 N_m N_f}{N_m + N_f}$, або якщо чисельність коливається (тоді N~e~ — середнє гармонійне розмірів по поколіннях).
+
+```{=html}
+<div class="lab" id="e5">
+  <div class="ctl">
+    <label>Покоління: <b id="e5gv"></b><input type="range" class="form-range" id="e5g" min="0" max="19" value="19"></label>
+    <div class="btns">
+      <button class="btn btn-sm btn-primary" id="e5play">Відтворити</button>
+      <button class="btn btn-sm btn-outline-primary" id="e5go">Нові 107 популяцій</button>
+    </div>
+  </div>
+  <canvas id="e5c"></canvas>
+  <div class="out" id="e5o"></div>
+  <hr>
+  <div class="ttl">Калькулятор N<sub>e</sub></div>
+  <div class="ctl">
+    <label>Самців: <b id="e5mv"></b><input type="range" class="form-range" id="e5m" min="1" max="100" value="10"></label>
+    <label>Самиць: <b id="e5fv"></b><input type="range" class="form-range" id="e5f" min="1" max="100" value="90"></label>
+    <label>Розміри популяції по поколіннях (через кому)<input type="text" class="form-control form-control-sm" id="e5h" value="1000, 1000, 10, 1000, 1000"></label>
+  </div>
+  <div class="out" id="e5no"></div>
+  <div class="src">Pierce, розд. 25.4: генетичний дрейф (рівняння 25.16, рис. 25.11 — дослід Бурі), ефективний розмір популяції.</div>
+</div>
+```
+
+**Спробуйте:** перегляньте покоління від 0 до 19. Коли з'являються перші популяції, що фіксували або втратили алель? Порівняйте спостережену дисперсію з очікуваною. У реальному досліді Бурі популяції розходилися швидше, ніж передбачає N = 16: що це каже про ефективний розмір? Порахуйте N~e~ для 10 самців і 90 самиць. Як одне покоління з N = 10 серед поколінь по 1 000 впливає на N~e~?
+
+# 6. Скільки генетичної мінливості в природі
+
+[● Базовий рівень]{.lvl .lvl1}
+
+::: {.callout-tip collapse="true"}
+## Простими словами
+
+Скільки різноманіття «приховано» в популяції: яка частка генів має кілька варіантів і як часто в окремої особини дві різні копії гена. Виявилось, що його значно більше, ніж видно за зовнішністю.
+
+**Запам'ятайте:** приблизно третина білкових локусів поліморфна.
+:::
+
+
+Дві класичні міри мінливості: **частка поліморфних локусів** (частка локусів, де є хоча б два алелі) і **очікувана гетерозиготність** $H = 1 - \sum p_i^2$ (для двох алелів 2pq), усереднена по локусах. Дослідження білкової мінливості електрофорезом показали, що приблизно третина білкових локусів поліморфна. Звідси дві гіпотези: **нейтральна** (більшість варіантів функціонально еквівалентні, їхня доля визначається дрейфом і мутаціями) і **балансова** (мінливість підтримує балансуючий відбір).
+
+```{=html}
+<div class="lab" id="e6">
+  <canvas id="e6c"></canvas>
+  <div class="tip" id="e6tip"></div>
+  <div class="hint">Наведіть курсор на стовпчик. Дані електрофорезу білків з табл. 26.1 Pierce (за Nevo, 1978). Ці методи недооцінюють справжню мінливість: синонімічні та некодуючі відмінності електрофорез не бачить.</div>
+  <div class="src">Pierce, розд. 26.2: вимірювання генетичної мінливості, нейтральна і балансова гіпотези.</div>
+</div>
+```
+
+**Спробуйте:** у якій групі мінливість найвища, а в якій — найнижча? Чому очікувана гетерозиготність корисніша за спостережену для видів, що самозапилюються?
+
+# 7. Молекулярна еволюція і молекулярний годинник
+
+[●●● Поглиблений рівень]{.lvl .lvl3}
+
+::: {.callout-tip collapse="true"}
+## Простими словами
+
+Частини генів, важливі для функції, змінюються повільно: зміни там зазвичай шкідливі й відсіюються. Частини, що не впливають на білок, змінюються швидше. Якщо зміни накопичуються приблизно рівномірно, кількість відмінностей між видами працює як годинник.
+
+**Запам'ятайте:** dN/dS < 1 — очищувальний відбір, > 1 — позитивний.
+:::
+
+
+Різні частини генів еволюціонують з різною швидкістю: що менше заміна впливає на функцію, то швидше вона накопичується. **Синонімічні** заміни (dS) зазвичай накопичуються набагато швидше за **несинонімічні** (dN), бо більшість змін амінокислот шкідливі й видаляються відбором. Відношення **dN/dS** показує силу відбору: ≪ 1 — очищувальний відбір, ≈ 1 — нейтральна еволюція, > 1 — позитивний відбір.
+
+За нейтральною теорією швидкість заміщення нейтральних мутацій дорівнює **швидкості мутацій μ** і не залежить від розміру популяції: у великій популяції виникає більше мутацій (2Nμ), але кожна має меншу ймовірність фіксації (1/2N). На цьому базується **молекулярний годинник**.
+
+```{=html}
+<div class="lab" id="e7">
+  <div class="ttl">Швидкості несинонімічних і синонімічних замін у генах ссавців <small>× 10⁻⁹ на сайт на рік</small></div>
+  <div class="ctl"><label>Сортувати
+    <select class="form-select form-select-sm" id="e7sort"><option value="ratio">за dN/dS</option><option value="dn">за dN</option><option value="ds">за dS</option><option value="name">за назвою</option></select></label></div>
+  <canvas id="e7c"></canvas>
+  <div class="tip" id="e7tip"></div>
+  <div class="hint">Дані з табл. 26.5 Pierce (за Li & Graur, 1991; порівняння людини і гризунів).</div>
+  <hr>
+  <div class="ttl">Нейтральна теорія: швидкість заміщення не залежить від N</div>
+  <div class="ctl">
+    <label>Швидкість мутацій μ на ділянку за покоління: <b id="e7uv"></b><input type="range" class="form-range" id="e7u" min="-2.7" max="-1.7" step="0.05" value="-2"></label>
+    <div class="btns"><button class="btn btn-sm btn-primary" id="e7go">Запустити ще раз</button></div>
+  </div>
+  <canvas id="e7n"></canvas>
+  <div class="out" id="e7no"></div>
+  <hr>
+  <div class="ttl">Калькулятор молекулярного годинника</div>
+  <div class="ctl">
+    <label>Калібрування: замін між видами з відомим часом розходження<input type="number" class="form-control form-control-sm" id="e7k1" value="20" min="1"></label>
+    <label>Час їхнього розходження, млн років<input type="number" class="form-control form-control-sm" id="e7k2" value="400" min="1"></label>
+    <label>Замін між досліджуваними видами<input type="number" class="form-control form-control-sm" id="e7k3" value="15" min="0"></label>
+  </div>
+  <div class="out" id="e7ko"></div>
+  <div class="src">Pierce, розд. 26.5: швидкості молекулярної еволюції (табл. 26.5, рис. 26.16), молекулярний годинник і приклад з цитохромом c.</div>
+</div>
+```
+
+**Спробуйте:** які гени найконсервативніші і чому (подумайте про функцію гістону H3 чи актину)? У яких генів dN/dS найвищий і що спільного в їхніх функціях (імунітет)? У симуляції порівняйте нахил ліній для N = 10 і N = 100. Чому на початку велика популяція не має жодних заміщень? Чому молекулярний годинник «цокає» не завжди рівномірно?
+
+# 8. Філогенетичні дерева
+
+[●● Середній рівень]{.lvl .lvl2}
+
+::: {.callout-tip collapse="true"}
+## Простими словами
+
+Філогенетичне дерево — родовід видів або генів. Що більше спільних літер у послідовностях, то ближче вони на дереві. Можливих дерев надзвичайно багато, тому програми шукають найкраще, не перебираючи всі.
+
+**Запам'ятайте:** схожість послідовностей → спорідненість.
+:::
+
+
+Філогенетичне дерево показує еволюційні зв'язки між організмами чи генами. Головна складність — **кількість можливих дерев** зростає надзвичайно швидко: для N таксонів кількість вкорінених дерев $\dfrac{(2N-3)!}{2^{N-2}(N-2)!}$. Тому програми не перебирають усі дерева, а використовують методи відстаней, максимальної економії (parsimony), максимальної правдоподібності або байєсівські методи. Нижче — найпростіший метод відстаней (**UPGMA**): змініть послідовності, і дерево перебудується.
+
+```{=html}
+<div class="lab" id="e8">
+  <div class="grid2">
+    <div>
+      <div class="ttl">Вирівняні послідовності <small>редагуйте літери</small></div>
+      <div id="e8seq"></div>
+      <div class="btns" style="margin-top:8px"><button class="btn btn-sm btn-outline-primary" id="e8mut">Додати випадкову мутацію</button><button class="btn btn-sm btn-outline-secondary" id="e8reset">Скинути</button></div>
+      <div class="out" id="e8m"></div>
+    </div>
+    <div><canvas id="e8c"></canvas></div>
+  </div>
+  <hr>
+  <div class="ctl"><label>Кількість таксонів N: <b id="e8nv"></b><input type="range" class="form-range" id="e8n" min="2" max="30" value="10"></label></div>
+  <div class="out" id="e8no"></div>
+  <div class="src">Pierce, розд. 26.4: вирівнювання гомологічних послідовностей, побудова філогенетичних дерев, кількість можливих дерев.</div>
+</div>
+```
+
+**Спробуйте:** змініть кілька нуклеотидів у послідовності «Вид E» так, щоб вона стала схожою на «Вид A». Як змінилося дерево? Скільки можливих вкорінених дерев для 10 і для 20 таксонів? Чому для великих наборів даних потрібні евристичні методи?
+
+# 9. Кількісні ознаки: полігенне успадкування
+
+[● Базовий рівень]{.lvl .lvl1}
+
+::: {.callout-tip collapse="true"}
+## Простими словами
+
+Зріст визначає не один ген, а сотні, і кожен додає трохи — як сума очок на багатьох кубиках. Сума багатьох малих внесків плюс вплив середовища дає плавний дзвоноподібний розподіл.
+
+**Запам'ятайте:** багато генів з малими ефектами + середовище = неперервна ознака.
+:::
+
+
+Ріст, маса, врожайність, артеріальний тиск — **кількісні ознаки**: на них впливають багато генів і середовище. Герман Нільсон-Еле показав на кольорі зерна пшениці, що кілька генів з **адитивним** ефектом дають багато класів фенотипу: для n локусів у F₂ — 2n + 1 класів у пропорціях біноміального розподілу. Додайте мінливість від середовища, і розподіл стає неперервним, близьким до нормального.
+
+```{=html}
+<div class="lab" id="e9">
+  <div class="ctl">
+    <label>Кількість локусів n: <b id="e9nv"></b><input type="range" class="form-range" id="e9n" min="1" max="20" value="2"></label>
+    <label>Внесок середовища (частка V<sub>E</sub> у V<sub>P</sub>): <b id="e9ev"></b><input type="range" class="form-range" id="e9e" min="0" max="0.9" step="0.05" value="0"></label>
+  </div>
+  <canvas id="e9c"></canvas>
+  <div class="out" id="e9o"></div>
+  <div class="src">Pierce, розд. 24.1–24.2: полігенне успадкування, досліди Нільсона-Еле (рис. 24.4).</div>
+</div>
+```
+
+**Спробуйте:** при n = 2 і без середовища відтворіть співвідношення 1 : 4 : 6 : 4 : 1 з досліду Нільсона-Еле. Яка частка F₂ подібна до одного з батьків (крайній клас) при n = 4? Як за цією часткою (1/4ⁿ) оцінювали кількість генів, що впливають на ознаку?
+
+# 10. Спадковість і відповідь на відбір
+
+[●● Середній рівень]{.lvl .lvl2}
+
+::: {.callout-tip collapse="true"}
+## Простими словами
+
+Селекціонер обирає найкращих тварин для розведення. Нащадки будуть кращими за середнє, але не настільки, як батьки: частина переваги батьків була від середовища, а не від генів. Частка, що «переходить» до нащадків, — і є спадковість h².
+
+**Запам'ятайте:** R = h² × S.
+:::
+
+
+Фенотипна мінливість розкладається на компоненти: $V_P = V_A + V_D + V_I + V_E + V_{GE}$. **Спадковість у вузькому сенсі** $h^2 = V_A / V_P$ показує, наскільки нащадки схожі на батьків, і визначає **відповідь на відбір**: $R = h^2 S$, де $S$ — диференціал відбору (різниця між середнім відібраних батьків і середнім популяції). Це «рівняння селекціонера».
+
+```{=html}
+<div class="lab" id="e10">
+  <div class="ctl">
+    <label>Спадковість h²: <b id="e10hv"></b><input type="range" class="form-range" id="e10h" min="0" max="1" step="0.05" value="0.4"></label>
+    <label>Частка відібраних батьків: <b id="e10pv"></b><input type="range" class="form-range" id="e10p" min="0.02" max="0.8" step="0.02" value="0.2"></label>
+    <div class="btns">
+      <button class="btn btn-sm btn-primary" id="e10next">Ще одне покоління відбору</button>
+      <button class="btn btn-sm btn-outline-secondary" id="e10reset">Почати спочатку</button>
+    </div>
+  </div>
+  <div class="grid2">
+    <canvas id="e10c"></canvas>
+    <canvas id="e10t"></canvas>
+  </div>
+  <div class="out" id="e10o"></div>
+  <div class="src">Pierce, розд. 24.3–24.4: компоненти фенотипної мінливості, спадковість (рівняння 24.11–24.15), відповідь на відбір R = h²S.</div>
+</div>
+```
+
+**Спробуйте:** при h² = 0 відберіть найкращих 10 %: чи зміниться наступне покоління? Як залежить відповідь від суворості відбору? Чому спадковість — характеристика конкретної популяції в конкретному середовищі, а не самої ознаки?
+
+# Тест для самоперевірки
+
+```{=html}
+<div class="lab quiz" id="quiz">
+  <div id="qbox"></div>
+  <div class="out" id="qscore"></div>
+  <button class="btn btn-sm btn-outline-secondary" id="qreset">Пройти ще раз</button>
+</div>
+
+<script>
+(function(){
+"use strict";
+const $=id=>document.getElementById(id);
+const redraws=[];const rnd=Math.random;
+const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+const f2=v=>v.toLocaleString('uk-UA',{maximumFractionDigits:2});
+const f3=v=>v.toLocaleString('uk-UA',{maximumFractionDigits:3});
+const sig=(v,d=3)=>v.toLocaleString('uk-UA',{maximumSignificantDigits:d});
+const pct=(v,d=1)=>(100*v).toLocaleString('uk-UA',{maximumFractionDigits:d})+' %';
+const int=v=>Math.round(v).toLocaleString('uk-UA');
+const sci=v=>{if(v===0)return '0';const e=Math.floor(Math.log10(v));const m=v/Math.pow(10,e);return (Math.abs(e)<3?sig(v):`${f2(m)}·10<sup>${e}</sup>`);};
+const C={ink:'#1f2933',ink2:'#52606d',ink3:'#7b8794',grid:'#e6ebf0',axis:'#a3adb8',s1:'#2a78d6',s2:'#eb6834',s3:'#1baf7a',s4:'#8a63c9',s5:'#d4a017',good:'#1f8a4c',bad:'#c62828',ref:'#c9d3dd'};
+function canvas(id,h){const c=$(id);c.style.width='100%';const w=Math.max(240,c.clientWidth||c.parentElement.clientWidth-2);const d=window.devicePixelRatio||1;
+  c.width=Math.round(w*d);c.height=Math.round(h*d);c.style.height=h+'px';const x=c.getContext('2d');x.setTransform(d,0,0,d,0,0);
+  x.clearRect(0,0,w,h);x.font='12px system-ui,-apple-system,Segoe UI,Roboto,sans-serif';return {x,w,h,c};}
+function niceTicks(a,b,n){const span=b-a||1;const s0=span/n;const m=Math.pow(10,Math.floor(Math.log10(s0)));const r=s0/m;
+  const st=(r<1.5?1:r<3?2:r<7?5:10)*m;const t=[];for(let v=Math.ceil(a/st-1e-9)*st;v<=b+1e-9;v+=st)t.push(+v.toFixed(10));return t;}
+function area(x,w,h,o){
+  const L=o.L??54,R=o.R??14,T=o.T??14,B=o.B??42;const W=w-L-R,H=h-T-B;
+  const xmin=o.xmin??0,xmax=o.xmax,ymin=o.ymin??0,ymax=o.ymax;
+  const lx=o.xlog,ly=o.ylog;const tx=v=>lx?Math.log10(v):v,ty=v=>ly?Math.log10(v):v;
+  const sx=v=>L+(tx(v)-tx(xmin))/(tx(xmax)-tx(xmin))*W;const sy=v=>T+H-(ty(v)-ty(ymin))/(ty(ymax)-ty(ymin))*H;
+  const logT=(a,b)=>{const t=[];for(let e=Math.ceil(Math.log10(a)-1e-9);e<=Math.floor(Math.log10(b)+1e-9);e++)t.push(Math.pow(10,e));return t;};
+  x.lineWidth=1;const yt=o.yt||(ly?logT(ymin,ymax):niceTicks(ymin,ymax,o.yn||5));
+  for(const v of yt){const y=sy(v);x.strokeStyle=C.grid;x.beginPath();x.moveTo(L,y);x.lineTo(L+W,y);x.stroke();
+    x.fillStyle=C.ink2;x.textAlign='right';x.textBaseline='middle';x.fillText((o.yf||f2)(v),L-6,y);}
+  if(!o.noX){const xt=o.xt||(lx?logT(xmin,xmax):niceTicks(xmin,xmax,o.xn||6));for(const v of xt){x.fillStyle=C.ink2;x.textAlign='center';x.textBaseline='top';x.fillText((o.xf||f2)(v),sx(v),T+H+6);}}
+  x.strokeStyle=C.axis;x.beginPath();x.moveTo(L,T);x.lineTo(L,T+H);x.lineTo(L+W,T+H);x.stroke();x.fillStyle=C.ink2;
+  if(o.xl){x.textAlign='center';x.textBaseline='bottom';x.fillText(o.xl,L+W/2,h-4);}
+  if(o.yl){x.save();x.translate(13,T+H/2);x.rotate(-Math.PI/2);x.textAlign='center';x.textBaseline='middle';x.fillText(o.yl,0,0);x.restore();}
+  return {sx,sy,L,T,W,H};}
+function line(x,pts,col,wd=2,dash){x.strokeStyle=col;x.lineWidth=wd;x.setLineDash(dash||[]);x.beginPath();pts.forEach((p,i)=>i?x.lineTo(p[0],p[1]):x.moveTo(p[0],p[1]));x.stroke();x.setLineDash([]);}
+function rrect(x,X,Y,W,H,r,col){r=Math.max(0,Math.min(r,W/2,Math.abs(H)/2));x.fillStyle=col;x.beginPath();x.moveTo(X,Y+H);x.lineTo(X,Y+r);x.quadraticCurveTo(X,Y,X+r,Y);x.lineTo(X+W-r,Y);x.quadraticCurveTo(X+W,Y,X+W,Y+r);x.lineTo(X+W,Y+H);x.closePath();x.fill();}
+function legend(x,items,X,Y,maxW){let cx=X,cy=Y;x.textBaseline='middle';x.textAlign='left';for(const [lab,col,dash] of items){const iw=x.measureText(lab).width+19;if(maxW&&cx>X&&cx+iw>X+maxW){cx=X;cy+=17;}
+  if(dash){line(x,[[cx,cy],[cx+14,cy]],col,2,[4,3]);}else{x.fillStyle=col;x.fillRect(cx,cy-5,14,10);}x.fillStyle=C.ink2;x.fillText(lab,cx+19,cy);cx+=iw+19;}}
+function gauss(){let u=0,v=0;while(!u)u=rnd();while(!v)v=rnd();return Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v);}
+function binom(n,p){if(p<=0)return 0;if(p>=1)return n;if(n<=60){let k=0;for(let i=0;i<n;i++)if(rnd()<p)k++;return k;}return clamp(Math.round(n*p+Math.sqrt(n*p*(1-p))*gauss()),0,n);}
+function poisson(l){if(l>30)return Math.max(0,Math.round(l+Math.sqrt(l)*gauss()));const L=Math.exp(-l);let k=0,p=1;do{k++;p*=rnd();}while(p>L);return k-1;}
+function multinom(n,p){const c=new Array(p.length).fill(0);const cum=[];let s=0;for(const v of p){s+=v;cum.push(s);}for(let i=0;i<n;i++){const u=rnd()*s;let lo=0,hi=cum.length-1;while(lo<hi){const m=(lo+hi)>>1;if(cum[m]<u)lo=m+1;else hi=m;}c[lo]++;}return c;}
+function tooltip(cv,tip,points,fmt){$(cv).onmousemove=e=>{const b=$(cv).getBoundingClientRect();const X=e.clientX-b.left,Y=e.clientY-b.top;let best=null;
+    for(const p of points())if(p&&X>=p.x0&&X<=p.x1&&Y>=p.y0&&Y<=p.y1){best=p;break;}const t=$(tip);
+    if(best){t.style.display='block';t.innerHTML=fmt(best);t.style.left=Math.min(window.innerWidth-240,e.clientX+12)+'px';t.style.top=(e.clientY+12)+'px';}else t.style.display='none';};
+  $(cv).onmouseleave=()=>{$(tip).style.display='none';};}
+function deb(fn){let q=0;return ()=>{cancelAnimationFrame(q);q=requestAnimationFrame(fn);};}
+
+/* ---------- 1. HWE extensions ---------- */
+(function(){
+  function three(){let p=+$('e1p').value,q=+$('e1q').value;if(p+q>1){q=+(1-p).toFixed(2);$('e1q').value=q;}const r=Math.max(0,1-p-q);
+    $('e1pv').textContent=f2(p);$('e1qv').textContent=f2(q);
+    const G=[['A₁A₁',p*p],['A₁A₂',2*p*q],['A₂A₂',q*q],['A₁A₃',2*p*r],['A₂A₃',2*q*r],['A₃A₃',r*r]];
+    const {x,w,h}=canvas('e1c',220);const a=area(x,w,h,{T:16,xmin:0,xmax:6,ymin:0,ymax:Math.max(0.1,Math.ceil(Math.max(...G.map(g=>g[1]))*10)/10),noX:true,yl:'частота генотипу',yf:v=>pct(v,0),B:30});
+    const bw=a.W/6;G.forEach(([n,v],i)=>{const X=a.L+i*bw+bw*0.15;const het=n.slice(0,2)!==n.slice(2,4);rrect(x,X,a.sy(v),bw*0.7,a.sy(0)-a.sy(v),4,het?C.s1:C.s2);x.fillStyle=C.ink;x.textAlign='center';x.textBaseline='bottom';x.fillText(f3(v),X+bw*0.35,a.sy(v)-2);x.fillStyle=C.ink2;x.textBaseline='top';x.fillText(n,X+bw*0.35,a.T+a.H+6);});
+    const het=G.filter(g=>g[0].slice(0,2)!==g[0].slice(2,4)).reduce((s,g)=>s+g[1],0);
+    $('e1o').innerHTML=`r (A₃) = 1 − p − q = <b>${f2(r)}</b>. Усі гетерозиготи разом: <b>${pct(het)}</b> = 1 − p² − q² − r². <span class="hint">Синій — гетерозиготи, помаранчевий — гомозиготи.</span>`;}
+  function xl(){const q=Math.pow(10,+$('e1x').value);$('e1xv').textContent=sci(q).replace(/<\/?sup>/g,m=>m);
+    $('e1xv').innerHTML=sci(q);
+    $('e1xo').innerHTML=`<table class="mini"><tr><th></th><th>частка з ознакою</th></tr><tr><td>самці (q)</td><td><b>${sci(q)}</b> — 1 з ${int(1/q)}</td></tr><tr><td>самиці (q²)</td><td><b>${sci(q*q)}</b> — 1 з ${int(1/(q*q))}</td></tr><tr><td>самиці-носії (2pq)</td><td>${sci(2*q*(1-q))}</td></tr></table>Ознака в самців трапляється у <b>${int(1/q)}</b> разів частіше, ніж у самиць.`;}
+  function dis(){const N=Math.pow(10,+$('e1d').value);$('e1dv').textContent=int(N);const f=1/N,q=Math.sqrt(f),p=1-q;
+    $('e1do').innerHTML=`q = √(1/${int(N)}) = <b>${f3(q)}</b>; носіїв (2pq) — <b>${pct(2*p*q,2)}</b>, тобто 1 з ${int(1/(2*p*q))} людей. На одного хворого припадає <b>${int(2*p*q/f)}</b> здорових носіїв: ${pct(2*p*q*0.5/(2*p*q*0.5+f),1)} копій патогенного алеля «сховані» в гетерозиготах.`;}
+  ['e1p','e1q'].forEach(id=>$(id).addEventListener('input',three));$('e1x').addEventListener('input',xl);$('e1d').addEventListener('input',dis);redraws.push(three);xl();dis();
+})();
+
+/* ---------- 2. inbreeding over time ---------- */
+(function(){
+  const G=15;function series(){const self=[0],sib=[0,0],half=[0,0];for(let t=1;t<=G;t++){self.push((1+self[t-1])/2);}
+    for(let t=1;t<=G;t++){sib.push((1+2*sib[t]+sib[t-1])/4);half.push((1+6*half[t]+half[t-1])/8);}return {self,sib:sib.slice(1),half:half.slice(1)};}
+  const S=series();const sys=[['самозапліднення',S.self,C.s2],['брат × сестра',S.sib,C.s1],['напівсибси',S.half,C.s3]];
+  function draw(){const p=+$('e2p').value,q=1-p,t=+$('e2t').value;$('e2pv').textContent=f2(p);$('e2tv').textContent=t;
+    const {x,w,h}=canvas('e2c',280);const a=area(x,w,h,{T:34,xmin:0,xmax:G,ymin:0,ymax:1,xl:'покоління інбридингу',yl:'гетерозиготи (1 − F)',yf:v=>pct(v,0)});
+    for(const [n,s,c] of sys){line(x,s.map((F,i)=>[a.sx(i),a.sy(1-F)]),c,2);}
+    x.strokeStyle=C.axis;x.setLineDash([3,3]);x.beginPath();x.moveTo(a.sx(t),a.T);x.lineTo(a.sx(t),a.T+a.H);x.stroke();x.setLineDash([]);
+    legend(x,sys.map(s=>[s[0],s[2]]),a.L,12,w-a.L-10);
+    const rows=sys.map(([n,s])=>{const F=s[t];return `<tr><td>${n}</td><td>${f3(F)}</td><td>${f3(p*p+F*p*q)}</td><td>${f3(2*p*q*(1-F))}</td><td>${f3(q*q+F*p*q)}</td></tr>`;}).join('');
+    $('e2o').innerHTML=`<b>Після ${t} покол.</b><table class="mini"><tr><th>система</th><th>F</th><th>AA</th><th>Aa</th><th>aa</th></tr><tr><td>випадкове</td><td>0</td><td>${f3(p*p)}</td><td>${f3(2*p*q)}</td><td>${f3(q*q)}</td></tr>${rows}</table><div class="hint">Частоти алелів не змінюються: p = f(AA) + ½ f(Aa) = ${f2(p)} у кожному рядку.</div>`;
+    const J=[['неспоріднені',0.082],['троюрідні (F = 1/64)',0.108],['двоюрідні (F = 1/16)',0.114]];
+    const c=canvas('e2j',160);const b=area(c.x,c.w,c.h,{L:138,T:8,B:38,xmin:0,xmax:0.14,ymin:0,ymax:3,noX:false,xt:[0,0.05,0.1],xf:v=>pct(v,0),yt:[],xl:'смертність дітей до 12 років'});
+    J.forEach(([n,v],i)=>{const Y=b.T+i*b.H/3+6,H=b.H/3-12;c.x.fillStyle=i?C.s2:C.ref;c.x.fillRect(b.L,Y,b.sx(v)-b.L,H);c.x.fillStyle=C.ink2;c.x.textAlign='right';c.x.textBaseline='middle';c.x.fillText(n,b.L-6,Y+H/2);c.x.textAlign='left';c.x.fillStyle=C.ink;c.x.fillText(pct(v),b.sx(v)+4,Y+H/2);});}
+  ['e2p','e2t'].forEach(id=>$(id).addEventListener('input',draw));redraws.push(draw);
+})();
+
+/* ---------- 3. mutation ---------- */
+(function(){
+  function eq(){const u=Math.pow(10,+$('e3u').value),v=Math.pow(10,+$('e3v').value);$('e3uv').innerHTML=sci(u);$('e3vv').innerHTML=sci(v);const qh=u/(u+v);
+    const {x,w,h}=canvas('e3c',240);const gmax=Math.pow(10,Math.ceil(Math.log10(5/(u+v))));const a=area(x,w,h,{T:34,xlog:true,xmin:1,xmax:gmax,ymin:0,ymax:1,xl:'покоління (логарифмічна шкала)',yl:'частота G₂ (q)',xf:v=>v>=1e4?'10'+String(Math.round(Math.log10(v))).split('').map(c=>'⁰¹²³⁴⁵⁶⁷⁸⁹'[+c]).join(''):int(v)});
+    const pts=[];for(let i=0;i<=200;i++){const g=Math.pow(10,i/200*Math.log10(gmax));const q=qh+(0-qh)*Math.pow(1-u-v,g);pts.push([a.sx(g),a.sy(q)]);}line(x,pts,C.s1,2.5);
+    line(x,[[a.L,a.sy(qh)],[a.L+a.W,a.sy(qh)]],C.s2,1.5,[5,4]);legend(x,[['q від 0 (лише G₁ на старті)',C.s1],[`рівновага q̂ = μ/(μ+ν) = ${f2(qh)}`,C.s2,1]],a.L,12,w-a.L-10);
+    const half=Math.log(0.5)/Math.log(1-u-v);
+    $('e3o').innerHTML=`За одне покоління (при q = 0,1): Δq = μp − νq = <b>${sci(u*0.9-v*0.1)}</b>. Половину шляху до рівноваги популяція проходить за ≈ <b>${int(half)}</b> поколінь${half*25>1e4?` (≈ ${int(half*25)} років у людини)`:''}.`;}
+  function bal(){const dom=$('e3dom').value==='dom';const mu=Math.pow(10,+$('e3mu').value),s=+$('e3s').value;$('e3muv').innerHTML=sci(mu);$('e3sv').textContent=f2(s);
+    const qh=dom?mu/s:Math.sqrt(mu/s);const G=dom?Math.round(Math.min(400,10/s)):Math.round(Math.min(200000,30/Math.sqrt(mu*s)));
+    const {x,w,h}=canvas('e3b',230);let q=0;const tr=[[0,0]];const step=Math.max(1,Math.floor(G/300));
+    for(let g=1;g<=G;g++){const p=1-q;let wb,qn;if(dom){const wAA=1-s,wAa=1-s;wb=q*q*wAA+2*p*q*wAa+p*p;qn=(q*q*wAA+p*q*wAa)/wb;}else{wb=1-s*q*q;qn=(q-s*q*q)/wb;}q=qn+mu*(1-qn);if(g%step===0)tr.push([g,q]);}
+    const ymax=qh*1.5;const a=area(x,w,h,{T:34,xmin:0,xmax:G,ymin:0,ymax,xl:'покоління',yl:'частота мутантного алеля',yf:v=>sig(v,2),xf:v=>v.toLocaleString('uk-UA'),L:66});
+    line(x,tr.map(([g,v])=>[a.sx(g),a.sy(v)]),C.s1,2.5);line(x,[[a.L,a.sy(qh)],[a.L+a.W,a.sy(qh)]],C.s2,1.5,[5,4]);
+    legend(x,[['симуляція: мутація + відбір',C.s1],[`рівновага ${dom?'μ/s':'√(μ/s)'}`,C.s2,1]],a.L,12,w-a.L-10);
+    const inc=dom?2*qh:qh*qh;
+    $('e3bo').innerHTML=`Рівноважна частота алеля: <b>${sci(qh)}</b>; частота хворих ≈ <b>${sci(inc)}</b> (1 на ${int(1/inc)}). ${dom?'Кожна копія домінантного алеля «видима» для відбору, тож рівновага низька.':'Більшість копій рецесивного алеля сховані в гетерозиготах, тож відбір їх майже не бачить, і рівновага значно вища.'}${dom&&Math.abs(mu-3e-5)<3e-6&&Math.abs(s-0.26)<0.006?' Це приклад з ахондроплазією в книзі: q̂ ≈ 0,000115.':''}`;}
+  ['e3u','e3v'].forEach(id=>$(id).addEventListener('input',eq));['e3mu','e3s'].forEach(id=>$(id).addEventListener('input',bal));$('e3dom').addEventListener('change',bal);redraws.push(eq,bal);
+})();
+
+/* ---------- 4. migration & rescue ---------- */
+const NAL=20;const SRC=(()=>{const f=[];for(let i=1;i<=NAL;i++)f.push(1/Math.pow(i,1.1));const s=f.reduce((a,b)=>a+b);return f.map(v=>v/s);})();
+(function(){
+  let res=null;const N=30,G=120,start=40;
+  function sim(){const k=+$('e4k').value;$('e4kv').textContent=k;const m=k/N;let p=multinom(12,SRC).map(v=>v/12);const H=[],A=[];
+    for(let g=0;g<=G;g++){H.push(1-p.reduce((a,v)=>a+v*v,0));A.push(p.filter(v=>v>0).length);const mm=g>=start?m:0;const nm=Math.round(2*N*mm),nr=2*N-nm;
+      const c=multinom(nr,p),cm=nm?multinom(nm,SRC):new Array(NAL).fill(0);p=c.map((v,i)=>(v+cm[i])/(2*N));}
+    res={H,A,k};draw();}
+  function draw(){const m=+$('e4m').value;$('e4mv').textContent=f3(m);
+    {const {x,w,h}=canvas('e4a',230);const a=area(x,w,h,{T:34,xmin:0,xmax:60,ymin:0,ymax:1,xl:'покоління',yl:'частота алеля a'});
+      const qI=0.8;let q=0.1;const pts=[];for(let g=0;g<=60;g++){pts.push([a.sx(g),a.sy(q)]);q=m*qI+(1-m)*q;}
+      line(x,[[a.L,a.sy(qI)],[a.L+a.W,a.sy(qI)]],C.s2,2,[5,4]);line(x,pts,C.s1,2.5);legend(x,[['популяція II (реципієнт)',C.s1],['популяція I (джерело)',C.s2,1]],a.L,12,w-a.L-10);}
+    if(res){const {x,w,h}=canvas('e4b',230);const a=area(x,w,h,{T:34,xmin:0,xmax:G,ymin:0,ymax:1,xl:'покоління',yl:'гетерозиготність H'});
+      x.fillStyle='rgba(42,120,214,.07)';x.fillRect(a.sx(start),a.T,a.sx(G)-a.sx(start),a.H);
+      const Hs=1-SRC.reduce((s,v)=>s+v*v,0);line(x,[[a.L,a.sy(Hs)],[a.L+a.W,a.sy(Hs)]],C.ink3,1.5,[4,3]);line(x,res.H.map((v,g)=>[a.sx(g),a.sy(v)]),C.s3,2.5);
+      legend(x,[['мала популяція',C.s3],['джерело',C.ink3,1]],a.L,12,w-a.L-10);x.fillStyle=C.s1;x.textAlign='left';x.textBaseline='bottom';x.fillText('міграція',a.sx(start)+4,a.T+a.H-4);}
+    const half=m>0?Math.log(0.5)/Math.log(1-m):Infinity;
+    $('e4o').innerHTML=`Однобічна міграція: різниця частот зменшується щопокоління в (1 − m) разів і зменшиться вдвічі за <b>${isFinite(half)?f2(half)+' покоління':'∞ (немає міграції)'}</b>.`+
+      (res?` Генетичний порятунок: перед міграцією (40-ве покоління) гетерозиготність <b>${f2(res.H[start])}</b>, алелів <b>${res.A[start]}</b>; наприкінці — <b>${f2(res.H[G])}</b>, алелів <b>${res.A[G]}</b> з ${NAL} у джерелі.`:'');}
+  $('e4m').addEventListener('input',draw);$('e4k').addEventListener('input',sim);$('e4go').onclick=sim;redraws.push(draw);sim();
+})();
+
+/* ---------- 5. Buri & Ne ---------- */
+(function(){
+  const NP=107,N2=32,G=19;let H=null,timer=null;
+  function sim(){H=[];let pops=new Array(NP).fill(16);H.push(pops.slice());for(let g=1;g<=G;g++){pops=pops.map(c=>binom(N2,c/N2));H.push(pops.slice());}draw();}
+  function draw(){const g=+$('e5g').value;$('e5gv').textContent=g;if(!H)return;const cnt=new Array(N2+1).fill(0);H[g].forEach(c=>cnt[c]++);
+    const {x,w,h}=canvas('e5c',260);const ymax=Math.max(30,Math.ceil(Math.max(...cnt)/10)*10);const a=area(x,w,h,{xmin:-0.5,xmax:N2+0.5,ymin:0,ymax,noX:true,xl:'кількість копій bw⁷⁵ у популяції (з 32)',yl:'кількість популяцій'});
+    const bw=a.W/(N2+1);for(let i=0;i<=N2;i++){if(cnt[i])rrect(x,a.L+i*bw+1,a.sy(cnt[i]),bw-2,a.sy(0)-a.sy(cnt[i]),3,i===0||i===N2?C.s2:C.s1);if(i%4===0){x.fillStyle=C.ink2;x.textAlign='center';x.textBaseline='top';x.fillText(i,a.L+i*bw+bw/2,a.T+a.H+5);}}
+    const ps=H[g].map(c=>c/N2);const m=ps.reduce((a,b)=>a+b)/NP;const v=ps.reduce((a,p)=>a+(p-m)**2,0)/NP;const ev=0.25*(1-Math.pow(1-1/N2,g));
+    const fx=H[g].filter(c=>c===N2).length,ls=H[g].filter(c=>c===0).length;
+    $('e5o').innerHTML=`Покоління ${g}: середня частота <b>${f3(m)}</b>, дисперсія між популяціями <b>${f3(v)}</b> (очікувано для N = 16: p₀q₀[1 − (1 − 1/2N)<sup>t</sup>] = ${f3(ev)}). Фіксували <i>bw⁷⁵</i>: <b>${fx}</b>, втратили: <b>${ls}</b> популяцій.`;}
+  function play(){if(timer){clearInterval(timer);timer=null;$('e5play').textContent='Відтворити';return;}$('e5g').value=0;draw();$('e5play').textContent='Зупинити';
+    timer=setInterval(()=>{const v=+$('e5g').value;if(v>=G){clearInterval(timer);timer=null;$('e5play').textContent='Відтворити';return;}$('e5g').value=v+1;draw();},450);}
+  function ne(){const m=+$('e5m').value,f=+$('e5f').value;$('e5mv').textContent=m;$('e5fv').textContent=f;const ns=4*m*f/(m+f);
+    const arr=$('e5h').value.split(/[,;\s]+/).map(Number).filter(v=>v>0);const hm=arr.length?arr.length/arr.reduce((a,v)=>a+1/v,0):NaN;const am=arr.length?arr.reduce((a,b)=>a+b,0)/arr.length:NaN;
+    $('e5no').innerHTML=`Нерівне співвідношення статей: N = ${m+f}, але N<sub>e</sub> = 4·${m}·${f}/(${m}+${f}) = <b>${f2(ns)}</b> (${pct(ns/(m+f),0)} від фактичної чисельності).`+
+      (arr.length?`<br>Коливання чисельності: середнє арифметичне ${f2(am)}, але N<sub>e</sub> (середнє гармонійне) = <b>${f2(hm)}</b>. Одне мале покоління визначає дрейф на багато поколінь уперед.`:'');}
+  $('e5g').addEventListener('input',draw);$('e5play').onclick=play;$('e5go').onclick=sim;['e5m','e5f','e5h'].forEach(id=>$(id).addEventListener('input',ne));redraws.push(draw);sim();ne();
+})();
+
+/* ---------- 6. natural variation (Pierce table 26.1) ---------- */
+(function(){
+  const D=[['Рослини',15,0.26,0.07],['Безхребетні (без комах)',28,0.40,0.10],['Комахи (без дрозофіли)',23,0.33,0.07],['Дрозофіла',32,0.43,0.14],['Риби',61,0.15,0.05],['Амфібії',12,0.27,0.08],['Рептилії',15,0.22,0.05],['Птахи',10,0.15,0.05],['Ссавці',46,0.15,0.04]];
+  let bars=[];
+  function draw(){const {x,w,h}=canvas('e6c',330);const L=Math.min(170,w*0.38);const a=area(x,w,h,{L,T:34,B:34,xmin:0,xmax:0.5,ymin:0,ymax:D.length,yt:[],xl:'частка',xf:v=>pct(v,0)});
+    bars=[];const rh=a.H/D.length;D.forEach(([n,ns,pl,he],i)=>{const Y=a.T+i*rh;x.fillStyle=C.ink2;x.textAlign='right';x.textBaseline='middle';x.fillText(n,a.L-6,Y+rh/2);
+      const bh=(rh-8)/2;x.fillStyle=C.s1;x.fillRect(a.L,Y+3,a.sx(pl)-a.L,bh);x.fillStyle=C.s2;x.fillRect(a.L,Y+3+bh+2,a.sx(he)-a.L,bh);
+      bars.push({x0:a.L,x1:a.sx(Math.max(pl,0.05))+40,y0:Y,y1:Y+rh,d:[n,ns,pl,he]});});
+    legend(x,[['частка поліморфних локусів',C.s1],['очікувана гетерозиготність',C.s2]],a.L,12,w-a.L-10);}
+  tooltip('e6c','e6tip',()=>bars,b=>`${b.d[0]} (${b.d[1]} видів): поліморфних локусів ${pct(b.d[2],0)}, H = ${f2(b.d[3])}`);
+  redraws.push(draw);
+})();
+
+/* ---------- 7. molecular evolution ---------- */
+(function(){
+  const T=[['α-актин',0.01,3.68],['β-актин',0.03,3.13],['Альбумін',0.91,6.63],['Альдолаза A',0.07,3.59],['Аполіпопротеїн E',0.98,4.04],['Креатинкіназа',0.15,3.08],['Еритропоетин',0.72,4.34],['α-глобін',0.55,5.14],['β-глобін',0.80,3.05],['Гормон росту',1.23,4.95],['Гістон H3',0.00,6.38],['Ig важкий ланцюг (V)',1.07,5.66],['Інсулін',0.13,4.02],['Інтерферон α1',1.41,3.53],['Інтерферон γ',2.79,8.59],['Лютеїнізуючий гормон',1.02,3.29],['Соматостатин-28',0.00,3.97]];
+  let bars=[];
+  function draw(){const s=$('e7sort').value;const d=T.slice();if(s==='ratio')d.sort((a,b)=>b[1]/b[2]-a[1]/a[2]);if(s==='dn')d.sort((a,b)=>b[1]-a[1]);if(s==='ds')d.sort((a,b)=>b[2]-a[2]);if(s==='name')d.sort((a,b)=>a[0].localeCompare(b[0],'uk'));
+    const rh=22;const {x,w,h}=canvas('e7c',d.length*rh+70);const L=Math.min(160,w*0.36);const a=area(x,w,h,{L,R:56,T:34,B:34,xmin:0,xmax:9,ymin:0,ymax:d.length,yt:[],xl:'замін на сайт на 10⁹ років'});
+    bars=[];d.forEach(([n,dn,ds],i)=>{const Y=a.T+i*rh;x.fillStyle=C.ink2;x.textAlign='right';x.textBaseline='middle';x.fillText(n,a.L-6,Y+rh/2);
+      x.fillStyle=C.s3;x.fillRect(a.L,Y+3,a.sx(ds)-a.L,(rh-8)/2);x.fillStyle=C.s2;x.fillRect(a.L,Y+3+(rh-8)/2+2,Math.max(1,a.sx(dn)-a.L),(rh-8)/2);
+      x.fillStyle=C.ink;x.textAlign='left';x.fillText('dN/dS '+f2(dn/ds),a.sx(ds)+6,Y+rh/2);bars.push({x0:0,x1:w,y0:Y,y1:Y+rh,d:[n,dn,ds]});});
+    legend(x,[['синонімічні (dS)',C.s3],['несинонімічні (dN)',C.s2]],a.L,12,w-a.L-10);}
+  tooltip('e7c','e7tip',()=>bars,b=>`${b.d[0]}: dN = ${f2(b.d[1])}, dS = ${f2(b.d[2])}, dN/dS = ${f3(b.d[1]/b.d[2])}`);
+  $('e7sort').addEventListener('change',draw);redraws.push(draw);
+  let neu=null;
+  function sim(){const mu=Math.pow(10,+$('e7u').value);$('e7uv').innerHTML=sci(mu);const G=6000;const out={};
+    for(const N of [10,100]){let al=[];let fix=0;const cum=[0];for(let t=1;t<=G;t++){const m=poisson(2*N*mu);for(let i=0;i<m;i++)al.push(1);al=al.map(c=>binom(2*N,c/(2*N)));fix+=al.filter(c=>c===2*N).length;al=al.filter(c=>c>0&&c<2*N);cum.push(fix);}out[N]=cum;}
+    neu={out,mu,G};drawN();}
+  function drawN(){if(!neu)return;const {out,mu,G}=neu;const {x,w,h}=canvas('e7n',240);const ymax=Math.max(5,Math.ceil(Math.max(out[10][G],out[100][G],mu*G)*1.15));
+    const a=area(x,w,h,{T:34,xmin:0,xmax:G,ymin:0,ymax,xl:'покоління',yl:'накопичено заміщень',xf:v=>v.toLocaleString('uk-UA')});
+    line(x,[[a.sx(0),a.sy(0)],[a.sx(G),a.sy(mu*G)]],C.ink3,1.5,[5,4]);line(x,out[10].map((v,t)=>[a.sx(t),a.sy(v)]),C.s1,2);line(x,out[100].map((v,t)=>[a.sx(t),a.sy(v)]),C.s2,2);
+    legend(x,[['N = 10',C.s1],['N = 100',C.s2],['очікування μ·t',C.ink3,1]],a.L,12,w-a.L-10);
+    const r10=out[10][G]/G,r100=(out[100][G]-out[100][400])/(G-400);
+    $('e7no').innerHTML=`Швидкість заміщення: N = 10 — <b>${sci(r10)}</b>, N = 100 (після 400 поколінь) — <b>${sci(Math.max(0,r100))}</b> за покоління; μ = <b>${sci(mu)}</b>. У великій популяції перші фіксації з'являються лише через ≈ 4N = 400 поколінь: стільки в середньому триває фіксація нейтральної мутації.`;}
+  $('e7u').addEventListener('input',deb(sim));$('e7go').onclick=sim;redraws.push(drawN);sim();
+  function clock(){const k1=+$('e7k1').value,k2=+$('e7k2').value,k3=+$('e7k3').value;if(!(k1>0&&k2>0)){$('e7ko').textContent='Введіть додатні числа.';return;}const rate=k1/k2;const t=k3/rate;
+    const lo=k3>0?t*Math.max(0,1-1.96/Math.sqrt(k3)):0,hi=k3>0?t*(1+1.96/Math.sqrt(k3)):0;
+    $('e7ko').innerHTML=`Швидкість годинника: ${f2(k1)} / ${f2(k2)} = <b>${f3(rate*100)}</b> заміни на 100 млн років. Оцінка часу розходження: <b>${int(t)} млн років</b>${k3>0?` (грубий 95 % інтервал лише через випадковість замін за Пуассоном: ${int(lo)}–${int(hi)} млн років; невизначеність калібрування його ще розширює)`:''}.`;}
+  ['e7k1','e7k2','e7k3'].forEach(id=>$(id).addEventListener('input',clock));clock();
+})();
+
+/* ---------- 8. phylogeny ---------- */
+(function(){
+  const DEF=[['Вид A','ATGGCTAAAGAGCTGTGGCGTTTCGGACAA'],['Вид B','ATGGCTAAGGAGCTGTGGCGATTCGGACAA'],['Вид C','ATGGCCAAGGAACTGTGGCGATTCGGTCAA'],['Вид D','ATGTCCAAGGAACTCTGGCGATTTGGTCAG'],['Вид E','ATGTCAAAGGATCTCTGGAGATTTGGTCAG']];
+  let S=DEF.map(r=>r.slice());
+  function inputs(){$('e8seq').innerHTML=S.map(([n,s],i)=>`<div class="seqrow"><span style="font-size:.85rem;color:#52606d">${n}</span><input class="form-control form-control-sm seqin" id="e8s${i}" value="${s}" maxlength="30" aria-label="${n}"></div>`).join('');
+    S.forEach((_,i)=>$('e8s'+i).addEventListener('input',e=>{S[i][1]=e.target.value.toUpperCase().replace(/[^ACGT-]/g,'');tree();}));}
+  function dist(a,b){let d=0,n=0;const L=Math.min(a.length,b.length);for(let i=0;i<L;i++){if(a[i]==='-'||b[i]==='-')continue;n++;if(a[i]!==b[i])d++;}return n?d/n:0;}
+  function tree(){const n=S.length;const D=S.map(a=>S.map(b=>dist(a[1],b[1])));
+    let clusters=S.map((r,i)=>({id:i,size:1,h:0,leaves:[i],name:r[0]}));const M=D.map(r=>r.slice());const nodes=[];let key=clusters.map((_,i)=>i);
+    let Dm=D.map(r=>r.slice());
+    while(clusters.length>1){let bi=0,bj=1,bd=Infinity;for(let i=0;i<clusters.length;i++)for(let j=i+1;j<clusters.length;j++){const d=Dm[i][j];if(d<bd){bd=d;bi=i;bj=j;}}
+      const A=clusters[bi],B=clusters[bj];const nc={kids:[A,B],size:A.size+B.size,h:bd/2,leaves:A.leaves.concat(B.leaves)};
+      const row=clusters.map((c,k)=>(Dm[bi][k]*A.size+Dm[bj][k]*B.size)/(A.size+B.size));
+      clusters=clusters.filter((_,k)=>k!==bi&&k!==bj);const keep=[...Array(Dm.length).keys()].filter(k=>k!==bi&&k!==bj);
+      Dm=keep.map(i=>keep.map(j=>Dm[i][j]));const nr=keep.map(k=>row[k]);Dm.forEach((r,i)=>r.push(nr[i]));nr.push(0);Dm.push(nr);clusters.push(nc);}
+    const root=clusters[0];const {x,w,h}=canvas('e8c',260);const L=20,R=w-90,T=20,B=h-40;const hmax=root.h||0.01;const sx=v=>L+(1-v/hmax)*(R-L);
+    const order=root.leaves;const Y={};order.forEach((l,i)=>Y[l]=T+i*(B-T)/(n-1));
+    function pos(c){if(!c.kids){return Y[c.id];}const ys=c.kids.map(pos);return (ys[0]+ys[1])/2;}
+    function drawc(c){if(!c.kids)return;const ys=c.kids.map(pos);const X=sx(c.h);x.strokeStyle=C.ink2;x.lineWidth=2;x.beginPath();x.moveTo(X,ys[0]);x.lineTo(X,ys[1]);x.stroke();
+      c.kids.forEach((k,i)=>{x.beginPath();x.moveTo(X,ys[i]);x.lineTo(sx(k.kids?k.h:0),ys[i]);x.stroke();drawc(k);});}
+    drawc(root);x.fillStyle=C.ink;x.textAlign='left';x.textBaseline='middle';order.forEach(l=>x.fillText(S[l][0],sx(0)+6,Y[l]));
+    x.strokeStyle=C.axis;x.beginPath();x.moveTo(L,h-22);x.lineTo(R,h-22);x.stroke();x.fillStyle=C.ink2;x.textAlign='center';x.textBaseline='top';[0,hmax/2,hmax].forEach(v=>x.fillText(f3(v),sx(v),h-18));
+    $('e8m').innerHTML='<table class="mini"><tr><th></th>'+S.map(r=>`<th>${r[0].replace('Вид ','')}</th>`).join('')+'</tr>'+S.map((r,i)=>`<tr><td>${r[0]}</td>${D[i].map(v=>`<td>${f2(v)}</td>`).join('')}</tr>`).join('')+'</table><div class="hint">p-відстань — частка позицій, що відрізняються. UPGMA послідовно об\'єднує найближчі кластери, припускаючи однакову швидкість еволюції в усіх гілках (молекулярний годинник). Шкала під деревом — висота вузлів (половина p-відстані).</div>';}
+  function cnt(){const N=+$('e8n').value;$('e8nv').textContent=N;let lg=0;for(let k=2*N-3;k>=1;k-=2)lg+=Math.log10(k);/* (2N-3)!! = (2N-3)!/(2^(N-2)(N-2)!) */
+    const v=Math.pow(10,lg);$('e8no').innerHTML=`Кількість вкорінених дерев для ${N} таксонів = (2N − 3)! / (2<sup>N−2</sup>(N − 2)!) = <b>${N<=2?1:lg<15?int(v):f2(v/Math.pow(10,Math.floor(lg)))+'·10<sup>'+Math.floor(lg)+'</sup>'}</b>.${lg>20?' Навіть перевіряючи мільярд дерев за секунду, перебір тривав би довше за вік Всесвіту.':''}`;}
+  $('e8mut').onclick=()=>{const i=Math.floor(rnd()*S.length);const s=S[i][1].split('');const j=Math.floor(rnd()*s.length);s[j]='ACGT'.replace(s[j],'')[Math.floor(rnd()*3)];S[i][1]=s.join('');$('e8s'+i).value=S[i][1];tree();};
+  $('e8reset').onclick=()=>{S=DEF.map(r=>r.slice());inputs();tree();};$('e8n').addEventListener('input',cnt);inputs();redraws.push(tree);cnt();
+})();
+
+/* ---------- 9. polygenic ---------- */
+(function(){
+  function draw(){const n=+$('e9n').value,e=+$('e9e').value;$('e9nv').textContent=n;$('e9ev').textContent=pct(e,0);const K=2*n;
+    const pr=[];let c=1;for(let k=0;k<=K;k++){pr.push(c*Math.pow(0.5,K));c=c*(K-k)/(k+1);}
+    const VG=K*0.25,VE=e>0?VG*e/(1-e):0;const sd=Math.sqrt(VE);
+    const {x,w,h}=canvas('e9c',260);const a=area(x,w,h,{xmin:-0.5-3*sd,xmax:K+0.5+3*sd,ymin:0,ymax:Math.max(...pr)*1.15,noX:true,xl:'кількість алелів «+» (фенотип)',yl:'частка F₂',yf:v=>pct(v,0)});
+    if(e===0){const bw=a.W/(K+1+6*sd);pr.forEach((v,k)=>{const X=a.sx(k)-bw*0.4;rrect(x,X,a.sy(v),bw*0.8,a.sy(0)-a.sy(v),3,C.s1);if(K<=12||k%2===0){x.fillStyle=C.ink2;x.textAlign='center';x.textBaseline='top';x.fillText(k,a.sx(k),a.T+a.H+5);}});}
+    else{const pts=[];const xs0=-0.5-3*sd,xs1=K+0.5+3*sd;for(let i=0;i<=300;i++){const X=xs0+(xs1-xs0)*i/300;let d=0;pr.forEach((v,k)=>{d+=v*Math.exp(-((X-k)**2)/(2*VE))/Math.sqrt(2*Math.PI*VE);});pts.push([a.sx(X),a.sy(d)]);}
+      x.fillStyle='rgba(42,120,214,.15)';x.beginPath();x.moveTo(a.sx(xs0),a.sy(0));pts.forEach(p=>x.lineTo(...p));x.lineTo(a.sx(xs1),a.sy(0));x.fill();line(x,pts,C.s1,2);
+      pr.forEach((v,k)=>{x.fillStyle=C.s2;x.beginPath();x.arc(a.sx(k),a.sy(v),3,0,7);x.fill();});legend(x,[['фенотип з урахуванням середовища',C.s1],['генотипні класи без середовища',C.s2]],a.L,12,w-a.L-10);}
+    const ratio=(()=>{let c=1,arr=[];for(let k=0;k<=K;k++){arr.push(c);c=c*(K-k)/(k+1);}return arr;})();
+    $('e9o').innerHTML=`${K+1} генотипних класів фенотипу${K<=8?`, співвідношення ${ratio.join(' : ')} (з ${int(Math.pow(4,n))})`:''}. Частка F₂, подібна до кожного з батьків: 1/4<sup>${n}</sup> = <b>${sci(Math.pow(0.25,n))}</b>. Спадковість у широкому сенсі H² = V<sub>G</sub>/V<sub>P</sub> = <b>${f2(1-e)}</b>.`;}
+  ['e9n','e9e'].forEach(id=>$(id).addEventListener('input',draw));redraws.push(draw);
+})();
+
+/* ---------- 10. response to selection ---------- */
+(function(){
+  const NI=3000;let pop=null,hist=[],last=null;
+  function init(){const h2=+$('e10h').value;pop=[];for(let i=0;i<NI;i++){const g=gauss()*Math.sqrt(h2),e=gauss()*Math.sqrt(1-h2);pop.push({g,p:g+e});}hist=[mean(pop.map(o=>o.p))];last=null;draw();}
+  const mean=a=>a.reduce((s,v)=>s+v,0)/a.length;
+  function gen(){const h2=+$('e10h').value,fr=+$('e10p').value;const sorted=pop.slice().sort((a,b)=>b.p-a.p);const sel=sorted.slice(0,Math.max(2,Math.round(fr*NI)));
+    const mu=mean(pop.map(o=>o.p)),ms=mean(sel.map(o=>o.p));const off=[];const VA=h2;
+    for(let i=0;i<NI;i++){const a=sel[Math.floor(rnd()*sel.length)],b=sel[Math.floor(rnd()*sel.length)];const g=(a.g+b.g)/2+gauss()*Math.sqrt(VA/2);off.push({g,p:g+gauss()*Math.sqrt(1-h2)});}
+    const mo=mean(off.map(o=>o.p));last={mu,ms,mo,S:ms-mu,R:mo-mu,h2,thr:sel[sel.length-1].p,parents:pop};pop=off;hist.push(mo);draw();}
+  function histo(x,a,vals,col,lo,hi,nb,scale){const bw=(hi-lo)/nb;const c=new Array(nb).fill(0);vals.forEach(v=>{const k=Math.floor((v-lo)/bw);if(k>=0&&k<nb)c[k]++;});
+    c.forEach((v,k)=>{if(v){x.fillStyle=col;const X0=a.sx(lo+k*bw),X1=a.sx(lo+(k+1)*bw);x.fillRect(X0+0.5,a.sy(v/scale),X1-X0-1,a.sy(0)-a.sy(v/scale));}});}
+  function draw(){$('e10hv').textContent=f2(+$('e10h').value);$('e10pv').textContent=pct(+$('e10p').value,0);if(!pop)return;
+    {const {x,w,h}=canvas('e10c',260);const all=(last?last.parents:pop).map(o=>o.p).concat(pop.map(o=>o.p));const lo=Math.floor(Math.min(...all)),hi=Math.ceil(Math.max(...all));const nb=40;
+      const a=area(x,w,h,{T:34,xmin:lo,xmax:hi,ymin:0,ymax:0.12,xl:'фенотип (одиниці SD)',yl:'частка особин',yf:v=>pct(v,0)});const sc=NI;
+      if(last){histo(x,a,last.parents.map(o=>o.p),'#c9d3dd',lo,hi,nb,sc);histo(x,a,last.parents.filter(o=>o.p>=last.thr).map(o=>o.p),C.s2,lo,hi,nb,sc);histo(x,a,pop.map(o=>o.p),'rgba(42,120,214,.55)',lo,hi,nb,sc);
+        [[last.mu,C.ink3],[last.ms,C.s2],[last.mo,C.s1]].forEach(([v,c])=>line(x,[[a.sx(v),a.T],[a.sx(v),a.T+a.H]],c,2,[4,3]));
+        legend(x,[['батьки',C.ref],['відібрані',C.s2],['нащадки',C.s1]],a.L,12,w-a.L-10);}
+      else{histo(x,a,pop.map(o=>o.p),C.ref,lo,hi,nb,sc);x.fillStyle=C.ink3;x.textAlign='center';x.fillText('натисніть «Ще одне покоління відбору»',a.L+a.W/2,a.T+20);}}
+    {const {x,w,h}=canvas('e10t',260);const G=Math.max(5,hist.length-1);const a=area(x,w,h,{T:34,xmin:0,xmax:G,ymin:Math.min(0,...hist)-0.2,ymax:Math.max(1,...hist)+0.2,xl:'покоління відбору',yl:'середній фенотип',xt:[...Array(G+1).keys()],xf:int});
+      line(x,hist.map((v,i)=>[a.sx(i),a.sy(v)]),C.s1,2.5);hist.forEach((v,i)=>{x.beginPath();x.arc(a.sx(i),a.sy(v),4,0,7);x.fillStyle=C.s1;x.fill();});legend(x,[['середнє популяції',C.s1]],a.L,12,w-a.L-10);}
+    $('e10o').innerHTML=last?`Диференціал відбору S = ${f2(last.ms)} − ${f2(last.mu)} = <b>${f2(last.S)}</b>. Очікувана відповідь R = h²·S = ${f2(last.h2)} × ${f2(last.S)} = <b>${f2(last.h2*last.S)}</b>; спостережена R = <b>${f2(last.R)}</b>. Реалізована спадковість R/S = <b>${f2(last.R/last.S)}</b>.<div class="hint">Модель спрощена: адитивна мінливість залишається сталою. У реальних популяціях відбір поступово вичерпує V<sub>A</sub>, і відповідь сповільнюється.</div>`:'Початкова популяція: фенотип = генотип (V<sub>A</sub> = h²) + середовище (V<sub>E</sub> = 1 − h²). Змініть h² до першого відбору, щоб задати нову популяцію.';}
+  $('e10h').addEventListener('input',()=>{if(!last)init();else draw();});$('e10p').addEventListener('input',draw);$('e10next').onclick=gen;$('e10reset').onclick=init;redraws.push(draw);init();
+})();
+
+/* ---------- quiz ---------- */
+(function(){
+  const Q=[
+   ['Частоти трьох алелів: p = 0,5, q = 0,3, r = 0,2. Яка очікувана частота генотипу A₁A₃?',['0,10','0,20','0,25','0,04'],1,'2pr = 2 · 0,5 · 0,2 = 0,2.'],
+   ['X-зчеплений рецесивний алель має частоту 0,01. Яка частка самиць з ознакою?',['0,01','0,02','0,001','0,0001'],3,'Самиці з ознакою — гомозиготи: q² = 0,0001. У самців — q = 0,01, у 100 разів більше.'],
+   ['Рецесивна хвороба трапляється в 1 з 10 000 людей. Яка частка носіїв?',['≈ 0,01 %','≈ 1 %','≈ 2 %','≈ 10 %'],2,'q = √0,0001 = 0,01; 2pq ≈ 2 · 0,99 · 0,01 ≈ 0,02.'],
+   ['Що робить інбридинг з частотами алелів?',['підвищує частоту рецесивних алелів','не змінює їх, але збільшує частку гомозигот','знижує частоту рідкісних алелів','збільшує частку гетерозигот'],1,'Інбридинг перерозподіляє алелі між генотипами: f(Aa) = 2pq(1 − F).'],
+   ['Скільки гетерозигот залишиться після 3 поколінь самозапліднення (від початкових)?',['1/2','1/4','1/8','0'],2,'Кожне покоління — удвічі менше: (1/2)³ = 1/8.'],
+   ['Чому мутація самостійно змінює частоти алелів дуже повільно?',['мутації завжди шкідливі','швидкість мутацій дуже мала (≈ 10⁻⁵ – 10⁻⁸)','мутації відразу видаляє відбір','мутації не успадковуються'],1,'Δq = μp − νq: при μ ≈ 10⁻⁵ зміна за покоління мізерна, рівновага встановлюється за сотні тисяч поколінь.'],
+   ['Рівновага мутація–відбір для рецесивного шкідливого алеля:',['μ/s','√(μ/s)','s/μ','μ·s'],1,'q̂ = √(μ/s): рецесивний алель ховається в гетерозиготах, тож його рівноважна частота вища, ніж для домінантного (μ/s).'],
+   ['Що робить міграція з відмінностями між популяціями та мінливістю всередині них?',['збільшує і те, і інше','зменшує відмінності між популяціями і збільшує мінливість усередині','збільшує відмінності і зменшує мінливість','не впливає'],1,'Міграція діє протилежно до дрейфу.'],
+   ['Популяція: 5 самців і 95 самиць. Ефективний розмір N<sub>e</sub>:',['100','50','19','5'],2,'4 · 5 · 95 / 100 = 19.'],
+   ['Чому синонімічні заміни накопичуються швидше за несинонімічні?',['вони частіше виникають','вони не змінюють білок і рідше видаляються відбором','синонімічні кодони стабільніші','через рекомбінацію'],1,'Очищувальний відбір видаляє більшість змін амінокислот, тож dN/dS ≪ 1.'],
+   ['За нейтральною теорією швидкість заміщення нейтральних мутацій дорівнює…',['1/2N','швидкості мутацій μ','2Nμ','μ/2N'],1,'Виникає 2Nμ мутацій за покоління, кожна фіксується з імовірністю 1/2N: 2Nμ · 1/(2N) = μ.'],
+   ['Скільки вкорінених дерев можливо для 4 таксонів?',['3','12','15','24'],2,'(2·4 − 3)! / (2² · 2!) = 120 / 8 = 15.'],
+   ['h² = 0,5; диференціал відбору S = 10 кг. Очікувана відповідь на відбір:',['20 кг','10 кг','5 кг','0,5 кг'],2,'R = h²S = 0,5 · 10 = 5 кг.'],
+   ['Ознаку визначають 3 адитивні локуси. Скільки фенотипних класів у F₂ без впливу середовища?',['3','4','6','7'],3,'2n + 1 = 7 класів.']
+  ];
+  let ans=new Array(Q.length).fill(null);
+  function render(){$('qbox').innerHTML=Q.map((q,i)=>`<div class="q" id="q${i}"><p>${i+1}. ${q[0]}</p>${q[1].map((o,j)=>`<button class="opt" data-q="${i}" data-o="${j}">${o}</button>`).join('')}<div class="expl" id="qe${i}"></div></div>`).join('');
+    $('qbox').querySelectorAll('.opt').forEach(b=>b.onclick=()=>pick(+b.dataset.q,+b.dataset.o));score();}
+  function pick(i,j){if(ans[i]!==null)return;ans[i]=j;const q=Q[i];document.querySelectorAll(`#q${i} .opt`).forEach((b,k)=>{b.disabled=true;if(k===q[2])b.classList.add('right');else if(k===j)b.classList.add('wrong');});
+    $('qe'+i).innerHTML=(j===q[2]?'<b style="color:#1f8a4c">Правильно.</b> ':'<b style="color:#c62828">Неправильно.</b> ')+q[3];score();}
+  function score(){const done=ans.filter(v=>v!==null).length,ok=ans.filter((v,i)=>v===Q[i][2]).length;const n=Q.length;
+    $('qscore').innerHTML=done<n?`Відповіли на ${done} з ${n} питань.`:`<span class="pill ${ok>=11?'good':ok>=8?'warn':'bad'}">Результат: ${ok} з ${n}</span> ${ok>=11?'Чудово!':ok>=8?'Непогано. Перегляньте розділи з помилками.':'Поверніться до панелей і спробуйте ще раз.'}`;}
+  $('qreset').onclick=()=>{ans=new Array(Q.length).fill(null);render();};render();
+})();
+
+let rt;window.addEventListener('resize',()=>{clearTimeout(rt);rt=setTimeout(()=>redraws.forEach(f=>f()),150);});
+redraws.forEach(f=>f());
+})();
+</script>
+```

@@ -1,0 +1,162 @@
+<style>
+.lvl{display:inline-block;padding:2px 10px;border-radius:999px;font-size:.8rem;font-weight:600;margin-right:4px;border:1px solid transparent}
+.lvl1{background:#e6f4ea;color:#1b6b3a;border-color:#b9dfc6}
+.lvl2{background:#e8f0fb;color:#1f5aa6;border-color:#bfd3f0}
+.lvl3{background:#f1eafa;color:#5b3a99;border-color:#d6c6ef}
+.gl{border-bottom:1.5px dotted #2a78d6;cursor:help;outline:none}
+.gl:focus-visible{outline:2px solid #2a78d6;outline-offset:2px;border-radius:2px}
+#gl-pop{position:absolute;z-index:2000;max-width:320px;background:#1f2933;color:#fff;font-size:.86rem;line-height:1.45;padding:10px 12px;border-radius:8px;box-shadow:0 6px 20px rgba(0,0,0,.18);display:none}
+#gl-pop b{font-size:.92rem}
+#gl-pop .en{color:#b8c4d0;font-size:.8rem;margin-left:4px}
+#gl-pop a{color:#9cc8ff}
+.ig-progress{display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-size:.88rem;color:#52606d;margin:.5rem 0 1rem}
+.ig-progress .bar{flex:1 1 180px;height:8px;background:#e3e8ee;border-radius:99px;overflow:hidden;max-width:360px}
+.ig-progress .bar span{display:block;height:100%;background:#1f8a4c;border-radius:99px;transition:width .3s}
+.ig-done{display:inline-flex;align-items:center;gap:6px;margin:.25rem 0 1.5rem;padding:4px 12px;border:1px solid #cfd8e3;border-radius:999px;background:#fff;color:#52606d;font-size:.85rem;cursor:pointer}
+.ig-done[aria-pressed="true"]{background:#e6f4ea;border-color:#9ccfae;color:#1b6b3a}
+.ig-done:focus-visible{outline:2px solid #2a78d6;outline-offset:2px}
+.route{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:1rem 0 1.5rem}
+.route a.card{display:block;text-decoration:none;color:#1f2933;border:1px solid #dde3ea;border-radius:10px;padding:12px 14px;background:#fff;min-width:0}
+.route a.card:hover{border-color:#2a78d6}
+.route a.card.here{border:2px solid #2a78d6;background:#f4f8fe}
+.route .step{font-size:.78rem;color:#7b8794;text-transform:uppercase;letter-spacing:.04em}
+.route .nm{font-weight:600;margin:2px 0 6px}
+.route ul{margin:0;padding-left:1.1em;font-size:.84rem;color:#52606d}
+#glossary .glsearch{max-width:360px;margin-bottom:10px}
+#glossary dl{display:grid;grid-template-columns:minmax(140px,220px) 1fr;gap:6px 16px;margin:0}
+#glossary dt{font-weight:600}
+#glossary dt .en{display:block;font-weight:400;font-size:.8rem;color:#7b8794}
+#glossary dd{margin:0;color:#334155}
+#glossary .row:target dt,#glossary .row:target dd{background:#fff6d6}
+@media (max-width:560px){#glossary dl{grid-template-columns:1fr}#glossary dd{margin-bottom:8px}}
+</style>
+<div id="gl-pop" role="tooltip"></div>
+<script>
+(function(){
+"use strict";
+var BASICS="Genetics_Basics_Interactive.html";
+var G=[
+ ["genome","геном","genome","геном(?!ік)\\p{L}*","Уся ДНК організму. У людини ≈ 3,1 млрд пар основ на один набір хромосом; у кожній клітині таких наборів два."],
+ ["genomics","геноміка","genomics","геномік\\p{L}*","Наука, що вивчає геноми цілком: усі гени та всю мінливість одночасно."],
+ ["chromosome","хромосома","chromosome","хромосом\\p{L}*","Одна дуже довга молекула ДНК, упакована з білками. У людини 23 пари: одна хромосома кожної пари від мами, друга від тата."],
+ ["gene","ген","gene",null,"Ділянка ДНК, що містить «рецепт» білка або функціональної РНК. У людини ≈ 20 000 генів, що кодують білки."],
+ ["nucleotide","нуклеотид","nucleotide / base","нуклеотид\\p{L}*","Одна «літера» ДНК: A, C, G або T. У подвійній спіралі A завжди навпроти T, а G навпроти C."],
+ ["codon","кодон","codon","кодон\\p{L}*","Три нуклеотиди поспіль, що кодують одну амінокислоту або сигнал «стоп»."],
+ ["exon","екзон","exon","екзон\\p{L}*","Частина гена, що залишається в мРНК після сплайсингу і (здебільшого) кодує білок."],
+ ["intron","інтрон","intron","інтрон\\p{L}*","Частина гена, яку вирізають з РНК під час сплайсингу."],
+ ["locus","локус","locus","локус\\p{L}*","Певне місце на хромосомі: позиція SNP або ген."],
+ ["allele","алель","allele","алел\\p{L}*","Один з варіантів того самого локусу. Наприклад, нормальний алель і алель F508del гена CFTR."],
+ ["allelefreq","частота алеля","allele frequency (AF)","частот\\p{L}* алел\\p{L}*","Частка копій певного алеля серед усіх копій цього локусу в популяції. У VCF — поле AF = AC / AN."],
+ ["diploid","диплоїдний","diploid","диплоїдн\\p{L}*","Має дві копії кожної хромосоми (від мами і від тата). Більшість клітин людини диплоїдні."],
+ ["haploid","гаплоїдний","haploid","гаплоїдн\\p{L}*","Має одну копію кожної хромосоми. Гамети (яйцеклітини, сперматозоїди) гаплоїдні."],
+ ["genotype","генотип","genotype","генотип\\p{L}*","Які два алелі має особа в локусі: 0/0, 0/1 або 1/1 (у записі VCF)."],
+ ["phenotype","фенотип","phenotype","фенотип\\p{L}*","Ознака, яку можна спостерігати чи виміряти: група крові, зріст, наявність хвороби."],
+ ["haplotype","гаплотип","haplotype","гаплотип\\p{L}*","Набір алелів на одній хромосомі (одній копії). Кожна людина має два гаплотипи для кожної ділянки."],
+ ["homozygote","гомозигота","homozygote","гомозигот(?!ност)\\p{L}*","Особа з двома однаковими алелями в локусі (0/0 або 1/1)."],
+ ["heterozygosity","гетерозиготність","heterozygosity (H)","гетерозиготн\\p{L}*","Частка гетерозиготних генотипів; для двох алелів очікується 2pq. Головна міра генетичного різноманіття."],
+ ["heterozygote","гетерозигота","heterozygote","гетерозигот(?!н)\\p{L}*","Особа з двома різними алелями в локусі (0/1)."],
+ ["dominant","домінантний","dominant","домінантн\\p{L}*","Алель, що проявляється навіть в одній копії (у гетерозиготі)."],
+ ["recessive","рецесивний","recessive","рецесивн\\p{L}*","Алель, що проявляється лише у двох копіях (у гомозиготі). Носії з однією копією зазвичай здорові."],
+ ["codominance","кодомінантність","codominance","кодомінант\\p{L}*","Обидва алелі проявляються в гетерозиготі одночасно, як A і B у групі крові AB."],
+ ["mutation","мутація","mutation","мутаці\\p{L}*","Зміна послідовності ДНК. Нова мутація спочатку існує в одній копії."],
+ ["polymorphism","поліморфізм","polymorphism","поліморфізм\\p{L}*","Варіант, що трапляється в популяції з частотою ≥ 1 %."],
+ ["snp","SNP","single nucleotide polymorphism","SNP","Поширений однонуклеотидний варіант (поліморфізм)."],
+ ["snv","SNV","single nucleotide variant","SNV","Заміна однієї літери ДНК незалежно від частоти."],
+ ["indel","indel","insertion/deletion","indel\\p{L}*","Вставка або втрата кількох нуклеотидів (до 50 п.о.)."],
+ ["sv","структурний варіант","structural variant (SV)","структурн\\p{L}* варіант\\p{L}*","Велика зміна ДНК (≥ 50 п.о.): делеція, дуплікація, інверсія, транслокація."],
+ ["cnv","CNV","copy number variant","CNV","Варіант кількості копій ділянки ДНК (делеція чи дуплікація зазвичай від ≈ 1 тис. п.о.)."],
+ ["transition","транзиція","transition","транзиці\\p{L}*","Заміна пурину на пурин (A↔G) або піримідину на піримідин (C↔T)."],
+ ["transversion","трансверсія","transversion","трансверсі\\p{L}*","Заміна пурину на піримідин чи навпаки (наприклад, A↔C)."],
+ ["missense","міссенс","missense","міссенс|missense","Заміна, яка змінює одну амінокислоту в білку."],
+ ["nonsense","нонсенс","nonsense / stop gained","нонсенс|nonsense","Заміна, яка створює передчасний стоп-кодон: білок обривається."],
+ ["synonymous","синонімічна заміна","synonymous / silent","синонімічн\\p{L}*","Заміна, яка не змінює амінокислоту (завдяки виродженості генетичного коду)."],
+ ["frameshift","зсув рамки зчитування","frameshift","зсув\\p{L}* рамки|frameshift","Вставка чи делеція, не кратна 3: усі наступні кодони читаються неправильно."],
+ ["lof","LoF","loss-of-function","loss-of-function|LoF","Варіант, що руйнує функцію гена: нонсенс, зсув рамки, порушення сплайсингу."],
+ ["meiosis","мейоз","meiosis","мейоз\\p{L}*","Поділ клітини, при якому утворюються гаплоїдні гамети; під час нього відбувається кросинговер."],
+ ["gamete","гамета","gamete","гамет\\p{L}*","Статева клітина (яйцеклітина або сперматозоїд) з одним набором хромосом."],
+ ["crossover","кросинговер","crossing over","кросинговер\\p{L}*","Обмін ділянками між хромосомами від мами і від тата під час мейозу."],
+ ["recombination","рекомбінація","recombination","рекомбінаці\\p{L}*|рекомбінант\\p{L}*","Утворення нових комбінацій алелів на хромосомі внаслідок кросинговеру."],
+ ["cm","сантиморган","centimorgan (cM)","сантиморган\\p{L}*","Генетична відстань: 1 cM — 1 % імовірності рекомбінації між двома локусами за один мейоз."],
+ ["ld","нерівновага за зчепленням","linkage disequilibrium (LD)","нерівноваг\\p{L}* за зчепленням|LD","Невипадкове поєднання алелів сусідніх локусів: вони успадковуються «пакетом»."],
+ ["germline","германна мутація","germline mutation","германн\\p{L}*|зародков\\p{L}* лін\\p{L}*","Мутація в клітинах, з яких утворюються гамети. Передається нащадкам."],
+ ["somatic","соматична мутація","somatic mutation","соматичн\\p{L}*","Мутація в клітинах тіла. Не передається нащадкам."],
+ ["denovo","de novo мутація","de novo mutation","de novo","Нова мутація, якої немає в жодного з батьків: виникла в їхній гаметі."],
+ ["mosaic","мозаїцизм","mosaicism","мозаїцизм\\p{L}*","Стан, коли мутацію несуть лише частина клітин організму."],
+ ["drift","дрейф генів","genetic drift","дрейф\\p{L}*","Випадкові зміни частот алелів через те, що в наступне покоління потрапляє лише вибірка генів. Сильніший у малих популяціях."],
+ ["selection","природний відбір","natural selection","відб[іо]р\\p{L}*","Різний внесок генотипів у наступне покоління через різну виживаність чи плодючість."],
+ ["fixation","фіксація","fixation","фіксаці\\p{L}*|зафіксува\\p{L}*","Стан, коли алель досяг частоти 100 %: інших алелів у популяції не лишилось."],
+ ["bottleneck","вузьке місце","bottleneck","вузьк\\p{L}* міс\\p{L}*","Різке скорочення чисельності популяції, після якого лишається лише частина різноманіття."],
+ ["founder","ефект засновника","founder effect","ефект\\p{L}* засновника","Нова популяція засновується невеликою групою, тож її частоти алелів випадково відрізняються від вихідних."],
+ ["hwe","закон Харді–Вайнберга","Hardy–Weinberg equilibrium","Харді","За випадкового схрещування генотипи розподіляються як p², 2pq, q², а частоти алелів не змінюються."],
+ ["inbreeding","інбридинг","inbreeding","інбридинг\\p{L}*|інбредн\\p{L}*","Схрещування родичів. Збільшує частку гомозигот, не змінюючи частот алелів."],
+ ["migration","міграція","migration / gene flow","міграці\\p{L}*","Перенесення алелів між популяціями. Робить популяції схожішими."],
+ ["ne","ефективний розмір популяції","effective population size (Ne)","ефективн\\p{L}* розмір\\p{L}*","Розмір ідеальної популяції з таким самим дрейфом. Зазвичай менший за фактичну чисельність."],
+ ["pca","PCA","principal component analysis","PCA","Метод, що зводить тисячі генотипів до кількох осей і показує людей точками: схожі генотипи опиняються поруч."],
+ ["coalescent","коалесцент","coalescent","коалесцен\\p{L}*","Генеалогія вибірки, простежена назад у часі до спільного предка."],
+ ["tajima","Tajima's D","Tajima's D","Tajima","Статистика, що порівнює кількість рідкісних і частих варіантів; ≈ 0 для нейтральної популяції сталого розміру."],
+ ["sweep","селективне вимітання","selective sweep","вимітанн\\p{L}*","Швидке поширення корисного алеля разом із сусідньою ділянкою хромосоми; лишає довгий спільний гаплотип."],
+ ["gwas","GWAS","genome-wide association study","GWAS","Пошук асоціацій ознаки з мільйонами SNP по всьому геному."],
+ ["roh","ділянка гомозиготності","run of homozygosity (ROH)","ROH|ділянк\\p{L}* гомозиготності","Довга смуга гомозиготних генотипів: дві копії однієї предкової ділянки."],
+ ["heritability","спадковість","heritability (h²)","спадковіст\\p{L}*","Частка мінливості ознаки, зумовлена генетичними відмінностями в цій популяції."],
+ ["polygenic","полігенна ознака","polygenic trait","полігенн\\p{L}*","Ознака, на яку впливає багато генів з малими ефектами (зріст, маса)."],
+ ["clock","молекулярний годинник","molecular clock","молекулярн\\p{L}* годинник\\p{L}*","Оцінка часу розходження видів за кількістю відмінностей у послідовностях."],
+ ["dnds","dN/dS","dN/dS ratio","dN/dS","Відношення швидкостей несинонімічних і синонімічних замін: показує силу відбору."],
+ ["phylogeny","філогенетичне дерево","phylogenetic tree","філогенетичн\\p{L}* дерев\\p{L}*","Схема еволюційної спорідненості видів чи генів."],
+ ["vcf","VCF","Variant Call Format","VCF","Текстовий формат для варіантів: позиція, REF, ALT і генотипи кожної особи."]
+];
+window.GLOSSARY=G;
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[c];});}
+var onBasics=!!document.getElementById("glossary");
+/* glossary list (basics page) */
+function renderGlossary(){var box=document.getElementById("glossary");if(!box)return;
+  var items=G.slice().sort(function(a,b){return a[1].localeCompare(b[1],"uk");});
+  box.innerHTML='<input type="search" class="form-control form-control-sm glsearch" id="glq" placeholder="Пошук терміну українською або англійською" aria-label="Пошук у глосарії"><dl>'+
+    items.map(function(g){return '<div class="row" id="gl-'+g[0]+'" style="display:contents"><dt>'+esc(g[1])+'<span class="en">'+esc(g[2])+'</span></dt><dd>'+esc(g[4])+'</dd></div>';}).join("")+'</dl>';
+  var q=document.getElementById("glq");q.addEventListener("input",function(){var v=q.value.trim().toLowerCase();
+    box.querySelectorAll(".row").forEach(function(r){r.style.display=(!v||r.textContent.toLowerCase().indexOf(v)>=0)?"contents":"none";});});}
+/* tooltips */
+var pop=document.getElementById("gl-pop");var cur=null;
+function show(el){var g=G.find(function(x){return x[0]===el.dataset.gl;});if(!g)return;cur=el;
+  pop.innerHTML='<b>'+esc(g[1])+'</b><span class="en">'+esc(g[2])+'</span><div style="margin-top:4px">'+esc(g[4])+'</div>'+(onBasics?'':'<div style="margin-top:6px"><a href="'+BASICS+'#gl-'+g[0]+'">Глосарій →</a></div>');
+  pop.style.display="block";var r=el.getBoundingClientRect();var pw=pop.offsetWidth;var left=Math.max(8,Math.min(window.scrollX+r.left,window.scrollX+document.documentElement.clientWidth-pw-8));
+  pop.style.left=left+"px";pop.style.top=(window.scrollY+r.bottom+6)+"px";}
+function hide(){pop.style.display="none";cur=null;}
+document.addEventListener("keydown",function(e){if(e.key==="Escape")hide();});
+document.addEventListener("click",function(e){var t=e.target.closest?e.target.closest(".gl"):null;if(t){e.preventDefault();if(cur===t)hide();else show(t);}else if(!pop.contains(e.target))hide();});
+function wrapTerms(){
+  var root=document.querySelector("main#quarto-document-content")||document.querySelector("main")||document.body;
+  var autos=G.filter(function(g){return g[3];});
+  var parts;try{parts=autos.map(function(g){return new RegExp("(?<![\\p{L}\\p{N}])(?:"+g[3]+")(?![\\p{L}\\p{N}])","u");});}catch(e){return;}
+  var sections=root.querySelectorAll("section.level1");if(!sections.length)sections=[root];
+  var skip="pre,code,a,h1,h2,h3,h4,h5,h6,.lab,.math,.gl,.quiz,#glossary,.route,.callout-header,.lvl,script,style,button,input,select,label,canvas,mjx-container";
+  sections.forEach(function(sec){var used={};
+    var blocks=sec.querySelectorAll("p,li,dd");
+    blocks.forEach(function(b){if(b.closest(skip))return;
+      var walker=document.createTreeWalker(b,NodeFilter.SHOW_TEXT,{acceptNode:function(n){return n.parentElement&&n.parentElement.closest(skip)?NodeFilter.FILTER_REJECT:NodeFilter.FILTER_ACCEPT;}});
+      var nodes=[];while(walker.nextNode())nodes.push(walker.currentNode);
+      nodes.forEach(function(node){var text=node.nodeValue;var best=null;
+        for(var i=0;i<autos.length;i++){if(used[autos[i][0]])continue;var m=parts[i].exec(text);if(m&&(best===null||m.index<best.idx||(m.index===best.idx&&m[0].length>best.len)))best={idx:m.index,len:m[0].length,i:i};}
+        if(!best)return;used[autos[best.i][0]]=1;
+        var before=text.slice(0,best.idx),word=text.slice(best.idx,best.idx+best.len),after=text.slice(best.idx+best.len);
+        var span=document.createElement("span");span.className="gl";span.tabIndex=0;span.dataset.gl=autos[best.i][0];span.textContent=word;span.setAttribute("role","button");span.setAttribute("aria-label",word+": пояснення терміну");
+        span.addEventListener("mouseenter",function(){show(span);});span.addEventListener("mouseleave",function(){setTimeout(function(){if(!pop.matches(":hover")&&cur===span)hide();},150);});
+        span.addEventListener("focus",function(){show(span);});span.addEventListener("blur",function(){setTimeout(function(){if(document.activeElement&&pop.contains(document.activeElement))return;if(cur===span)hide();},150);});
+        var frag=document.createDocumentFragment();if(before)frag.appendChild(document.createTextNode(before));frag.appendChild(span);if(after)frag.appendChild(document.createTextNode(after));
+        node.parentNode.replaceChild(frag,node);});
+    });});
+  pop.addEventListener("mouseleave",hide);}
+/* progress */
+function progress(){var root=document.querySelector("main#quarto-document-content")||document.body;
+  var secs=[].slice.call(root.querySelectorAll("section.level1")).filter(function(s){var h=s.querySelector("h1");return h&&/^\s*\d+\./.test(h.textContent);});
+  if(!secs.length)return;var key="ig-progress:"+location.pathname.split("/").pop();var st={};try{st=JSON.parse(localStorage.getItem(key)||"{}");}catch(e){st={};}
+  var bar=document.createElement("div");bar.className="ig-progress";bar.innerHTML='<span id="ig-ptxt"></span><div class="bar"><span id="ig-pbar"></span></div>';
+  secs[0].parentNode.insertBefore(bar,secs[0]);
+  function upd(){var n=secs.filter(function(s){return st[s.id];}).length;document.getElementById("ig-ptxt").textContent="Ви розібрали "+n+" з "+secs.length+" розділів";document.getElementById("ig-pbar").style.width=(100*n/secs.length)+"%";}
+  secs.forEach(function(s){var b=document.createElement("button");b.type="button";b.className="ig-done";
+    function lab(){var on=!!st[s.id];b.setAttribute("aria-pressed",on?"true":"false");b.textContent=on?"✓ Розібрався з цим розділом":"Позначити розділ як розібраний";}
+    b.addEventListener("click",function(){st[s.id]=!st[s.id];try{localStorage.setItem(key,JSON.stringify(st));}catch(e){}lab();upd();});lab();s.appendChild(b);});
+  upd();}
+function init(){try{renderGlossary();}catch(e){}try{wrapTerms();}catch(e){}try{progress();}catch(e){}}
+if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init);else init();
+})();
+</script>

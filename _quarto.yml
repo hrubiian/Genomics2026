@@ -24,6 +24,16 @@ website:
         text: Resources
       - href: AI_prompts.qmd
         text: AI Prompts
+      - text: Інтерактив
+        menu:
+          - href: qmd/Genetics_Basics_Interactive.qmd
+            text: "0. Основи генетики (почніть звідси)"
+          - href: qmd/HW4_Genetic_Variation_1000G.qmd
+            text: "1. Типи генетичної мінливості (HW4)"
+          - href: qmd/Population_Genomics_Interactive.qmd
+            text: "2. Популяційна геноміка"
+          - href: qmd/Evolutionary_Genetics_Interactive.qmd
+            text: "3. Еволюційна і кількісна генетика"
       # - href: HomeWork.qmd
       #   text: HomeWork
 

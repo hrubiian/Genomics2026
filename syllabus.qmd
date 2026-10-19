@@ -2,6 +2,21 @@
 title: "Syllabus"
 ---
 
+::: callout-tip
+## Інтерактивні заняття з генетики
+
+Чотири сторінки з моделями, які можна змінювати, блоками «Простими словами», підказками до термінів і тестами для самоперевірки. Проходьте їх по порядку:
+
+0.  [Основи генетики](qmd/Genetics_Basics_Interactive.qmd) — ген, алель, генотип, мейоз, решітка Пеннета, частота алеля, рядок VCF
+1.  [Типи генетичної мінливості (HW4)](qmd/HW4_Genetic_Variation_1000G.qmd) — SNV, indel, SV, наслідки мутацій, дрейф, Харді–Вайнберг, рекомбінація, LD
+2.  [Популяційна геноміка](qmd/Population_Genomics_Interactive.qmd) — F<sub>ST</sub>, PCA, коалесцент і Tajima's D, сліди відбору, GWAS, ROH
+3.  [Еволюційна і кількісна генетика](qmd/Evolutionary_Genetics_Interactive.qmd) — мутація, міграція, N<sub>e</sub>, молекулярний годинник, філогенія, спадковість
+
+Довідник: [Біоінформатичні формати файлів](qmd/Bioinformatics_Formats_Interactive.qmd) — FASTA, FASTQ, SAM/BAM, VCF, BED, GFF3/GTF з розбором кожного поля, декодерами якості, FLAG і CIGAR та конвертером координат.
+
+Усі сторінки також доступні в меню **Інтерактив** у верхній панелі сайту.
+:::
+
 ## Week 1 (14.09.2026)
 
 - Intro to practical course. Strategy of analysis
@@ -16,9 +31,9 @@ title: "Syllabus"
 
 - Sanger Sequencing. Design of primers for Sanger Sequencing. [SnapGene](https://www.snapgene.com/snapgene-viewer)
 
--   HW: Install SnapGene Viewer. Make [HW2_SnapGene task](/qmd/HW2_Sanger_SnapGene.qmd).
+- HW: Install SnapGene Viewer. Make [HW2_SnapGene task](/qmd/HW2_Sanger_SnapGene.qmd).
 
--   Presentation - [Google Slides](https://docs.google.com/presentation/d/1hPudn3gnEG12q_c29gWemCXGA-GGDID75PyUds8dkgY/edit?usp=sharing)
+- Presentation - [Google Slides](https://docs.google.com/presentation/d/1hPudn3gnEG12q_c29gWemCXGA-GGDID75PyUds8dkgY/edit?usp=sharing)
 
 ## Week 3(28.09.2026)
 
@@ -30,32 +45,33 @@ Presentation: [Google Slides](https://docs.google.com/presentation/d/1GyUxdYE31n
 
 ## Week 4(05.10.2026)
 
-- NGS analysis part 2. Mapping reads to reference genome. SAM/BAM files. De novo assembly. 
-Presentation: [Google Slides](https://docs.google.com/presentation/d/13Q5hAa-1P9XbVoqAQBpA4FgYXell1_kwvkNdJ1ufBCg/edit?usp=sharing) <!-- - [Test1](https://forms.gle/X91gpBF7Kemu57Lq8) -->
+- NGS analysis part 2. Mapping reads to reference genome. SAM/BAM files. De novo assembly. Presentation: [Google Slides](https://docs.google.com/presentation/d/13Q5hAa-1P9XbVoqAQBpA4FgYXell1_kwvkNdJ1ufBCg/edit?usp=sharing) <!-- - [Test1](https://forms.gle/X91gpBF7Kemu57Lq8) -->
 
 ## Week 5(12.10.2026)
 
-- NGS analysis part 3. Variant calling. VCF files. Annotation of variants    HW: [Ecoli_Genome_Assembly_Part_2](qmd/HW3.Genome_Assembly_Part_2_updated.qmd) -   Presentation: [Google Slides](https://docs.google.com/presentation/d/1iY0phjCUks24rS7hJqnK8yUFX1anygPH4Cm_WLGSpNQ/edit?usp=sharing) 
+- NGS analysis part 3. Variant calling. VCF files. Annotation of variants HW: [Ecoli_Genome_Assembly_Part_2](qmd/HW3.Genome_Assembly_Part_2_updated.qmd) - Presentation: [Google Slides](https://docs.google.com/presentation/d/1iY0phjCUks24rS7hJqnK8yUFX1anygPH4Cm_WLGSpNQ/edit?usp=sharing)
 
 ## Week 6(19.10.2026)
 
-- Analysis of annotated VCF files.VEP.Fst.Tajima's D.
+- Types of Genetic Polymorphisms. SNPs, Indels, CNVs, Structural Variants
 
-  Почніть звідси: [Основи генетики (інтерактивно)](qmd/Genetics_Basics_Interactive.qmd)
+- HW: [HW4_Genetic_Variation (інтерактивний практикум)](qmd/HW4_Genetic_Variation_1000G.qmd) — скріншоти 4–5 панелей зі спостереженнями та результат тесту додайте до презентації
 
-  Interactive: [Популяційна геноміка: інтерактивні моделі](qmd/Population_Genomics_Interactive.qmd)
+- Presentation: [Google Slides](https://docs.google.com/presentation/d/1K9W07kr51umJofHRvLYKCYJ8g9X7BuDPzHIvh9OkoHU/edit?usp=sharing)
 
-  Interactive: [Еволюційна і кількісна генетика (за Pierce, гл. 24–26)](qmd/Evolutionary_Genetics_Interactive.qmd)
+**Interactive:**
 
- <!-- -   Presentation:[Google Slides](https://docs.google.com/presentation/d/17XSWzw3bsfNZbTr5naQzfR4gZ5vkgYA-aLiA7bdn10o/edit?slide=id.g29d89553eed_0_16#slide=id.g29d89553eed_0_16) -->
+-  [0. Основи генетики](qmd/Genetics_Basics_Interactive.qmd) (почніть звідси, якщо базові поняття ще непевні),
+
+- [3. Еволюційна і кількісна генетика](qmd/Evolutionary_Genetics_Interactive.qmd) (за Pierce, *Genetics: A Conceptual Approach*, гл. 24–26)
 
 ## Week 7(26.10.2026)
 
-- Types of Genetic Polymorphisms. SNPs, Indels, CNVs, Structural Variants
+- Analysis of annotated VCF files. VEP. Fst. Tajima's D.
 
-  HW: [HW4_Genetic_Variation (інтерактивний практикум)](qmd/HW4_Genetic_Variation_1000G.qmd)
+  **Interactive:**
 
- <!-- -   Presentation: [Google Slides](https://docs.google.com/presentation/d/13M6hbFiviR-XhK61JRIr9q4udzad_1KpULmZk5LVKP8/edit?usp=sharing) -->
+- [Популяційна геноміка](qmd/Population_Genomics_Interactive.qmd) — F<sub>ST</sub>, PCA, Tajima's D, сліди відбору, GWAS, ROH
 
 ## Week 8(02.11.2026)
 

@@ -137,6 +137,11 @@ ul.task-list li input[type="checkbox"] {
     <a class="dropdown-item" href="../qmd/Evolutionary_Genetics_Interactive.html">
  <span class="dropdown-text">3. Еволюційна і кількісна генетика</span></a>
   </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li>
+    <a class="dropdown-item" href="../qmd/Bioinformatics_Formats_Interactive.html">
+ <span class="dropdown-text">Довідник: формати файлів (FASTA, FASTQ, SAM, VCF, BED, GFF)</span></a>
+  </li>  
     </ul>
   </li>
 </ul>
@@ -644,6 +649,7 @@ function txt(x,s,X,Y,o={}){x.fillStyle=o.c||C.ink2;x.textAlign=o.a||'left';x.tex
    ['Що означає генотип 1|1 у файлі VCF?',['обидві копії мають референсний алель','одна копія ALT, одна REF','обидві копії мають альтернативний алель','генотип невідомий'],2,'0 — REF, 1 — ALT; «|» — фаза відома.'],
    ['У вибірці 100 людей алель ALT має AC = 5. Чому дорівнює AF?',['0,05','0,025','0,5','5'],1,'AN = 2 × 100 = 200 копій; AF = 5 / 200 = 0,025.']
   ];
+  Q.forEach(q=>{const idx=q[1].map((_,j)=>j);for(let i=idx.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[idx[i],idx[j]]=[idx[j],idx[i]];}q[1]=idx.map(j=>q[1][j]);q[2]=idx.indexOf(q[2]);});
   let ans=new Array(Q.length).fill(null);
   function render(){$('qbox').innerHTML=Q.map((q,i)=>`<div class="q" id="q${i}"><p>${i+1}. ${q[0]}</p>${q[1].map((o,j)=>`<button class="opt" data-q="${i}" data-o="${j}">${o}</button>`).join('')}<div class="expl" id="qe${i}"></div></div>`).join('');
     $('qbox').querySelectorAll('.opt').forEach(b=>b.onclick=()=>pick(+b.dataset.q,+b.dataset.o));score();}
@@ -767,7 +773,15 @@ var G=[
  ["clock","молекулярний годинник","molecular clock","молекулярн\\p{L}* годинник\\p{L}*","Оцінка часу розходження видів за кількістю відмінностей у послідовностях."],
  ["dnds","dN/dS","dN/dS ratio","dN/dS","Відношення швидкостей несинонімічних і синонімічних замін: показує силу відбору."],
  ["phylogeny","філогенетичне дерево","phylogenetic tree","філогенетичн\\p{L}* дерев\\p{L}*","Схема еволюційної спорідненості видів чи генів."],
- ["vcf","VCF","Variant Call Format","VCF","Текстовий формат для варіантів: позиція, REF, ALT і генотипи кожної особи."]
+ ["vcf","VCF","Variant Call Format","VCF","Текстовий формат для варіантів: позиція, REF, ALT і генотипи кожної особи."],
+ ["fasta","FASTA","FASTA format","FASTA","Формат послідовностей: рядок-заголовок з «>» і під ним послідовність ДНК чи білка."],
+ ["fastq","FASTQ","FASTQ format","FASTQ","Формат рідів секвенування: 4 рядки на рід — заголовок «@», послідовність, «+», якість кожного нуклеотиду."],
+ ["phred","оцінка Phred","Phred quality score","Phred|Фред\\p{L}*","Q = −10·log₁₀(P помилки): Q20 — 1 помилка на 100, Q30 — 1 на 1000. У FASTQ кодується символом з кодом Q + 33."],
+ ["sam","SAM / BAM","Sequence Alignment/Map","SAM|BAM","Формат вирівнювання рідів на референс: 11 обов'язкових стовпчиків на рід. BAM — стиснута двійкова версія, CRAM — ще компактніша."],
+ ["cigar","CIGAR","CIGAR string","CIGAR","Рядок у SAM, що описує вирівнювання ріду: M — вирівняно, I — вставка, D — делеція, S — soft clip, N — інтрон."],
+ ["mapq","MAPQ","mapping quality","MAPQ","Phred-оцінка ймовірності, що рід вирівняно не туди. MAPQ 0 — рід лягає в кілька місць однаково добре."],
+ ["bed","BED","Browser Extensible Data","BED\\d*","Формат ділянок геному: хромосома, початок, кінець. Координати з 0, кінець не включено."],
+ ["gff","GFF3 / GTF","General Feature Format","GFF3?|GTF","Формати анотації генів: 9 стовпчиків, координати з 1. GFF3 будує ієрархію через ID/Parent, GTF — через gene_id і transcript_id."]
 ];
 window.GLOSSARY=G;
 function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[c];});}

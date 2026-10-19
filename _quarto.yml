@@ -34,6 +34,9 @@ website:
             text: "2. Популяційна геноміка"
           - href: qmd/Evolutionary_Genetics_Interactive.qmd
             text: "3. Еволюційна і кількісна генетика"
+          - text: "---"
+          - href: qmd/Bioinformatics_Formats_Interactive.qmd
+            text: "Довідник: формати файлів (FASTA, FASTQ, SAM, VCF, BED, GFF)"
       # - href: HomeWork.qmd
       #   text: HomeWork
 

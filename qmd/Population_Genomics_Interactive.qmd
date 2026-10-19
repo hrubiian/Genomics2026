@@ -646,6 +646,7 @@ function log10p(chi2){const z=Math.sqrt(chi2)/Math.SQRT2;if(z<5){let t=1/(1+0.5*
    ['Дитина двоюрідних брата і сестри має очікуваний коефіцієнт інбридингу:',['1/4','1/8','1/16','1/64'],2,'F = 1/16: в середньому 6,25 % геному в ділянках IBD.'],
    ['Чому ROH у дитини братів і сестер довші, ніж у дитини троюрідних?',['більше мейозів — більше рекомбінацій, що ріжуть ділянки','менше мейозів між спільним предком і дитиною — менше рекомбінацій','через мутації','через відбір'],1,'Середня довжина ділянки IBD ≈ 100/m cM, де m — кількість мейозів у петлі спорідненості.']
   ];
+  Q.forEach(q=>{const idx=q[1].map((_,j)=>j);for(let i=idx.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[idx[i],idx[j]]=[idx[j],idx[i]];}q[1]=idx.map(j=>q[1][j]);q[2]=idx.indexOf(q[2]);});
   let ans=new Array(Q.length).fill(null);
   function render(){$('qbox').innerHTML=Q.map((q,i)=>`<div class="q" id="q${i}"><p>${i+1}. ${q[0]}</p>${q[1].map((o,j)=>`<button class="opt" data-q="${i}" data-o="${j}">${o}</button>`).join('')}<div class="expl" id="qe${i}"></div></div>`).join('');
     $('qbox').querySelectorAll('.opt').forEach(b=>b.onclick=()=>pick(+b.dataset.q,+b.dataset.o));score();}

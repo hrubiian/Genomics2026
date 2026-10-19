@@ -913,6 +913,7 @@ function multinom(n,p){const c=new Array(p.length).fill(0);const cum=[];let s=0;
    ['r² між двома SNP дорівнює 1. Що це означає?',['SNP незалежні','знаючи алель одного SNP, можна точно передбачити алель іншого','SNP лежать на різних хромосомах','D = 0'],1,'Повна кореляція: такі SNP взаємозамінні як tag-SNP у GWAS.'],
    ['Чому у великих вибірках (gnomAD, 1000 Genomes) більшість варіантів рідкісні?',['через помилки секвенування','більшість мутацій молоді, а популяція людей стрімко зросла','через відбір на користь рідкісних алелів','через рекомбінацію'],1,'Нейтральний SFS ∝ 1/i, а зростання популяції ще збільшує частку рідкісних варіантів.']
   ];
+  Q.forEach(q=>{const idx=q[1].map((_,j)=>j);for(let i=idx.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[idx[i],idx[j]]=[idx[j],idx[i]];}q[1]=idx.map(j=>q[1][j]);q[2]=idx.indexOf(q[2]);});
   let ans=new Array(Q.length).fill(null);
   function render(){$('qbox').innerHTML=Q.map((q,i)=>`<div class="q" id="q${i}"><p>${i+1}. ${q[0]}</p>${q[1].map((o,j)=>`<button class="opt" data-q="${i}" data-o="${j}">${o}</button>`).join('')}<div class="expl" id="qe${i}"></div></div>`).join('');
     $('qbox').querySelectorAll('.opt').forEach(b=>b.onclick=()=>pick(+b.dataset.q,+b.dataset.o));score();}

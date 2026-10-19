@@ -1,0 +1,617 @@
+---
+title: "Біоінформатичні формати файлів: інтерактивний довідник"
+author: "Nazarii Hrubiian"
+html-table-processing: none
+include-after-body: _interactive_helpers.html
+---
+
+```{=html}
+<style>
+.lab{--lab-bg:#f8fafc;--lab-line:#dde3ea;--ink:#1f2933;--ink2:#52606d;--ink3:#7b8794;
+  --s1:#2a78d6;--s2:#eb6834;--s3:#1baf7a;--good:#1f8a4c;--bad:#c62828;--warn:#b26a00;
+  border:1px solid var(--lab-line);border-radius:10px;background:var(--lab-bg);
+  padding:16px 18px 18px;margin:1.25rem 0 2.25rem;color:var(--ink)}
+.lab .ttl{font-weight:600;font-size:1rem;margin:0 0 .75rem;color:var(--ink)}
+.lab .ttl small{font-weight:400;color:var(--ink3);margin-left:.4rem}
+.lab .ctl{display:flex;flex-wrap:wrap;gap:12px 22px;align-items:flex-end;margin-bottom:12px}
+.lab .ctl label{display:flex;flex-direction:column;gap:2px;font-size:.82rem;color:var(--ink2);min-width:150px;flex:1 1 150px;max-width:320px}
+.lab .ctl label b{color:var(--ink);font-variant-numeric:tabular-nums}
+.lab .btns{display:flex;flex-wrap:wrap;gap:6px}
+.lab canvas{display:block;width:100%;background:#fff;border:1px solid var(--lab-line);border-radius:6px}
+.lab .out{font-variant-numeric:tabular-nums;font-size:.92rem;margin-top:10px;line-height:1.55}
+.lab .grid2{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:14px}
+@media (max-width:760px){.lab .grid2{grid-template-columns:1fr}}
+.lab .grid2>*{min-width:0}
+.lab .grid2.stack{grid-template-columns:1fr}
+.lab .grid2.stack .info{min-height:0}
+.lab .pill{display:inline-block;padding:2px 10px;border-radius:999px;font-size:.82rem;font-weight:600;color:#fff}
+.lab .pill.good{background:var(--good)}.lab .pill.bad{background:var(--bad)}.lab .pill.warn{background:var(--warn)}
+.lab .hint{font-size:.82rem;color:var(--ink3);margin-top:6px}
+.lab .form-range::-webkit-slider-runnable-track{background:#cfd8e3}
+.lab .form-range::-moz-range-track{background:#cfd8e3}
+.lab .file{font-family:SFMono-Regular,Menlo,Consolas,monospace;font-size:.84rem;line-height:1.9;background:#fff;border:1px solid var(--lab-line);border-radius:6px;padding:10px 12px;overflow-x:auto;white-space:pre}
+.lab .file .fl{min-height:1.2em}
+.lab .file .fname{font-family:system-ui,-apple-system,"Segoe UI",sans-serif;font-size:.78rem;color:var(--ink3);margin-bottom:4px}
+.lab .tk{border-radius:3px;padding:1px 2px;cursor:pointer;outline:none}
+.lab .tk.on{box-shadow:0 0 0 2px #1f2933}
+.lab .tk:focus-visible{box-shadow:0 0 0 2px var(--s1)}
+.lab .tab{color:#c3ccd6;padding:0 4px;user-select:none}
+.lab .k1{background:#e3edfb;color:#1d4f96}.lab .k2{background:#fde6d9;color:#9a3c0c}.lab .k3{background:#dcf3e8;color:#11643f}
+.lab .k4{background:#efe7fb;color:#55309a}.lab .k5{background:#fdf1cc;color:#7a5600}.lab .k6{background:#fbe0e4;color:#9b1c33}
+.lab .k7{background:#dff3f6;color:#0d5c69}.lab .k8{background:#eceff3;color:#3e4c59}
+.lab .info{background:#fff;border:1px solid var(--lab-line);border-left:4px solid var(--s1);border-radius:6px;padding:10px 12px;font-size:.9rem;line-height:1.55;min-height:120px}
+.lab .info .nm{font-weight:700;margin-bottom:4px}
+.lab .info code{font-size:.84rem}
+.lab .aln{font-family:SFMono-Regular,Menlo,Consolas,monospace;font-size:.88rem;overflow-x:auto;background:#fff;border:1px solid var(--lab-line);border-radius:6px;padding:10px}
+.lab .aln .r{display:flex;white-space:nowrap;align-items:center}
+.lab .aln .lb{width:92px;min-width:92px;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;font-size:.76rem;color:var(--ink2)}
+.lab .aln .c{display:inline-block;width:18px;text-align:center;border-radius:2px;margin:1px 0}
+.lab .aln .num{font-size:.62rem;color:var(--ink3)}
+.lab .c.m{background:#dcf3e8}.lab .c.x{background:#c62828;color:#fff;font-weight:700}.lab .c.i{background:#8a63c9;color:#fff;font-weight:700}
+.lab .c.d{background:#fde6d9;color:#9a3c0c}.lab .c.n{background:#eceff3;color:#9aa5b1}.lab .c.s{color:#9aa5b1;font-style:italic}.lab .c.dim{color:#b9c2cc}
+.lab .flags{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:4px 14px;font-size:.86rem;margin-top:8px}
+.lab .flags label{display:flex;gap:6px;align-items:flex-start;min-width:0;max-width:none;flex-direction:row;color:var(--ink)}
+.lab .flags code{color:var(--ink3);min-width:42px;display:inline-block}
+.lab .ruler{font-family:SFMono-Regular,Menlo,Consolas,monospace;font-size:.82rem;overflow-x:auto;background:#fff;border:1px solid var(--lab-line);border-radius:6px;padding:10px}
+.lab .ruler .r{display:flex;white-space:nowrap;align-items:flex-end}
+.lab .ruler .lb{width:150px;min-width:150px;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;font-size:.76rem;color:var(--ink2)}
+.lab .ruler .b{display:inline-block;width:24px;text-align:center;border-left:1px solid #e3e8ee}
+.lab .ruler .b.on{background:#e3edfb;color:#1d4f96;font-weight:700}
+.lab .ruler .tick{display:inline-block;width:24px;text-align:left;font-size:.66rem;color:var(--ink3);transform:translateX(-3px)}
+.lab .ruler .tick.on{color:#c62828;font-weight:700}
+.lab .pipe{display:flex;flex-wrap:wrap;align-items:center;gap:6px}
+.lab .pbox{border:1px solid var(--lab-line);background:#fff;border-radius:8px;padding:8px 10px;text-decoration:none;color:var(--ink);font-size:.86rem;line-height:1.3;min-width:0}
+.lab .pbox b{display:block;font-family:SFMono-Regular,Menlo,Consolas,monospace;font-size:.84rem}
+.lab .pbox:hover{border-color:var(--s1)}
+.lab .parr{color:var(--ink3);font-size:.78rem;text-align:center;line-height:1.2}
+.lab .parr span{display:block;font-size:1.1rem;color:var(--ink2)}
+.lab table.sum{border-collapse:collapse;font-size:.86rem;width:100%}
+.lab table.sum th,.lab table.sum td{border-bottom:1px solid var(--lab-line);padding:6px 8px;text-align:left;vertical-align:top}
+.lab table.sum th{font-weight:600;color:var(--ink2)}
+.lab .tblwrap{overflow-x:auto}
+.lab .guess{font-family:SFMono-Regular,Menlo,Consolas,monospace;font-size:.82rem;background:#1f2933;color:#e5edf5;border-radius:6px;padding:12px;white-space:pre;overflow-x:auto;min-height:90px}
+.quiz .q{border-top:1px solid var(--lab-line);padding:12px 0}
+.quiz .q:first-child{border-top:none}
+.quiz .q p{margin:0 0 6px;font-weight:600}
+.quiz .opt{display:block;width:100%;text-align:left;margin:4px 0;padding:6px 10px;border:1px solid var(--lab-line);border-radius:6px;background:#fff;color:var(--ink)}
+.quiz .opt:hover:not([disabled]){border-color:var(--s1)}
+.quiz .opt.right{border-color:var(--good);background:#e6f4ea}
+.quiz .opt.wrong{border-color:var(--bad);background:#fdecea}
+.quiz .expl{font-size:.88rem;color:var(--ink2);margin-top:4px}
+.lab button:focus-visible,.lab input:focus-visible,.lab select:focus-visible{outline:2px solid var(--s1);outline-offset:2px}
+</style>
+```
+
+# Як користуватися довідником
+
+Біоінформатика — це передусім ланцюжок перетворень файлів: сирі ріди → вирівнювання → варіанти → анотація. Кожен формат — звичайний текст (або його стиснута двійкова версія) зі строгою структурою: кожен стовпчик і кожен символ щось означає. На цій сторінці для кожного формату є приклад, де **кожне поле підсвічено кольором**: наведіть курсор або клацніть, щоб побачити пояснення. Під прикладами — інтерактивні інструменти: декодер якості FASTQ, розшифровка FLAG і CIGAR у SAM, розбір генотипу у VCF, конвертер координат BED.
+
+Усі приклади описують ту саму умовну ділянку хромосоми 7 і той самий умовний ген **TESTG**, тож можна простежити, як одна й та сама позиція виглядає в різних форматах.
+
+```{=html}
+<div class="lab" id="f0">
+  <div class="ttl">Звідки беруться файли <small>типовий пайплайн з курсу; натисніть на формат</small></div>
+  <div class="pipe">
+    <a class="pbox" href="#fmt-fastq"><b>FASTQ</b>сирі ріди</a>
+    <div class="parr"><span>→</span>fastp<br>QC, обрізання</div>
+    <a class="pbox" href="#fmt-fastq"><b>FASTQ</b>чисті ріди</a>
+    <div class="parr"><span>→</span>bwa mem<br>+ <a href="#fmt-fasta">FASTA</a></div>
+    <a class="pbox" href="#fmt-sam"><b>SAM</b>вирівнювання</a>
+    <div class="parr"><span>→</span>samtools<br>sort, index</div>
+    <a class="pbox" href="#fmt-sam"><b>BAM + .bai</b>стиснуте</a>
+    <div class="parr"><span>→</span>bcftools<br>mpileup, call</div>
+    <a class="pbox" href="#fmt-vcf"><b>VCF</b>варіанти</a>
+    <div class="parr"><span>→</span>SnpEff / VEP<br>+ <a href="#fmt-gff">GFF/GTF</a></div>
+    <a class="pbox" href="#fmt-vcf"><b>VCF</b>анотований</a>
+  </div>
+  <div class="hint">Референсний геном зберігається у <a href="#fmt-fasta">FASTA</a>, анотація генів — у <a href="#fmt-gff">GFF3/GTF</a>, а ділянки інтересу (наприклад, екзони для таргетного секвенування) — у <a href="#fmt-bed">BED</a>.</div>
+</div>
+```
+
+# 1. FASTA — послідовності {#fmt-fasta}
+
+Найпростіший формат: рядок-заголовок, що починається з `>`, і під ним послідовність, розбита на рядки однакової довжини. У FASTA зберігають референсні геноми, гени, білки, контиги після збірки. Індекс `.fai` (`samtools faidx`) дозволяє програмам миттєво діставати будь-яку ділянку, не читаючи весь файл.
+
+```{=html}
+<div class="lab" id="f1">
+  <div class="grid2">
+    <div><div class="file" id="f1f"></div></div>
+    <div class="info" id="f1i"><span class="hint">Наведіть курсор на будь-яке поле файлу.</span></div>
+  </div>
+  <div class="ctl" style="margin-top:12px">
+    <label>Ширина рядка послідовності: <b id="f1wv"></b><input type="range" class="form-range" id="f1w" min="10" max="60" step="5" value="30"></label>
+  </div>
+  <div class="out" id="f1o"></div>
+</div>
+```
+
+**Перевірте себе:** чому всі рядки послідовності одного запису мають бути однакової довжини (крім останнього)? Що зберігається у стовпчику OFFSET файлу `.fai`?
+
+# 2. FASTQ — ріди з якістю {#fmt-fastq}
+
+Кожен рід займає **4 рядки**: заголовок з `@`, послідовність, рядок `+` і рядок якості тієї самої довжини. Кожен символ якості кодує **оцінку Phred** Q для відповідного нуклеотиду: Q = (ASCII-код символу) − 33, а ймовірність помилки P = 10<sup>−Q/10</sup>. Q20 означає 1 помилку на 100, Q30 — 1 на 1000.
+
+```{=html}
+<div class="lab" id="f2">
+  <div class="grid2 stack">
+    <div><div class="file" id="f2f"></div></div>
+    <div class="info" id="f2i"><span class="hint">Наведіть курсор на будь-яке поле файлу.</span></div>
+  </div>
+  <div class="ttl" style="margin-top:16px">Декодер якості <small>змінюйте рядки або поріг обрізання</small></div>
+  <div class="ctl">
+    <label style="max-width:none;flex:1 1 100%">Послідовність<input class="form-control form-control-sm" id="f2s" style="font-family:monospace"></label>
+    <label style="max-width:none;flex:1 1 100%">Рядок якості (Phred+33)<input class="form-control form-control-sm" id="f2q" style="font-family:monospace"></label>
+    <label>Поріг обрізання з 3′-кінця (вікно 4 нуклеотиди): <b id="f2tv"></b><input type="range" class="form-range" id="f2t" min="0" max="40" value="20"></label>
+  </div>
+  <canvas id="f2c"></canvas>
+  <div class="tip" id="f2tip" style="position:fixed;display:none;background:#1f2933;color:#fff;font-size:.8rem;padding:4px 8px;border-radius:4px;pointer-events:none;z-index:1000"></div>
+  <div class="out" id="f2o"></div>
+</div>
+```
+
+**Перевірте себе:** яку якість кодує символ `I`, а яку `#`? Чому якість зазвичай падає до кінця ріду? Що робить fastp, коли середня якість у вікні опускається нижче порогу?
+
+# 3. SAM / BAM — вирівнювання рідів {#fmt-sam}
+
+SAM — таблиця, де кожен рядок описує, куди вирівнявся один рід. Спочатку йде заголовок (рядки з `@`), далі записи з **11 обов'язковими стовпчиками** і необов'язковими тегами. **BAM** — та сама інформація у стиснутому двійковому вигляді, **CRAM** — ще сильніше стиснута з опорою на референс. Відсортований BAM індексують (`.bai`), щоб швидко діставати ріди з будь-якої ділянки — так працює IGV.
+
+```{=html}
+<div class="lab" id="f3">
+  <div class="grid2 stack">
+    <div><div class="file" id="f3f"></div></div>
+    <div class="info" id="f3i"><span class="hint">Наведіть курсор на будь-яке поле файлу.</span></div>
+  </div>
+
+  <div class="ttl" style="margin-top:18px">Декодер FLAG <small>FLAG — сума бітів; кожен біт — так/ні</small></div>
+  <div class="ctl">
+    <label>FLAG<input type="number" class="form-control form-control-sm" id="f3flag" min="0" max="4095" value="99"></label>
+    <div class="btns" id="f3pre"></div>
+  </div>
+  <div class="flags" id="f3bits"></div>
+  <div class="out" id="f3fo"></div>
+
+  <div class="ttl" style="margin-top:18px">Візуалізатор CIGAR <small>як рід лягає на референс</small></div>
+  <div class="btns" id="f3cp"></div>
+  <div class="ctl" style="margin-top:8px">
+    <label>POS (1-based)<input type="number" class="form-control form-control-sm" id="f3pos" min="1001" max="1042" value="1003"></label>
+    <label>CIGAR<input class="form-control form-control-sm" id="f3cig" style="font-family:monospace"></label>
+    <label style="max-width:none;flex:2 1 300px">SEQ (рід)<input class="form-control form-control-sm" id="f3seq" style="font-family:monospace"></label>
+  </div>
+  <div class="aln" id="f3aln"></div>
+  <div class="out" id="f3ao"></div>
+</div>
+```
+
+**Перевірте себе:** що означають FLAG 99 і 147 і чому вони трапляються парою? Чому в рядку з CIGAR `10M2I15M` рід довший за ділянку референсу, яку він покриває? Як записати рід, у якого перші 5 нуклеотидів — залишок адаптера?
+
+# 4. VCF — варіанти {#fmt-vcf}
+
+VCF складається з **метаданих** (`##`), що описують усі поля, рядка заголовка (`#CHROM ...`) і записів: один рядок — один варіант, далі по стовпчику на кожен зразок. Стовпчик FORMAT задає, які поля є в кожному зразку (тут GT:AD:DP:GQ). Стиснутий `.vcf.gz` індексують `tabix` (`.tbi`); двійкова версія — **BCF**.
+
+```{=html}
+<div class="lab" id="f4">
+  <div class="grid2 stack">
+    <div><div class="file" id="f4f"></div></div>
+    <div class="info" id="f4i"><span class="hint">Наведіть курсор на будь-яке поле. Клацніть на генотип зразка (наприклад, <code>0/1:15,13:28:99</code>), щоб розібрати його.</span></div>
+  </div>
+  <div class="out" id="f4o"></div>
+</div>
+```
+
+**Перевірте себе:** чому делеція записана як `REF=CTT ALT=C`, а не `CTT → -`? Що означає генотип `1/2` у третьому записі? Як з AD обчислити частку рідів з альтернативним алелем і чому для гетерозиготи вона близька до 50 %?
+
+# 5. BED — ділянки геному і системи координат {#fmt-bed}
+
+BED описує ділянки: хромосома, початок, кінець і за бажанням назва, оцінка, ланцюг, а у BED12 — ще й екзони. Головна пастка BED — **координати з 0 і напіввідкритий інтервал**: `chr7 999 1200` означає нуклеотиди з 1000-го по 1200-й у звичній нумерації з 1. VCF, SAM і GFF рахують з 1 і включають обидва кінці. Через це виникає найпоширеніша помилка в біоінформатиці — зсув на одиницю.
+
+```{=html}
+<div class="lab" id="f5">
+  <div class="ttl">Конвертер координат <small>рухайте повзунки</small></div>
+  <div class="ctl">
+    <label>BED start (з 0): <b id="f5sv"></b><input type="range" class="form-range" id="f5s" min="0" max="23" value="4"></label>
+    <label>BED end: <b id="f5ev"></b><input type="range" class="form-range" id="f5e" min="1" max="24" value="10"></label>
+  </div>
+  <div class="ruler" id="f5r"></div>
+  <div class="out" id="f5o"></div>
+  <hr>
+  <div class="grid2 stack">
+    <div><div class="file" id="f5f"></div><canvas id="f5c" style="margin-top:10px"></canvas></div>
+    <div class="info" id="f5i"><span class="hint">Наведіть курсор на поле. BED12 описує цілий транскрипт з екзонами одним рядком.</span></div>
+  </div>
+</div>
+```
+
+**Перевірте себе:** як записати в BED перший нуклеотид хромосоми? Яка довжина ділянки `chr7 100 150`? Як цю саму ділянку задати для `samtools view` у форматі `chr:start-end`?
+
+# 6. GFF3 і GTF — анотація генів {#fmt-gff}
+
+GFF3 і GTF описують, де лежать гени, транскрипти, екзони, CDS і UTR. Обидва мають 9 стовпчиків, координати з 1 включно з обома кінцями. Різниця — в останньому стовпчику: GFF3 будує ієрархію через `ID` і `Parent`, а GTF перелічує `gene_id` і `transcript_id` в кожному рядку. Клацніть на рядок файлу або на елемент на схемі гена.
+
+```{=html}
+<div class="lab" id="f6">
+  <div class="ctl"><div class="btns"><button class="btn btn-sm btn-primary" id="f6g3" aria-pressed="true">GFF3</button><button class="btn btn-sm btn-outline-primary" id="f6gt" aria-pressed="false">GTF</button></div></div>
+  <canvas id="f6c"></canvas>
+  <div class="grid2 stack" style="margin-top:10px">
+    <div><div class="file" id="f6f"></div></div>
+    <div class="info" id="f6i"><span class="hint">Наведіть курсор на поле або клацніть на елемент схеми.</span></div>
+  </div>
+</div>
+```
+
+**Перевірте себе:** чим відрізняються exon і CDS? Навіщо стовпчик phase у рядках CDS? Як BED12 з розділу 5 відповідає цьому самому транскрипту в GFF3?
+
+# 7. Шпаргалка і гра «Визнач формат» {#fmt-summary}
+
+```{=html}
+<div class="lab" id="f7">
+  <div class="tblwrap"><table class="sum">
+    <thead><tr><th>Формат</th><th>Що зберігає</th><th>Координати</th><th>Стиснення та індекс</th><th>Інструменти з курсу</th></tr></thead>
+    <tbody>
+      <tr><td><b>FASTA</b></td><td>послідовності: геном, гени, білки, контиги</td><td>—</td><td><code>.fa.gz</code> (bgzip), індекс <code>.fai</code></td><td>samtools faidx, blast, SnapGene</td></tr>
+      <tr><td><b>FASTQ</b></td><td>ріди секвенування + якість кожного нуклеотиду</td><td>—</td><td><code>.fastq.gz</code></td><td>fastQC, multiQC, fastp</td></tr>
+      <tr><td><b>SAM / BAM / CRAM</b></td><td>вирівнювання рідів на референс</td><td>з 1</td><td>BAM / CRAM, індекс <code>.bai</code> / <code>.crai</code></td><td>bwa, samtools, IGV</td></tr>
+      <tr><td><b>VCF / BCF</b></td><td>варіанти і генотипи зразків</td><td>з 1</td><td><code>.vcf.gz</code> + <code>.tbi</code> / <code>.csi</code>, BCF</td><td>bcftools, SnpEff, VEP, plink</td></tr>
+      <tr><td><b>BED</b></td><td>ділянки геному (регіони, екзони, піки)</td><td>з 0, кінець не включено</td><td><code>.bed.gz</code> + <code>.tbi</code></td><td>bedtools, samtools -L, bcftools -R</td></tr>
+      <tr><td><b>GFF3 / GTF</b></td><td>анотація генів і транскриптів</td><td>з 1</td><td><code>.gff3.gz</code></td><td>SnpEff, bcftools csq, featureCounts</td></tr>
+    </tbody>
+  </table></div>
+  <hr>
+  <div class="ttl">Визнач формат <small>до якого формату належить фрагмент?</small></div>
+  <div class="guess" id="f7g"></div>
+  <div class="btns" id="f7b" style="margin-top:10px"></div>
+  <div class="out" id="f7o"></div>
+</div>
+```
+
+# Тест для самоперевірки {#fmt-quiz}
+
+```{=html}
+<div class="lab quiz" id="quiz">
+  <div id="qbox"></div>
+  <div class="out" id="qscore"></div>
+  <button class="btn btn-sm btn-outline-secondary" id="qreset">Пройти ще раз</button>
+</div>
+
+<script>
+(function(){
+"use strict";
+const $=id=>document.getElementById(id);
+const redraws=[];const rnd=Math.random;
+const f2=v=>v.toLocaleString('uk-UA',{maximumFractionDigits:2});
+const pct=(v,d=1)=>(100*v).toLocaleString('uk-UA',{maximumFractionDigits:d})+' %';
+const int=v=>Math.round(v).toLocaleString('uk-UA');
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const C={ink:'#1f2933',ink2:'#52606d',ink3:'#7b8794',grid:'#e6ebf0',axis:'#a3adb8',s1:'#2a78d6',s2:'#eb6834',s3:'#1baf7a',s4:'#8a63c9',good:'#1f8a4c',bad:'#c62828',warn:'#d99a00'};
+function canvas(id,h){const c=$(id);c.style.width='100%';const w=Math.max(240,c.clientWidth||c.parentElement.clientWidth-2);const d=window.devicePixelRatio||1;
+  c.width=Math.round(w*d);c.height=Math.round(h*d);c.style.height=h+'px';const x=c.getContext('2d');x.setTransform(d,0,0,d,0,0);
+  x.clearRect(0,0,w,h);x.font='12px system-ui,-apple-system,Segoe UI,Roboto,sans-serif';return {x,w,h,c};}
+function txt(x,s,X,Y,o={}){x.fillStyle=o.c||C.ink2;x.textAlign=o.a||'left';x.textBaseline=o.b||'middle';if(o.f)x.font=o.f;x.fillText(s,X,Y);x.font='12px system-ui,-apple-system,Segoe UI,Roboto,sans-serif';}
+function rrect(x,X,Y,W,H,r,col){r=Math.max(0,Math.min(r,W/2,Math.abs(H)/2));x.fillStyle=col;x.beginPath();x.moveTo(X+r,Y);x.lineTo(X+W-r,Y);x.quadraticCurveTo(X+W,Y,X+W,Y+r);x.lineTo(X+W,Y+H-r);x.quadraticCurveTo(X+W,Y+H,X+W-r,Y+H);x.lineTo(X+r,Y+H);x.quadraticCurveTo(X,Y+H,X,Y+H-r);x.lineTo(X,Y+r);x.quadraticCurveTo(X,Y,X+r,Y);x.closePath();x.fill();}
+
+/* annotated file: lines = [[text,key],...]; key null = plain text; '\t' rendered as tab mark */
+function annot(boxId,infoId,fname,lines,D,onSel){
+  const box=$(boxId);
+  const tok=([t,k])=>{if(t==='\t')return '<span class="tab" aria-hidden="true">⇥</span>';if(!k)return esc(t);return `<span class="tk ${D[k].c}" data-k="${k}" tabindex="0" role="button" aria-label="${esc(D[k].n)}">${esc(t)}</span>`;};
+  box.innerHTML=(fname?`<div class="fname">${esc(fname)} <span style="margin-left:8px">⇥ = табуляція</span></div>`:'')+lines.map((l,li)=>`<div class="fl" data-line="${li}">${l.map(tok).join('')}</div>`).join('');
+  function sel(k,el){box.querySelectorAll('.tk').forEach(e=>e.classList.toggle('on',e.dataset.k===k));const d=D[k];let h=`<div class="nm">${d.n}</div>${d.d}`;
+    if(onSel){const extra=onSel(k,el);if(extra)h+=extra;}$(infoId).innerHTML=h;}
+  box.querySelectorAll('.tk').forEach(e=>{e.addEventListener('mouseenter',()=>sel(e.dataset.k,e));e.addEventListener('focus',()=>sel(e.dataset.k,e));e.addEventListener('click',()=>sel(e.dataset.k,e));});
+  return sel;}
+const T=['\t',null];
+
+/* ---------- 1. FASTA ---------- */
+(function(){
+  const S1='ATGGCTAAAGAGCTGTGGCGTTTCGGACAATAAGCTAAGTGATAGCAAGTGACCTGATCGA';
+  const S2='MAKELWRFGQ';
+  const D={
+    gt:{c:'k2',n:'Початок заголовка «>»',d:'Кожен запис FASTA починається з символу <code>&gt;</code>. Усе, що до наступного <code>&gt;</code>, належить цьому запису.'},
+    id:{c:'k1',n:'Ідентифікатор послідовності',d:'Перше слово після <code>&gt;</code> (до пробілу). Саме за ним програми шукають послідовність: <code>samtools faidx ref.fa chr7:1001-1060</code>. Тому ID має бути унікальним і без пробілів.'},
+    desc:{c:'k8',n:'Опис',d:'Усе після першого пробілу — довільний коментар. Більшість програм його ігнорують.'},
+    seq:{c:'k3',n:'Послідовність ДНК',d:'Літери A, C, G, T (і N — невідомий нуклеотид). Рядки однієї довжини: це потрібно для індексу <code>.fai</code>, який обчислює, де у файлі лежить потрібна позиція.'},
+    prot:{c:'k4',n:'Білкова послідовність',d:'FASTA зберігає і білки: тут однолітерні коди амінокислот (M — метіонін, K — лізин тощо). Формат той самий, змінюється лише алфавіт.'}};
+  function draw(){const w=+$('f1w').value;$('f1wv').textContent=w+' символів';
+    const L=[[['>','gt'],['chr7','id'],[' TESTG region, GRCh38-like, illustrative','desc']]];
+    for(let i=0;i<S1.length;i+=w)L.push([[S1.slice(i,i+w),'seq']]);
+    L.push([['>','gt'],['TESTG-P1','id'],[' protein fragment','desc']]);L.push([[S2,'prot']]);
+    annot('f1f','f1i','example.fa',L,D);
+    const hdr1='>chr7 TESTG region, GRCh38-like, illustrative\n';const off1=hdr1.length;const nLines=Math.ceil(S1.length/w);const bodyBytes=S1.length+nLines;
+    const hdr2='>TESTG-P1 protein fragment\n';const off2=off1+bodyBytes+hdr2.length;
+    const gc=[...S1].filter(c=>c==='G'||c==='C').length/S1.length;
+    $('f1o').innerHTML=`Довжина chr7: <b>${S1.length}</b> п.о., GC-вміст <b>${pct(gc)}</b>.<br>Індекс <code>example.fa.fai</code> (NAME, LENGTH, OFFSET, LINEBASES, LINEWIDTH):<div class="file" style="margin-top:6px">chr7\t${S1.length}\t${off1}\t${w}\t${w+1}\nTESTG-P1\t${S2.length}\t${off2}\t${S2.length}\t${S2.length+1}</div><div class="hint">OFFSET — номер байта, з якого починається послідовність; LINEWIDTH = символи рядка + символ нового рядка. Змініть ширину рядка: зміниться розбиття і індекс, але не сама послідовність.</div>`;}
+  $('f1w').addEventListener('input',draw);draw();
+})();
+
+/* ---------- 2. FASTQ ---------- */
+(function(){
+  const SEQ='ATGGCTAAAGAGCTGTGGCGTTTCGGACAATAAGCTAAGT';
+  const QUAL='IIIIIIIIIIIIIIHHHHHHGGGFFFEEDDCB@?=;96#0';
+  const D={
+    at:{c:'k2',n:'Рядок 1: заголовок «@»',d:'Кожен запис починається з <code>@</code>. Далі — ідентифікатор ріду.'},
+    ins:{c:'k1',n:'Прилад',d:'Унікальний номер секвенатора (тут Illumina NovaSeq, префікс A).'},
+    run:{c:'k1',n:'Номер запуску',d:'Порядковий номер запуску на цьому приладі.'},
+    fc:{c:'k1',n:'Проточна комірка (flowcell)',d:'Ідентифікатор проточної комірки, на якій ішло секвенування.'},
+    lane:{c:'k7',n:'Доріжка (lane)',d:'Номер доріжки проточної комірки.'},
+    tile:{c:'k7',n:'Плитка (tile)',d:'Ділянка доріжки, яку фотографує камера.'},
+    xy:{c:'k7',n:'Координати кластера x:y',d:'Положення кластера на плитці. Разом з попередніми полями дає унікальну назву ріду.'},
+    rd:{c:'k4',n:'Номер ріду в парі',d:'1 — перший рід пари (файл <code>_R1</code>), 2 — другий (<code>_R2</code>).'},
+    flt:{c:'k4',n:'Фільтр якості',d:'<code>Y</code> — кластер не пройшов фільтр приладу, <code>N</code> — пройшов.'},
+    ctl:{c:'k4',n:'Контрольні біти',d:'0 — звичайний рід.'},
+    idx:{c:'k5',n:'Індекс (баркод) зразка',d:'Послідовність баркоду, за якою ріди з різних зразків, секвенованих разом, розділяють на окремі файли (демультиплексування).'},
+    seq:{c:'k3',n:'Рядок 2: послідовність',d:'Прочитані нуклеотиди. N — прилад не зміг визначити нуклеотид.'},
+    plus:{c:'k8',n:'Рядок 3: «+»',d:'Роздільник. Іноді після <code>+</code> повторюють ідентифікатор, але зазвичай рядок порожній.'},
+    q:{c:'k6',n:'Рядок 4: якість',d:'По одному символу на кожен нуклеотид. Q = ASCII-код − 33: <code>I</code> = 73 − 33 = Q40, <code>?</code> = Q30, <code>5</code> = Q20, <code>#</code> = Q2. Сучасні прилади Illumina використовують лише кілька значень (наприклад, <code>F</code>, <code>:</code>, <code>,</code>, <code>#</code>).'}};
+  const L=[[['@','at'],['A00123','ins'],[':',null],['8','run'],[':',null],['H7KLMDSXX','fc'],[':',null],['1','lane'],[':',null],['1101','tile'],[':',null],['10004:1000','xy'],[' ',null],['1','rd'],[':',null],['N','flt'],[':',null],['0','ctl'],[':',null],['ATCACG','idx']],
+    [[SEQ,'seq']],[['+','plus']],[[QUAL,'q']]];
+  annot('f2f','f2i','sample_R1.fastq',L,D);
+  $('f2s').value=SEQ;$('f2q').value=QUAL;
+  let bars=[];
+  function draw(){const s=$('f2s').value.toUpperCase(),q=$('f2q').value,thr=+$('f2t').value;$('f2tv').textContent='Q'+thr;
+    const n=Math.min(s.length,q.length);const Q=[...q.slice(0,n)].map(c=>c.charCodeAt(0)-33);
+    let cut=n;for(let i=0;i+4<=n;i++){const m=(Q[i]+Q[i+1]+Q[i+2]+Q[i+3])/4;if(m<thr){cut=i;break;}}
+    const {x,w,h}=canvas('f2c',230);const L0=40,R=10,T=14,B=46;const W=w-L0-R,H=h-T-B;const bw=n?W/n:W;const qmax=42;const sy=v=>T+H-v/qmax*H;
+    [0,10,20,30,40].forEach(v=>{x.strokeStyle=C.grid;x.beginPath();x.moveTo(L0,sy(v));x.lineTo(L0+W,sy(v));x.stroke();txt(x,'Q'+v,L0-6,sy(v),{a:'right'});});
+    bars=[];for(let i=0;i<n;i++){const v=Math.max(0,Q[i]);const col=v>=30?C.good:v>=20?C.warn:C.bad;const X=L0+i*bw;x.globalAlpha=i>=cut?0.25:1;rrect(x,X+1,sy(v),Math.max(1,bw-2),sy(0)-sy(v),2,col);x.globalAlpha=1;
+      if(bw>=9)txt(x,s[i]||'',X+bw/2,T+H+12,{a:'center',c:i>=cut?C.ink3:C.ink,f:'bold 11px ui-monospace,Menlo,monospace'});if(bw>=9)txt(x,q[i],X+bw/2,T+H+26,{a:'center',c:C.ink3,f:'11px ui-monospace,Menlo,monospace'});bars.push({x0:X,x1:X+bw,i,v,ch:q[i],b:s[i]});}
+    if(cut<n){x.strokeStyle=C.bad;x.setLineDash([4,3]);x.beginPath();x.moveTo(L0+cut*bw,T);x.lineTo(L0+cut*bw,T+H);x.stroke();x.setLineDash([]);txt(x,'✂ обрізано',L0+cut*bw+4,T+8,{c:C.bad});}
+    x.strokeStyle=C.ink;x.setLineDash([2,3]);x.beginPath();x.moveTo(L0,sy(thr));x.lineTo(L0+W,sy(thr));x.stroke();x.setLineDash([]);
+    const mean=Q.reduce((a,b)=>a+b,0)/(n||1),q30=Q.filter(v=>v>=30).length/(n||1),ee=Q.reduce((a,v)=>a+Math.pow(10,-Math.max(0,v)/10),0);
+    let warn='';if(s.length!==q.length)warn=`<span class="pill bad">помилка</span> Довжини не збігаються: послідовність ${s.length}, якість ${q.length}. Такий FASTQ програми відкинуть. `;
+    $('f2o').innerHTML=warn+`Середня якість <b>Q${f2(mean)}</b>; нуклеотидів з Q ≥ 30: <b>${pct(q30,0)}</b>; очікувана кількість помилок у ріді: <b>${f2(ee)}</b>. ${cut<n?`При порозі Q${thr} рід обрізано до <b>${cut}</b> нуклеотидів з ${n}.`:`Рід збережено повністю (${n} нуклеотидів).`}<div class="hint">Зелений — Q ≥ 30, жовтий — 20–29, червоний — < 20. Наведіть курсор на стовпчик.</div>`;}
+  $('f2c').addEventListener('mousemove',e=>{const b=$('f2c').getBoundingClientRect();const X=e.clientX-b.left;const bar=bars.find(r=>X>=r.x0&&X<r.x1);const t=$('f2tip');
+    if(bar){t.style.display='block';t.innerHTML=`позиція ${bar.i+1}: ${esc(bar.b||'')} · символ «${esc(bar.ch)}» = ASCII ${bar.ch.charCodeAt(0)} → Q${bar.v} → P(помилки) = ${bar.v>0?Math.pow(10,-bar.v/10).toPrecision(2):'1'}`;t.style.left=Math.min(window.innerWidth-320,e.clientX+12)+'px';t.style.top=(e.clientY+14)+'px';}else t.style.display='none';});
+  $('f2c').addEventListener('mouseleave',()=>{$('f2tip').style.display='none';});
+  ['f2s','f2q','f2t'].forEach(id=>$(id).addEventListener('input',draw));redraws.push(draw);
+})();
+
+/* ---------- 3. SAM ---------- */
+const REF='ATGGCTAAAGAGCTGTGGCGTTTCGGACAATAAGCTAAGTGA';const RSTART=1001;
+(function(){
+  const D={
+    hd:{c:'k8',n:'@HD — заголовок файлу',d:'Версія формату (VN) і порядок сортування (SO:coordinate — відсортовано за координатами; потрібно для індексу).'},
+    sq:{c:'k8',n:'@SQ — референсна послідовність',d:'Назва (SN) і довжина (LN) кожної хромосоми референсу. Мають збігатися з FASTA, на який вирівнювали.'},
+    rg:{c:'k8',n:'@RG — група рідів',d:'Зразок (SM), бібліотека, платформа. bcftools і GATK беруть назву зразка саме звідси.'},
+    pg:{c:'k8',n:'@PG — програма',d:'Якою програмою і з якими параметрами отримано файл — корисно для відтворюваності.'},
+    qn:{c:'k1',n:'1. QNAME — назва ріду',d:'Та сама, що в FASTQ (без <code>@</code>). Обидва ріди пари мають однакову назву.'},
+    fl:{c:'k2',n:'2. FLAG — бітові прапорці',d:'Сума бітів, що описує рід: чи парний, чи вирівнявся, на якому ланцюгу, перший чи другий у парі. Розшифруйте нижче в декодері FLAG.'},
+    rn:{c:'k3',n:'3. RNAME — хромосома',d:'Куди вирівнявся рід. <code>*</code> — не вирівнявся.'},
+    pos:{c:'k3',n:'4. POS — позиція',d:'Координата (з 1) першого вирівняного нуклеотиду ріду на референсі. Soft-clipped нуклеотиди в POS не враховуються.'},
+    mq:{c:'k5',n:'5. MAPQ — якість вирівнювання',d:'Phred-оцінка ймовірності, що рід вирівняно не туди: MAPQ 60 → 1 на мільйон, MAPQ 30 → 1 на 1000, MAPQ 0 — рід однаково добре лягає в кілька місць (повтори).'},
+    cg:{c:'k4',n:'6. CIGAR — як рід лягає на референс',d:'Послідовність операцій: <code>M</code> — вирівняно (збіг або заміна), <code>I</code> — вставка в ріді, <code>D</code> — делеція в ріді, <code>S</code> — soft clip (нуклеотиди є в SEQ, але не вирівняні), <code>N</code> — пропуск (інтрон у РНК-секвенуванні). Спробуйте у візуалізаторі нижче.'},
+    rnx:{c:'k7',n:'7. RNEXT — хромосома пари',d:'Де вирівнявся другий рід пари. <code>=</code> — на тій самій хромосомі.'},
+    pnx:{c:'k7',n:'8. PNEXT — позиція пари',d:'POS другого ріду пари.'},
+    tl:{c:'k7',n:'9. TLEN — довжина фрагмента',d:'Відстань від початку лівого ріду до кінця правого = довжина вставки (insert size). Додатна для лівого ріду, від\'ємна для правого.'},
+    sq2:{c:'k3',n:'10. SEQ — послідовність ріду',d:'Для рідів на зворотному ланцюгу (біт 16) записано зворотно-комплементарну послідовність, як вона лежить на референсі.'},
+    ql:{c:'k6',n:'11. QUAL — якість',d:'Рядок якості з FASTQ (Phred+33), у тому ж порядку, що й SEQ.'},
+    tg:{c:'k8',n:'Необов\'язкові теги TAG:TYPE:VALUE',d:'<code>NM:i:3</code> — кількість відмінностей від референсу (заміни + вставлені + видалені нуклеотиди); <code>AS:i</code> — оцінка вирівнювання; <code>RG:Z</code> — група рідів. Тип: i — ціле, Z — рядок.'}};
+  const r1s=REF.slice(2,12)+'TT'+REF.slice(12,34);const q32='FFFFFFFFFFFFFFFFFFFFFFFFF:FFF,FF';const q34=q32+'FF';
+  const r1m=REF.slice(8,40);const r2s='ggggg'.toUpperCase()+REF.slice(9,36);const r3='ACGTTGCAGGTCAAGTCCGATTACGGATCCAT';
+  const rec=(f)=>{const o=[];f.forEach((v,i)=>{if(i)o.push(T);o.push(v);});return o;};
+  const L=[[['@HD','hd'],T,['VN:1.6','hd'],T,['SO:coordinate','hd']],
+    [['@SQ','sq'],T,['SN:chr7','sq'],T,['LN:159345973','sq']],
+    [['@RG','rg'],T,['ID:run1','rg'],T,['SM:sample1','rg'],T,['PL:ILLUMINA','rg']],
+    [['@PG','pg'],T,['ID:bwa','pg'],T,['PN:bwa','pg'],T,['CL:bwa mem ref.fa R1.fq.gz R2.fq.gz','pg']],
+    rec([['r001','qn'],['99','fl'],['chr7','rn'],['1003','pos'],['60','mq'],['10M2I22M','cg'],['=','rnx'],['1009','pnx'],['38','tl'],[r1s,'sq2'],[q34,'ql'],['NM:i:2','tg'],['RG:Z:run1','tg']]),
+    rec([['r001','qn'],['147','fl'],['chr7','rn'],['1009','pos'],['60','mq'],['32M','cg'],['=','rnx'],['1003','pnx'],['-38','tl'],[r1m,'sq2'],[q32,'ql'],['NM:i:0','tg'],['RG:Z:run1','tg']]),
+    rec([['r002','qn'],['0','fl'],['chr7','rn'],['1010','pos'],['37','mq'],['5S27M','cg'],['*','rnx'],['0','pnx'],['0','tl'],[r2s,'sq2'],[q32,'ql'],['NM:i:0','tg'],['RG:Z:run1','tg']]),
+    rec([['r003','qn'],['4','fl'],['*','rn'],['0','pos'],['0','mq'],['*','cg'],['*','rnx'],['0','pnx'],['0','tl'],[r3,'sq2'],[q32,'ql'],['RG:Z:run1','tg']])];
+  annot('f3f','f3i','sample.sam',L,D);
+  /* FLAG */
+  const BITS=[[1,'рід парний (paired-end)'],[2,'обидва ріди пари вирівняні правильно (proper pair)'],[4,'рід не вирівнявся'],[8,'рід пари не вирівнявся'],[16,'рід на зворотному ланцюгу'],[32,'рід пари на зворотному ланцюгу'],[64,'перший рід пари (R1)'],[128,'другий рід пари (R2)'],[256,'вторинне вирівнювання'],[512,'не пройшов контроль якості'],[1024,'дублікат ПЛР або оптичний'],[2048,'додаткове (supplementary) вирівнювання']];
+  $('f3bits').innerHTML=BITS.map(([b,t])=>`<label><input type="checkbox" class="form-check-input" data-b="${b}"><span><code>${b}</code>${t}</span></label>`).join('');
+  $('f3pre').innerHTML=[99,147,83,163,0,16,4,1024,2048].map(v=>`<button class="btn btn-sm btn-outline-secondary" data-v="${v}">${v}</button>`).join('');
+  function flagOut(){const v=Math.max(0,Math.min(4095,+$('f3flag').value||0));$('f3bits').querySelectorAll('input').forEach(c=>c.checked=!!(v&+c.dataset.b));
+    const on=BITS.filter(([b])=>v&b);let s=on.length?on.map(([b,t])=>`<b>${b}</b> (${t})`).join(' + '):'жоден біт не встановлено: одиночний рід, вирівняний на прямий ланцюг';
+    const notes=[];if((v&4)&&(v&2))notes.push('Суперечність: рід не вирівнявся, але позначений як proper pair.');if((v&64)&&(v&128))notes.push('Суперечність: рід не може бути одночасно першим і другим.');if((v&2)&&!(v&1))notes.push('Біт 2 має сенс лише разом з бітом 1.');
+    $('f3fo').innerHTML=`FLAG ${v} = ${s}.`+(notes.length?`<div><span class="pill warn">увага</span> ${notes.join(' ')}</div>`:'')+`<div class="hint">У командах: <code>samtools view -f 2</code> — лише ріди з бітом 2, <code>-F 4</code> — без невирівняних, <code>-F 1024</code> — без дублікатів.</div>`;}
+  $('f3flag').addEventListener('input',flagOut);$('f3bits').addEventListener('change',()=>{let v=0;$('f3bits').querySelectorAll('input').forEach(c=>{if(c.checked)v+=+c.dataset.b;});$('f3flag').value=v;flagOut();});
+  $('f3pre').querySelectorAll('button').forEach(b=>b.onclick=()=>{$('f3flag').value=b.dataset.v;flagOut();});flagOut();
+  /* CIGAR */
+  const mut=s=>s.slice(0,9)+(s[9]==='A'?'C':'A')+s.slice(10);
+  const PRE=[['Повний збіг',1003,'25M',REF.slice(2,27)],['Заміна',1003,'25M',mut(REF.slice(2,27))],['Вставка',1003,'10M2I15M',REF.slice(2,12)+'TT'+REF.slice(12,27)],
+    ['Делеція',1003,'10M3D15M',REF.slice(2,12)+REF.slice(15,30)],['Soft clip (адаптер)',1008,'5S21M','GATCG'+REF.slice(7,28)],['Інтрон (РНК)',1003,'8M10N12M',REF.slice(2,10)+REF.slice(20,32)]];
+  $('f3cp').innerHTML=PRE.map((p,i)=>`<button class="btn btn-sm btn-outline-primary" data-i="${i}">${p[0]}</button>`).join('');
+  function setPre(i){const p=PRE[i];$('f3pos').value=p[1];$('f3cig').value=p[2];$('f3seq').value=p[3];aln();}
+  $('f3cp').querySelectorAll('button').forEach(b=>b.onclick=()=>setPre(+b.dataset.i));
+  function aln(){const pos=+$('f3pos').value,cig=$('f3cig').value.trim().toUpperCase(),seq=$('f3seq').value.trim().toUpperCase();
+    const ops=[];const re=/(\d+)([MIDNSHP=X])/g;let m,used=0;while((m=re.exec(cig))){ops.push([+m[1],m[2]]);used+=m[0].length;}
+    const err=e=>{$('f3aln').innerHTML='';$('f3ao').innerHTML=`<span class="pill bad">помилка</span> ${e}`;};
+    if(!ops.length||used!==cig.length)return err('CIGAR має складатися з пар «число + операція» (M, I, D, N, S, H, =, X), наприклад <code>10M2I15M</code>.');
+    const qlen=ops.reduce((a,[n,o])=>a+('MIS=X'.includes(o)?n:0),0),rlen=ops.reduce((a,[n,o])=>a+('MDN=X'.includes(o)?n:0),0);
+    if(qlen!==seq.length)return err(`Довжина ріду за CIGAR — ${qlen} (сума M, I, S, =, X), а в SEQ — ${seq.length} нуклеотидів. У справжньому SAM вони завжди збігаються.`);
+    const r0=pos-RSTART;if(r0<0||r0+rlen>REF.length)return err(`Вирівнювання виходить за межі показаного референсу (позиції ${RSTART}–${RSTART+REF.length-1}).`);
+    const cols=[];let qi=0,ri=r0;let lead=0;
+    ops.forEach(([n,o],k)=>{for(let j=0;j<n;j++){
+      if(o==='S'){cols.push({t:'s',q:seq[qi++],r:null,clip:k===0});}
+      else if(o==='M'||o==='='||o==='X'){const rb=REF[ri],qb=seq[qi];cols.push({t:rb===qb?'m':'x',q:qb,r:rb,rp:RSTART+ri});ri++;qi++;}
+      else if(o==='I'){cols.push({t:'i',q:seq[qi++],r:'-'});}
+      else if(o==='D'){cols.push({t:'d',q:'-',r:REF[ri],rp:RSTART+ri});ri++;}
+      else if(o==='N'){cols.push({t:'n',q:'.',r:REF[ri],rp:RSTART+ri});ri++;}}});
+    lead=cols.findIndex(c=>c.t!=='s');if(lead<0)lead=cols.length;
+    const pre=[];for(let k=lead;k>0;k--){const rp=r0-k;pre.push(rp>=0?{r:REF[rp],rp:RSTART+rp}:{r:' ',rp:null});}
+    const rows={num:[],ref:[],read:[]};
+    cols.forEach((c,k)=>{let rr=c.r,rp=c.rp;if(c.t==='s'){const p=c.clip?pre[k]:null;if(c.clip&&p){rr=p.r;rp=p.rp;}else{const off=ri-r0+(k-cols.length);rr=' ';}}
+      rows.num.push(rp&&rp%5===0?`<span class="c num">${rp%100}</span>`:'<span class="c num"></span>');
+      rows.ref.push(`<span class="c${c.t==='s'?' dim':c.t==='i'?' i':''}">${rr==null?' ':rr}</span>`);
+      rows.read.push(`<span class="c ${c.t}">${c.t==='s'?c.q.toLowerCase():c.q}</span>`);});
+    const padL=2,padR=2;const pl=[],pr=[];for(let k=padL;k>0;k--){const rp=r0-lead-k;pl.push(rp>=0?REF[rp]:' ');}for(let k=0;k<padR;k++){const rp=ri+k;pr.push(rp<REF.length?REF[rp]:' ');}
+    const mk=(arr,cls)=>arr.map(b=>`<span class="c ${cls}">${b}</span>`).join('');
+    $('f3aln').innerHTML=`<div class="r"><span class="lb">позиція</span>${'<span class="c num"></span>'.repeat(padL)}${rows.num.join('')}</div>`+
+      `<div class="r"><span class="lb">референс</span>${mk(pl,'dim')}${rows.ref.join('')}${mk(pr,'dim')}</div>`+
+      `<div class="r"><span class="lb">рід</span>${'<span class="c"></span>'.repeat(padL)}${rows.read.join('')}</div>`;
+    const mm=cols.filter(c=>c.t==='x').length,ins=cols.filter(c=>c.t==='i').length,dl=cols.filter(c=>c.t==='d').length,sc=cols.filter(c=>c.t==='s').length,nn=cols.filter(c=>c.t==='n').length;
+    $('f3ao').innerHTML=`Рід (${seq.length} нукл.) покриває референс з <b>${pos}</b> по <b>${pos+rlen-1}</b> (${rlen} позицій). Замін: <b>${mm}</b>, вставлених: <b>${ins}</b>, видалених: <b>${dl}</b>${sc?`, soft-clipped: <b>${sc}</b>`:''}${nn?`, пропущено (інтрон): <b>${nn}</b>`:''}. Тег <code>NM:i:${mm+ins+dl}</code>.`+
+      `<div class="hint">Зелений — збіг, червоний — заміна, фіолетовий — вставка, помаранчевий — делеція, сірі малі літери — soft clip, крапки — пропущена ділянка (N). Кінець вирівнювання = POS + (сума M, D, N) − 1.</div>`;}
+  ['f3pos','f3cig','f3seq'].forEach(id=>$(id).addEventListener('input',aln));setPre(2);
+})();
+
+/* ---------- 4. VCF ---------- */
+(function(){
+  const D={
+    ff:{c:'k8',n:'##fileformat',d:'Версія специфікації VCF. Обов\'язковий перший рядок.'},
+    ref:{c:'k8',n:'##reference',d:'Референсний геном, відносно якого викликано варіанти. Позиції мають сенс лише для того самого референсу.'},
+    ctg:{c:'k8',n:'##contig',d:'Назва і довжина хромосоми. Потрібно для індексування і перевірок.'},
+    inf:{c:'k1',n:'##INFO — опис поля INFO',d:'ID, кількість значень (Number: 1 — одне, A — по одному на кожен ALT, R — на REF і кожен ALT, G — на кожен генотип), тип і опис.'},
+    fil:{c:'k6',n:'##FILTER — опис фільтра',d:'Назви фільтрів, які можуть з\'явитися у стовпчику FILTER.'},
+    fmt:{c:'k4',n:'##FORMAT — опис поля зразка',d:'Поля, що можуть бути в стовпчиках зразків: GT, AD, DP, GQ тощо.'},
+    hdr:{c:'k8',n:'#CHROM — рядок заголовка',d:'Назви 8 фіксованих стовпчиків, FORMAT і назви зразків. Починається з одного <code>#</code>.'},
+    chr:{c:'k3',n:'CHROM',d:'Хромосома. Має збігатися з назвою в референсі (<code>chr7</code> чи <code>7</code> — часте джерело помилок).'},
+    pos:{c:'k3',n:'POS',d:'Позиція з 1. Для індела — позиція «якірного» нуклеотиду перед зміною.'},
+    id:{c:'k8',n:'ID',d:'Ідентифікатор, наприклад rs-номер з dbSNP. <code>.</code> — відсутній.'},
+    rf:{c:'k2',n:'REF',d:'Нуклеотид(и) референсу в цій позиції. Для делеції — якірний нуклеотид + видалені: <code>CTT</code> → <code>C</code> означає, що зникли <code>TT</code> після C.'},
+    al:{c:'k2',n:'ALT',d:'Альтернативний алель (або кілька через кому — мультиалельний сайт). Номери алелів у GT: 0 — REF, 1 — перший ALT, 2 — другий ALT.'},
+    ql:{c:'k5',n:'QUAL',d:'Phred-оцінка того, що варіант справжній: QUAL 30 — 1 шанс на 1000, що варіанту немає.'},
+    flt:{c:'k6',n:'FILTER',d:'<code>PASS</code> — пройшов усі фільтри; інакше назва фільтра, якого не пройшов (тут <code>LowQual</code>).'},
+    io:{c:'k1',n:'INFO',d:'Інформація про варіант загалом, пари <code>ключ=значення</code> через «;». DP — сумарне покриття, AF — частота ALT серед усіх копій у вибірці. Після анотації SnpEff тут з\'являється поле ANN з наслідком варіанта.'},
+    fm:{c:'k4',n:'FORMAT',d:'Порядок полів у стовпчиках зразків: <code>GT:AD:DP:GQ</code>.'},
+    smp:{c:'k7',n:'Дані зразка',d:'Значення у порядку FORMAT, через двокрапку.'}};
+  const L=[[['##fileformat=VCFv4.2','ff']],[['##reference=GRCh38.fa','ref']],[['##contig=<ID=chr7,length=159345973>','ctg']],
+    [['##INFO=<ID=DP,Number=1,Type=Integer,Description="Total depth">','inf']],[['##INFO=<ID=AF,Number=A,Type=Float,Description="Allele frequency">','inf']],
+    [['##FILTER=<ID=LowQual,Description="Low quality">','fil']],
+    [['##FORMAT=<ID=GT,Number=1,Type=String,Description="Genotype">','fmt']],[['##FORMAT=<ID=AD,Number=R,Type=Integer,Description="Allelic depths">','fmt']],
+    [['##FORMAT=<ID=DP,Number=1,Type=Integer,Description="Read depth">','fmt']],[['##FORMAT=<ID=GQ,Number=1,Type=Integer,Description="Genotype quality">','fmt']],
+    [['#CHROM','hdr'],T,['POS','hdr'],T,['ID','hdr'],T,['REF','hdr'],T,['ALT','hdr'],T,['QUAL','hdr'],T,['FILTER','hdr'],T,['INFO','hdr'],T,['FORMAT','hdr'],T,['sample1','hdr'],T,['sample2','hdr'],T,['sample3','hdr']]];
+  const R=[['chr7','1050','rs0001','G','A','812.4','PASS','DP=89;AF=0.5',['0/1:15,13:28:99','1/1:0,31:31:93','0/0:30,0:30:90']],
+    ['chr7','1120','.','CTT','C','455','PASS','DP=88;AF=0.333',['0/0:29,0:29:87','0/1:14,12:26:99','0/1:16,17:33:99']],
+    ['chr7','1304','.','T','A,G','120','LowQual','DP=40;AF=0.167,0.167',['1/2:0,6,5:11:40','0/0:14,0,0:14:42','0/0:15,0,0:15:45']]];
+  R.forEach(r=>{const k=['chr','pos','id','rf','al','ql','flt','io'];const l=[];r.slice(0,8).forEach((v,i)=>{if(i)l.push(T);l.push([v,k[i]]);});l.push(T,['GT:AD:DP:GQ','fm']);r[8].forEach(s=>{l.push(T,[s,'smp']);});L.push(l);});
+  annot('f4f','f4i','variants.vcf',L,D,(k,el)=>{if(k!=='smp'||!el)return '';const v=el.textContent;const [gt,ad,dp,gq]=v.split(':');const ln=+el.closest('.fl').dataset.line;const rec=R[ln-11];if(!rec)return '';
+    const alleles=[rec[3],...rec[4].split(',')];const a=gt.split(/[\/|]/).map(Number);const ads=ad.split(',').map(Number);const tot=ads.reduce((s,x)=>s+x,0);
+    const kind=a[0]===a[1]?(a[0]===0?'гомозигота за референсним алелем':'гомозигота за альтернативним алелем'):(a.includes(0)?'гетерозигота REF/ALT':'гетерозигота з двома різними ALT');
+    return `<hr style="margin:8px 0"><b>Розбір ${esc(v)}</b><br>GT <code>${gt}</code> → алелі ${a.map(i=>`${i} = <b>${alleles[i]}</b>`).join(' і ')}: ${kind}.<br>AD <code>${ad}</code> → рідів з кожним алелем: ${ads.map((n,i)=>`${alleles[i]}: ${n}`).join(', ')}${tot&&a[0]!==a[1]?` (частка ALT ≈ ${pct((tot-ads[0])/tot,0)})`:''}.<br>DP <code>${dp}</code> → покриття ${dp} рідів.<br>GQ <code>${gq}</code> → імовірність, що генотип визначено неправильно, ≈ ${Math.pow(10,-gq/10).toExponential(0).replace('e-','·10^-')}.`;});
+  $('f4o').innerHTML='<div class="hint">Три записи показують типові випадки: SNV (G→A), делецію з якірним нуклеотидом (CTT→C) і мультиалельний сайт (T→A або G), що не пройшов фільтр. Координати умовні.</div>';
+})();
+
+/* ---------- 5. BED ---------- */
+const GENE={chr:'chr7',start:1000,end:1900,exons:[[1000,1200],[1400,1550],[1700,1900]],cds:[[1100,1200],[1400,1550],[1700,1801]]};
+(function(){
+  const SEQ='GATTACAGGCTTACGATCCATGAA';
+  function draw(){let s=+$('f5s').value,e=+$('f5e').value;if(e<=s){e=s+1;$('f5e').value=e;}$('f5sv').textContent=s;$('f5ev').textContent=e;
+    let h='<div class="r"><span class="lb">межі з 0 (BED)</span>'+[...SEQ].map((_,i)=>`<span class="tick${i===s?' on':''}">${i}</span>`).join('')+`<span class="tick${e===SEQ.length?' on':''}">${SEQ.length}</span></div>`;
+    h+='<div class="r"><span class="lb">послідовність</span>'+[...SEQ].map((b,i)=>`<span class="b${i>=s&&i<e?' on':''}">${b}</span>`).join('')+'</div>';
+    h+='<div class="r"><span class="lb">номер нуклеотиду з 1</span>'+[...SEQ].map((_,i)=>`<span class="b${i>=s&&i<e?' on':''}" style="font-size:.7rem;color:#7b8794">${i+1}</span>`).join('')+'</div>';
+        $('f5r').innerHTML=h;
+    $('f5o').innerHTML=`<table class="sum" style="max-width:640px"><tr><th>Формат</th><th>Запис</th></tr>`+
+      `<tr><td>BED (з 0, кінець не включено)</td><td><code>chr7&nbsp;&nbsp;${s}&nbsp;&nbsp;${e}</code></td></tr>`+
+      `<tr><td>GFF / VCF / SAM (з 1, включно)</td><td>початок <code>${s+1}</code>, кінець <code>${e}</code></td></tr>`+
+      `<tr><td>регіон для samtools / bcftools / IGV</td><td><code>chr7:${s+1}-${e}</code></td></tr>`+
+      `<tr><td>довжина</td><td><code>end − start = ${e-s}</code> п.о.</td></tr></table>`+
+      `<div class="hint">У BED числа позначають <b>межі між нуклеотидами</b> (червоні). Тому довжина — просто різниця, а для переходу до нумерації з 1 треба додати 1 лише до початку.</div>`;}
+  ['f5s','f5e'].forEach(id=>$(id).addEventListener('input',draw));draw();
+  const D={
+    c1:{c:'k3',n:'1. chrom',d:'Хромосома.'},c2:{c:'k3',n:'2. chromStart (з 0)',d:'Початок ділянки в координатах з 0. 999 у BED = 1000-й нуклеотид у GFF.'},c3:{c:'k3',n:'3. chromEnd',d:'Кінець, не включно. Чисельно збігається з кінцем у нумерації з 1.'},
+    c4:{c:'k1',n:'4. name',d:'Назва ділянки (тут транскрипт).'},c5:{c:'k8',n:'5. score',d:'Оцінка 0–1000 (наприклад, для відтінку в браузері геному).'},c6:{c:'k1',n:'6. strand',d:'Ланцюг: <code>+</code>, <code>-</code> або <code>.</code>'},
+    c7:{c:'k2',n:'7. thickStart',d:'Початок «товстої» частини — кодуючої ділянки (CDS). У браузері малюється товстіше.'},c8:{c:'k2',n:'8. thickEnd',d:'Кінець кодуючої ділянки.'},c9:{c:'k8',n:'9. itemRgb',d:'Колір у форматі R,G,B.'},
+    c10:{c:'k4',n:'10. blockCount',d:'Кількість блоків (екзонів).'},c11:{c:'k4',n:'11. blockSizes',d:'Довжини екзонів через кому.'},c12:{c:'k4',n:'12. blockStarts',d:'Початки екзонів <b>відносно chromStart</b>, через кому.'},
+    b3:{c:'k5',n:'BED3 — лише ділянка',d:'Найпростіший BED: хромосома, початок, кінець. Так задають ділянки для таргетного секвенування чи для <code>bcftools view -R regions.bed</code>.'}};
+  const g=GENE;const bs=g.exons.map(([a,b])=>b-a+1),bst=g.exons.map(([a])=>a-g.start);
+  const v=[g.chr,String(g.start-1),String(g.end),'TESTG-201','0','+',String(g.cds[0][0]-1),String(g.cds[2][1]),'0,0,255','3',bs.join(','),bst.join(',')];
+  const l12=[];v.forEach((x,i)=>{if(i)l12.push(T);l12.push([x,'c'+(i+1)]);});
+  const L=[[['chr7','b3'],T,['999','b3'],T,['1200','b3']],[['chr7','b3'],T,['1399','b3'],T,['1550','b3']],l12];
+  annot('f5f','f5i','regions.bed  (два рядки BED3 і один BED12)',L,D);
+  function drawGene(){const {x,w,h}=canvas('f5c',110);const L0=30,R=w-20;const sx=p=>L0+(p-g.start)/(g.end-g.start)*(R-L0);const y=48;
+    x.strokeStyle=C.ink3;x.lineWidth=2;x.beginPath();x.moveTo(sx(g.start),y);x.lineTo(sx(g.end),y);x.stroke();
+    g.exons.forEach(([a,b])=>{rrect(x,sx(a),y-8,sx(b)-sx(a),16,2,'#9fb3c8');});g.cds.forEach(([a,b])=>{rrect(x,sx(a),y-14,sx(b)-sx(a),28,3,C.s1);});
+    txt(x,'TESTG-201 з BED12: тонке — UTR, товсте — CDS (thickStart–thickEnd)',L0,14,{c:C.ink});[g.start,g.end].forEach(p=>txt(x,String(p),sx(p),y+30,{a:'center',c:C.ink3}));txt(x,'координати з 1',R,h-10,{a:'right',c:C.ink3});}
+  redraws.push(drawGene);
+})();
+
+/* ---------- 6. GFF3/GTF ---------- */
+(function(){
+  const g=GENE;let mode='gff3';let selLine=null;
+  const FEAT=[['gene',g.start,g.end,'.'],['mRNA',g.start,g.end,'.'],['five_prime_UTR',1000,1099,'.'],['exon',1000,1200,'.'],['CDS',1100,1200,'0'],['exon',1400,1550,'.'],['CDS',1400,1550,'1'],['exon',1700,1900,'.'],['CDS',1700,1801,'0'],['three_prime_UTR',1802,1900,'.']];
+  function attrs(f,i){let ex=0,cd=0;for(let k=0;k<=i;k++){if(FEAT[k][0]==='exon')ex++;if(FEAT[k][0]==='CDS')cd++;}
+    if(mode==='gff3'){if(f[0]==='gene')return 'ID=gene:TESTG;Name=TESTG;biotype=protein_coding';if(f[0]==='mRNA')return 'ID=transcript:TESTG-201;Parent=gene:TESTG;Name=TESTG-201';
+      if(f[0]==='CDS')return 'ID=CDS:TESTG-P1;Parent=transcript:TESTG-201';if(f[0]==='exon')return `Parent=transcript:TESTG-201;exon_number=${ex}`;return 'Parent=transcript:TESTG-201';}
+    const base='gene_id "TESTG";';if(f[0]==='gene')return base+' gene_name "TESTG";';const t=base+' transcript_id "TESTG-201";';
+    if(f[0]==='exon')return t+` exon_number "${ex}";`;if(f[0]==='CDS')return t+` exon_number "${cd}";`;return t;}
+  const TYPE_GTF={gene:'gene',mRNA:'transcript',five_prime_UTR:'five_prime_utr',three_prime_UTR:'three_prime_utr',exon:'exon',CDS:'CDS'};
+  const D={
+    s1:{c:'k3',n:'1. seqid',d:'Хромосома.'},s2:{c:'k8',n:'2. source',d:'Звідки анотація (Ensembl, HAVANA, RefSeq, програма передбачення генів).'},
+    s3:{c:'k1',n:'3. type',d:'Тип елемента: gene, mRNA/transcript, exon, CDS, UTR. Ієрархія: ген → транскрипт → екзони і CDS.'},
+    s4:{c:'k3',n:'4. start (з 1)',d:'Початок, включно. Порівняйте з BED у розділі 5: той самий екзон там починається з 999.'},s5:{c:'k3',n:'5. end (з 1)',d:'Кінець, включно. Довжина = end − start + 1.'},
+    s6:{c:'k8',n:'6. score',d:'Оцінка; зазвичай <code>.</code>'},s7:{c:'k1',n:'7. strand',d:'Ланцюг, на якому лежить ген.'},
+    s8:{c:'k2',n:'8. phase',d:'Лише для CDS: скільки нуклеотидів на початку цієї CDS треба пропустити, щоб потрапити на початок кодону (0, 1 або 2). Перша CDS має 101 нуклеотид: 101 = 33 кодони + 2 нуклеотиди, тож третій нуклеотид кодону — перший у наступній CDS, і її phase = 1.'},
+    s9:{c:'k4',n:'9. attributes',d:''}};
+  function render(){const lines=[];FEAT.forEach((f,i)=>{const v=[g.chr,mode==='gff3'?'ensembl':'HAVANA',mode==='gff3'?f[0]:TYPE_GTF[f[0]],String(f[1]),String(f[2]),'.','+',f[3],attrs(f,i)];const l=[];v.forEach((x,k)=>{if(k)l.push(T);l.push([x,'s'+(k+1)]);});lines.push(l);});
+    if(mode==='gff3')lines.unshift([['##gff-version 3',null]]);
+    D.s9.d=mode==='gff3'?'Пари <code>ключ=значення</code> через «;». <code>ID</code> — унікальний ідентифікатор елемента, <code>Parent</code> — посилання на батьківський елемент. Так exon і CDS знають, до якого транскрипту належать, а транскрипт — до якого гена.':'Пари <code>ключ "значення";</code>. Кожен рядок явно містить <code>gene_id</code> і <code>transcript_id</code>, а ієрархію відновлюють за цими ідентифікаторами. GTF використовують, наприклад, для підрахунку рідів на ген у РНК-секвенуванні.';
+    annot('f6f','f6i',mode==='gff3'?'annotation.gff3':'annotation.gtf',lines,D,(k,el)=>{if(!el)return '';const li=+el.closest('.fl').dataset.line-(mode==='gff3'?1:0);if(li>=0){selLine=li;drawGene();const f=FEAT[li];return `<hr style="margin:8px 0">Рядок: <b>${f[0]}</b> ${f[1]}–${f[2]}, довжина ${f[2]-f[1]+1} п.о.`;}return '';});
+    $('f6g3').className='btn btn-sm '+(mode==='gff3'?'btn-primary':'btn-outline-primary');$('f6gt').className='btn btn-sm '+(mode==='gtf'?'btn-primary':'btn-outline-primary');
+    $('f6g3').setAttribute('aria-pressed',mode==='gff3');$('f6gt').setAttribute('aria-pressed',mode==='gtf');drawGene();}
+  let boxes=[];
+  function drawGene(){const {x,w,h}=canvas('f6c',170);const L0=110,R=w-20;const sx=p=>L0+(p-g.start)/(g.end-g.start)*(R-L0);boxes=[];
+    const rows=[['ген',FEAT.map((f,i)=>[f,i]).filter(([f])=>f[0]==='gene'),24],['транскрипт',FEAT.map((f,i)=>[f,i]).filter(([f])=>f[0]==='mRNA'),62],['екзони, CDS, UTR',FEAT.map((f,i)=>[f,i]).filter(([f])=>!['gene','mRNA'].includes(f[0])),110]];
+    rows.forEach(([lab,items,y])=>{txt(x,lab,8,y,{c:C.ink2});
+      if(lab==='транскрипт'){x.strokeStyle=C.ink3;x.lineWidth=2;x.beginPath();x.moveTo(sx(g.start),y);x.lineTo(sx(g.end),y);x.stroke();}
+      items.forEach(([f,i])=>{const t=f[0];let hh=t==='CDS'?22:t==='exon'?14:t.includes('UTR')?10:12;let col=t==='gene'?'#9fb3c8':t==='mRNA'?'#c9d3dd':t==='CDS'?C.s1:t==='exon'?'#9fb3c8':C.s3;
+        let yy=y-hh/2;if(t==='exon'){yy=y-hh/2+16;}if(t.includes('UTR')){yy=y-hh/2+16;}
+        if(t==='mRNA'){g.exons.forEach(([a,b])=>rrect(x,sx(a),y-6,sx(b)-sx(a),12,2,'#9fb3c8'));boxes.push({i,x0:sx(f[1]),x1:sx(f[2]),y0:y-8,y1:y+8});if(selLine===i){x.strokeStyle=C.ink;x.lineWidth=2;x.strokeRect(sx(f[1])-2,y-10,sx(f[2])-sx(f[1])+4,20);}return;}
+        rrect(x,sx(f[1]),yy,Math.max(2,sx(f[2])-sx(f[1])),hh,2,col);boxes.push({i,x0:sx(f[1]),x1:sx(f[2]),y0:yy,y1:yy+hh});
+        if(selLine===i){x.strokeStyle=C.ink;x.lineWidth=2;x.strokeRect(sx(f[1])-2,yy-2,sx(f[2])-sx(f[1])+4,hh+4);}});});
+    txt(x,'CDS',sx(1100),96,{c:C.s1,f:'bold 11px system-ui'});txt(x,'UTR',sx(1000),136,{c:C.s3,f:'bold 11px system-ui'});txt(x,'екзони',sx(1400),136,{c:'#5b6b7b',f:'bold 11px system-ui'});
+    [g.start,1200,1400,1550,1700,g.end].forEach(p=>txt(x,String(p),sx(p),h-10,{a:'center',c:C.ink3}));}
+  $('f6c').addEventListener('click',e=>{const b=$('f6c').getBoundingClientRect();const X=e.clientX-b.left,Y=e.clientY-b.top;const hit=boxes.filter(r=>X>=r.x0-2&&X<=r.x1+2&&Y>=r.y0-3&&Y<=r.y1+3).sort((a,c)=>(a.x1-a.x0)-(c.x1-c.x0))[0];
+    if(hit){selLine=hit.i;const lineEl=$('f6f').querySelector(`.fl[data-line="${hit.i+(mode==='gff3'?1:0)}"] .tk[data-k="s3"]`);if(lineEl)lineEl.click();drawGene();}});
+  $('f6g3').onclick=()=>{mode='gff3';render();};$('f6gt').onclick=()=>{mode='gtf';render();};render();redraws.push(drawGene);
+})();
+
+/* ---------- 7. guess the format ---------- */
+(function(){
+  const F=['FASTA','FASTQ','SAM','VCF','BED','GFF3','GTF'];
+  const S=[
+   ['FASTA','>NC_000913.3 Escherichia coli K-12 MG1655\nAGCTTTTCATTCTGACTGCAACGGGCAATATGTCTCTGTGTGG\nATTAAAAAAAGAGTGTCTGATAGCAGCTTCTGAACTGGTTAC'],
+   ['FASTA','>sp|P13569|CFTR_HUMAN Cystic fibrosis transmembrane conductance regulator\nMQRSPLEKASVVSKLFFSWTRPILRKGYRQRLELSDIYQIPSV'],
+   ['FASTQ','@DRR589139.1 1 length=151\nTTGCTGAATTCGCTAACGGTTAGCAAGGTTCAGAAAGTAATGA\n+\nFFFFF:FFFFFFF,FFFFFFFFFF:FFFFFFFFFFFFFFF#FF'],
+   ['FASTQ','@A00123:8:H7KLMDSXX:2:1203:5000:2000 2:N:0:GGCTAC\nNTGGAACCTTGACCAGTAG\n+\n#FFFFFFF:FFFFFF,FF'],
+   ['SAM','r101\t83\tNC_000913.3\t1544\t60\t151M\t=\t1301\t-394\tTTGCAG...\tFFF:F...\tNM:i:1'],
+   ['SAM','@SQ\tSN:NC_000913.3\tLN:4641652\nr7\t0\tNC_000913.3\t200\t42\t20S131M\t*\t0\t0\tACGT...\tFFFF...'],
+   ['VCF','#CHROM\tPOS\tID\tREF\tALT\tQUAL\tFILTER\tINFO\nNC_000913.3\t547694\t.\tA\tG\t225\tPASS\tDP=48;MQ=60'],
+   ['VCF','chr22\t25001234\trs5746\tC\tT\t.\tPASS\tAC=812;AN=5008;AF=0.162\tGT\t0|1\t0|0\t1|1'],
+   ['BED','chr7\t117480024\t117668665\tCFTR\t0\t+\nchr7\t117559479\t117559593\texon11\t0\t+'],
+   ['BED','chr1\t1000\t2000\nchr1\t5000\t6500\nchr2\t300\t900'],
+   ['GFF3','##gff-version 3\nchr7\tensembl\tgene\t117480025\t117668665\t.\t+\t.\tID=gene:ENSG00000001626;Name=CFTR'],
+   ['GTF','2L\tFlyBase\texon\t7529\t8116\t.\t+\t.\tgene_id "FBgn0031208"; transcript_id "FBtr0300689";']];
+  let cur=null,score=0,total=0,answered=false;
+  function next(){cur=S[Math.floor(rnd()*S.length)];answered=false;$('f7g').textContent=cur[1].replace(/\t/g,'   ');$('f7b').querySelectorAll('button').forEach(b=>{b.disabled=false;b.className='btn btn-sm btn-outline-primary';});
+    $('f7o').innerHTML=total?`Рахунок: <b>${score}</b> з ${total}.`:'Оберіть формат.';}
+  $('f7b').innerHTML=F.map(f=>`<button class="btn btn-sm btn-outline-primary" data-f="${f}">${f}</button>`).join('')+'<button class="btn btn-sm btn-outline-secondary" id="f7n">Наступний фрагмент →</button>';
+  const WHY={FASTA:'рядок починається з «>», далі лише послідовність.',FASTQ:'4 рядки: «@», послідовність, «+», якість тієї самої довжини.',SAM:'рядки заголовка з «@SQ» або 11 стовпчиків: назва ріду, FLAG, хромосома, позиція, MAPQ, CIGAR…',
+    VCF:'стовпчики CHROM, POS, ID, REF, ALT, QUAL, FILTER, INFO (і генотипи).',BED:'хромосома, початок, кінець (з 0) і, можливо, назва та ланцюг.',GFF3:'9 стовпчиків, атрибути у вигляді ID=…;Name=…',GTF:'9 стовпчиків, атрибути у вигляді gene_id "…"; transcript_id "…";'};
+  $('f7b').querySelectorAll('button[data-f]').forEach(b=>b.onclick=()=>{if(answered)return;answered=true;total++;const ok=b.dataset.f===cur[0];if(ok)score++;
+    $('f7b').querySelectorAll('button[data-f]').forEach(x=>{x.disabled=true;if(x.dataset.f===cur[0])x.className='btn btn-sm btn-success';else if(x===b)x.className='btn btn-sm btn-danger';});
+    $('f7o').innerHTML=`${ok?'<b style="color:#1f8a4c">Правильно!</b>':'<b style="color:#c62828">Ні, це '+cur[0]+'.</b>'} Ознака: ${WHY[cur[0]]} Рахунок: <b>${score}</b> з ${total}.`;});
+  $('f7n').onclick=next;next();
+})();
+
+/* ---------- quiz ---------- */
+(function(){
+  const Q=[
+   ['Скільки рядків займає один запис FASTQ?',['1','2','4','залежить від довжини ріду'],2,'Заголовок @, послідовність, +, якість.'],
+   ['Символ якості «?» (ASCII 63) у Phred+33 означає…',['Q63','Q30','Q33','Q6'],1,'63 − 33 = 30: імовірність помилки 1 на 1000.'],
+   ['FLAG 16 у SAM означає, що рід…',['не вирівнявся','на зворотному ланцюгу','дублікат','другий у парі'],1,'Біт 16 — reverse strand.'],
+   ['Рід має CIGAR 5S20M і SEQ довжиною…',['20','25','15','5'],1,'S і M обидва займають нуклеотиди ріду: 5 + 20 = 25.'],
+   ['MAPQ = 0 зазвичай означає, що рід…',['ідеально вирівнявся','однаково добре лягає в кілька місць геному','не має якості','є адаптером'],1,'Вирівнювання неоднозначне — типово для повторів.'],
+   ['У VCF генотип 0/1 означає…',['дві копії ALT','одна копія REF і одна ALT','генотип невідомий','відома фаза'],1,'0 — REF, 1 — ALT; «/» — фаза невідома.'],
+   ['Делецію двох нуклеотидів TT після C у VCF записують як…',['REF=TT ALT=-','REF=CTT ALT=C','REF=C ALT=CTT','REF=T ALT=.'],1,'Indel записують з якірним нуклеотидом перед зміною.'],
+   ['Ділянка BED «chr1 0 100» у нумерації з 1 — це…',['0–100','1–100','1–101','0–99'],1,'Початок з 0 → +1; кінець не включено, тож він уже збігається з кінцем у нумерації з 1.'],
+   ['Яка довжина ділянки BED «chr2 150 300»?',['150','151','149','300'],0,'end − start = 150.'],
+   ['Чим GFF3 відрізняється від GTF?',['GFF3 рахує з 0','різним записом атрибутів: ID/Parent проти gene_id/transcript_id','GTF не має координат','GFF3 зберігає ріди'],1,'Обидва мають 9 стовпчиків і координати з 1.'],
+   ['Навіщо файл .bai або .tbi?',['це резервна копія','індекс для швидкого доступу до будь-якої ділянки','стиснення','список зразків'],1,'Індекс дозволяє читати лише потрібну ділянку, не переглядаючи весь файл.'],
+   ['Чому для samtools faidx усі рядки послідовності FASTA мають бути однакової довжини?',['так красивіше','індекс обчислює зсув у байтах, знаючи довжину рядка','інакше не працює blast','через стиснення'],1,'Позиція → номер рядка і зсув у ньому → номер байта.']
+  ];
+  Q.forEach(q=>{const idx=q[1].map((_,j)=>j);for(let i=idx.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[idx[i],idx[j]]=[idx[j],idx[i]];}q[1]=idx.map(j=>q[1][j]);q[2]=idx.indexOf(q[2]);});
+  let ans=new Array(Q.length).fill(null);
+  function render(){$('qbox').innerHTML=Q.map((q,i)=>`<div class="q" id="q${i}"><p>${i+1}. ${q[0]}</p>${q[1].map((o,j)=>`<button class="opt" data-q="${i}" data-o="${j}">${o}</button>`).join('')}<div class="expl" id="qe${i}"></div></div>`).join('');
+    $('qbox').querySelectorAll('.opt').forEach(b=>b.onclick=()=>pick(+b.dataset.q,+b.dataset.o));score();}
+  function pick(i,j){if(ans[i]!==null)return;ans[i]=j;const q=Q[i];document.querySelectorAll(`#q${i} .opt`).forEach((b,k)=>{b.disabled=true;if(k===q[2])b.classList.add('right');else if(k===j)b.classList.add('wrong');});
+    $('qe'+i).innerHTML=(j===q[2]?'<b style="color:#1f8a4c">Правильно.</b> ':'<b style="color:#c62828">Неправильно.</b> ')+q[3];score();}
+  function score(){const done=ans.filter(v=>v!==null).length,ok=ans.filter((v,i)=>v===Q[i][2]).length;const n=Q.length;
+    $('qscore').innerHTML=done<n?`Відповіли на ${done} з ${n} питань.`:`<span class="pill ${ok>=10?'good':ok>=7?'warn':'bad'}">Результат: ${ok} з ${n}</span> ${ok>=10?'Чудово!':'Поверніться до розділів з помилками.'}`;}
+  $('qreset').onclick=()=>{ans=new Array(Q.length).fill(null);render();};render();
+})();
+
+let rt;window.addEventListener('resize',()=>{clearTimeout(rt);rt=setTimeout(()=>redraws.forEach(f=>f()),150);});
+redraws.forEach(f=>f());
+})();
+</script>
+```

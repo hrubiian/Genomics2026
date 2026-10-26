@@ -61,7 +61,7 @@ Presentation: [Google Slides](https://docs.google.com/presentation/d/1GyUxdYE31n
 
 **Interactive:**
 
--  [0. Основи генетики](qmd/Genetics_Basics_Interactive.qmd) (почніть звідси, якщо базові поняття ще непевні),
+- [0. Основи генетики](qmd/Genetics_Basics_Interactive.qmd) (почніть звідси, якщо базові поняття ще непевні),
 
 - [3. Еволюційна і кількісна генетика](qmd/Evolutionary_Genetics_Interactive.qmd) (за Pierce, *Genetics: A Conceptual Approach*, гл. 24–26)
 
@@ -69,6 +69,8 @@ Presentation: [Google Slides](https://docs.google.com/presentation/d/1GyUxdYE31n
 
 - Analysis of annotated VCF files. VEP. Fst. Tajima's D.
 
+- Presentation: [Google Slides](https://docs.google.com/presentation/d/16gP47YsHp5QPZjj_PQNfiCB5o4VWu03pqvciB8x-mew/edit?usp=sharing)
+  
   **Interactive:**
 
 - [Популяційна геноміка](qmd/Population_Genomics_Interactive.qmd) — F<sub>ST</sub>, PCA, Tajima's D, сліди відбору, GWAS, ROH
@@ -87,4 +89,6 @@ Presentation: [Google Slides](https://docs.google.com/presentation/d/1GyUxdYE31n
 
 ## Week 11(23.11.2026)
 
-- Presentation group's results. Summary of the course <!-- - Template of presentation - [Google Slides](https://docs.google.com/presentation/d/1y_OozXxONxVYAfu7k68_F-MTNjz7ekUS1Mb9qtOXUec/edit?slide=id.g311d8853ae9_0_32#slide=id.g311d8853ae9_0_32) -->
+- Presentation group's results. Summary of the course 
+
+- Template of presentation - [Google Slides](https://docs.google.com/presentation/d/1y_OozXxONxVYAfu7k68_F-MTNjz7ekUS1Mb9qtOXUec/edit?slide=id.g311d8853ae9_0_32#slide=id.g311d8853ae9_0_32)

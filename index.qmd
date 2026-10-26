@@ -10,6 +10,4 @@ Welcome to the **Structural and Functional Genomics** Fall 2026 practice course!
 
 - [AI Prompts](AI_prompts.qmd) - промпти для вивчення геноміки з LLM та AI-агентами
 
-- **Інтерактивні заняття** з генетики та популяційної геноміки. Почніть з [Основ генетики](qmd/Genetics_Basics_Interactive.qmd), далі — [HW4](qmd/HW4_Genetic_Variation_1000G.qmd), [Популяційна геноміка](qmd/Population_Genomics_Interactive.qmd) і [Еволюційна і кількісна генетика](qmd/Evolutionary_Genetics_Interactive.qmd).
-
 - [Довідник біоінформатичних форматів](qmd/Bioinformatics_Formats_Interactive.qmd) — FASTA, FASTQ, SAM/BAM, VCF, BED, GFF3/GTF з інтерактивним розбором полів.

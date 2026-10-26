@@ -32,21 +32,21 @@
     "href": "syllabus.html#week-405.10.2026",
     "title": "Syllabus",
     "section": "Week 4(05.10.2026)",
-    "text": "Week 4(05.10.2026)\n\nNGS analysis part 2. Mapping reads to reference genome. SAM/BAM files. De novo assembly. Presentation: Google Slides"
+    "text": "Week 4(05.10.2026)\n\nNGS analysis part 2. Mapping reads to reference genome. SAM/BAM files. De novo assembly.\nPresentation: Google Slides"
   },
   {
     "objectID": "syllabus.html#week-512.10.2026",
     "href": "syllabus.html#week-512.10.2026",
     "title": "Syllabus",
     "section": "Week 5(12.10.2026)",
-    "text": "Week 5(12.10.2026)\n\nNGS analysis part 3. Variant calling. VCF files. Annotation of variants HW: Ecoli_Genome_Assembly_Part_2 - Presentation: Google Slides"
+    "text": "Week 5(12.10.2026)\n\nNGS analysis part 3. Variant calling. VCF files. Annotation of variants HW: Ecoli_Genome_Assembly_Part_2\nPresentation: Google Slides"
   },
   {
     "objectID": "syllabus.html#week-619.10.2026",
     "href": "syllabus.html#week-619.10.2026",
     "title": "Syllabus",
     "section": "Week 6(19.10.2026)",
-    "text": "Week 6(19.10.2026)\n\nTypes of Genetic Polymorphisms. SNPs, Indels, CNVs, Structural Variants\nHW: HW4_Genetic_Variation (інтерактивний практикум) — скріншоти 4–5 панелей зі спостереженнями та результат тесту додайте до презентації\nPresentation: Google Slides\n\nInteractive:\n\n0. Основи генетики (почніть звідси, якщо базові поняття ще непевні),\n3. Еволюційна і кількісна генетика (за Pierce, Genetics: A Conceptual Approach, гл. 24–26)"
+    "text": "Week 6(19.10.2026)\n\nTypes of Genetic Polymorphisms. SNPs, Indels, CNVs, Structural Variants\nHW: HW4_Genetic_Variation (інтерактивний практикум)\nPresentation: Google Slides\n\nInteractive:\n\n0. Основи генетики (почніть звідси, якщо базові поняття ще непевні),\n3. Еволюційна і кількісна генетика (за Pierce, Genetics: A Conceptual Approach, гл. 24–26)"
   },
   {
     "objectID": "syllabus.html#week-726.10.2026",
@@ -67,14 +67,14 @@
     "href": "syllabus.html#week-909.11.2026",
     "title": "Syllabus",
     "section": "Week 9(09.11.2026)",
-    "text": "Week 9(09.11.2026)\n\nGuest Lecture"
+    "text": "Week 9(09.11.2026)\n\nPipelines(bash/Nextflow/SnakeMake)"
   },
   {
     "objectID": "syllabus.html#week-1016.11.2026",
     "href": "syllabus.html#week-1016.11.2026",
     "title": "Syllabus",
     "section": "Week 10(16.11.2026)",
-    "text": "Week 10(16.11.2026)\n\nTBA"
+    "text": "Week 10(16.11.2026)\n\nR in genomics"
   },
   {
     "objectID": "syllabus.html#week-1123.11.2026",
@@ -221,7 +221,7 @@
     "href": "index.html",
     "title": "Genomics2026",
     "section": "",
-    "text": "Welcome to the Structural and Functional Genomics Fall 2026 practice course! Browse categories for finding required information:\n\nSyllabus\nResources\nAI Prompts - промпти для вивчення геноміки з LLM та AI-агентами\nІнтерактивні заняття з генетики та популяційної геноміки. Почніть з Основ генетики, далі — HW4, Популяційна геноміка і Еволюційна і кількісна генетика.\nДовідник біоінформатичних форматів — FASTA, FASTQ, SAM/BAM, VCF, BED, GFF3/GTF з інтерактивним розбором полів."
+    "text": "Welcome to the Structural and Functional Genomics Fall 2026 practice course! Browse categories for finding required information:\n\nSyllabus\nResources\nAI Prompts - промпти для вивчення геноміки з LLM та AI-агентами\nДовідник біоінформатичних форматів — FASTA, FASTQ, SAM/BAM, VCF, BED, GFF3/GTF з інтерактивним розбором полів."
   },
   {
     "objectID": "qmd/Evolutionary_Genetics_Interactive.html",

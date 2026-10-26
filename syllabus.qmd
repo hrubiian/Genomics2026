@@ -45,17 +45,19 @@ Presentation: [Google Slides](https://docs.google.com/presentation/d/1GyUxdYE31n
 
 ## Week 4(05.10.2026)
 
-- NGS analysis part 2. Mapping reads to reference genome. SAM/BAM files. De novo assembly. Presentation: [Google Slides](https://docs.google.com/presentation/d/13Q5hAa-1P9XbVoqAQBpA4FgYXell1_kwvkNdJ1ufBCg/edit?usp=sharing) <!-- - [Test1](https://forms.gle/X91gpBF7Kemu57Lq8) -->
+- NGS analysis part 2. Mapping reads to reference genome. SAM/BAM files. De novo assembly. 
+- Presentation: [Google Slides](https://docs.google.com/presentation/d/13Q5hAa-1P9XbVoqAQBpA4FgYXell1_kwvkNdJ1ufBCg/edit?usp=sharing) <!-- - [Test1](https://forms.gle/X91gpBF7Kemu57Lq8) -->
 
 ## Week 5(12.10.2026)
 
-- NGS analysis part 3. Variant calling. VCF files. Annotation of variants HW: [Ecoli_Genome_Assembly_Part_2](qmd/HW3.Genome_Assembly_Part_2_updated.qmd) - Presentation: [Google Slides](https://docs.google.com/presentation/d/1iY0phjCUks24rS7hJqnK8yUFX1anygPH4Cm_WLGSpNQ/edit?usp=sharing)
+- NGS analysis part 3. Variant calling. VCF files. Annotation of variants HW: [Ecoli_Genome_Assembly_Part_2](qmd/HW3.Genome_Assembly_Part_2_updated.qmd) 
+- Presentation: [Google Slides](https://docs.google.com/presentation/d/1iY0phjCUks24rS7hJqnK8yUFX1anygPH4Cm_WLGSpNQ/edit?usp=sharing)
 
 ## Week 6(19.10.2026)
 
 - Types of Genetic Polymorphisms. SNPs, Indels, CNVs, Structural Variants
 
-- HW: [HW4_Genetic_Variation (інтерактивний практикум)](qmd/HW4_Genetic_Variation_1000G.qmd) — скріншоти 4–5 панелей зі спостереженнями та результат тесту додайте до презентації
+- HW: [HW4_Genetic_Variation (інтерактивний практикум)](qmd/HW4_Genetic_Variation_1000G.qmd)
 
 - Presentation: [Google Slides](https://docs.google.com/presentation/d/1K9W07kr51umJofHRvLYKCYJ8g9X7BuDPzHIvh9OkoHU/edit?usp=sharing)
 
@@ -81,11 +83,11 @@ Presentation: [Google Slides](https://docs.google.com/presentation/d/1GyUxdYE31n
 
 ## Week 9(09.11.2026)
 
-- Guest Lecture
+- Pipelines(bash/Nextflow/SnakeMake)
 
 ## Week 10(16.11.2026)
 
-- TBA
+- R in genomics
 
 ## Week 11(23.11.2026)
 

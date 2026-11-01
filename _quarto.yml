@@ -42,6 +42,14 @@ website:
 
 format:
   html:
-    theme: cosmo
+    # Light/dark toggle appears in the navbar automatically.
+    # The dark variant is a black "neon" theme (neon-dark.scss).
+    theme:
+      light: cosmo
+      dark: [cosmo, neon-dark.scss]
+    respect-user-color-scheme: true   # first visit follows the OS light/dark setting
+    highlight-style:
+      light: github
+      dark: dracula
     toc: true
     css: styles.css

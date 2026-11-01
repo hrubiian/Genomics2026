@@ -71,24 +71,18 @@ $callout-color-warning:   $neon-yellow;
   border-bottom: 1px solid $neon-cyan;
   box-shadow: 0 0 12px rgba($neon-cyan, .45);
 }
-.navbar .navbar-title { color: #fff; text-shadow: 0 0 6px rgba($neon-cyan, .8); }
-.navbar .nav-link.active { text-shadow: 0 0 8px rgba($neon-cyan, .9); }
+.navbar .navbar-title { color: #fff; }
 
-// Glowing headings
-h1, .h1, .title {
-  color: #fff;
-  text-shadow: 0 0 6px rgba($neon-magenta, .9), 0 0 18px rgba($neon-magenta, .5);
-}
+// Neon-coloured headings (flat, no glow)
+h1, .h1, .title { color: $neon-magenta; }
 h2, .h2 {
-  color: #fff;
-  text-shadow: 0 0 6px rgba($neon-cyan, .8), 0 0 16px rgba($neon-cyan, .35);
+  color: $neon-cyan;
   border-bottom-color: rgba($neon-cyan, .35) !important;
 }
-h3, .h3 { color: $neon-green; text-shadow: 0 0 6px rgba($neon-green, .45); }
+h3, .h3 { color: $neon-green; }
 h4, h5, h6 { color: $neon-yellow; }
 
 a { text-decoration-color: rgba($neon-cyan, .5); }
-a:hover { text-shadow: 0 0 8px rgba($neon-magenta, .8); }
 
 strong, b { color: #fff; }
 

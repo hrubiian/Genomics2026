@@ -116,5 +116,7 @@ body.quarto-dark #glossary .row:target dt,
 body.quarto-dark #glossary .row:target dd { background: rgba(245, 255, 59, .15); }
 
 /* Inline style="color:#52606d" labels written by the page scripts */
-body.quarto-dark .lab [style*="color:#52606d"] { color: #b4b4c8 !important; }
+body.quarto-dark .lab [style*="color:#52606d"],
+body.quarto-dark .lab .chrrow > span,
+body.quarto-dark .lab .seqrow > span { color: #b4b4c8 !important; }
 body.quarto-dark .lab [style*="color:#7b8794"] { color: #8a8aa3 !important; }

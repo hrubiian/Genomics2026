@@ -8,6 +8,7 @@ project:
     - "!HTML/"          # leftover Quarto template page - not published
   resources:
     - .nojekyll         # stops GitHub from running Jekyll over the output
+    - qmd/Amino_Acids_Trainer.html   # standalone HTML game, copied as-is
 
 website:
   title: "Structural and Functional Genomics"
@@ -34,6 +35,8 @@ website:
             text: "2. Популяційна геноміка"
           - href: qmd/Evolutionary_Genetics_Interactive.qmd
             text: "3. Еволюційна і кількісна генетика"
+          - href: qmd/Amino_Acids_Trainer.html
+            text: "Амінокислотний тренажер (гра)"
           - text: "---"
           - href: qmd/Bioinformatics_Formats_Interactive.qmd
             text: "Довідник: формати файлів (FASTA, FASTQ, SAM, VCF, BED, GFF)"

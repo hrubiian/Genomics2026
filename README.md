@@ -33,7 +33,8 @@ The live site refreshes about a minute later.
 | `docs/` | Generated output — **never edit by hand**, it is overwritten on every render. |
 | `docs/.nojekyll` | Tells GitHub to serve the files as-is instead of running Jekyll over them. |
 | `qmd/` | Homework and instruction pages. |
-| `styles.css` | Custom CSS, loaded by every page. |
+| `styles.css` | Custom CSS, loaded by every page (incl. dark-mode fixes for the interactive labs). |
+| `neon-dark.scss` | Dark "neon" theme used when the navbar light/dark toggle is set to dark. |
 
 GitHub Pages is set to serve the **`main` branch, `/docs` folder**
 (Settings > Pages). Changing that setting will break publishing.

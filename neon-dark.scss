@@ -1,0 +1,113 @@
+/*-- scss:defaults --*/
+// "Neon" dark theme: pure black background with neon accents.
+// Layered on top of cosmo (see _quarto.yml -> format.html.theme.dark).
+
+$neon-cyan:    #00f0ff;
+$neon-magenta: #ff2bd6;
+$neon-green:   #39ff14;
+$neon-yellow:  #f5ff3b;
+$neon-orange:  #ff9f1c;
+$neon-red:     #ff3864;
+$neon-purple:  #b46cff;
+
+$body-bg:        #000000;
+$body-color:     #e8e8f2;
+$body-secondary-color: #a0a0b8;
+$headings-color: #ffffff;
+
+$primary:   $neon-cyan;
+$secondary: #2a2a3d;
+$success:   $neon-green;
+$info:      $neon-purple;
+$warning:   $neon-yellow;
+$danger:    $neon-red;
+$light:     #1a1a26;
+$dark:      #000000;
+
+$link-color:       $neon-cyan;
+$link-hover-color: $neon-magenta;
+
+$border-color:  #2a2a3d;
+$hr-border-color: $neon-magenta;
+
+$input-bg:           #0b0b12;
+$input-color:        $body-color;
+$input-border-color: #34344a;
+$form-range-track-bg: #2a2a3d;
+
+$dropdown-bg:              #07070c;
+$dropdown-link-color:      $body-color;
+$dropdown-link-hover-bg:   #14142a;
+$dropdown-link-hover-color: $neon-cyan;
+$dropdown-border-color:    $neon-cyan;
+
+$card-bg: #07070c;
+$table-color: $body-color;
+$table-striped-bg: rgba($neon-cyan, .04);
+$table-hover-bg:   rgba($neon-cyan, .08);
+
+// Quarto variables
+$navbar-bg: #000000;
+$navbar-fg: #d6d6e6;
+$navbar-hl: $neon-cyan;
+$footer-bg: #000000;
+$code-color: $neon-magenta;
+$code-bg: transparent;
+$code-block-bg: #0a0a12;
+$code-block-border-left: $neon-magenta;
+$toc-active-border: $neon-cyan;
+$text-muted: #9a9ab0;
+
+$callout-color-note:      $neon-cyan;
+$callout-color-tip:       $neon-green;
+$callout-color-important: $neon-magenta;
+$callout-color-caution:   $neon-orange;
+$callout-color-warning:   $neon-yellow;
+
+/*-- scss:rules --*/
+
+// Thin neon line under the navbar
+.navbar {
+  border-bottom: 1px solid $neon-cyan;
+  box-shadow: 0 0 12px rgba($neon-cyan, .45);
+}
+.navbar .navbar-title { color: #fff; }
+
+// Neon-coloured headings (flat, no glow)
+h1, .h1, .title { color: $neon-magenta; }
+h2, .h2 {
+  color: $neon-cyan;
+  border-bottom-color: rgba($neon-cyan, .35) !important;
+}
+h3, .h3 { color: $neon-green; }
+h4, h5, h6 { color: $neon-yellow; }
+
+a { text-decoration-color: rgba($neon-cyan, .5); }
+
+strong, b { color: #fff; }
+
+::selection { background: $neon-magenta; color: #000; }
+
+// Buttons glow
+.btn-primary, .btn-outline-primary:hover { color: #000; box-shadow: 0 0 10px rgba($neon-cyan, .55); }
+.btn-outline-primary { color: $neon-cyan; border-color: $neon-cyan; }
+
+// Code blocks
+div.sourceCode, pre.sourceCode {
+  border: 1px solid #1f1f33;
+  box-shadow: inset 0 0 0 1px rgba($neon-magenta, .08);
+}
+
+// Tables
+.table { --bs-table-bg: transparent; }
+.table > thead { border-bottom-color: $neon-cyan !important; }
+
+// Tabs
+.nav-tabs .nav-link.active, .nav-tabs .nav-item.show .nav-link {
+  background-color: #000;
+  color: $neon-cyan;
+  border-color: $neon-cyan $neon-cyan #000;
+}
+
+// Scrollbars
+* { scrollbar-color: #33334d #000; }

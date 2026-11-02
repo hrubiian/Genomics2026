@@ -57,7 +57,7 @@ Presentation: [Google Slides](https://docs.google.com/presentation/d/1GyUxdYE31n
 
 - Types of Genetic Polymorphisms. SNPs, Indels, CNVs, Structural Variants
 
-- HW: [HW4_Genetic_Variation (інтерактивний практикум)](qmd/HW4_Genetic_Variation_1000G.qmd)
+- HW(optional, not reqired): [HW4_Genetic_Variation (інтерактивний практикум)](qmd/HW4_Genetic_Variation_1000G.qmd)
 
 - Presentation: [Google Slides](https://docs.google.com/presentation/d/1K9W07kr51umJofHRvLYKCYJ8g9X7BuDPzHIvh9OkoHU/edit?usp=sharing)
 
@@ -79,18 +79,15 @@ Presentation: [Google Slides](https://docs.google.com/presentation/d/1GyUxdYE31n
 
 ## Week 8(02.11.2026)
 
-- Oxford Nanopore sequencing. Long reads. Applications.
+- Oxford Nanopore sequencing part 1.Principle and library prep
 - Presentation: [Google Slides](https://docs.google.com/presentation/d/17A71k9g23BTlZagdasKqcBSMcxNrNacP1pg55siJc1Y/edit?usp=sharing)
 
 ## Week 9(09.11.2026)
 
-- Pipelines(bash/Nextflow/SnakeMake)
+- Oxford Nanopore sequencing part 2. Setup and data analysis
+- Presentation: [Google Slides](https://docs.google.com/presentation/d/17A71k9g23BTlZagdasKqcBSMcxNrNacP1pg55siJc1Y/edit?usp=sharing)
 
 ## Week 10(16.11.2026)
-
-- R in genomics
-
-## Week 11(23.11.2026)
 
 - Presentation group's results. Summary of the course 
 

@@ -79,7 +79,8 @@ Presentation: [Google Slides](https://docs.google.com/presentation/d/1GyUxdYE31n
 
 ## Week 8(02.11.2026)
 
-- Oxford Nanopore sequencing. Long reads. Applications. <!-- -   Presentation: [Google Slides](https://docs.google.com/presentation/d/1GFkwqwKna9uiec4MrmYDCI-2OhFh-fz6IK5io4MbEwY/edit?usp=sharing) -->
+- Oxford Nanopore sequencing. Long reads. Applications.
+- Presentation: [Google Slides](https://docs.google.com/presentation/d/17A71k9g23BTlZagdasKqcBSMcxNrNacP1pg55siJc1Y/edit?usp=sharing)
 
 ## Week 9(09.11.2026)
 

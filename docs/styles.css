@@ -13,3 +13,110 @@
   background-color: transparent;
   white-space: pre-wrap;   /* wrap long prompt lines on phones */
 }
+
+/* ------------------------------------------------------------------
+   Dark (neon) mode. Quarto puts .quarto-dark on <body> when the
+   navbar toggle is set to dark; everything below only applies then.
+   ------------------------------------------------------------------ */
+
+body.quarto-dark .panel-tabset div.sourceCode {
+  background-color: #0a0a12;
+  border-color: #2a2a3d;
+  border-left-color: #ff2bd6;
+  box-shadow: 0 0 10px rgba(255, 43, 214, .15);
+}
+
+/* Interactive labs (qmd/*_Interactive.qmd, HW4): swap their palette */
+body.quarto-dark .lab {
+  --lab-bg: #07070c; --lab-line: #2a2a3d;
+  --ink: #e8e8f2; --ink2: #b4b4c8; --ink3: #8a8aa3;
+  --s1: #00f0ff; --s2: #ff9f1c; --s3: #39ff14;
+  --good: #39ff14; --bad: #ff3864; --warn: #f5ff3b;
+  --bA: #39ff14; --bC: #00c8ff; --bG: #ffb000; --bT: #ff3864;
+  box-shadow: 0 0 0 1px rgba(0, 240, 255, .15), 0 0 18px rgba(0, 240, 255, .08);
+}
+body.quarto-dark .lab .pill.good,
+body.quarto-dark .lab .pill.warn { color: #000; }
+
+/* Panels that were hard-coded white */
+body.quarto-dark .lab .info,
+body.quarto-dark .lab .step-note,
+body.quarto-dark .lab .file,
+body.quarto-dark .lab .aln,
+body.quarto-dark .lab .ruler,
+body.quarto-dark .lab .pbox,
+body.quarto-dark .quiz .opt { background: #0d0d16; color: var(--ink); }
+body.quarto-dark .quiz .opt.right { background: rgba(57, 255, 20, .12); }
+body.quarto-dark .quiz .opt.wrong { background: rgba(255, 56, 100, .14); }
+
+/* Charts are drawn on canvas with light colours: invert them so the
+   white background turns black while hues stay roughly the same. */
+body.quarto-dark .lab canvas { filter: invert(1) hue-rotate(180deg); }
+
+body.quarto-dark .lab .form-range::-webkit-slider-runnable-track { background: #2a2a3d; }
+body.quarto-dark .lab .form-range::-moz-range-track { background: #2a2a3d; }
+
+/* Token / tag colours (formats reference, genetics basics, HW4) */
+body.quarto-dark .lab .k1 { background: rgba(0, 200, 255, .16);  color: #7fe9ff; }
+body.quarto-dark .lab .k2 { background: rgba(255, 159, 28, .16); color: #ffc070; }
+body.quarto-dark .lab .k3 { background: rgba(57, 255, 20, .14);  color: #8dff73; }
+body.quarto-dark .lab .k4 { background: rgba(180, 108, 255, .18); color: #d3a8ff; }
+body.quarto-dark .lab .k5 { background: rgba(245, 255, 59, .14); color: #f5ff8a; }
+body.quarto-dark .lab .k6 { background: rgba(255, 43, 214, .16); color: #ff8ae9; }
+body.quarto-dark .lab .k7 { background: rgba(0, 255, 200, .14);  color: #7dffe2; }
+body.quarto-dark .lab .k8 { background: rgba(255, 255, 255, .08); color: #c8c8da; }
+body.quarto-dark .lab .tk.on { box-shadow: 0 0 0 2px #00f0ff; }
+body.quarto-dark .lab .tab { color: #4a4a66; }
+
+body.quarto-dark .lab .c.m { background: rgba(57, 255, 20, .14); }
+body.quarto-dark .lab .c.d { background: rgba(255, 159, 28, .18); color: #ffc070; }
+body.quarto-dark .lab .c.n { background: rgba(255, 255, 255, .06); color: #6f6f88; }
+body.quarto-dark .lab .ruler .b { border-left-color: #2a2a3d; }
+body.quarto-dark .lab .ruler .b.on { background: rgba(0, 200, 255, .18); color: #7fe9ff; }
+
+body.quarto-dark .lab .chrbar.m { background: rgba(255, 43, 214, .35); }
+body.quarto-dark .lab .chrbar.f { background: rgba(0, 200, 255, .35); }
+body.quarto-dark .lab .allele { background: #0d0d16; color: #e8e8f2; border-color: #00f0ff; }
+body.quarto-dark .lab .allele.alt { background: #ff3864; color: #000; border-color: #ff3864; }
+body.quarto-dark .lab .pun .hd { background: #14141f; color: #b4b4c8; }
+body.quarto-dark .lab .g0 { background: rgba(57, 255, 20, .15);  color: #8dff73; }
+body.quarto-dark .lab .g1 { background: rgba(0, 200, 255, .16);  color: #7fe9ff; }
+body.quarto-dark .lab .g2 { background: rgba(255, 159, 28, .18); color: #ffc070; }
+body.quarto-dark .lab .vrow .who { color: #b4b4c8; }
+body.quarto-dark .lab .vc.var { background: rgba(0, 200, 255, .12); }
+body.quarto-dark .lab .vc.sel { outline-color: #00f0ff; }
+body.quarto-dark .lab .vc.hd.var { color: #00f0ff; }
+
+body.quarto-dark .lab .b:hover { background: rgba(255, 255, 255, .08); }
+body.quarto-dark .lab .b.sel { background: #000; }
+body.quarto-dark .lab .b.mut { background: rgba(245, 255, 59, .25); }
+body.quarto-dark .lab .aa { background: #14141f; }
+body.quarto-dark .lab .aa.diff { background: rgba(255, 159, 28, .22); color: #ffc070; }
+body.quarto-dark .lab .aa.stop { background: #ff3864; color: #000; }
+
+/* Shared helpers (qmd/_interactive_helpers.html) */
+body.quarto-dark .lvl1 { background: rgba(57, 255, 20, .12);  color: #8dff73; border-color: rgba(57, 255, 20, .35); }
+body.quarto-dark .lvl2 { background: rgba(0, 200, 255, .12);  color: #7fe9ff; border-color: rgba(0, 200, 255, .35); }
+body.quarto-dark .lvl3 { background: rgba(180, 108, 255, .14); color: #d3a8ff; border-color: rgba(180, 108, 255, .4); }
+body.quarto-dark .gl { border-bottom-color: #00f0ff; }
+body.quarto-dark #gl-pop { background: #0d0d16; border: 1px solid #00f0ff; box-shadow: 0 0 14px rgba(0, 240, 255, .35); }
+body.quarto-dark .ig-progress { color: #b4b4c8; }
+body.quarto-dark .ig-progress .bar { background: #1f1f33; }
+body.quarto-dark .ig-progress .bar span { background: #39ff14; box-shadow: 0 0 8px #39ff14; }
+body.quarto-dark .ig-done { background: #0d0d16; border-color: #2a2a3d; color: #b4b4c8; }
+body.quarto-dark .ig-done[aria-pressed="true"] { background: rgba(57, 255, 20, .12); border-color: #39ff14; color: #8dff73; }
+body.quarto-dark .route a.card { background: #07070c; border-color: #2a2a3d; color: #e8e8f2; }
+body.quarto-dark .route a.card:hover { border-color: #00f0ff; box-shadow: 0 0 10px rgba(0, 240, 255, .3); }
+body.quarto-dark .route a.card.here { background: #0a0a14; border-color: #ff2bd6; box-shadow: 0 0 12px rgba(255, 43, 214, .3); }
+body.quarto-dark .route .step { color: #8a8aa3; }
+body.quarto-dark .route ul { color: #b4b4c8; }
+body.quarto-dark #glossary dt .en { color: #8a8aa3; }
+body.quarto-dark #glossary dd { color: #c8c8da; }
+body.quarto-dark #glossary .row:target dt,
+body.quarto-dark #glossary .row:target dd { background: rgba(245, 255, 59, .15); }
+
+/* Inline style="color:#52606d" labels written by the page scripts */
+body.quarto-dark .lab [style*="color:#52606d"],
+body.quarto-dark .lab .chrrow > span,
+body.quarto-dark .lab .seqrow > span { color: #b4b4c8 !important; }
+body.quarto-dark .lab [style*="color:#7b8794"] { color: #8a8aa3 !important; }
